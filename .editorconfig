@@ -1,0 +1,10 @@
+root = true
+
+[*.{vue}]
+indent_style = space
+indent_size = 2
+semi = true,
+singleQuote = true
+
+[*.js]
+quote_type = single
