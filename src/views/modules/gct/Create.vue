@@ -15,7 +15,7 @@
         {{ location.name }} - (服务器数量: {{ location.servers }})
       </option>
     </select>
-    <p>此节点基础价格 <span v-text="selectedLocation.price"></span> 元</p>
+    <p>此节点基础价格 <span v-text="selectedLocation.price * 100"></span> Drops</p>
 
     <div class="mt-3">
       <h4 class="mt-5">您想要多少个 CPU 核心？</h4>
@@ -28,8 +28,8 @@
         v-model="gct.cpu_limit"
       />
       将使用 <span v-text="gct.cpu_limit / 100"></span> 个核心。价格为
-      <span v-text="(gct.cpu_limit / 100) * selectedLocation.cpu_price"></span>
-      元
+      <span v-text="(gct.cpu_limit / 100) * selectedLocation.cpu_price * 100"></span>
+      Drops
     </div>
 
     <div class="mt-3">
@@ -43,8 +43,8 @@
         v-model="gct.memory"
       />
       将使用 <span v-text="gct.memory / 1024"></span> GB 内存。价格为
-      <span v-text="(gct.memory / 1024) * selectedLocation.memory_price"></span>
-      元
+      <span v-text="(gct.memory / 1024) * selectedLocation.memory_price * 100"></span>
+      Drops
     </div>
 
     <div class="mt-3">
@@ -58,7 +58,7 @@
         v-model="gct.disk"
       />
       将使用 <span v-text="gct.disk / 1024"></span> GB 磁盘。价格为
-      <span v-text="(gct.disk / 1024) * selectedLocation.disk_price"></span> 元
+      <span v-text="(gct.disk / 1024) * selectedLocation.disk_price * 100"></span> Drops
     </div>
 
     <div class="mt-3">
@@ -71,7 +71,7 @@
         v-model="gct.backups"
       />
       将可以创建 <span v-text="gct.backups"></span> 个备份。价格为
-      <span v-text="gct.backups * selectedLocation.backup_price"></span> 元
+      <span v-text="gct.backups * selectedLocation.backup_price * 100"></span> Drops
     </div>
 
     <div class="mt-3">
@@ -84,8 +84,8 @@
         v-model="gct.allocations"
       />
       将分配 <span v-text="gct.allocations"></span> 个端口。价格为
-      <span v-text="gct.allocations * selectedLocation.allocation_price"></span>
-      元
+      <span v-text="gct.allocations * selectedLocation.allocation_price * 100"></span>
+      Drops
     </div>
 
     <div class="mt-3">
@@ -102,7 +102,7 @@
         <label class="form-check-label" for="c-databases">
           是的，我用的到数据库，我想要一个。<span
             >(需要
-            <span v-text="selectedLocation.database_price"></span> 元)</span
+            <span v-text="selectedLocation.database_price * 100 * 100"></span> Drops)</span
           >
         </label>
       </div>
