@@ -6,6 +6,14 @@ import router from '../plugins/router';
 
 import Layout from '../components/Layout.vue';
 
+// if build for production, use production api
+// if build for development, use development api
+const baseURL = process.env.NODE_ENV === 'production' ? api.production : api.development;
+console.log('api endpoint: ' + baseURL);
+
+// const auth_url = process.env.NODE_ENV === 'production' ? api.prod_auth : api.develop_auth;
+
+
 // console.log(Layout.tooManyRequests);
 
 // axios.defaults.withCredentials = true;
@@ -16,18 +24,10 @@ import Layout from '../components/Layout.vue';
 // App.loadingBar.start();
 // message.create('hi');
 
-let baseURL;
-
 // const url = {
 //     dev: "https://www.leaf.test/api/",
 //     production: "https://www.leaf.test/api/",
 // }
-
-if (app.buildForProduction) {
-  baseURL = api.production;
-} else {
-  baseURL = api.development;
-}
 
 // 实例
 let instance = axios.create({

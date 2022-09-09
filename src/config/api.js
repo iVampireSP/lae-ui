@@ -1,8 +1,7 @@
 export default {
-//   development: 'http://www.lae.test/api/',
-//   production: 'http://www.lae.test/api/',
-//   origin: 'http://www.auth_server.test',
-  development: 'https://api.laecloud.com/api/',
-  production: 'https://api.laecloud.com/api/',
-  origin: 'https://auth.laecloud.com',
+  development: 'http://www.lae.test/api/',
+  develop_auth: 'http://www.auth_server.test',
+  
+  production: 'https://api.lae.yistars.net/api/',
+  prod_auth: 'https://auth.laecloud.com',
 };

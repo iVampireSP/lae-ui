@@ -22,6 +22,10 @@
   import router from '../../plugins/router'
   import api from '../../config/api'
 
+  const origin =
+    process.env.NODE_ENV === 'production' ? api.prod_auth : api.develop_auth
+  console.log('auth server: ' + origin)
+
   const token = ref('')
   const show = ref(false)
   const title = ref('连接到 莱云')
@@ -71,15 +75,14 @@
   }
 
   function toLogin() {
-
-    // if build for production, use the production url
-    if (process.env.NODE_ENV === 'production') {
-      location.href = api.login
-    } else {
-      location.href = api.login
-    }
+    // // if build for production, use the production url
+    // if (process.env.NODE_ENV === 'production') {
+    //   location.href = api.login
+    // } else {
+    //   location.href = api.login
+    // }
 
     window.location.href =
-      api.origin + '/?callback=' + encodeURIComponent(window.location.href)
+      origin + '/?callback=' + encodeURIComponent(window.location.href)
   }
 </script>
