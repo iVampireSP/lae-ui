@@ -15,6 +15,7 @@
             <th scope="col">服务</th>
             <th scope="col">名称</th>
             <th scope="col">每 5 分钟消耗的 Drops</th>
+            <th scope="col">本月消耗</th>
             <th scope="col">状态</th>
             <th scope="col">创建时间</th>
             <!-- <th scope="col">更新时间</th> -->
@@ -30,6 +31,15 @@
               <span v-else class="text-success">
                 {{ host.price }} Drops ≈
                 {{ ((host.price / dropsRate) * 8640).toFixed(2) }} 元 / 月
+              </span>
+            </td>
+            <td>
+              <span v-if="usages[host.id]">
+                {{ usages[host.id] + ' Drops' ?? '未计量' }}
+              </span>
+
+              <span v-else class="text-warning">
+                <i class="bi bi-exclamation-circle"></i>
               </span>
             </td>
             <td>
@@ -89,9 +99,15 @@
 
   const hosts = ref([])
 
+  const usages = ref([])
+
   function refresh() {
     http.get('/hosts').then((res) => {
       hosts.value = res.data
+    })
+
+    http.get('/hosts/usages').then((res) => {
+      usages.value = res.data
     })
   }
 

@@ -78,6 +78,9 @@
                 class="dropdown-menu dropdown-menu-right"
                 aria-labelledby="navbarDropdown"
               >
+                <span class="dropdown-item text-auto"
+                  >本月消耗: {{ drops.monthly_usages }} Drops</span
+                >
                 <router-link
                   class="dropdown-item text-auto"
                   active-class="active"
@@ -100,9 +103,16 @@
 </template>
 
 <script setup>
-  //   import app from '../config/app'
-  import store from '../plugins/store'
   import { ref } from 'vue'
+  //   import app from '../config/app'
+  import http from '../api/http'
+  import store from '../plugins/store'
+
+  const drops = ref({})
+
+  http.get('/balances/drops').then((res) => {
+    drops.value = res.data
+  })
 
   const show = ref(true)
   if (store.state.token == null) {

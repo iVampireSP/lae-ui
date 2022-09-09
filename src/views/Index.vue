@@ -22,7 +22,7 @@
 
 <script setup>
   import { ref, onMounted, onUnmounted } from 'vue'
-  //   import store from '../plugins/store'
+  import store from '../plugins/store'
   import http from '../api/http'
 
   const user = ref('')
@@ -32,6 +32,7 @@
       .get('/users')
       .then((res) => {
         user.value = res.data
+        store.commit('updateUser', res.data)
       })
       .catch((err) => {
         console.error(err)
