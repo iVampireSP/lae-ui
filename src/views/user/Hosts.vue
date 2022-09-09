@@ -37,6 +37,11 @@
                   ><i class="bi bi-check-circle"></i> &nbsp;运行中</span
                 >
               </span>
+              <span v-else-if="host.status == 'pending'">
+                <span class="text-success"
+                  ><i class="bi bi-check-circle"></i> &nbsp;等待中</span
+                >
+              </span>
               <span v-else-if="host.status == 'suspended'">
                 <span class="text-danger">
                   <i class="bi bi-x-circle"></i>
@@ -53,7 +58,12 @@
             <td>{{ new Date(host.created_at).toLocaleString() }}</td>
             <!-- <td>{{ new Date(host.updated_at).toLocaleString() }}</td> -->
             <td>
-              <a href="#" @click="deleteHost(host.id)">释放</a>
+              <a
+                v-show="host.status !== 'pending'"
+                href="#"
+                @click="deleteHost(host.id)"
+                >释放</a
+              >
               <span
                 v-show="host.status == 'suspended' || host.status == 'stopped'"
                 >&nbsp;</span
