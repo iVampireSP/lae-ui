@@ -29,7 +29,7 @@
               <span v-if="host.price == 0" class="text-danger"> 被接管</span>
               <span v-else class="text-success">
                 {{ host.price }} Drops ≈
-                {{ ((host.price / 100) * 8640).toFixed(2) }} 元 / 月
+                {{ ((host.price / dropsRate) * 8640).toFixed(2) }} 元 / 月
               </span>
             </td>
             <td>
@@ -84,6 +84,8 @@
 <script setup>
   import http from '../../api/http'
   import { ref, onMounted, onUnmounted } from 'vue'
+  import store from '../../plugins/store'
+  const dropsRate = ref(store.state.user.drops_rate)
 
   const hosts = ref([])
 

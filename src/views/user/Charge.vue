@@ -16,7 +16,7 @@
           v-model="charge.amount"
         />
 
-        <span>≈ {{ charge.amount * 100 }} Drops</span>
+        <span>≈ {{ charge.amount * dropsRate }} Drops</span>
       </div>
 
       <div class="mt-3">
@@ -38,9 +38,7 @@
         <button class="btn btn-primary" @click="doCharge()">充值</button>
       </div>
 
-      <div>
-        请注意: Drops 计算并不准确。它可能与实际获得有点偏差。
-      </div>
+      <div>请注意: Drops 计算并不准确。它可能与实际获得有点偏差。</div>
     </div>
   </div>
 </template>
@@ -48,6 +46,9 @@
 <script setup>
   import { ref } from 'vue'
   import http from '../../api/http'
+  import store from '../../plugins/store'
+
+  const dropsRate = ref(store.state.user.drops_rate)
 
   const chargeSuccess = ref(false)
 
