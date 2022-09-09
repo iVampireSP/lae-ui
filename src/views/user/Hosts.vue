@@ -28,7 +28,7 @@
             <td>
               <span v-if="host.price == 0" class="text-danger"> 被接管</span>
               <span v-else class="text-success">
-                {{ host.price }} Drops ≈ {{ host.price / 100 }} 元
+                {{ host.price }} Drops ≈ {{ (host.price / 100) * 8640 }} 元/月
               </span>
             </td>
             <td>
@@ -58,11 +58,7 @@
             <td>{{ new Date(host.created_at).toLocaleString() }}</td>
             <!-- <td>{{ new Date(host.updated_at).toLocaleString() }}</td> -->
             <td>
-              <a
-                href="#"
-                @click="deleteHost(host.id)"
-                >释放</a
-              >
+              <a href="#" @click="deleteHost(host.id)">释放</a>
               <span
                 v-show="host.status == 'suspended' || host.status == 'stopped'"
                 >&nbsp;</span
