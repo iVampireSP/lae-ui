@@ -59,7 +59,6 @@
             <!-- <td>{{ new Date(host.updated_at).toLocaleString() }}</td> -->
             <td>
               <a
-                v-show="host.status !== 'pending'"
                 href="#"
                 @click="deleteHost(host.id)"
                 >释放</a
