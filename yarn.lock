@@ -328,6 +328,11 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+humanize@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.npmmirror.com/humanize/-/humanize-0.0.9.tgz#1994ffaecdfe9c441ed2bdac7452b7bb4c9e41a4"
+  integrity sha512-bvZZ7vXpr1RKoImjuQ45hJb5OvE2oJafHysiD/AL3nkqTZH2hFCjQ3YZfCd63FefDitbJze/ispUPP0gfDsT2Q==
+
 is-core-module@^2.9.0:
   version "2.10.0"
   resolved "https://registry.npmmirror.com/is-core-module/-/is-core-module-2.10.0.tgz#9012ede0a91c69587e647514e1d5277019e728ed"

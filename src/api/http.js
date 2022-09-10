@@ -1,18 +1,15 @@
 import axios from 'axios';
 import store from '../plugins/store';
 import api from '../config/api';
-import app from '../config/app';
 import router from '../plugins/router';
-
-import Layout from '../components/Layout.vue';
 
 // if build for production, use production api
 // if build for development, use development api
-const baseURL = process.env.NODE_ENV === 'production' ? api.production : api.development;
+const baseURL =
+  process.env.NODE_ENV === 'production' ? api.production : api.development;
 console.log('api endpoint: ' + baseURL);
 
 // const auth_url = process.env.NODE_ENV === 'production' ? api.prod_auth : api.develop_auth;
-
 
 // console.log(Layout.tooManyRequests);
 
@@ -59,7 +56,19 @@ instance.interceptors.response.use(
     return Promise.resolve(res);
   },
   (error) => {
-    console.error(error);
+    console.error('axios error', error);
+
+    let data = [];
+
+    if (error.response.data.data) {
+      data = error.response.data.data;
+    }
+
+    if (error.response.data.message) {
+      data = error.response.data.message;
+    }
+   
+    alert(data)
 
     if (error.response.status === 429) {
       alert('请求次数过多');
