@@ -28,7 +28,7 @@
         v-model="gct.cpu_limit"
       />
       将使用 <span v-text="gct.cpu_limit / 100"></span> 个核心。价格为
-      <span v-text="(gct.cpu_limit / 100) * selectedLocation.cpu_price * 100"></span>
+      <span v-text="(gct.cpu_limit / 100) * selectedLocation.cpu_price"></span>
       Drops
     </div>
 
