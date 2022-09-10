@@ -79,8 +79,15 @@
                 aria-labelledby="navbarDropdown"
               >
                 <span class="dropdown-item text-auto"
+                  >余额: {{ store.state.user.balance }} 元</span
+                >
+                <span class="dropdown-item text-auto"
+                  >Drops: {{ drops.drops ?? 0 }} Drops</span
+                >
+                <span class="dropdown-item text-auto"
                   >本月消耗: {{ drops.monthly_usages ?? 0 }} Drops</span
                 >
+
                 <router-link
                   class="dropdown-item text-auto"
                   active-class="active"

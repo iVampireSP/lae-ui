@@ -3,6 +3,9 @@
     <h3>镜缘映射</h3>
 
     <p>镜缘映射可以帮助您映射您的内网服务到公网中。</p>
+    <p v-show="traffics.free_traffic">
+      您当前的可抵用流量: {{ traffics.free_traffic }} GB
+    </p>
 
     <div class="list-group mt-3" v-for="tunnel in tunnels">
       <a
@@ -158,6 +161,7 @@
               id="floatingServer"
               v-model="createTunnel.server_id"
               v-show="createTunnel.protocol == 'tcp'"
+              @change="randomRemotePort"
             >
               <option v-for="server in servers_tcp" :value="server.id">
                 {{ server.name }}
@@ -172,6 +176,7 @@
               id="floatingServer"
               v-model="createTunnel.server_id"
               v-show="createTunnel.protocol == 'udp'"
+              @change="randomRemotePort"
             >
               <option v-for="server in servers_udp" :value="server.id">
                 {{ server.name }}
@@ -210,6 +215,17 @@
               v-model="createTunnel.remote_port"
             />
             <label for="floatingPort">远程端口</label>
+            <div v-if="selectedServer">
+              <div
+                v-if="
+                  createTunnel.remote_port < selectedServer.min_port ||
+                  createTunnel.remote_port > selectedServer.max_port
+                "
+                class="alert alert-danger"
+              >
+                当前端口范围不正确。
+              </div>
+            </div>
           </div>
 
           <span class="d-none">
@@ -228,10 +244,6 @@
               隧道数量: {{ selectedServer.tunnels }}/{{
                 selectedServer.max_tunnels
               }}
-            </p>
-
-            <p v-show="selectedServer.price_per_gb !== 0">
-              免费流量: {{ selectedServer.free_traffic }} GB
             </p>
 
             <p v-if="selectedServer.price_per_gb !== 0">
@@ -265,6 +277,7 @@
 
   //   const router = useRoute()
 
+  const traffics = ref([])
   const tunnels = ref([])
   const servers = ref([])
   const servers_http = ref([])
@@ -312,6 +325,10 @@
     tunnels.value = res.data
   })
 
+  http.get('/modules/frp/traffics').then((res) => {
+    traffics.value = res.data
+  })
+
   function getServers() {
     http.get('/modules/frp/servers').then((res) => {
       tunnelCreated.value = false
@@ -343,6 +360,18 @@
     selectedServer.value = servers.value.find((server) => {
       return server.id == id
     })
+  }
+
+  function randomRemotePort() {
+
+    const input = createTunnel.value.remote_port ?? 0
+
+    const start = selectedServer.value.min_port
+    const end = selectedServer.value.max_port
+
+    if (input < start || input > end) {
+      createTunnel.value.remote_port = Math.floor(Math.random() * (end - start + 1) + start)
+    }
   }
 
   function create() {
