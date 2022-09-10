@@ -66,10 +66,12 @@
       <p v-show="tunnel.today_traffic_in">
         今日入流量 {{ tunnel.today_traffic_in / (1024 * 1024 * 1024) }} GB
       </p>
-      
+
       <p v-show="tunnel.today_traffic_in">
         今日出流量 {{ tunnel.today_traffic_in / (1024 * 1024 * 1024) }} GB
       </p>
+
+      <p class="mt-3">隧道外部链接地址 {{ tunnel.server.server_address }}</p>
 
       <!-- 隧道配置文件 -->
       <div class="mt-3">
