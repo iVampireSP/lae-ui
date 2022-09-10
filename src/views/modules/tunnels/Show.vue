@@ -1,7 +1,14 @@
 <template>
   <div class="mt-3">
     <div v-if="loaded">
-      <h3><input class="editable" v-model="tunnel.name" @change="change()" placeholder="隧道名称是必填项" /></h3>
+      <h3>
+        <input
+          class="editable"
+          v-model="tunnel.name"
+          @change="change()"
+          placeholder="隧道名称是必填项"
+        />
+      </h3>
 
       <button
         class="btn btn-primary"
@@ -54,6 +61,14 @@
           v-show="!canDelete"
           >在客户端关闭大约1分钟左右，才可以删除隧道。</span
         >
+      </p>
+
+      <p v-show="tunnel.today_traffic_in">
+        今日入流量 {{ tunnel.today_traffic_in / (1024 * 1024 * 1024) }} GB
+      </p>
+      
+      <p v-show="tunnel.today_traffic_in">
+        今日出流量 {{ tunnel.today_traffic_in / (1024 * 1024 * 1024) }} GB
       </p>
 
       <!-- 隧道配置文件 -->
