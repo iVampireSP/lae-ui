@@ -79,7 +79,7 @@
                 aria-labelledby="navbarDropdown"
               >
                 <span class="dropdown-item text-auto"
-                  >本月消耗: {{ drops.monthly_usages }} Drops</span
+                  >本月消耗: {{ drops.monthly_usages ?? 0 }} Drops</span
                 >
                 <router-link
                   class="dropdown-item text-auto"
