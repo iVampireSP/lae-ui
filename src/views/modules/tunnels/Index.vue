@@ -230,7 +230,14 @@
               }}
             </p>
 
-            <p>每 GB 流量消耗的 Drops: {{ selectedServer.price_per_gb }}</p>
+            <p v-show="selectedServer.price_per_gb !== 0">
+              免费流量: {{ selectedServer.free_traffic }} GB
+            </p>
+
+            <p v-if="selectedServer.price_per_gb !== 0">
+              每 GB 流量消耗的 Drops: {{ selectedServer.price_per_gb }}
+            </p>
+            <p v-else>此节点目前不收取费用</p>
           </div>
         </div>
         <div class="modal-footer">
