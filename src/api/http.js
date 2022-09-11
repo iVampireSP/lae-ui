@@ -67,16 +67,14 @@ instance.interceptors.response.use(
     if (error.response.data.message) {
       data = error.response.data.message;
     }
-   
-    alert(data)
 
     if (error.response.status === 429) {
       alert('请求次数过多');
-    }
-
-    if (error.response.status === 401) {
+    } else if (error.response.status === 401) {
       store.commit('setToken', null);
       router.push({ name: 'login' });
+    } else {
+      alert(data);
     }
 
     // window.$message.error(
