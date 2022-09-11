@@ -126,6 +126,8 @@
             <label for="floatingProtocol">协议</label>
           </div>
 
+          <span>请在下方选择服务器</span>
+
           <!-- 选择服务器 -->
           <div class="form-floating mb-3">
             <select

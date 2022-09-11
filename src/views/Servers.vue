@@ -4,7 +4,7 @@
 
     <p>查看我们的服务器运行状态</p>
 
-    <div class="overflow-scroll">
+    <div class="overflow-auto">
       <table class="table">
         <thead>
           <tr>
