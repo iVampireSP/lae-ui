@@ -10,7 +10,7 @@
     <div class="list-group mt-3" v-for="tunnel in tunnels">
       <router-link
         :to="{ name: 'modules.tunnels.show', params: { id: tunnel.id } }"
-        class="list-group-item list-group-item-action"
+        class="list-group-item list-group-item-action shadow-sm rounded"
       >
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1 text-success">{{ tunnel.name }}</h5>
@@ -130,7 +130,6 @@
             <label for="floatingProtocol">协议</label>
           </div>
 
-          <span>请在下方选择服务器</span>
           <!-- 选择服务器 -->
           <div
             class="form-floating mb-3"
@@ -234,7 +233,7 @@
                   createTunnel.remote_port < selectedServer.min_port ||
                   createTunnel.remote_port > selectedServer.max_port
                 "
-                class="alert alert-danger"
+                class="text-danger ms-1"
               >
                 当前端口范围不正确。
               </div>

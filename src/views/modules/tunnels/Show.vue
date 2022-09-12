@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-3">
+  <div>
     <div v-if="loaded">
       <h3>
         <input
@@ -10,51 +10,60 @@
         />
       </h3>
 
-      <button
+      <div class="btn-group" role="group" aria-label="隧道控制按钮组">
+        <button
+          class="btn btn-warning"
+          v-show="canDelete"
+          @click="resetToken()"
+          type="button"
+          data-bs-toggle="tooltip"
+          data-bs-placement="right"
+          title="你需要关闭客户端后，才能重置。"
+        >
+          重置 Token
+        </button>
+
+        <button
+          class="btn btn-danger"
+          v-show="canDelete"
+          @click="deleteTunnel()"
+          type="button"
+          data-bs-toggle="tooltip"
+          data-bs-placement="right"
+          title="删除后，你将无法恢复该隧道。如果你的隧道没有停止，则你看不见删除按钮。"
+        >
+          删除
+        </button>
+      </div>
+
+      <!-- <button
         class="btn btn-primary"
         v-if="tunnel.status == 'running'"
         @click="stop()"
+        data-bs-toggle="tooltip"
+        data-bs-placement="right"
+        title="不再接受新的隧道连接。"
       >
         停用隧道
-      </button>
+      </button> -->
 
-      <p v-else-if="tunnel.status == 'suspended'">
+      <!-- <p v-else-if="tunnel.status == 'suspended'">
         隧道已被暂停，无法进一步操作。
-      </p>
+      </p> -->
 
-      <button
+      <p v-if="tunnel.status == 'suspended'">隧道已被暂停，无法进一步操作。</p>
+
+      <!-- <button
         v-else-if="tunnel.status == 'stopped'"
         class="btn btn-primary"
         @click="start()"
       >
         启用隧道
-      </button>
-
-      <button
-        class="btn btn-danger m-lg-2"
-        v-show="canDelete"
-        @click="deleteTunnel()"
-        type="button"
-        data-bs-toggle="tooltip"
-        data-bs-placement="right"
-        title="删除后，你将无法恢复该隧道。如果你的隧道没有停止，则你看不见删除按钮。"
-      >
-        删除
-      </button>
-
-      <button
-        class="btn btn-danger"
-        v-show="canDelete"
-        @click="resetToken()"
-        type="button"
-      >
-        重置 Token
-      </button>
+      </button> -->
 
       <div v-if="showChart">
         <vue-echarts :option="option" style="height: 500px" ref="chart" />
       </div>
-      <div v-else>暂时没有流量数据。</div>
 
       <p v-if="tunnel.status == 'stopped'">
         隧道已经停止，如果客户端还在运行，则会正常计费。<span
@@ -71,7 +80,42 @@
         今日出流量 {{ tunnel.today_traffic_in / (1024 * 1024 * 1024) }} GB
       </p>
 
-      <p class="mt-3">隧道外部链接地址 {{ tunnel.server.server_address }}</p>
+      <p class="mt-3">
+        外部连接:
+        <span
+          v-if="tunnel.protocol == 'http' || tunnel.protocol == 'https'"
+          data-bs-toggle="tooltip"
+          data-bs-placement="right"
+          title="在新标签页打开"
+        >
+          <a
+            rel="noreferrer"
+            target="_blank"
+            :href="tunnel.protocol + '://' + tunnel.custom_domain"
+            class="text-decoration-none"
+          >
+            {{ tunnel.protocol + '://' + tunnel.custom_domain }}
+            <i class="bi bi-box-arrow-up-right text-decoration-none"></i
+          ></a>
+        </span>
+
+        <span
+          v-else
+          class="cursor-pointer"
+          data-bs-toggle="tooltip"
+          data-bs-placement="right"
+          title="点击来复制"
+          @click="copy(tunnel.server.server_address + ':' + tunnel.remote_port)"
+        >
+          {{
+            tunnel.protocol +
+            '://' +
+            tunnel.server.server_address +
+            ':' +
+            tunnel.remote_port
+          }}
+        </span>
+      </p>
 
       <!-- 隧道配置文件 -->
       <div class="mt-3">
@@ -217,18 +261,22 @@
     http.patch(url, { name: tunnel.value.name })
   }
 
-  function stop() {
-    http.patch(url, { status: 'stopped' }).then(() => {
-      tunnel.value.status = 'stopped'
-    })
-    refresh()
-  }
+  //   function stop() {
+  //     http.patch(url, { status: 'stopped' }).then(() => {
+  //       tunnel.value.status = 'stopped'
+  //     })
+  //     refresh()
+  //   }
 
-  function start() {
-    http.patch(url, { status: 'running' }).then(() => {
-      tunnel.value.status = 'running'
-    })
-    refresh()
+  //   function start() {
+  //     http.patch(url, { status: 'running' }).then(() => {
+  //       tunnel.value.status = 'running'
+  //     })
+  //     refresh()
+  //   }
+
+  function copy(text) {
+    navigator.clipboard.writeText(text)
   }
 
   function deleteTunnel() {
