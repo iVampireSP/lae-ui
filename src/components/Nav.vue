@@ -149,7 +149,7 @@
       ></button>
     </div>
     <div class="offcanvas-body position-relative">
-      <div>
+      <div class="mt-3">
         <h4>财务</h4>
         <div>余额: {{ store.state.user.balance }} 元</div>
 
@@ -158,14 +158,13 @@
         <div>本月消耗: {{ drops.monthly_usages ?? 0 }} Drops</div>
       </div>
 
-      <div class="mt-4">
+      <div class="mt-5">
         <h4>计费项目列表</h4>
         <router-link class="text-auto" :to="{ name: 'hosts' }"
           >计费项目列表</router-link
         >
       </div>
 
-      
       <div
         class="btn-group position-absolute rounded-0"
         style="bottom: 0; left: 0; right: 0"
@@ -197,6 +196,4 @@
   if (store.state.token == null) {
     show.value = false
   }
-
-
 </script>
