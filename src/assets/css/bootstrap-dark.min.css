@@ -11684,7 +11684,7 @@ fieldset:disabled .btn {
   }
   .placeholder {
     background-color: currentColor;
-    opacity: 0.5;
+    opacity: 0.1;
   }
   @-webkit-keyframes placeholder-glow {
     50% {
