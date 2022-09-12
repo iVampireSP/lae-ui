@@ -8,9 +8,8 @@
     </p>
 
     <div class="list-group mt-3" v-for="tunnel in tunnels">
-      <a
-        href="#"
-        @click.prevent="toRoute(tunnel.id)"
+      <router-link
+        :to="{ name: 'modules.tunnels.show', params: { id: tunnel.id } }"
         class="list-group-item list-group-item-action"
       >
         <div class="d-flex w-100 justify-content-between">
@@ -18,7 +17,12 @@
           <small>{{ new Date(tunnel.updated_at).toLocaleString() }}</small>
         </div>
         <p class="mb-1">
-          <span v-if="tunnel.protocol == 'http' || tunnel.protocol == 'https'">
+          <span
+            v-if="tunnel.protocol == 'http' || tunnel.protocol == 'https'"
+            data-bs-toggle="tooltip"
+            data-bs-placement="right"
+            title="按住 Shift 或 Ctrl 来打开"
+          >
             <a
               rel="noreferrer"
               target="_blank"
@@ -43,7 +47,7 @@
         <!-- <small class="text-muted">
         
         </small> -->
-      </a>
+      </router-link>
     </div>
   </div>
 
@@ -127,14 +131,15 @@
           </div>
 
           <span>请在下方选择服务器</span>
-
           <!-- 选择服务器 -->
-          <div class="form-floating mb-3">
+          <div
+            class="form-floating mb-3"
+            v-show="createTunnel.protocol == 'http'"
+          >
             <select
               class="form-control"
               id="floatingServer"
               v-model="createTunnel.server_id"
-              v-show="createTunnel.protocol == 'http'"
             >
               <option v-for="server in servers_http" :value="server.id">
                 {{ server.name }}
@@ -143,12 +148,14 @@
             <label for="floatingServer">支持 HTTP 协议的服务器</label>
           </div>
 
-          <div class="form-floating mb-3">
+          <div
+            class="form-floating mb-3"
+            v-show="createTunnel.protocol == 'https'"
+          >
             <select
               class="form-control"
               id="floatingServer"
               v-model="createTunnel.server_id"
-              v-show="createTunnel.protocol == 'https'"
             >
               <option v-for="server in servers_https" :value="server.id">
                 {{ server.name }}
@@ -157,12 +164,14 @@
             <label for="floatingServer">支持 HTTPS 协议的服务器</label>
           </div>
 
-          <div class="form-floating mb-3">
+          <div
+            class="form-floating mb-3"
+            v-show="createTunnel.protocol == 'tcp'"
+          >
             <select
               class="form-control"
               id="floatingServer"
               v-model="createTunnel.server_id"
-              v-show="createTunnel.protocol == 'tcp'"
               @change="randomRemotePort"
             >
               <option v-for="server in servers_tcp" :value="server.id">
@@ -172,12 +181,14 @@
             <label for="floatingServer">支持 TCP 协议的服务器</label>
           </div>
 
-          <div class="form-floating mb-3">
+          <div
+            class="form-floating mb-3"
+            v-show="createTunnel.protocol == 'udp'"
+          >
             <select
               class="form-control"
               id="floatingServer"
               v-model="createTunnel.server_id"
-              v-show="createTunnel.protocol == 'udp'"
               @change="randomRemotePort"
             >
               <option v-for="server in servers_udp" :value="server.id">
@@ -365,14 +376,15 @@
   }
 
   function randomRemotePort() {
-
     const input = createTunnel.value.remote_port ?? 0
 
     const start = selectedServer.value.min_port
     const end = selectedServer.value.max_port
 
     if (input < start || input > end) {
-      createTunnel.value.remote_port = Math.floor(Math.random() * (end - start + 1) + start)
+      createTunnel.value.remote_port = Math.floor(
+        Math.random() * (end - start + 1) + start
+      )
     }
   }
 

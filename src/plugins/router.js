@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import store from './store';
 import app from '../config/app';
+import { Tooltip } from 'bootstrap';
 
 const routes = [
   {
@@ -121,6 +122,10 @@ const router = createRouter({
 // }
 
 router.beforeEach((to, from) => {
+  new Tooltip(document.body, {
+    selector: "[data-bs-toggle='tooltip']",
+  });
+
   if (to.matched.length === 0) {
     return router.push({ name: 'errors.404' });
   }
