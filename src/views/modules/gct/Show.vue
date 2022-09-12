@@ -3,6 +3,14 @@
     <h3 class="placeholder-wave">
       <span class="placeholder col-6 h-75"></span>
     </h3>
+
+    <div class="placeholder-wave w-75 mt-5">
+      <div class="placeholder w-100" style="height: 200px"></div>
+    </div>
+
+    <div class="placeholder-wave w-75 mt-5">
+      <div class="placeholder w-100" style="height: 500px"></div>
+    </div>
   </div>
 
   <div v-show="loaded">
