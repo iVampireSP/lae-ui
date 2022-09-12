@@ -8,7 +8,7 @@
     </p>
     <p>如果价格被接管，则可能是按量计费等。</p>
 
-    <div class="overflow-scroll">
+    <div class="overflow-auto">
       <table class="table">
         <thead>
           <tr>

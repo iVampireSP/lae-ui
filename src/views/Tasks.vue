@@ -4,13 +4,13 @@
 
     <p>当前的任务队列</p>
 
-    <div class="overflow-scroll">
+    <div class="overflow-auto">
       <table class="table">
         <thead>
           <tr>
             <th scope="col">主机名</th>
-            <th scope="col">详情</th>
-            <th scope="col">进度</th>
+            <!-- <th scope="col">详情</th> -->
+            <!-- <th scope="col">进度</th> -->
             <th scope="col">状态</th>
             <th scope="col">开始于</th>
           </tr>
@@ -18,8 +18,38 @@
         <tbody>
           <tr v-for="task in tasks">
             <td>{{ task.host.name }}</td>
-            <td>{{ task.title }}</td>
-            <td width="30%">
+            <td class="text-nowrap">
+              <span v-if="task.status == 'pending'">
+                <i class="bi bi-clock"></i>&nbsp;</span
+              >
+              <span v-else-if="task.status == 'error'">
+                <span class="text-danger">
+                  <i class="bi bi-x-circle"></i>
+                  &nbsp;错误
+                </span></span
+              >
+              <span v-else-if="task.status == 'cancelled'"> 已取消 </span>
+              <span v-else-if="task.status == 'processing'">
+                <div
+                  class="spinner-border text-primary spinner-border-sm"
+                  role="status"
+                >
+                  <span class="visually-hidden"></span>
+                </div>
+              </span>
+              <span v-else-if="task.status == 'need_operation'">
+                需要操作
+              </span>
+              <span v-else-if="task.status == 'done'"> 已完成 </span>
+              <span v-else-if="task.status == 'success'">
+                <span class="text-success"
+                  ><i class="bi bi-check-circle"></i></span
+                >
+              </span>
+
+              {{ task.title }}
+            </td>
+            <!-- <td width="30%">
               <div class="mt-1">
                 <div class="progress" v-if="task.status == 'processing'">
                   <div
@@ -72,8 +102,8 @@
                   ></div>
                 </div>
               </div>
-            </td>
-            <td>
+            </td> -->
+            <!-- <td class="text-nowrap">
               <span v-if="task.status == 'pending'">
                 <i class="bi bi-clock"></i>&nbsp;等待中</span
               >
@@ -103,7 +133,7 @@
                   ><i class="bi bi-check-circle"></i> &nbsp;成功</span
                 >
               </span>
-            </td>
+            </td> -->
             <td>{{ new Date(task.updated_at).toLocaleTimeString() }}</td>
           </tr>
         </tbody>

@@ -11,8 +11,8 @@
             <th>服务</th>
             <th>名称</th>
             <th>状态</th>
-            <th>状态更新时间</th>
-            <th>设立时间</th>
+            <!-- <th>检查时间</th> -->
+            <!-- <th>设立时间</th> -->
           </tr>
         </thead>
         <tbody>
@@ -38,8 +38,8 @@
                 </span>
               </span>
             </td>
-            <td>{{ new Date(server.updated_at).toLocaleString() }}</td>
-            <td>{{ new Date(server.created_at).toLocaleString() }}</td>
+            <!-- <td>{{ new Date(server.updated_at).toLocaleString() }}</td> -->
+            <!-- <td>{{ new Date(server.created_at).toLocaleString() }}</td> -->
           </tr>
         </tbody>
       </table>

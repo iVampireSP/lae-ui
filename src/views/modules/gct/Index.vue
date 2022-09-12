@@ -2,7 +2,7 @@
   <div>
     <h3>游戏容器</h3>
 
-    <div class="overflow-scroll">
+    <div class="overflow-auto">
       <table class="table">
         <thead>
           <tr>
