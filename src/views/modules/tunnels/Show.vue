@@ -208,15 +208,15 @@
       </div>
     </div>
     <div v-else>
-      <h3 class="placeholder-wave">
-        <span class="placeholder col-6"></span>
-      </h3>
-
       <div class="placeholder-wave">
+        <div class="placeholder w-50" style="height: 100px"></div>
+      </div>
+
+      <div class="placeholder-wave mt-4">
         <div class="placeholder w-100" style="height: 500px"></div>
       </div>
 
-      <div class="placeholder-wave mt-3">
+      <div class="placeholder-wave mt-4">
         <div class="placeholder w-100" style="height: 300px"></div>
       </div>
     </div>
