@@ -177,6 +177,8 @@
   import { useRoute } from 'vue-router'
   import { VueEcharts } from 'vue3-echarts'
 
+  import Humanize from 'humanize-plus'
+
   import http from '../../../api/http'
   import route from '../../../plugins/router'
 
@@ -281,6 +283,12 @@
                 'border-radius:10px;width:9px;height:9px;background-color:' +
                 v.color +
                 '"></span>'
+              html +=
+                colorEl +
+                v.seriesName +
+                ': ' +
+                Humanize.fileSize(v.value) +
+                '<br/>'
             }
             return html
           },
@@ -303,6 +311,11 @@
         yAxis: [
           {
             type: 'value',
+            axisLabel: {
+              formatter: function (value) {
+                return Humanize.fileSize(value)
+              },
+            },
           },
         ],
         series: [
