@@ -33,6 +33,9 @@
 
   // const user = store.state.user
 
+  console.log('store token:', store.state.token)
+  console.log('store user:', store.state.user)
+
   const connect = () => {
     buttonDisabled.value = true
     title.value = '正在验证登录...'
@@ -48,7 +51,7 @@
         buttonDisabled.value = false
 
         show.value = true
-        // router.push('/')
+        router.push('/')
 
         location.href = '/'
       })

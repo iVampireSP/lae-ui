@@ -2,7 +2,7 @@
   <div>
     <Nav />
   </div>
-  <div>
+  <div class="mt-5">
     <div class="background-container"></div>
     <Layout />
   </div>

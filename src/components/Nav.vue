@@ -1,6 +1,6 @@
 <template>
   <div v-show="show">
-    <nav class="navbar navbar-expand-md shadow-sm">
+    <nav class="navbar navbar-expand-md shadow-sm fixed-top bg-body">
       <div class="container">
         <router-link
           class="navbar-brand text-auto lae-logo"
@@ -69,7 +69,22 @@
               >
             </li>
 
-            <li class="nav-item dropdown">
+            <li class="nav-item">
+              <a
+                class="nav-link text-auto cursor-pointer"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasUserRight"
+                aria-controls="offcanvasUserRight"
+              >
+                {{ store.state.user.name }}
+                <i
+                  class="bi bi-layout-sidebar-inset-reverse position-relative"
+                  style="top: 0.5px"
+                ></i>
+              </a>
+            </li>
+
+            <!-- <li class="nav-item dropdown">
               <a
                 id="navbarDropdown"
                 class="nav-link dropdown-toggle text-auto"
@@ -109,11 +124,60 @@
                   >更换账号</router-link
                 >
               </div>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
     </nav>
+  </div>
+
+  <div
+    class="offcanvas offcanvas-end"
+    tabindex="-1"
+    id="offcanvasUserRight"
+    aria-labelledby="offcanvasUserRightLabel"
+  >
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasUserRightLabel">
+        {{ store.state.user.name }}
+      </h5>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="offcanvas"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="offcanvas-body position-relative">
+      <div>
+        <h4>财务</h4>
+        <div>余额: {{ store.state.user.balance }} 元</div>
+
+        <div>Drops: {{ drops.drops ?? 0 }} Drops</div>
+
+        <div>本月消耗: {{ drops.monthly_usages ?? 0 }} Drops</div>
+      </div>
+
+      <div class="mt-4">
+        <h4>计费项目列表</h4>
+        <router-link class="text-auto" :to="{ name: 'hosts' }"
+          >计费项目列表</router-link
+        >
+      </div>
+
+      
+      <div
+        class="btn-group position-absolute rounded-0"
+        style="bottom: 0; left: 0; right: 0"
+      >
+        <router-link
+          class="btn btn-danger rounded-0"
+          active-class="active"
+          :to="{ name: 'login' }"
+          >更换账号</router-link
+        >
+      </div>
+    </div>
   </div>
 </template>
 
@@ -133,4 +197,6 @@
   if (store.state.token == null) {
     show.value = false
   }
+
+
 </script>
