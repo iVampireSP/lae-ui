@@ -3,6 +3,8 @@ import store from '../plugins/store';
 import api from '../config/api';
 import router from '../plugins/router';
 
+import { Modal } from 'bootstrap';
+
 // if build for production, use production api
 // if build for development, use development api
 const baseURL =
@@ -72,10 +74,16 @@ instance.interceptors.response.use(
       alert('请求次数过多');
     } else if (error.response.status === 401) {
       if (router.currentRoute.value.name !== 'login') {
-        store.commit('updateToken', {
-          token: null,
+        var myModal = new Modal(document.getElementById('tokenExpiredModal'), {
+          backdrop: true,
         });
-        router.push({ name: 'login' });
+
+        myModal.show();
+
+        // store.commit('updateToken', {
+        //   token: null,
+        // });
+        // router.push({ name: 'login' });
       }
     } else {
       alert(data);

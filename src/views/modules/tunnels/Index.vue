@@ -3,6 +3,13 @@
     <h3>镜缘映射</h3>
 
     <p>镜缘映射可以帮助您映射您的内网服务到公网中。</p>
+    <p>
+      <a
+        href="https://forum.laecloud.com/d/5-ying-she-ji-chu-jiao-xue-ji-chu-zhong-de-ji-chu-chu-xue-zhe-xian-ding"
+        target="_blank"
+        >如果您是第一次使用，请务必看这里。</a
+      >
+    </p>
     <p v-show="traffics.free_traffic">
       您当前的可抵用流量: {{ traffics.free_traffic }} GB
     </p>
