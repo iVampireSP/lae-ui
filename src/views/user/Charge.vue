@@ -38,7 +38,7 @@
         <button class="btn btn-primary" @click="doCharge()">充值</button>
       </div>
 
-      <div>请注意: Drops 计算并不准确。它可能与实际获得有点偏差。</div>
+      <div>请注意: 由于计费方式的特殊性，我们不支持退款，请合理充值。</div>
     </div>
   </div>
 </template>
