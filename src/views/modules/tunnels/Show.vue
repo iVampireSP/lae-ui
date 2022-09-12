@@ -208,9 +208,9 @@
       </div>
     </div>
     <div v-else>
-      <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
+      <h3 class="placeholder-wave">
+        <span class="placeholder col-6 h-75"></span>
+      </h3>
     </div>
   </div>
   <!-- <pre v-text="tunnel"></pre> -->

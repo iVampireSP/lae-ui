@@ -45,7 +45,12 @@
           <!-- Right Side Of Navbar -->
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link text-auto" href="https://forum.laecloud.com">社区</a>
+              <a
+                class="nav-link text-auto"
+                target="_blank"
+                href="https://forum.laecloud.com"
+                >社区</a
+              >
             </li>
             <li class="nav-item">
               <router-link
