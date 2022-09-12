@@ -4,7 +4,7 @@
   </div>
   <div class="mt-5">
     <div class="background-container"></div>
-    <Modals />
+    <!-- <Modals /> -->
     <Layout />
   </div>
 </template>
