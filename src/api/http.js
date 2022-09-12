@@ -74,11 +74,14 @@ instance.interceptors.response.use(
       alert('请求次数过多');
     } else if (error.response.status === 401) {
       if (router.currentRoute.value.name !== 'login') {
-        var myModal = new Modal(document.getElementById('tokenExpiredModal'), {
-          backdrop: true,
-        });
 
-        myModal.show();
+        alert('您的 访问密钥 可能已经失效，请尝试通过侧边栏来重新登录。');
+
+        // var myModal = new Modal(document.getElementById('tokenExpiredModal'), {
+        //   backdrop: true,
+        // });
+
+        // myModal.show();
 
         // store.commit('updateToken', {
         //   token: null,
