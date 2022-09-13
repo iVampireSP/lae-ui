@@ -59,15 +59,24 @@
   </div>
 
   <div class="mt-3">
-    <button
-      type="button"
-      class="btn btn-primary"
-      data-bs-toggle="modal"
-      data-bs-target="#createTunnelModel"
-      @click="getServers()"
-    >
-      创建隧道
-    </button>
+    <div class="btn-group" role="group" aria-label="创建或整合隧道配置文件">
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#createTunnelModel"
+        @click="getServers()"
+      >
+        创建隧道
+      </button>
+      <router-link
+        type="button"
+        class="btn btn-primary"
+        :to="{ name: 'modules.tunnels.compact' }"
+      >
+        整合配置
+      </router-link>
+    </div>
   </div>
 
   <div
@@ -334,11 +343,11 @@
 
   createTunnel.value.name = randomString(10)
 
-  function toRoute(id) {
-    // key.value = Math.round(Math.random() * 1000)
-    route.push({ name: 'modules.tunnels.show', params: { id: id } })
-    // key.value = Math.round(Math.random() * 1000)
-  }
+//   function toRoute(id) {
+//     // key.value = Math.round(Math.random() * 1000)
+//     route.push({ name: 'modules.tunnels.show', params: { id: id } })
+//     // key.value = Math.round(Math.random() * 1000)
+//   }
 
   http.get('/modules/frp/hosts').then((res) => {
     tunnels.value = res.data

@@ -90,7 +90,11 @@ const routes = [
         path: 'tunnels',
         name: 'modules.tunnels',
         component: () => import('../views/modules/tunnels/Index.vue'),
-        children: [],
+      },
+      {
+        path: 'tunnels/compact',
+        name: 'modules.tunnels.compact',
+        component: () => import('../views/modules/tunnels/Compact.vue'),
       },
       {
         path: 'tunnels/:id',
@@ -102,7 +106,6 @@ const routes = [
         path: 'gct',
         name: 'modules.gct',
         component: () => import('../views/modules/gct/Index.vue'),
-        children: [],
       },
       {
         path: 'gct/create',
