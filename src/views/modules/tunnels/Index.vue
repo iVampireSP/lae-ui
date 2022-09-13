@@ -279,7 +279,16 @@
             </p>
             <p v-else>此节点目前不收取费用</p>
           </div>
+
+          <p>
+            如果您继续，则代表同意了我们的<a
+              target="_blank"
+              href="https://forum.laecloud.com/d/6-jing-yuan-ying-she-shi-yong-tiao-kuan"
+              >使用条款</a
+            >
+          </p>
         </div>
+
         <div class="modal-footer">
           <button
             type="button"
@@ -343,11 +352,11 @@
 
   createTunnel.value.name = randomString(10)
 
-//   function toRoute(id) {
-//     // key.value = Math.round(Math.random() * 1000)
-//     route.push({ name: 'modules.tunnels.show', params: { id: id } })
-//     // key.value = Math.round(Math.random() * 1000)
-//   }
+  //   function toRoute(id) {
+  //     // key.value = Math.round(Math.random() * 1000)
+  //     route.push({ name: 'modules.tunnels.show', params: { id: id } })
+  //     // key.value = Math.round(Math.random() * 1000)
+  //   }
 
   http.get('/modules/frp/hosts').then((res) => {
     tunnels.value = res.data
