@@ -54,8 +54,26 @@
           ></button>
         </div>
         <div class="modal-body">
-          <div v-if="passwordChanged" class="alert alert-success" role="alert">
+          <div
+            v-if="passwordChanged == 'success'"
+            class="alert alert-success"
+            role="alert"
+          >
             密码修改成功。
+          </div>
+          <div
+            v-if="passwordChanged == 'error'"
+            class="alert alert-danger"
+            role="alert"
+          >
+            无法修改密码。可能是没有创建过服务器。
+          </div>
+          <div
+            v-if="passwordChanged == 'wrong'"
+            class="alert alert-danger"
+            role="alert"
+          >
+            密码长度必须大于等于 8 位。
           </div>
           <div v-else class="alert alert-primary" role="alert">
             我们将修改对应您邮箱账户的面板密码。
@@ -128,7 +146,7 @@
 
   const hosts = ref([])
 
-  const passwordChanged = ref(false)
+  const passwordChanged = ref('')
   const password = ref('')
 
   // 随机生成字符串
@@ -150,12 +168,20 @@
   //   }
 
   function updatePwd() {
+
+    if (password.value.length < 8) {
+      passwordChanged.value = 'wrong'
+      return
+    }
+
     http
       .patch('/modules/gct/account', {
         password: password.value,
       })
       .then(() => {
-        passwordChanged.value = true
+        passwordChanged.value = 'success'
+      }).catch(() => {
+        passwordChanged.value = 'error'
       })
   }
   http.get('/modules/gct/hosts').then((res) => {
