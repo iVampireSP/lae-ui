@@ -40,15 +40,19 @@
         '/modules/frp/hosts?with_config=1&&server_id=' + selectedServer.value
       )
       .then((res) => {
-        tunnels.value = res.data
-        all_config.value = res.data[0].config.server + '\n\n'
+        if (res.data.length > 0) {
+          tunnels.value = res.data
+          all_config.value = res.data[0].config.server + '\n\n'
 
-        res.data.forEach((tunnel) => {
-          all_config.value += `
+          res.data.forEach((tunnel) => {
+            all_config.value += `
 # ${tunnel.name} 在 ${tunnel.server.name} 上
 ${tunnel.config.client}
 `
-        })
+          })
+        } else {
+            all_config.value = '这个服务器下没有隧道。'
+        }
       })
   }
 </script>
