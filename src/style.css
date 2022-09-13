@@ -92,4 +92,8 @@ td {
   .v-md-editor--editable .v-md-editor__editor-wrapper {
     border-right: 1px solid #606060 !important;
   }
+
+  .v-md-textarea-editor pre, .v-md-textarea-editor textarea {
+    color: #cacaca !important;
+  }
 }
