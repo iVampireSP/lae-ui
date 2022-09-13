@@ -40,6 +40,12 @@
       ><i class="bi bi-check-circle"></i> &nbsp;已关闭</span
     >
   </span>
+
+  <span v-else-if="status == 'error'">
+    <span class="text-danger"
+      ><i class="bi bi-x-circle"></i> &nbsp;投递失败</span
+    >
+  </span>
 </template>
 
 <script setup>
