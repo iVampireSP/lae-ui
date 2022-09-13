@@ -12,7 +12,7 @@
     <div class="mt-3">
       <a
         type="button"
-        class="btn btn-primary"
+        class="btn btn-outline-primary"
         target="_blank"
         :href="'https://panel.muhanyun.cn/server/' + gct.server.identifier"
         >前往控制面板</a
@@ -204,7 +204,7 @@
     </div>
 
     <div class="mt-4"></div>
-    <button class="btn btn-primary" @click="apply()">应用更改</button>
+    <button class="btn btn-outline-primary" @click="apply()">应用更改</button>
   </div>
   <div v-else>
     <div class="placeholder-wave">

@@ -14,7 +14,7 @@
       </p>
     </div>
 
-    <router-link class="btn btn-primary" :to="{ name: 'billing.charge' }"
+    <router-link class="btn btn-outline-primary" :to="{ name: 'billing.charge' }"
       >添加到余额</router-link
     >
   </div>

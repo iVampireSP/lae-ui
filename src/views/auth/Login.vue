@@ -6,7 +6,7 @@
       @click="toLogin()"
       :disabled="buttonDisabled"
       type="button"
-      class="btn btn-primary"
+      class="btn btn-outline-primary"
     >
       前往 莱云
     </button>

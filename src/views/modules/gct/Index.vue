@@ -80,7 +80,7 @@
           >
             取消
           </button>
-          <button type="button" class="btn btn-primary" @click="updatePwd()">
+          <button type="button" class="btn btn-outline-primary" @click="updatePwd()">
             修改
           </button>
         </div>

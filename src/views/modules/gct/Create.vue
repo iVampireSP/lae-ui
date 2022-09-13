@@ -144,7 +144,7 @@
     <div class="mt-3">
       <button
         :disabled="creating"
-        class="btn btn-primary"
+        class="btn btn-outline-primary"
         @click="createServer()"
       >
         创建服务器

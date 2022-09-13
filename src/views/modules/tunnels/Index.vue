@@ -62,7 +62,7 @@
     <div class="btn-group" role="group" aria-label="创建或整合隧道配置文件">
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-outline-primary"
         data-bs-toggle="modal"
         data-bs-target="#createTunnelModel"
         @click="getServers()"
@@ -71,7 +71,7 @@
       </button>
       <router-link
         type="button"
-        class="btn btn-primary"
+        class="btn btn-outline-primary"
         :to="{ name: 'modules.tunnels.compact' }"
       >
         整合配置
@@ -288,7 +288,7 @@
           >
             取消
           </button>
-          <button type="button" class="btn btn-primary" @click="create">
+          <button type="button" class="btn btn-outline-primary" @click="create">
             创建
           </button>
         </div>

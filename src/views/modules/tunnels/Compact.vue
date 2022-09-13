@@ -1,5 +1,5 @@
 <template>
-  <router-link class="btn btn-primary" :to="{ name: 'modules.tunnels' }">
+  <router-link class="btn btn-outline-primary" :to="{ name: 'modules.tunnels' }">
     返回到 隧道列表
   </router-link>
 

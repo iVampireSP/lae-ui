@@ -40,7 +40,7 @@
 
     <!-- btn -->
     <div class="btn-group mt-4" role="group" aria-label="Basic example">
-      <button class="btn btn-primary" @click="replyWorkOrder">回复</button>
+      <button class="btn btn-outline-primary" @click="replyWorkOrder">回复</button>
       <button class="btn btn-danger" @click="closeWorkOrder">关闭</button>
     </div>
   </div>

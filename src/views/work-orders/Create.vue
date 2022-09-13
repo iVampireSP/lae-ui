@@ -63,7 +63,7 @@
       ></v-md-editor>
     </div>
 
-    <button class="mt-3 btn btn-primary" @click="submitWorkOrder()">
+    <button class="mt-3 btn btn-outline-primary" @click="submitWorkOrder()">
       提交工单
     </button>
   </div>

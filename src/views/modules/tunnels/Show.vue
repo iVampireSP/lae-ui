@@ -37,7 +37,7 @@
       </div>
 
       <!-- <button
-        class="btn btn-primary"
+        class="btn btn-outline-primary"
         v-if="tunnel.status == 'running'"
         @click="stop()"
         data-bs-toggle="tooltip"
@@ -55,7 +55,7 @@
 
       <!-- <button
         v-else-if="tunnel.status == 'stopped'"
-        class="btn btn-primary"
+        class="btn btn-outline-primary"
         @click="start()"
       >
         启用隧道
