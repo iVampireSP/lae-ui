@@ -70,6 +70,10 @@ instance.interceptors.response.use(
       data = error.response.data.message;
     }
 
+     if (error.response.data.error) {
+       data = error.response.data.error.message;
+     }
+
     if (error.response.status === 429) {
       alert('请求次数过多');
     } else if (error.response.status === 401) {

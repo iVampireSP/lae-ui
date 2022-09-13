@@ -1,6 +1,6 @@
 <template>
   <div v-show="show">
-    <nav class="navbar navbar-expand-md shadow-sm fixed-top bg-body">
+    <nav class="navbar navbar-expand-md shadow-sm bg-body">
       <div class="container">
         <router-link
           class="navbar-brand text-auto lae-logo"
@@ -162,6 +162,13 @@
         <h4>计费项目列表</h4>
         <router-link class="text-auto" :to="{ name: 'hosts' }"
           >计费项目列表</router-link
+        >
+      </div>
+
+      <div class="mt-5">
+        <h4>开启的工单</h4>
+        <router-link class="text-auto" :to="{ name: 'work-orders' }"
+          >工单列表</router-link
         >
       </div>
 

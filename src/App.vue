@@ -2,7 +2,7 @@
   <div>
     <Nav />
   </div>
-  <div class="mt-5">
+  <div>
     <div class="background-container"></div>
     <!-- <Modals /> -->
     <Layout />

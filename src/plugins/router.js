@@ -57,6 +57,24 @@ const routes = [
       keepalive: true,
     },
   },
+  {
+    path: '/work-orders',
+    name: 'work-orders',
+    component: () => import('../views/work-orders/Index.vue'),
+    meta: {
+      auth: true,
+    },
+  },
+  {
+    path: '/work-orders/create',
+    name: 'work-orders.create',
+    component: () => import('../views/work-orders/Create.vue'),
+  },
+  {
+    path: '/work-orders/:id',
+    name: 'work-orders.show',
+    component: () => import('../views/work-orders/Show.vue'),
+  },
 
   // Modules
   {
