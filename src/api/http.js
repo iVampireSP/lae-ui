@@ -74,7 +74,6 @@ instance.interceptors.response.use(
       alert('请求次数过多');
     } else if (error.response.status === 401) {
       if (router.currentRoute.value.name !== 'login') {
-
         alert('您的 访问密钥 可能已经失效，请尝试通过侧边栏来重新登录。');
 
         // var myModal = new Modal(document.getElementById('tokenExpiredModal'), {
@@ -89,7 +88,9 @@ instance.interceptors.response.use(
         // router.push({ name: 'login' });
       }
     } else {
-      alert(data);
+      if (data.length !== 0) {
+        alert(data);
+      }
     }
 
     // window.$message.error(
