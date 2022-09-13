@@ -32,7 +32,11 @@
 
   <div class="mt-5">
     <h4>回复</h4>
-    <v-md-editor v-model="reply.content" height="500px" placeholder="继续跟进问题。如果问题已解决，请关闭工单。"></v-md-editor>
+    <v-md-editor
+      v-model="reply.content"
+      height="500px"
+      placeholder="继续跟进问题。如果问题已解决，请关闭工单。"
+    ></v-md-editor>
 
     <!-- btn -->
     <div class="btn-group mt-4" role="group" aria-label="Basic example">
@@ -116,5 +120,6 @@
 <style>
   .markdown-preview .github-markdown-body {
     padding: 0;
+    background-color: var(--bs-body-bg) !important;
   }
 </style>
