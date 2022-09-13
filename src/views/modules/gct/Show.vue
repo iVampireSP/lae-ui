@@ -1,19 +1,5 @@
 <template>
-  <div v-show="!loaded">
-    <h3 class="placeholder-wave">
-      <span class="placeholder col-6 h-75"></span>
-    </h3>
-
-    <div class="placeholder-wave w-75 mt-5">
-      <div class="placeholder w-100" style="height: 200px"></div>
-    </div>
-
-    <div class="placeholder-wave w-75 mt-5">
-      <div class="placeholder w-100" style="height: 500px"></div>
-    </div>
-  </div>
-
-  <div v-show="loaded">
+  <div v-if="loaded">
     <h3>
       <input
         class="editable"
@@ -220,6 +206,19 @@
     <div class="mt-4"></div>
     <button class="btn btn-primary" @click="apply()">应用更改</button>
   </div>
+  <div v-else>
+    <div class="placeholder-wave">
+      <div class="placeholder w-50" style="height: 100px"></div>
+    </div>
+
+    <div class="placeholder-wave w-75 mt-4">
+      <div class="placeholder w-100" style="height: 200px"></div>
+    </div>
+
+    <div class="placeholder-wave w-75 mt-4">
+      <div class="placeholder w-100" style="height: 500px"></div>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -269,7 +268,7 @@
   function updateThisEgg() {
     eggs.value.forEach((egg) => {
       if (egg.egg_id == gct.value.egg_id) {
-        console.log(egg)
+        // console.log(egg)
         egg_info.value = egg
       }
     })

@@ -6082,7 +6082,7 @@ fieldset:disabled .btn {
   vertical-align: middle;
   cursor: wait;
   background-color: currentColor;
-  opacity: 0.5;
+  opacity: 0.1;
 }
 .placeholder.btn::before {
   display: inline-block;
@@ -11908,8 +11908,9 @@ fieldset:disabled .btn {
   .d-dark-none {
     display: none !important;
   }
+}
 
-  .offcanvas.offcanvas-end {
+.offcanvas.offcanvas-end {
     top: 0;
     right: 0;
     width: var(--bs-offcanvas-width);
@@ -11917,4 +11918,3 @@ fieldset:disabled .btn {
       var(--bs-offcanvas-border-color);
     transform: translateX(100%);
   }
-}
