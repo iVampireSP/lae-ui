@@ -288,7 +288,7 @@
           >
             取消
           </button>
-          <button type="button" class="btn btn-outline-primary" @click="create">
+          <button type="button" class="btn btn-primary" @click="create">
             创建
           </button>
         </div>
