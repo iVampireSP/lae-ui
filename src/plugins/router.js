@@ -31,6 +31,14 @@ const routes = [
     },
   },
   {
+    path: '/billing/transactions',
+    name: 'billing.transactions',
+    component: () => import('../views/user/Transactions.vue'),
+    meta: {
+      auth: true,
+    },
+  },
+  {
     path: '/servers',
     name: 'servers',
     component: () => import('../views/Servers.vue'),
