@@ -162,6 +162,13 @@
             >浏览列表</router-link
           >
         </div>
+
+        <div>
+          充值余额:
+          <router-link class="text-auto" :to="{ name: 'billing.charge' }"
+            >充值</router-link
+          >
+        </div>
       </div>
 
       <div class="mt-5">

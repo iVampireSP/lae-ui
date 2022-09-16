@@ -1,51 +1,63 @@
 <template>
   <div class="mb-2">
-    <h4>莱云 Beta</h4>
-  </div>
-  <div>
-    <div>
-      <p>余额: {{ user.balance }} <small># 这是你充值的余额</small></p>
-      <p>
-        Drops: {{ user.drops }}
-        <small
-          ># 这是按量/时间计费用的余额，当 Drops 不够用时，你的余额会自动转换为
-          Drops</small
-        >
-      </p>
-    </div>
+    <h4>欢迎使用 莱云 Beta</h4>
 
-    <router-link class="btn btn-outline-primary" :to="{ name: 'billing.charge' }"
-      >添加到余额</router-link
-    >
+    <!-- <span v-if="announcement.attributes">
+      {{ announcement.attributes.title }}
+    </span>
+
+    <span v-if="announcement.attributes">
+      {{ new Date(announcement.attributes.createdAt).toLocaleString() }}
+    </span> -->
+    <h4 class="mt-3">公告</h4>
+    <div class="list-group mt-3" v-for="announcement in announcements">
+      <span v-if="announcement.attributes">
+        <a
+          class="list-group-item list-group-item-action shadow-sm rounded"
+          target="_blank"
+          :href="base_url + '/d/' + announcement.attributes.slug"
+        >
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1 text-success">
+              {{ announcement.attributes.title }}
+            </h5>
+            <small>
+              {{
+                new Date(announcement.attributes.lastPostedAt).toLocaleString()
+              }}
+            </small>
+          </div>
+          <!-- <p class="mb-1">
+            <span></span>
+          </p> -->
+          <!-- <small class="text-muted">
+        </small> -->
+        </a>
+      </span>
+    </div>
   </div>
 </template>
 
 <script setup>
-  import { ref, onMounted, onUnmounted } from 'vue'
-  import store from '../plugins/store'
+  import { ref } from 'vue'
   import http from '../api/http'
 
-  const user = ref('')
+  const announcements = ref([
+    {
+      attributes: {
+        title: '莱云 Beta',
+        slug: 'beta',
+      },
+    },
+  ])
+  const base_url = ref('')
 
-  function refresh() {
-    http
-      .get('/users')
-      .then((res) => {
-        user.value = res.data
-        store.commit('updateUser', res.data)
-      })
-      .catch((err) => {
-        console.error(err)
-      })
-  }
+  http.get('forum/announcements').then((res) => {
+    // foreach res
+    announcements.value = res.data
 
-  refresh()
+    console.log(announcements.value)
 
-  onMounted(() => {
-    refresh()
-    const interval = setInterval(refresh, 60000)
-    onUnmounted(() => {
-      clearInterval(interval)
-    })
+    base_url.value = announcements.value.base_url
   })
 </script>
