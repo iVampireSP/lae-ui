@@ -160,7 +160,7 @@
                 {{ server.name }}
               </option>
             </select>
-            <label for="floatingServer">支持 HTTP 协议的服务器</label>
+            <label for="floatingServer">选择支持 HTTP 协议的节点</label>
           </div>
 
           <div
@@ -176,7 +176,7 @@
                 {{ server.name }}
               </option>
             </select>
-            <label for="floatingServer">支持 HTTPS 协议的服务器</label>
+            <label for="floatingServer">选择支持 HTTPS 协议的节点</label>
           </div>
 
           <div
@@ -193,7 +193,7 @@
                 {{ server.name }}
               </option>
             </select>
-            <label for="floatingServer">支持 TCP 协议的服务器</label>
+            <label for="floatingServer">选择支持 TCP 协议的节点(国内服务器严禁 TCP 建站)</label>
           </div>
 
           <div
@@ -210,7 +210,7 @@
                 {{ server.name }}
               </option>
             </select>
-            <label for="floatingServer">支持 UDP 协议的服务器</label>
+            <label for="floatingServer">选择支持 UDP 协议的节点</label>
           </div>
 
           <!-- 如果是 http,https 则要求输入域名 -->
@@ -227,7 +227,7 @@
               placeholder="xxx"
               v-model="createTunnel.custom_domain"
             />
-            <label for="floatingDomain">域名</label>
+            <label for="floatingDomain">绑定域名</label>
           </div>
 
           <div
@@ -242,7 +242,7 @@
               placeholder="xxx"
               v-model="createTunnel.remote_port"
             />
-            <label for="floatingPort">远程端口</label>
+            <label for="floatingPort">远程端口(此项会自动生成，一般情况不要改动)</label>
             <div v-if="selectedServer">
               <div
                 v-if="
@@ -275,6 +275,8 @@
             </p>
 
             <p v-if="selectedServer.price_per_gb !== 0">
+              此节点为收费节点</br>
+              ￥1 = 1000 Drops</br>
               每 GB 流量消耗的 Drops: {{ selectedServer.price_per_gb }}
             </p>
             <p v-else>此节点目前不收取费用</p>
