@@ -3,7 +3,7 @@
     <h3 v-text="workOrder.title"></h3>
 
     <div class="markdown-preview">
-      <v-md-editor v-model="workOrder.title" mode="preview"></v-md-editor>
+      <v-md-editor v-model="workOrder.content" mode="preview"></v-md-editor>
     </div>
   </div>
 
