@@ -34,7 +34,7 @@
               <span v-else>
                 <span class="text-danger">
                   <i class="bi bi-x-circle"></i>
-                  &nbsp;暂时不可用
+                  &nbsp;不可用
                 </span>
               </span>
             </td>
