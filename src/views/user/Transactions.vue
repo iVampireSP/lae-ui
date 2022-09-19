@@ -37,6 +37,8 @@
               <span v-if="transaction.payment == 'alipay'"> 支付宝 </span>
               <span v-if="transaction.payment == 'wepay'"> 微信支付 </span>
               <span v-if="transaction.payment == 'balance'"> 余额 </span>
+              <span v-if="transaction.payment == 'console'"> 控制台 </span>
+              <span v-else> {{ transaction.payment }} </span>
             </td>
 
             <td>
@@ -62,7 +64,7 @@
             </td>
 
             <td>
-                {{ new Date(transaction.created_at).toLocaleString() }}
+              {{ new Date(transaction.created_at).toLocaleString() }}
             </td>
           </tr>
         </tbody>
