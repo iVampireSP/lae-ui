@@ -139,7 +139,7 @@
   >
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="offcanvasUserRightLabel">
-        {{ store.state.user.name }}
+        {{ store.state.user.name }} # {{ store.state.user.id }}
       </h5>
       <button
         type="button"
