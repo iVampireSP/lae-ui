@@ -12,7 +12,7 @@
 
       <div class="btn-group" role="group" aria-label="隧道控制按钮组">
         <button
-          class="btn btn-warning"
+          class="btn btn-outline-secondary"
           v-show="canDelete"
           @click="resetToken()"
           type="button"
@@ -24,7 +24,7 @@
         </button>
 
         <button
-          class="btn btn-danger"
+          class="btn btn-outline-danger"
           v-show="canDelete"
           @click="deleteTunnel()"
           type="button"
