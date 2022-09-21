@@ -3,7 +3,7 @@ import store from '../plugins/store';
 import api from '../config/api';
 import router from '../plugins/router';
 
-import { Modal } from 'bootstrap';
+// import { Modal } from 'bootstrap';
 
 // if build for production, use production api
 // if build for development, use development api
@@ -70,9 +70,9 @@ instance.interceptors.response.use(
       data = error.response.data.message;
     }
 
-     if (error.response.data.error) {
-       data = error.response.data.error.message;
-     }
+    if (error.response.data.error) {
+      data = error.response.data.error.message;
+    }
 
     if (error.response.status === 429) {
       alert('请求次数过多');

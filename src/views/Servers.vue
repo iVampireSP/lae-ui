@@ -9,8 +9,7 @@
         <thead>
           <tr>
             <th>服务</th>
-            <th>名称</th>
-            <th>状态</th>
+            <th>名称和状态</th>
             <!-- <th>检查时间</th> -->
             <!-- <th>设立时间</th> -->
           </tr>
@@ -18,25 +17,26 @@
         <tbody>
           <tr v-for="server in servers">
             <td>{{ server.module.name }}</td>
-            <td>{{ server.name }}</td>
             <td>
               <span v-if="server.status == 'up'">
                 <span class="text-success"
-                  ><i class="bi bi-check-circle"></i> &nbsp;运行中</span
-                >
+                  ><i class="bi bi-check-circle"></i>
+                  <!-- 运行中 -->
+                </span>
               </span>
               <span v-else-if="server.status == 'maintenance'">
                 <span class="text-warning">
                   <i class="bi bi-wrench-adjustable"></i>
-                  &nbsp;维护中
+                  <!-- 维护中 -->
                 </span>
               </span>
               <span v-else>
                 <span class="text-danger">
                   <i class="bi bi-x-circle"></i>
-                  &nbsp;不可用
+                  <!-- 不可用 -->
                 </span>
               </span>
+              &nbsp; {{ server.name }}
             </td>
             <!-- <td>{{ new Date(server.updated_at).toLocaleString() }}</td> -->
             <!-- <td>{{ new Date(server.created_at).toLocaleString() }}</td> -->
