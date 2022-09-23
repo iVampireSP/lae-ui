@@ -49,7 +49,7 @@
                 >
               </span>
               <span v-else-if="host.status == 'pending'">
-                <span class="text-success"
+                <span class="text-warning"
                   ><i class="bi bi-clock-history"></i> &nbsp;等待中</span
                 >
               </span>
