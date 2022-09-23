@@ -40,7 +40,9 @@
               <span v-else-if="task.status == 'need_operation'">
                 需要操作
               </span>
-              <span v-else-if="task.status == 'done'"> 已完成 </span>
+              <span v-else-if="task.status == 'done'">
+                <i class="bi bi-check-circle"></i>
+              </span>
               <span v-else-if="task.status == 'success'">
                 <span class="text-success"
                   ><i class="bi bi-check-circle"></i
