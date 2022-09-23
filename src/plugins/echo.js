@@ -25,7 +25,7 @@ function init() {
         enableLogging: true,
         enabledTransports: ['ws', 'wss'],
 
-        authEndpoint: 'http://www.lae.test/api/broadcasting/auth',
+        authEndpoint: api.ws_auth_endpoint,
         auth: {
           headers: {
             Accept: 'application/json',
