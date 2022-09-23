@@ -50,6 +50,19 @@ td {
 .cursor-pointer {
   cursor: pointer;
 }
+/* 
+.table-flash {
+    animation: flash 1s linear;
+}
+
+@keyframes flash {
+    from {
+        background-color: #f8f9fa20;
+    }
+    to {
+        background-color: none;
+    }
+} */
 
 @media (prefers-color-scheme: dark) {
   /* .background-container {

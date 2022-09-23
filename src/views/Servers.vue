@@ -49,21 +49,22 @@
 
 <script setup>
   import http from '../api/http'
+  import echo from '../plugins/echo'
   import { ref, onMounted, onUnmounted } from 'vue'
 
   const servers = ref([])
 
-  function refresh() {
-    http.get('/servers').then((res) => {
-      servers.value = res.data
-    })
-  }
+  http.get('/servers').then((res) => {
+    servers.value = res.data
+  })
 
   onMounted(() => {
-    refresh()
-    const interval = setInterval(refresh, 1000)
-    onUnmounted(() => {
-      clearInterval(interval)
+    echo.channel('servers').listen('.servers', (e) => {
+      servers.value = e.data
     })
+  })
+
+  onUnmounted(() => {
+    echo.leave('servers')
   })
 </script>

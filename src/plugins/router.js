@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import store from './store';
 import app from '../config/app';
-import { Tooltip } from 'bootstrap';
+import { Tooltip, Toast } from 'bootstrap';
 
 const routes = [
   {
@@ -154,6 +154,10 @@ router.beforeEach((to, from) => {
   new Tooltip(document.body, {
     selector: "[data-bs-toggle='tooltip']",
   });
+
+  Array.from(document.querySelectorAll('.toast')).forEach(
+    (toastNode) => new Toast(toastNode)
+  );
 
   if (to.matched.length === 0) {
     return router.push({ name: 'errors.404' });

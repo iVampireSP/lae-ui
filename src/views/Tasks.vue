@@ -43,8 +43,8 @@
               <span v-else-if="task.status == 'done'"> 已完成 </span>
               <span v-else-if="task.status == 'success'">
                 <span class="text-success"
-                  ><i class="bi bi-check-circle"></i></span
-                >
+                  ><i class="bi bi-check-circle"></i
+                ></span>
               </span>
 
               {{ task.title }}
@@ -144,6 +144,9 @@
 
 <script setup>
   import http from '../api/http'
+  import echo from '../plugins/echo'
+  import store from '../plugins/store'
+
   import { ref, onMounted, onUnmounted } from 'vue'
 
   const tasks = ref([])
@@ -154,11 +157,18 @@
     })
   }
 
+  refresh()
+
+  const private_channel = `users.${store.state.user.id}`
+
   onMounted(() => {
-    refresh()
-    const interval = setInterval(refresh, 1000)
-    onUnmounted(() => {
-      clearInterval(interval)
+    echo.private(private_channel).listen('.user', (e) => {
+      console.log(e)
+      refresh()
     })
+  })
+
+  onUnmounted(() => {
+    echo.leave(private_channel)
   })
 </script>

@@ -24,3 +24,31 @@ app.use(router, store, VueAxios, axios);
 
 app.provide('axios', app.config.globalProperties.axios);
 app.mount('#app');
+
+
+// let client = new PusherJS('app-key', {
+//   wsHost: '127.0.0.1',
+//   wsPort: 6001,
+//   forceTLS: false,
+//   encrypted: true,
+//   disableStats: true,
+//   enabledTransports: ['ws', 'wss'],
+// });
+
+// client.subscribe('users.1').bind('user', (message) => {
+//     console.log(message)
+// });
+
+// let client = new PusherJS('app-key', {
+//   wsHost: '127.0.0.1',
+//   wsPort: 6001,
+//   forceTLS: false,
+//   encrypted: true,
+//   disableStats: true,
+//   enabledTransports: ['ws', 'wss'],
+
+// });
+
+// client.subscribe('test').bind('test', (message) => {
+//   console.log(message);
+// });

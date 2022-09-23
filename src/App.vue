@@ -12,7 +12,7 @@
 <script setup>
   import Layout from './components/Layout.vue'
   import Nav from './components/Nav.vue'
-import Modals from './components/Modals.vue';
+  // import Modals from './components/Modals.vue';
   //   import app from './config/app'
 
   //   document.title = app.name

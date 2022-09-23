@@ -4,6 +4,7 @@ const config = {
     auth: 'http://www.auth_server.test',
     ws_host: 'www.lae.test',
     ws_port: 6001,
+    ws_auth_endpoint: 'http://www.lae.test/api/broadcasting/auth',
   },
   prod: {
     api: 'https://api.lae.yistars.net/api/',
@@ -11,6 +12,7 @@ const config = {
 
     ws_host: 'api.lae.yistars.net',
     ws_port: 443,
+    ws_auth_endpoint: 'https://api.lae.yistars.net/api/broadcasting/auth',
   },
 };
 
