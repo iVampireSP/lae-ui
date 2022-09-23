@@ -10,7 +10,7 @@ const config = {
     api: 'https://api.lae.yistars.net/api/',
     auth: 'https://auth.laecloud.com',
 
-    ws_host: 'api.lae.yistars.net',
+    ws_host: 'socket.lae.yistars.net',
     ws_port: 443,
     ws_auth_endpoint: 'https://api.lae.yistars.net/api/broadcasting/auth',
   },
