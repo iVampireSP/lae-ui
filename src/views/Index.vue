@@ -10,7 +10,7 @@
       {{ new Date(item.attributes.createdAt).toLocaleString() }}
     </span> -->
 
-    <div v-show="pinned">
+    <div v-show="base_url">
       <h4 class="mt-3">公告</h4>
       <div class="list-group mt-3" v-for="item in pinned">
         <span v-if="item.attributes">
@@ -24,11 +24,7 @@
                 {{ item.attributes.title }}
               </h5>
               <small>
-                {{
-                  new Date(
-                    item.attributes.lastPostedAt
-                  ).toLocaleString()
-                }}
+                {{ new Date(item.attributes.lastPostedAt).toLocaleString() }}
               </small>
             </div>
             <!-- <p class="mb-1">
