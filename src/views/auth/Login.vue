@@ -22,8 +22,8 @@
   import router from '../../plugins/router'
   import api from '../../config/api'
 
-  const origin =
-    process.env.NODE_ENV === 'production' ? api.prod_auth : api.develop_auth
+  const origin = api.auth
+
   console.log('auth server: ' + origin)
 
   const token = ref('')

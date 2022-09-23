@@ -7,13 +7,7 @@ import router from '../plugins/router';
 
 // if build for production, use production api
 // if build for development, use development api
-const baseURL =
-  process.env.NODE_ENV === 'production' ? api.production : api.development;
-console.log('api endpoint: ' + baseURL);
-
-// const auth_url = process.env.NODE_ENV === 'production' ? api.prod_auth : api.develop_auth;
-
-// console.log(Layout.tooManyRequests);
+const baseURL = api.api;
 
 // axios.defaults.withCredentials = true;
 // import Base from "../Base.vue";
