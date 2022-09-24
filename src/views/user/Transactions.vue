@@ -12,7 +12,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">类型</th>
+            <th scope="col">类型与模块</th>
             <th scope="col">支付方式</th>
             <th scope="col">说明</th>
             <th scope="col">入账</th>
@@ -30,6 +30,8 @@
               <span v-if="transaction.type == 'income'" class="text-success">
                 收入
               </span>
+              &nbsp;
+              <span>{{ transaction.module.name }}</span>
             </td>
 
             <td>
@@ -79,7 +81,31 @@
 
   const transactions = ref([])
 
-  http.get('/balances/transactions').then((res) => {
-    transactions.value = res.data
+  const modules = ref([])
+
+  http.get('/modules').then((res) => {
+    modules.value = res.data
+
+    console.log(modules.value)
+    http.get('/balances/transactions').then((res) => {
+      transactions.value = res.data
+
+      transactions.value.forEach((transaction) => {
+        transaction.income = (transaction.income / 100).toFixed(2)
+        transaction.outcome = (transaction.outcome / 100).toFixed(2)
+        transaction.balance = (transaction.balance / 100).toFixed(2)
+        transaction.income_drops = (transaction.income_drops / 100).toFixed(2)
+        transaction.outcome_drops = (transaction.outcome_drops / 100).toFixed(2)
+        transaction.drops = (transaction.drops / 100).toFixed(2)
+        // transaction.module =
+
+        // search modules
+        modules.value.forEach((module) => {
+          if (module.id == transaction.module_id) {
+            transaction.module = module
+          }
+        })
+      })
+    })
   })
 </script>
