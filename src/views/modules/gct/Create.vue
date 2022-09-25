@@ -102,7 +102,7 @@
         <label class="form-check-label" for="c-databases">
           是的，我用的到数据库，我想要一个。<span
             >(需要
-            <span v-text="selectedLocation.database_price * 100 * 100"></span> Drops)</span
+            <span v-text="selectedLocation.database_price * 100"></span> Drops)</span
           >
         </label>
       </div>
