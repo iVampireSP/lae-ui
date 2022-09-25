@@ -123,13 +123,26 @@
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button
               class="nav-link active"
+              id="nav-tunnel-status-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#nav-tunnel-status"
+              type="button"
+              role="tab"
+              aria-controls="nav-tunnel-status"
+              aria-selected="true"
+            >
+              隧道状态
+            </button>
+
+            <button
+              class="nav-link"
               id="nav-conf-all-tab"
               data-bs-toggle="tab"
               data-bs-target="#nav-conf-all"
               type="button"
               role="tab"
               aria-controls="nav-conf-all"
-              aria-selected="true"
+              aria-selected="false"
             >
               全部配置
             </button>
@@ -157,11 +170,23 @@
             >
               客户端
             </button>
+            <button
+              class="nav-link"
+              id="nav-conf-client-in-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#nav-conf-client-in"
+              type="button"
+              role="tab"
+              aria-controls="nav-conf-client-in"
+              aria-selected="false"
+            >
+              传入配置
+            </button>
           </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
           <div
-            class="tab-pane fade show active"
+            class="tab-pane fade"
             id="nav-conf-all"
             role="tabpanel"
             aria-labelledby="nav-conf-all-tab"
@@ -204,6 +229,57 @@
               tunnel.config.client
             }}</textarea>
           </div>
+
+          <div
+            id="nav-tunnel-status"
+            class="tab-pane fade show active"
+            role="tabpanel"
+            aria-labelledby="nav-conf-client-tab"
+          >
+            <div class="mt-2">
+              <div v-if="tunnel.tunnel">
+                <h4>连接信息</h4>
+
+                <div class="p">
+                  <p>活动连接: {{ tunnel.tunnel.cur_conns }}</p>
+                  <p>上次关闭时间: {{ tunnel.tunnel.last_close_time }}</p>
+                  <p>上次启动时间: {{ tunnel.tunnel.last_start_time }}</p>
+                  <p>
+                    今日入流量:
+                    {{ tunnel.tunnel.today_traffic_in / 1024 / 1024 / 1024 }} GB
+                  </p>
+                  <p>
+                    今日出流量:
+                    {{ tunnel.tunnel.today_traffic_out / 1024 / 1024 / 1024 }}
+                    GB
+                  </p>
+                </div>
+              </div>
+              <div v-else>当前隧道不在线。</div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          id="nav-conf-client-in"
+          class="tab-pane fade"
+          role="tabpanel"
+          aria-labelledby="nav-conf-client-in-tab"
+        >
+          <h4 class="mt-3">客户端传入配置</h4>
+          <table class="table table-hover" v-if="tunnel.tunnel.conf">
+            <thead>
+              <th>配置键名称</th>
+              <th>配置键值</th>
+            </thead>
+            <tbody>
+              <tr v-for="(value, key) in tunnel.tunnel.conf" :key="key">
+                <td>{{ key }}</td>
+                <td>{{ value }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <p v-else>隧道不在线。</p>
         </div>
       </div>
     </div>
@@ -236,7 +312,7 @@
 
   const router = useRoute()
 
-  const tunnel = ref([])
+  const tunnel = ref({})
 
   const loaded = ref(false)
 
@@ -390,3 +466,10 @@
     }
   }
 </script>
+
+<style scoped>
+  .p p {
+    padding: 0;
+    margin: 1px;
+  }
+</style>
