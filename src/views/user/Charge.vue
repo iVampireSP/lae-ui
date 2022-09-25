@@ -35,10 +35,14 @@
 
       <div class="mt-3">
         <!-- button -->
-        <button class="btn btn-outline-primary" @click="doCharge()">充值</button>
+        <button class="btn btn-outline-primary" @click="doCharge()">
+          充值
+        </button>
       </div>
 
-      <div class="mt-2">请注意: 由于计费方式的特殊性，我们不支持退款，请合理充值。</div>
+      <div class="mt-2">
+        请注意: 由于计费方式的特殊性，我们不支持退款，请合理充值。
+      </div>
     </div>
   </div>
 </template>
@@ -58,11 +62,13 @@
   })
 
   function doCharge() {
+    let winOpen = window.open('', '_blank')
+
     http
       .post('/balances', charge.value)
       .then((res) => {
         if (res.data.pay_url) {
-          window.open(res.data.pay_url)
+          winOpen.location = res.data.pay_url
         }
         chargeSuccess.value = true
       })
