@@ -6,7 +6,7 @@ import './style.css';
 import { createApp } from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
-import pangu from 'pangu';
+// import pangu from 'pangu';
 // import { useRoute } from 'vue-router';
 
 import App from './App.vue';
@@ -21,7 +21,7 @@ const app = createApp(App);
 
 // retry
 import axiosRetry from 'axios-retry';
-axiosRetry(axios, { retries: 3 });
+// axiosRetry(axios, { retries: 3 });
 
 // 引入 http
 
@@ -61,7 +61,7 @@ app.mount('#app');
 
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  // listen to any DOM change and automatically perform spacing via MutationObserver()
-  pangu.autoSpacingPage();
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//   // listen to any DOM change and automatically perform spacing via MutationObserver()
+//   pangu.autoSpacingPage();
+// });
