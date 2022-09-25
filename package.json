@@ -20,6 +20,7 @@
     "laravel-echo": "^1.14.0",
     "pangu": "^4.0.7",
     "pusher-js": "^7.4.0",
+    "smooth-corners": "^1.0.8",
     "vue": "^3.2.37",
     "vue-axios": "^3.4.1",
     "vue-router": "4",

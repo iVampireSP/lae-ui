@@ -106,7 +106,16 @@ td {
     border-right: 1px solid #606060 !important;
   }
 
-  .v-md-textarea-editor pre, .v-md-textarea-editor textarea {
+  .v-md-textarea-editor pre,
+  .v-md-textarea-editor textarea {
     color: #cacaca !important;
   }
+}
+
+.placeholder {
+  /* --smooth-corners: 100.00;
+  mask-image: paint(smooth-corners);
+  -webkit-mask-image: paint(smooth-corners); */
+
+  border-radius: 8px;
 }

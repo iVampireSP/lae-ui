@@ -2098,6 +2098,11 @@ slash@^2.0.0:
   resolved "https://registry.npmmirror.com/slash/-/slash-2.0.0.tgz"
   integrity sha512-ZYKh3Wh2z1PpEXWr0MpSBZ0V6mZHAQfYevttO11c51CaWjGTaadiKZ+wVt1PbMlDV5qhMFslpZCemhwOK7C89A==
 
+smooth-corners@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.npmmirror.com/smooth-corners/-/smooth-corners-1.0.8.tgz#e8f2d9d2509224944e1a962735204a9768878679"
+  integrity sha512-JcHYm/7l3RZAX+Ev7/91tRX2zau1h+8nVWqMkl3mvqMsHQkUCbEQjFNKRj58s49PyqDcpl9TcUeC2zHHyGu2sQ==
+
 snapdragon-node@^2.0.1:
   version "2.1.1"
   resolved "https://registry.npmmirror.com/snapdragon-node/-/snapdragon-node-2.1.1.tgz"
