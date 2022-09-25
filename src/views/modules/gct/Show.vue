@@ -92,7 +92,7 @@
             <input
               type="range"
               class="form-range"
-              min="512"
+              min="1024"
               max="10240"
               step="512"
               v-model="gct.memory"
