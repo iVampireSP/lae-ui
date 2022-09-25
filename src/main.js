@@ -18,6 +18,10 @@ const app = createApp(App);
 // app.config.globalProperties.$http = http;
 // app.config.globalProperties.$route = useRoute();
 
+// retry
+import axiosRetry from 'axios-retry';
+axiosRetry(axios, { retries: 3 });
+
 // 引入 http
 
 app.use(router, store, VueAxios, axios);

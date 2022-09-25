@@ -102,16 +102,24 @@
   const usages = ref([])
 
   function refresh() {
-    http.get('/hosts').then((res) => {
-      hosts.value = res.data
-    })
+    http
+      .get('/hosts')
+      .then((res) => {
+        hosts.value = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
 
-    http.get('/hosts/usages').then((res) => {
-      usages.value = res.data
-    })
+    http
+      .get('/hosts/usages')
+      .then((res) => {
+        usages.value = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
-
-  refresh()
 
   function deleteHost(id) {
     if (
