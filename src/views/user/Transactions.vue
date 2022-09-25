@@ -94,9 +94,6 @@
         transaction.income = (transaction.income / 100).toFixed(2)
         transaction.outcome = (transaction.outcome / 100).toFixed(2)
         transaction.balance = (transaction.balance / 100).toFixed(2)
-        transaction.income_drops = (transaction.income_drops / 100).toFixed(2)
-        transaction.outcome_drops = (transaction.outcome_drops / 100).toFixed(2)
-        transaction.drops = (transaction.drops / 100).toFixed(2)
         // transaction.module =
 
         // search modules
