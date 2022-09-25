@@ -18,6 +18,7 @@
     "echarts": "^5.3.3",
     "humanize-plus": "^1.8.2",
     "laravel-echo": "^1.14.0",
+    "pangu": "^4.0.7",
     "pusher-js": "^7.4.0",
     "vue": "^3.2.37",
     "vue-axios": "^3.4.1",

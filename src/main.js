@@ -6,6 +6,7 @@ import './style.css';
 import { createApp } from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import pangu from 'pangu';
 // import { useRoute } from 'vue-router';
 
 import App from './App.vue';
@@ -56,3 +57,11 @@ app.mount('#app');
 // client.subscribe('test').bind('test', (message) => {
 //   console.log(message);
 // });
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  // listen to any DOM change and automatically perform spacing via MutationObserver()
+  pangu.autoSpacingPage();
+});
