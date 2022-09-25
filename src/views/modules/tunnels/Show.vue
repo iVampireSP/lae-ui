@@ -335,7 +335,7 @@
   function refresh() {
     http.get(url).then((res) => {
       tunnel.value = res.data
-      //   loaded.value = true
+      loaded.value = true
 
       if (tunnel.value.tunnel.length !== 0) {
         if (tunnel.value.tunnel.status !== 'offline') {
