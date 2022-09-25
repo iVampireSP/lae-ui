@@ -237,7 +237,7 @@
             aria-labelledby="nav-conf-client-tab"
           >
             <div class="mt-2">
-              <div v-if="tunnel.tunnel.length > 0">
+              <div v-if="tunnel.tunnel.length">
                 <h4 class="mt-3">连接信息</h4>
 
                 <div class="p">
