@@ -237,20 +237,20 @@
             aria-labelledby="nav-conf-client-tab"
           >
             <div class="mt-2">
-              <div v-if="tunnel.tunnel">
-                <h4>连接信息</h4>
+              <div v-if="tunnel.tunnel.length > 0">
+                <h4 class="mt-3">连接信息</h4>
 
                 <div class="p">
                   <p>活动连接: {{ tunnel.tunnel.cur_conns }}</p>
                   <p>上次关闭时间: {{ tunnel.tunnel.last_close_time }}</p>
                   <p>上次启动时间: {{ tunnel.tunnel.last_start_time }}</p>
-                  <p>
+                  <p v-show="tunnel.tunnel.today_traffic_in">
                     今日入流量:
-                    {{ tunnel.tunnel.today_traffic_in / 1024 / 1024 / 1024 }} GB
+                    {{ tunnel.tunnel.today_traffic_in / 1024 / 1024 / 1024 ?? 0 }} GB
                   </p>
-                  <p>
+                  <p v-show="tunnel.tunnel.today_traffic_out">
                     今日出流量:
-                    {{ tunnel.tunnel.today_traffic_out / 1024 / 1024 / 1024 }}
+                    {{ tunnel.tunnel.today_traffic_out / 1024 / 1024 / 1024 ?? 0}}
                     GB
                   </p>
                 </div>
