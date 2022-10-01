@@ -103,6 +103,8 @@
           }
         })
       })
+
+      console.log(transactions.value)
     })
   })
 </script>
