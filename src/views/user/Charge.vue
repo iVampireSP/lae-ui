@@ -44,7 +44,7 @@
         请注意: 由于计费方式的特殊性，我们不支持退款，请合理充值。
 
         <br />
-        <a href="https://forum.laecloud.com/d/4-wo-chong-zhi-hou-jin-e-mei-you-li-ji-dao-zhang">
+        <a target="_blank" href="https://forum.laecloud.com/d/4-wo-chong-zhi-hou-jin-e-mei-you-li-ji-dao-zhang">
         必看! 充值后金额没有立即到账的原因。
         </a>
       </div>
