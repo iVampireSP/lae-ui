@@ -31,7 +31,7 @@
                 收入
               </span>
               &nbsp;
-              <span>{{ transaction.module.name }}</span>
+              <span v-show="transaction.module.name">{{ transaction.module.name }}</span>
             </td>
 
             <td>
