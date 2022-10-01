@@ -17,7 +17,8 @@
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="切换导航"
-        >
+          >
+          
             <span class="bi bi-list text-auto fs-1"></span>
         </button>
 
@@ -75,6 +76,7 @@
                 data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasUserRight"
                 aria-controls="offcanvasUserRight"
+                @click.prevent="refresh_user()"
               >
                 {{ store.state.user.name }}
                 <i
@@ -215,5 +217,14 @@ http.get('/balances/drops').then((res) => {
 const show = ref(true)
 if (store.state.token == null) {
     show.value = false
+}
+
+function refresh_user() {
+    http
+        .get('/users')
+        .then((res) => {
+            store.commit('updateUser', res.data)
+        })
+
 }
 </script>
