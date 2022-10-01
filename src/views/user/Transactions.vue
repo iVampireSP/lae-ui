@@ -31,7 +31,7 @@
                 收入
               </span>
               &nbsp;
-              <span v-show="transaction.module.name">{{ transaction.module.name }}</span>
+              <span v-show="transaction.module">{{ transaction.module }}</span>
             </td>
 
             <td>
@@ -99,7 +99,7 @@
         // search modules
         modules.forEach((module) => {
           if (module.id == transaction.module_id) {
-            transaction.module = module
+            transaction.module = module.name
           }
         })
       })
