@@ -100,6 +100,8 @@
         modules.forEach((module) => {
           if (module.id == transaction.module_id) {
             transaction.module = module.name
+          } else {
+            transaction.module = '莱云'
           }
         })
       })
