@@ -81,12 +81,12 @@
 
   const transactions = ref([])
 
-  const modules = ref([])
+  let modules = []
 
   http.get('/modules').then((res) => {
-    modules.value = res.data
+    modules = res.data
 
-    console.log(modules.value)
+    console.log(modules)
     http.get('/balances/transactions').then((res) => {
       transactions.value = res.data
 
@@ -97,7 +97,7 @@
         // transaction.module =
 
         // search modules
-        modules.value.forEach((module) => {
+        modules.forEach((module) => {
           if (module.id == transaction.module_id) {
             transaction.module = module
           }
