@@ -8,7 +8,7 @@
           to="/"
         >
         </router-link>
-
+                
         <button
           class="navbar-toggler"
           type="button"
@@ -18,7 +18,7 @@
           aria-expanded="false"
           aria-label="切换导航"
         >
-          <span class="navbar-toggler-icon"></span>
+            <span class="bi bi-list text-auto fs-1"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -201,19 +201,19 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-  //   import app from '../config/app'
-  import http from '../api/http'
-  import store from '../plugins/store'
+import { ref } from 'vue'
+//   import app from '../config/app'
+import http from '../api/http'
+import store from '../plugins/store'
 
-  const drops = ref({})
+const drops = ref({})
 
-  http.get('/balances/drops').then((res) => {
+http.get('/balances/drops').then((res) => {
     drops.value = res.data
-  })
+})
 
-  const show = ref(true)
-  if (store.state.token == null) {
+const show = ref(true)
+if (store.state.token == null) {
     show.value = false
-  }
+}
 </script>
