@@ -91,8 +91,8 @@
       transactions.value = res.data
 
       transactions.value.forEach((transaction) => {
-        transaction.income = (transaction.income / 100).toFixed(2)
-        transaction.outcome = (transaction.outcome / 100).toFixed(2)
+        // transaction.income = (transaction.income / 100).toFixed(2)
+        // transaction.outcome = (transaction.outcome / 100).toFixed(2)
         // transaction.balance = (transaction.balance / 100).toFixed(2)
         // transaction.module =
 
