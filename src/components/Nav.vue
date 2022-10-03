@@ -58,7 +58,7 @@
                 class="nav-link text-auto"
                 active-class="active"
                 :to="{ name: 'servers' }"
-                >服务器状态</router-link
+                >状态</router-link
               >
             </li>
             <li class="nav-item">
