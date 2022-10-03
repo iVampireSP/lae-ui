@@ -157,7 +157,7 @@
 
         <div>Drops: {{ drops.drops ?? 0 }} Drops</div>
 
-        <div>本月消耗: {{ drops.monthly_usages ?? 0 }} Drops</div>
+        <!-- <div>本月消耗: {{ drops.monthly_usages ?? 0 }} Drops</div> -->
         <div>
           交易记录:
           <router-link class="text-auto" :to="{ name: 'billing.transactions' }"
