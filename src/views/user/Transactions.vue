@@ -86,7 +86,7 @@ let modules = []
 http.get('/modules').then((res) => {
     modules = res.data
 
-    console.log(modules)
+    // console.log(modules)
     http.get('/balances/transactions').then((res) => {
         transactions.value = res.data
 
@@ -105,7 +105,7 @@ http.get('/modules').then((res) => {
             })
         })
 
-        console.log(transactions.value)
+        // console.log(transactions.value)
     })
 })
 </script>
