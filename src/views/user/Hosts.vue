@@ -35,7 +35,7 @@
             </td>
             <td>
               <span v-if="usages[host.id]">
-                {{ usages[host.id].toFixed(2) + ' Drops' ?? '未计量' }}
+                {{ usages[host.id] + ' Drops' ?? '未计量' }}
               </span>
 
               <span v-else class="text-warning">
