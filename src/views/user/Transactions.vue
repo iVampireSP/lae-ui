@@ -76,37 +76,36 @@
 </template>
 
 <script setup>
-  import http from '../../api/http'
-  import { ref } from 'vue'
+import http from '../../api/http'
+import { ref } from 'vue'
 
-  const transactions = ref([])
+const transactions = ref([])
 
-  let modules = []
+let modules = []
 
-  http.get('/modules').then((res) => {
+http.get('/modules').then((res) => {
     modules = res.data
 
     console.log(modules)
     http.get('/balances/transactions').then((res) => {
-      transactions.value = res.data
+        transactions.value = res.data
 
-      transactions.value.forEach((transaction) => {
-        // transaction.income = (transaction.income / 100).toFixed(2)
-        // transaction.outcome = (transaction.outcome / 100).toFixed(2)
-        // transaction.balance = (transaction.balance / 100).toFixed(2)
-        // transaction.module =
-
-        // search modules
-        modules.forEach((module) => {
-          if (module.id == transaction.module_id) {
-            transaction.module = module.name
-          } else {
+        transactions.value.forEach((transaction) => {
+            // transaction.income = (transaction.income / 100).toFixed(2)
+            // transaction.outcome = (transaction.outcome / 100).toFixed(2)
+            // transaction.balance = (transaction.balance / 100).toFixed(2)
+            // transaction.module =
+            // search modules
             transaction.module = '莱云'
-          }
-        })
-      })
 
-      console.log(transactions.value)
+            modules.forEach((module) => {
+                if (module.id == transaction.module_id) {
+                    transaction.module = module.name
+                }
+            })
+        })
+
+        console.log(transactions.value)
     })
-  })
+})
 </script>
