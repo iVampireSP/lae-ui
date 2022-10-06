@@ -105,6 +105,11 @@ const routes = [
         component: () => import('../views/modules/tunnels/Compact.vue'),
       },
       {
+        path: 'tunnels/downloads',
+        name: 'modules.tunnels.download',
+        component: () => import('../views/modules/tunnels/Download.vue'),
+      },
+      {
         path: 'tunnels/:id',
         name: 'modules.tunnels.show',
         props: true,

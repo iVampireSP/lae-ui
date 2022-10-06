@@ -76,6 +76,13 @@
       >
         整合配置
       </router-link>
+        <router-link
+        type="button"
+        class="btn btn-outline-primary"
+        :to="{ name: 'modules.tunnels.download' }"
+      >
+        客户端下载
+      </router-link>
     </div>
   </div>
 
@@ -312,129 +319,129 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-  //   import { useRoute } from 'vue-router'
-  import http from '../../../api/http'
-  import route from '../../../plugins/router'
+import { ref } from 'vue'
+//   import { useRoute } from 'vue-router'
+import http from '../../../api/http'
+import route from '../../../plugins/router'
 
-  //   const router = useRoute()
+//   const router = useRoute()
 
-  const traffics = ref([])
-  const tunnels = ref([])
-  const servers = ref([])
-  const servers_http = ref([])
-  const servers_https = ref([])
-  const servers_tcp = ref([])
-  const servers_udp = ref([])
+const traffics = ref([])
+const tunnels = ref([])
+const servers = ref([])
+const servers_http = ref([])
+const servers_https = ref([])
+const servers_tcp = ref([])
+const servers_udp = ref([])
 
-  const tunnelCreated = ref(false)
-  const tunnelCreateError = ref(false)
+const tunnelCreated = ref(false)
+const tunnelCreateError = ref(false)
 
-  const selectedServer = ref({
+const selectedServer = ref({
     name: null,
-  })
+})
 
-  const createTunnel = ref({
+const createTunnel = ref({
     name: null,
     protocol: 'http',
     local_address: '127.0.0.1:80',
     server_id: 1,
     remote_port: null,
     custom_domain: null,
-  })
+})
 
-  // 随机生成字符串
-  function randomString(len) {
+// 随机生成字符串
+function randomString(len) {
     len = len || 32
     var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'
     var maxPos = $chars.length
     var str = ''
     for (var i = 0; i < len; i++) {
-      str += $chars.charAt(Math.floor(Math.random() * maxPos))
+        str += $chars.charAt(Math.floor(Math.random() * maxPos))
     }
     return str
-  }
+}
 
-  createTunnel.value.name = randomString(10)
+createTunnel.value.name = randomString(10)
 
-  //   function toRoute(id) {
-  //     // key.value = Math.round(Math.random() * 1000)
-  //     route.push({ name: 'modules.tunnels.show', params: { id: id } })
-  //     // key.value = Math.round(Math.random() * 1000)
-  //   }
+//   function toRoute(id) {
+//     // key.value = Math.round(Math.random() * 1000)
+//     route.push({ name: 'modules.tunnels.show', params: { id: id } })
+//     // key.value = Math.round(Math.random() * 1000)
+//   }
 
-  http.get('/modules/frp/hosts').then((res) => {
+http.get('/modules/frp/hosts').then((res) => {
     tunnels.value = res.data
-  })
+})
 
-  http.get('/modules/frp/traffics').then((res) => {
+http.get('/modules/frp/traffics').then((res) => {
     traffics.value = res.data
-  })
+})
 
-  function getServers() {
+function getServers() {
     http.get('/modules/frp/servers').then((res) => {
-      tunnelCreated.value = false
+        tunnelCreated.value = false
 
-      servers.value = res.data
+        servers.value = res.data
 
-      createTunnel.server_id = servers.value[0].id
+        createTunnel.server_id = servers.value[0].id
 
-      servers_http.value = servers.value.filter((server) => {
-        return server.allow_http == 1
-      })
+        servers_http.value = servers.value.filter((server) => {
+            return server.allow_http == 1
+        })
 
-      servers_https.value = servers.value.filter((server) => {
-        return server.allow_https == 1
-      })
+        servers_https.value = servers.value.filter((server) => {
+            return server.allow_https == 1
+        })
 
-      servers_tcp.value = servers.value.filter((server) => {
-        return server.allow_tcp == 1
-      })
+        servers_tcp.value = servers.value.filter((server) => {
+            return server.allow_tcp == 1
+        })
 
-      servers_udp.value = servers.value.filter((server) => {
-        return server.allow_udp == 1
-      })
+        servers_udp.value = servers.value.filter((server) => {
+            return server.allow_udp == 1
+        })
     })
-  }
+}
 
-  function getCurrentServer(id) {
+function getCurrentServer(id) {
     // 从 servers 中找到 id 对应的服务器
     selectedServer.value = servers.value.find((server) => {
-      return server.id == id
+        return server.id == id
     })
-  }
+}
 
-  function randomRemotePort() {
+function randomRemotePort() {
     const input = createTunnel.value.remote_port ?? 0
 
     const start = selectedServer.value.min_port
     const end = selectedServer.value.max_port
 
     if (input < start || input > end) {
-      createTunnel.value.remote_port = Math.floor(
-        Math.random() * (end - start + 1) + start
-      )
+        createTunnel.value.remote_port = Math.floor(
+            Math.random() * (end - start + 1) + start
+        )
     }
-  }
+}
 
-  function create() {
+function create() {
     http
-      .post('/modules/frp/hosts', createTunnel.value)
-      .then((res) => {
-        // 刷新列表
+        .post('/modules/frp/hosts', createTunnel.value)
+        .then((res) => {
+            // 刷新列表
 
-        if (res.status == 200 || res.status == 201) {
-          http.get('/modules/frp/hosts').then((res) => {
-            tunnels.value = res.data
-          })
-          tunnelCreated.value = true
-        } else {
-          tunnelCreateError.value = res.message
-        }
-      })
-      .catch((status, message) => {
-        tunnelCreateError.value =
-          '无法创建隧道，可能是表单没有填写完整，或者服务器不接受此端口（端口被占用或者不在范围内）'
-      })
-  }
+            if (res.status == 200 || res.status == 201) {
+                http.get('/modules/frp/hosts').then((res) => {
+                    tunnels.value = res.data
+                })
+                tunnelCreated.value = true
+            } else {
+                tunnelCreateError.value = res.message
+            }
+        })
+        .catch((status, message) => {
+            tunnelCreateError.value =
+                '无法创建隧道，可能是表单没有填写完整，或者服务器不接受此端口（端口被占用或者不在范围内）'
+        })
+}
 </script>
