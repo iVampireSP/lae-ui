@@ -41,8 +41,8 @@
               </span>
             </td>
             <td>
-                <span v-if="host.balance" class="text-success">
-                    {{ host.balance }} 元 / 月
+                <span v-if="host.managed_price" class="text-success">
+                    {{ host.managed_price ?? 0 }} 元 / 月
                 </span>
                 <span v-else>
                     <i class="bi bi-arrow-left"></i> Drops
