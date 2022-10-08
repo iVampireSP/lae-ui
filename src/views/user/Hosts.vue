@@ -28,15 +28,15 @@
             <td>{{ host.module.name }}</td>
             <td>{{ host.name }}</td>
             <td>
-              <span v-if="host.managed_price" class="text-success">
+              <span v-if="host.managed_price > 0" class="text-success">
                 {{ host.managed_price }} 元 / 月
                 <br />
               </span>
-              <span v-if="host.price !== 0" class="text-success">
+              <span v-if="host.price > 0" class="text-success">
                 {{ host.price }} Drops ≈
                 {{ ((host.price / dropsRate) * 8640).toFixed(2) }} 元 / 月
               </span>
-              <span v-if="host.managed_price === 0 && host.managed_price === 0 " class="text-danger">
+              <span v-if="host.price == 0 && host.managed_price == 0 " class="text-danger">
                 被接管
               </span>
             </td>
