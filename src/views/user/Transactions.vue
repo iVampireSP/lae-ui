@@ -11,7 +11,7 @@
     <div>
         <a class="link cursor-pointer" @click="refresh({})">全部</a>
         &nbsp;
-        <a class="link cursor-pointer" @click="refresh({type: 'income', payment: 'balance'})">入账</a>
+        <a class="link cursor-pointer" @click="refresh({type: 'income', payment: null})">入账</a>
         &nbsp;
         <a class="link cursor-pointer" @click="refresh({type: 'payout', payment: 'balance'})">出账</a>
         &nbsp;
