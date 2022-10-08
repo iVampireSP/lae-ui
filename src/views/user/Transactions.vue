@@ -8,6 +8,16 @@
       以下记录将会保存 1 年。
     </p>
 
+    <div>
+        <a class="link cursor-pointer" @click="refresh({})">全部</a>
+        &nbsp;
+        <a class="link cursor-pointer" @click="refresh({type: 'income', payment: 'balance'})">入账</a>
+        &nbsp;
+        <a class="link cursor-pointer" @click="refresh({type: 'payout', payment: 'balance'})">出账</a>
+        &nbsp;
+        <a class="link cursor-pointer" @click="refresh({type: null, payment: 'drops'})">Drops</a>
+    </div>
+
     <div class="overflow-auto">
       <table class="table">
         <thead>
@@ -77,17 +87,21 @@
 
 <script setup>
 import http from '../../api/http'
+import router from '../../plugins/router'
+
 import { ref } from 'vue'
 
 const transactions = ref([])
 
 let modules = []
 
-http.get('/modules').then((res) => {
-    modules = res.data
-
-    // console.log(modules)
-    http.get('/balances/transactions').then((res) => {
+function refresh(params = {}) {
+    http.get('/balances/transactions', {
+        params: {
+            payment: params.payment ?? router.currentRoute.value.query.payment,
+            type: params.type ?? router.currentRoute.value.query.type,
+        }
+    }).then((res) => {
         transactions.value = res.data
 
         transactions.value.forEach((transaction) => {
@@ -105,7 +119,18 @@ http.get('/modules').then((res) => {
             })
         })
 
-        // console.log(transactions.value)
+
+        // router.push({
+        //     query: params
+        // })
     })
+}
+
+http.get('/modules').then((res) => {
+    modules = res.data
+
+
+    refresh()
+
 })
 </script>
