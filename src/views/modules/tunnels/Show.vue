@@ -196,6 +196,7 @@
               >{{ tunnel.config.server }} 
 
 # {{ tunnel.name }} 在 {{ tunnel.server.name }} 上
+# 请在截图时打码下一行信息。
 {{ tunnel.config.client }}</textarea
             >
           </div>
