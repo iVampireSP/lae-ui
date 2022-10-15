@@ -48,17 +48,17 @@ links.value = [
     {
         name: 'Windows 图形启动器',
         arch: 'amd64',
-        url: 'https://cdn.114514.space/Download/Files/2.0.0/MEFrp_GUI_V1.0.1_Released.zip',
+        url: 'http://cdn.114514.space/Download/Files/2.0.0/MEFrp_GUI_V1.0.1_Released.zip',
     },
     {
         name: 'Windows',
         arch: 'amd64',
-        url: 'https://cdn.114514.space/Download/Files/2.0.0/frp_0.44.0_windows_amd64.zip',
+        url: 'http://cdn.114514.space/Download/Files/2.0.0/frp_0.44.0_windows_amd64.zip',
     },
     {
         name: 'Linux',
         arch: 'amd64',
-        url: 'https://cdn.114514.space/Download/Files/2.0.0/frp_0.44.0_linux_amd64.tar.gz',
+        url: 'http://cdn.114514.space/Download/Files/2.0.0/frp_0.44.0_linux_amd64.tar.gz',
     },
 ];
 

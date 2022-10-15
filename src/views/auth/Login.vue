@@ -16,68 +16,71 @@
 </template>
 
 <script setup>
-  import { onMounted, ref } from 'vue'
-  import store from '../../plugins/store'
-  import http from '../../api/http'
-  import router from '../../plugins/router'
-  import api from '../../config/api'
+import { onMounted, ref } from 'vue'
+import store from '../../plugins/store'
+import http from '../../api/http'
+import router from '../../plugins/router'
+import api from '../../config/api'
+// import app from '../../config/app'
 
-  const origin = api.auth
+const origin = api.auth
 
-  console.log('auth server: ' + origin)
+console.log('auth server: ' + origin)
 
-  const token = ref('')
-  const show = ref(false)
-  const title = ref('连接到 莱云')
-  const buttonDisabled = ref(false)
+const token = ref('')
+const show = ref(false)
+const title = ref('连接到 莱云')
+const buttonDisabled = ref(false)
 
-  // const user = store.state.user
+// const user = store.state.user
 
-  console.log('store token:', store.state.token)
-  console.log('store user:', store.state.user)
+console.log('store token:', store.state.token)
+console.log('store user:', store.state.user)
 
-  const connect = () => {
+const connect = () => {
     buttonDisabled.value = true
     title.value = '正在验证登录...'
     store.commit('updateToken', token.value)
     http
-      .get('/users')
-      .then((res) => {
-        store.commit('updateUser', res.data)
+        .get('/users')
+        .then((res) => {
+            store.commit('updateUser', res.data)
 
-        console.log(res.data)
+            // app.isLogin = true
 
-        title.value = '嗨, ' + res.data.name
-        buttonDisabled.value = false
+            console.log(res.data)
 
-        show.value = true
-        router.push('/')
+            title.value = '嗨, ' + res.data.name
+            buttonDisabled.value = false
 
-        location.href = '/'
-      })
-      .catch((err) => {
-        console.error(err)
-        store.commit('updateToken', {
-          token: null,
+            show.value = true
+            router.push('/')
+
+            location.href = '/'
         })
-        title.value = '无法验证登录，将在几秒钟后重试。'
-        buttonDisabled.value = false
-      })
+        .catch((err) => {
+            console.error(err)
+            store.commit('updateToken', {
+                token: null,
+            })
+            title.value = '无法验证登录，将在几秒钟后重试。'
+            buttonDisabled.value = false
+        })
     token.value = ''
-  }
+}
 
-  // read the router query para
-  const query = router.currentRoute.value.query
+// read the router query para
+const query = router.currentRoute.value.query
 
-  if (query.token != null) {
+if (query.token != null) {
     token.value = query.token
     connect()
-  } else {
+} else {
     show.value = false
     setTimeout(toLogin, 1000)
-  }
+}
 
-  function toLogin() {
+function toLogin() {
     // // if build for production, use the production url
     // if (process.env.NODE_ENV === 'production') {
     //   location.href = api.login
@@ -86,6 +89,6 @@
     // }
 
     window.location.href =
-      origin + '/?callback=' + encodeURIComponent(window.location.href)
-  }
+        origin + '/?callback=' + encodeURIComponent(window.location.href)
+}
 </script>
