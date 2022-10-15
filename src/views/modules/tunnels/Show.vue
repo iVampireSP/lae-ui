@@ -241,6 +241,11 @@
               <div v-if="tunnel.tunnel">
                 <h4 class="mt-3">连接信息</h4>
 
+
+                <div class="p">
+                    域名解析到: {{ tunnel.server.server_address }}
+                </div>
+
                 <div class="p">
                   <p>活动连接: {{ tunnel.tunnel.cur_conns ?? 0 }}</p>
                   <p>
