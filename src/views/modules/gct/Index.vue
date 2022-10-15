@@ -10,8 +10,8 @@
             <th scope="col">名称</th>
             <th scope="col">IP:端口</th>
             <th scope="col">模板</th>
-            <th scope="col">创建时间</th>
             <th scope="col">修改时间</th>
+            <th scope="col">创建时间</th>
             <th scope="col">操作</th>
           </tr>
         </thead>
@@ -21,8 +21,8 @@
             <td>{{ host.name }}</td>
             <td>{{ host.ip + ':' + host.port }}</td>
             <td>{{ host.egg.name }}</td>
-            <td>{{ new Date(host.created_at).toLocaleString() }}</td>
             <td>{{ new Date(host.updated_at).toLocaleString() }}</td>
+            <td>{{ new Date(host.created_at).toLocaleString() }}</td>
             <td>
               <router-link
                 :to="{ name: 'modules.gct.show', params: { id: host.id } }"
