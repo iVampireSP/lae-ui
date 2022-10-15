@@ -172,15 +172,15 @@
     backups: 1,
   })
 
-  const totalPrice = ref({
-    cpu: 0,
-    memory: 0,
-    disk: 0,
-    backups: 0,
-    allocations: 0,
-    databases: 0,
-    total: 0,
-  })
+//   const totalPrice = ref({
+//     cpu: 0,
+//     memory: 0,
+//     disk: 0,
+//     backups: 0,
+//     allocations: 0,
+//     databases: 0,
+//     total: 0,
+//   })
 
   const locations = ref({})
   const nests = ref({})
