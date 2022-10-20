@@ -64,7 +64,7 @@
 
     base_url.value = pinned.value.base_url
 
-    // show.value = true
+    show.value = true
   })
 
   function randomInt() {
