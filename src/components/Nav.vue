@@ -8,7 +8,7 @@
           to="/"
         >
         </router-link>
-                
+
         <button
           class="navbar-toggler"
           type="button"
@@ -17,9 +17,8 @@
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="切换导航"
-          >
-          
-            <span class="bi bi-list text-auto fs-1"></span>
+        >
+          <span class="bi bi-list text-auto fs-1"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -41,6 +40,14 @@
                 >游戏容器</router-link
               >
             </li>
+            <!-- <li class="nav-item">
+              <router-link
+                class="nav-link text-auto"
+                active-class="active"
+                :to="{ name: 'modules.cdn' }"
+                >内容分发</router-link
+              >
+            </li> -->
           </ul>
 
           <!-- Right Side Of Navbar -->
@@ -203,28 +210,25 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-//   import app from '../config/app'
-import http from '../api/http'
-import store from '../plugins/store'
+  import { ref } from 'vue'
+  //   import app from '../config/app'
+  import http from '../api/http'
+  import store from '../plugins/store'
 
-const drops = ref({})
+  const drops = ref({})
 
-http.get('/balances/drops').then((res) => {
+  http.get('/balances/drops').then((res) => {
     drops.value = res.data
-})
+  })
 
-const show = ref(true)
-if (store.state.token == null) {
+  const show = ref(true)
+  if (store.state.token == null) {
     show.value = false
-}
+  }
 
-function refresh_user() {
-    http
-        .get('/users')
-        .then((res) => {
-            store.commit('updateUser', res.data)
-        })
-
-}
+  function refresh_user() {
+    http.get('/users').then((res) => {
+      store.commit('updateUser', res.data)
+    })
+  }
 </script>

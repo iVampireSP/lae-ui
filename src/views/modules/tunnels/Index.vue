@@ -76,7 +76,7 @@
       >
         整合配置
       </router-link>
-        <router-link
+      <router-link
         type="button"
         class="btn btn-outline-primary"
         :to="{ name: 'modules.tunnels.download' }"
@@ -224,94 +224,141 @@
 
           <!-- 如果是 http,https 则要求输入域名 -->
           <div
-            class="form-floating mb-3"
             v-show="
               createTunnel.protocol == 'http' ||
               createTunnel.protocol == 'https'
             "
           >
-            <input
-              class="form-control"
-              id="floatingDomain"
-              placeholder="xxx"
-              v-model="createTunnel.custom_domain"
-            />
-            <label for="floatingDomain">绑定域名</label>
-          </div>
+            <div class="form-floating mb-3">
+              <input
+                class="form-control"
+                id="floatingDomain"
+                placeholder="xxx"
+                v-model="createTunnel.custom_domain"
+              />
+              <label for="floatingDomain">绑定域名</label>
+            </div>
 
-          <div
-            class="form-floating mb-3"
-            v-show="
-              createTunnel.protocol == 'tcp' || createTunnel.protocol == 'udp'
-            "
-          >
-            <input
-              class="form-control"
-              id="floatingPort"
-              placeholder="xxx"
-              v-model="createTunnel.remote_port"
-            />
-            <label for="floatingPort"
-              >远程端口(此项会自动生成，一般情况不要改动)</label
+            <!-- checkbox 同时创建 CDN -->
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                v-model="createTunnel.create_https"
+                id="createHttps"
+              />
+              <label class="form-check-label" for="createHttps">
+                同时创建 HTTP(s) 隧道
+              </label>
+            </div>
+
+            <!-- <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="1"
+                id="createCDN"
+                v-model="createTunnel.create_cdn"
+              />
+              <label class="form-check-label" for="createCDN">
+                使用 CDN 接管隧道流量
+              </label>
+            </div> -->
+
+            <!-- <div v-show="createTunnel.create_cdn">
+              <select class="form-control" v-model="cdn.package_id">
+                <option value="0" selected>先选择一个地域</option>
+                <option v-for="(value, key) in packages" :value="key">
+                  {{ value.name }}
+                </option>
+              </select> -->
+
+            <!-- 当 数组中存在 package id 存在时显示 -->
+            <!-- <div v-if="packages[cdn.package_id] !== null">
+                <div v-if="packages[cdn.package_id]">
+                  <span>免费流量: {{ packages[cdn.package_id].free }} GB</span>
+                  <br />
+                  <span
+                    >流量: {{ packages[cdn.package_id].price }} 元 / GB</span
+                  >
+                </div>
+              </div> -->
+            <!-- </div> -->
+
+            <div
+              class="form-floating mb-3"
+              v-show="
+                createTunnel.protocol == 'tcp' || createTunnel.protocol == 'udp'
+              "
             >
-            <div v-if="selectedServer">
-              <div
-                v-if="
-                  createTunnel.remote_port < selectedServer.min_port ||
-                  createTunnel.remote_port > selectedServer.max_port
-                "
-                class="text-danger ms-1"
+              <input
+                class="form-control"
+                id="floatingPort"
+                placeholder="xxx"
+                v-model="createTunnel.remote_port"
+              />
+              <label for="floatingPort"
+                >远程端口(此项会自动生成，一般情况不要改动)</label
               >
-                当前端口范围不正确。
+              <div v-if="selectedServer">
+                <div
+                  v-if="
+                    createTunnel.remote_port < selectedServer.min_port ||
+                    createTunnel.remote_port > selectedServer.max_port
+                  "
+                  class="text-danger ms-1"
+                >
+                  当前端口范围不正确。
+                </div>
               </div>
             </div>
+
+            <span class="d-none">
+              <span v-text="getCurrentServer(createTunnel.server_id)"></span>
+            </span>
+
+            <div v-if="selectedServer">
+              <h3>服务器信息</h3>
+              <p>名称: {{ selectedServer.name }}</p>
+              <p>
+                端口范围: {{ selectedServer.min_port }} -
+                {{ selectedServer.max_port }}
+              </p>
+
+              <p>
+                隧道数量: {{ selectedServer.tunnels }}/{{
+                  selectedServer.max_tunnels
+                }}
+              </p>
+
+              <p v-if="selectedServer.price_per_gb !== 0">
+                此节点为收费节点, 每 GB 流量消耗的 Drops:
+                {{ selectedServer.price_per_gb }}
+              </p>
+              <p v-else>此节点目前不收取费用</p>
+            </div>
+
+            <p>
+              如果您继续，则代表同意了我们的<a
+                target="_blank"
+                href="https://forum.laecloud.com/d/6-jing-yuan-ying-she-shi-yong-tiao-kuan"
+                >使用条款</a
+              >
+            </p>
           </div>
 
-          <span class="d-none">
-            <span v-text="getCurrentServer(createTunnel.server_id)"></span>
-          </span>
-
-          <div v-if="selectedServer">
-            <h3>服务器信息</h3>
-            <p>名称: {{ selectedServer.name }}</p>
-            <p>
-              端口范围: {{ selectedServer.min_port }} -
-              {{ selectedServer.max_port }}
-            </p>
-
-            <p>
-              隧道数量: {{ selectedServer.tunnels }}/{{
-                selectedServer.max_tunnels
-              }}
-            </p>
-
-            <p v-if="selectedServer.price_per_gb !== 0">
-              此节点为收费节点, 每 GB 流量消耗的 Drops:
-              {{ selectedServer.price_per_gb }}
-            </p>
-            <p v-else>此节点目前不收取费用</p>
-          </div>
-
-          <p>
-            如果您继续，则代表同意了我们的<a
-              target="_blank"
-              href="https://forum.laecloud.com/d/6-jing-yuan-ying-she-shi-yong-tiao-kuan"
-              >使用条款</a
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
             >
-          </p>
-        </div>
-
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            取消
-          </button>
-          <button type="button" class="btn btn-primary" @click="create">
-            创建
-          </button>
+              取消
+            </button>
+            <button type="button" class="btn btn-primary" @click="create">
+              创建
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -319,129 +366,166 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-//   import { useRoute } from 'vue-router'
-import http from '../../../api/http'
-import route from '../../../plugins/router'
+  import { ref } from 'vue'
+  //   import { useRoute } from 'vue-router'
+  import http from '../../../api/http'
+  // import route from '../../../plugins/router'
 
-//   const router = useRoute()
+  //   const router = useRoute()
 
-const traffics = ref([])
-const tunnels = ref([])
-const servers = ref([])
-const servers_http = ref([])
-const servers_https = ref([])
-const servers_tcp = ref([])
-const servers_udp = ref([])
+  const traffics = ref([])
+  const tunnels = ref([])
+  const servers = ref([])
+  const servers_http = ref([])
+  const servers_https = ref([])
+  const servers_tcp = ref([])
+  const servers_udp = ref([])
 
-const tunnelCreated = ref(false)
-const tunnelCreateError = ref(false)
+  const tunnelCreated = ref(false)
+  const tunnelCreateError = ref(false)
 
-const selectedServer = ref({
+  const packages = ref({})
+
+  const cdn = ref({})
+
+  const selectedServer = ref({
     name: null,
-})
+  })
 
-const createTunnel = ref({
+  const createTunnel = ref({
     name: null,
     protocol: 'http',
     local_address: '127.0.0.1:80',
     server_id: 1,
     remote_port: null,
     custom_domain: null,
-})
+    create_https: true,
+    create_cdn: false,
+  })
 
-// 随机生成字符串
-function randomString(len) {
+  // 随机生成字符串
+  function randomString(len) {
     len = len || 32
     var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'
     var maxPos = $chars.length
     var str = ''
     for (var i = 0; i < len; i++) {
-        str += $chars.charAt(Math.floor(Math.random() * maxPos))
+      str += $chars.charAt(Math.floor(Math.random() * maxPos))
     }
     return str
-}
+  }
 
-createTunnel.value.name = randomString(10)
+  createTunnel.value.name = randomString(10)
 
-//   function toRoute(id) {
-//     // key.value = Math.round(Math.random() * 1000)
-//     route.push({ name: 'modules.tunnels.show', params: { id: id } })
-//     // key.value = Math.round(Math.random() * 1000)
-//   }
+  //   function toRoute(id) {
+  //     // key.value = Math.round(Math.random() * 1000)
+  //     route.push({ name: 'modules.tunnels.show', params: { id: id } })
+  //     // key.value = Math.round(Math.random() * 1000)
+  //   }
 
-http.get('/modules/frp/hosts').then((res) => {
+  //   http.get('/modules/cdn/packages').then((res) => {
+  //     packages.value = res.data
+
+  //     // get first key
+  //     cdn.value.package_id = Object.keys(res.data)[0]
+  //   })
+
+  http.get('/modules/frp/hosts').then((res) => {
     tunnels.value = res.data
-})
+  })
 
-http.get('/modules/frp/traffics').then((res) => {
+  http.get('/modules/frp/traffics').then((res) => {
     traffics.value = res.data
-})
+  })
 
-function getServers() {
+  function getServers() {
     http.get('/modules/frp/servers').then((res) => {
-        tunnelCreated.value = false
+      tunnelCreated.value = false
 
-        servers.value = res.data
+      servers.value = res.data
 
-        createTunnel.server_id = servers.value[0].id
+      createTunnel.server_id = servers.value[0].id
 
-        servers_http.value = servers.value.filter((server) => {
-            return server.allow_http == 1
-        })
+      servers_http.value = servers.value.filter((server) => {
+        return server.allow_http == 1
+      })
 
-        servers_https.value = servers.value.filter((server) => {
-            return server.allow_https == 1
-        })
+      servers_https.value = servers.value.filter((server) => {
+        return server.allow_https == 1
+      })
 
-        servers_tcp.value = servers.value.filter((server) => {
-            return server.allow_tcp == 1
-        })
+      servers_tcp.value = servers.value.filter((server) => {
+        return server.allow_tcp == 1
+      })
 
-        servers_udp.value = servers.value.filter((server) => {
-            return server.allow_udp == 1
-        })
+      servers_udp.value = servers.value.filter((server) => {
+        return server.allow_udp == 1
+      })
     })
-}
+  }
 
-function getCurrentServer(id) {
+  function getCurrentServer(id) {
     // 从 servers 中找到 id 对应的服务器
     selectedServer.value = servers.value.find((server) => {
-        return server.id == id
+      return server.id == id
     })
-}
+  }
 
-function randomRemotePort() {
+  function randomRemotePort() {
     const input = createTunnel.value.remote_port ?? 0
 
     const start = selectedServer.value.min_port
     const end = selectedServer.value.max_port
 
     if (input < start || input > end) {
-        createTunnel.value.remote_port = Math.floor(
-            Math.random() * (end - start + 1) + start
-        )
+      createTunnel.value.remote_port = Math.floor(
+        Math.random() * (end - start + 1) + start
+      )
     }
-}
+  }
 
-function create() {
+  function create() {
     http
-        .post('/modules/frp/hosts', createTunnel.value)
-        .then((res) => {
-            // 刷新列表
+      .post('/modules/frp/hosts', createTunnel.value)
+      .then((res) => {
+        // 刷新列表
 
-            if (res.status == 200 || res.status == 201) {
-                http.get('/modules/frp/hosts').then((res) => {
-                    tunnels.value = res.data
-                })
-                tunnelCreated.value = true
-            } else {
-                tunnelCreateError.value = res.message
-            }
+        if (createTunnel.value.create_https) {
+          if (createTunnel.value.protocol == 'http') {
+            createTunnel.value.protocol = 'https'
+          } else if (createTunnel.value.protocol == 'https') {
+            createTunnel.value.protocol = 'http'
+          }
+        }
+
+        createTunnel.value.name += ' - ' + createTunnel.value.protocol
+
+        http.post('/modules/frp/hosts', createTunnel.value).then((res) => {
+          http.get('/modules/frp/hosts').then((res) => {
+            tunnels.value = res.data
+          })
         })
-        .catch((status, message) => {
-            tunnelCreateError.value =
-                '无法创建隧道，可能是表单没有填写完整，或者服务器不接受此端口（端口被占用或者不在范围内）'
-        })
-}
+
+        // if (createTunnel.value.create_cdn) {
+        //   http.post('/modules/cdn/hosts', {
+        //     domain: createTunnel.value.custom_domain,
+        //     package_id: cdn.value.package_id,
+        //     backend: selectedServer.value.server_address,
+        //   })
+        // }
+
+        if (res.status == 200 || res.status == 201) {
+          http.get('/modules/frp/hosts').then((res) => {
+            tunnels.value = res.data
+          })
+          tunnelCreated.value = true
+        } else {
+          tunnelCreateError.value = res.message
+        }
+      })
+      .catch((status, message) => {
+        tunnelCreateError.value =
+          '无法创建隧道，可能是表单没有填写完整，或者服务器不接受此端口（端口被占用或者不在范围内）'
+      })
+  }
 </script>

@@ -132,6 +132,23 @@ const routes = [
         props: true,
         component: () => import('../views/modules/gct/Show.vue'),
       },
+      {
+        path: 'cdn',
+        name: 'modules.cdn',
+        component: () => import('../views/modules/cdn/Index.vue'),
+      },
+      {
+        path: 'cdn/create',
+        name: 'modules.cdn.create',
+        props: true,
+        component: () => import('../views/modules/cdn/Create.vue'),
+      },
+      {
+        path: 'cdn/:id',
+        name: 'modules.cdn.show',
+        props: true,
+        component: () => import('../views/modules/cdn/Show.vue'),
+      },
     ],
   },
 
