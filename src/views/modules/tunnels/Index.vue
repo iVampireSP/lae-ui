@@ -251,8 +251,87 @@
                 同时创建 HTTP(s) 隧道
               </label>
             </div>
+          </div>
+          <div
+            class="form-floating mb-3"
+            v-show="
+              createTunnel.protocol == 'tcp' || createTunnel.protocol == 'udp'
+            "
+          >
+            <input
+              class="form-control"
+              id="floatingPort"
+              placeholder="xxx"
+              v-model="createTunnel.remote_port"
+            />
+            <label for="floatingPort"
+              >远程端口</label
+            >
+            <div v-if="selectedServer">
+              <div
+                v-if="
+                  createTunnel.remote_port < selectedServer.min_port ||
+                  createTunnel.remote_port > selectedServer.max_port
+                "
+                class="text-danger ms-1"
+              >
+                当前端口范围不正确。
+              </div>
+            </div>
+          </div>
 
-            <!-- <div class="form-check">
+          <span class="d-none">
+            <span v-text="getCurrentServer(createTunnel.server_id)"></span>
+          </span>
+
+          <div v-if="selectedServer">
+            <h3>服务器信息</h3>
+            <p>名称: {{ selectedServer.name }}</p>
+            <p>
+              端口范围: {{ selectedServer.min_port }} -
+              {{ selectedServer.max_port }}
+            </p>
+
+            <p>
+              隧道数量: {{ selectedServer.tunnels }}/{{
+                selectedServer.max_tunnels
+              }}
+            </p>
+
+            <p v-if="selectedServer.price_per_gb !== 0">
+              此节点为收费节点, 每 GB 流量消耗的 Drops:
+              {{ selectedServer.price_per_gb }}
+            </p>
+            <p v-else>此节点目前不收取费用</p>
+          </div>
+
+          <p>
+            如果您继续，则代表同意了我们的<a
+              target="_blank"
+              href="https://forum.laecloud.com/d/6-jing-yuan-ying-she-shi-yong-tiao-kuan"
+              >使用条款</a
+            >
+          </p>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            取消
+          </button>
+          <button type="button" class="btn btn-primary" @click="create">
+            创建
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 这部分以后再说 -->
+  <!-- <div class="form-check">
               <input
                 class="form-check-input"
                 type="checkbox"
@@ -265,7 +344,7 @@
               </label>
             </div> -->
 
-            <!-- <div v-show="createTunnel.create_cdn">
+  <!-- <div v-show="createTunnel.create_cdn">
               <select class="form-control" v-model="cdn.package_id">
                 <option value="0" selected>先选择一个地域</option>
                 <option v-for="(value, key) in packages" :value="key">
@@ -273,8 +352,8 @@
                 </option>
               </select> -->
 
-            <!-- 当 数组中存在 package id 存在时显示 -->
-            <!-- <div v-if="packages[cdn.package_id] !== null">
+  <!-- 当 数组中存在 package id 存在时显示 -->
+  <!-- <div v-if="packages[cdn.package_id] !== null">
                 <div v-if="packages[cdn.package_id]">
                   <span>免费流量: {{ packages[cdn.package_id].free }} GB</span>
                   <br />
@@ -283,86 +362,7 @@
                   >
                 </div>
               </div> -->
-            <!-- </div> -->
-
-            <div
-              class="form-floating mb-3"
-              v-show="
-                createTunnel.protocol == 'tcp' || createTunnel.protocol == 'udp'
-              "
-            >
-              <input
-                class="form-control"
-                id="floatingPort"
-                placeholder="xxx"
-                v-model="createTunnel.remote_port"
-              />
-              <label for="floatingPort"
-                >远程端口(此项会自动生成，一般情况不要改动)</label
-              >
-              <div v-if="selectedServer">
-                <div
-                  v-if="
-                    createTunnel.remote_port < selectedServer.min_port ||
-                    createTunnel.remote_port > selectedServer.max_port
-                  "
-                  class="text-danger ms-1"
-                >
-                  当前端口范围不正确。
-                </div>
-              </div>
-            </div>
-
-            <span class="d-none">
-              <span v-text="getCurrentServer(createTunnel.server_id)"></span>
-            </span>
-
-            <div v-if="selectedServer">
-              <h3>服务器信息</h3>
-              <p>名称: {{ selectedServer.name }}</p>
-              <p>
-                端口范围: {{ selectedServer.min_port }} -
-                {{ selectedServer.max_port }}
-              </p>
-
-              <p>
-                隧道数量: {{ selectedServer.tunnels }}/{{
-                  selectedServer.max_tunnels
-                }}
-              </p>
-
-              <p v-if="selectedServer.price_per_gb !== 0">
-                此节点为收费节点, 每 GB 流量消耗的 Drops:
-                {{ selectedServer.price_per_gb }}
-              </p>
-              <p v-else>此节点目前不收取费用</p>
-            </div>
-
-            <p>
-              如果您继续，则代表同意了我们的<a
-                target="_blank"
-                href="https://forum.laecloud.com/d/6-jing-yuan-ying-she-shi-yong-tiao-kuan"
-                >使用条款</a
-              >
-            </p>
-          </div>
-
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              取消
-            </button>
-            <button type="button" class="btn btn-primary" @click="create">
-              创建
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script setup>
@@ -384,7 +384,7 @@
   const tunnelCreated = ref(false)
   const tunnelCreateError = ref(false)
 
-  const packages = ref({})
+//   const packages = ref({})
 
   const cdn = ref({})
 
