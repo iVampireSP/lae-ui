@@ -55,7 +55,7 @@
       />
     </div>
 
-    <h4 class="mt-5">统计图表</h4>
+    <!-- <h4 class="mt-5">统计图表</h4> -->
 
     <div>
       <div id="chart-cpu"></div>
