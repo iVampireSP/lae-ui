@@ -25,7 +25,11 @@
     "vue-axios": "^3.4.1",
     "vue-router": "4",
     "vue3-echarts": "^1.0.4",
-    "vuex": "^4.0.2"
+    "vuex": "^4.0.2",
+    "xterm": "^5.0.0",
+    "xterm-addon-fit": "^0.6.0",
+    "xterm-addon-search": "^0.10.0",
+    "xterm-addon-search-bar": "^0.2.0"
   },
   "devDependencies": {
     "@types/node": "^18.7.18",

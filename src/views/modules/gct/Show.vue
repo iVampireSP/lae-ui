@@ -9,14 +9,56 @@
       />
     </h3>
 
-    <div class="mt-3">
-      <a
-        type="button"
-        class="btn btn-outline-primary"
-        target="_blank"
-        :href="'https://panel.muhanyun.cn/server/' + gct.server.identifier"
-        >前往控制面板</a
-      >
+    <div class="mt-3" v-if="gct.server">
+      <!-- btn group -->
+      <div class="btn-group" role="group" aria-label="控制面板和电源管理">
+        <a
+          type="button"
+          class="btn btn-outline-primary"
+          target="_blank"
+          :href="'https://panel.muhanyun.cn/server/' + gct.server.identifier"
+          >前往控制面板</a
+        >
+
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          @click="setState('start')"
+        >
+          开机
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          @click="setState('restart')"
+        >
+          重启
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-warning"
+          @click="setState('stop')"
+        >
+          停止
+        </button>
+      </div>
+    </div>
+
+    <div style="height: 100%; background: #002833" class="mt-3">
+      <div id="terminal" ref="terminal"></div>
+      <input
+        class="command"
+        type="text"
+        v-model="command"
+        placeholder="在这里输入命令..."
+        @keyup.enter="sendCommand"
+      />
+    </div>
+
+    <h4 class="mt-5">统计图表</h4>
+
+    <div>
+      <div id="chart-cpu"></div>
     </div>
 
     <h4 class="mt-5">服务器参数</h4>
@@ -222,23 +264,209 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { ref, onBeforeUnmount } from 'vue'
   import { useRoute } from 'vue-router'
-
+  import { Terminal } from 'xterm'
+  import { FitAddon } from 'xterm-addon-fit'
+  import { SearchAddon } from 'xterm-addon-search'
+  import { SearchBarAddon } from 'xterm-addon-search-bar'
   import http from '../../../api/http'
-  //   import route from '../../../plugins/router'
 
+  import 'xterm/css/xterm.css'
+
+  const fitAddon = new FitAddon()
+  const searchAddon = new SearchAddon()
+  const searchBar = new SearchBarAddon({ searchAddon })
+
+  let terminal = ''
+  const router = useRoute()
   const loaded = ref(false)
 
   const gct = ref({
     name: '正在加载...',
   })
 
-  const router = useRoute()
+  const command = ref('')
 
   http.get('/modules/gct/hosts/' + router.params.id).then((res) => {
     gct.value = res.data
   })
+
+  const gct_ws = ref({
+    data: {
+      socket: '',
+      token: '',
+    },
+  })
+
+  http
+    .get('/modules/gct/hosts/' + router.params.id + '/server/websocket')
+    .then((res) => {
+      // pterodactyl wings login
+      gct_ws.value = res.data
+
+      initSocket()
+    })
+
+  let socket
+  const initSocket = () => {
+    socket = new WebSocket(gct_ws.value.data.socket)
+    socket.onopen = () => {
+      socket.send(
+        JSON.stringify({
+          event: 'auth',
+          args: [gct_ws.value.data.token],
+        })
+      )
+      setTimeout(() => {
+        initTerm(socket)
+      })
+    }
+  }
+
+  const theme = {
+    background: '#000000',
+    cursor: 'transparent',
+    black: '#000000',
+    red: '#E54B4B',
+    green: '#9ECE58',
+    yellow: '#FAED70',
+    blue: '#396FE2',
+    magenta: '#BB80B3',
+    cyan: '#2DDAFD',
+    white: '#d0d0d0',
+    brightBlack: 'rgba(255, 255, 255, 0.2)',
+    brightRed: '#FF5370',
+    brightGreen: '#C3E88D',
+    brightYellow: '#FFCB6B',
+    brightBlue: '#82AAFF',
+    brightMagenta: '#C792EA',
+    brightCyan: '#89DDFF',
+    brightWhite: '#ffffff',
+    selection: '#FAF089',
+  }
+
+  const terminalProps = {
+    disableStdin: true,
+    cursorStyle: 'underline',
+    allowTransparency: true,
+    fontSize: 12,
+    rows: 30,
+    theme: theme,
+  }
+
+  const TERMINAL_PRELUDE = '\u001b[1m\u001b[33m莱云 ~ \u001b[0m'
+
+  const handleConsoleOutput = (line, prelude = false) =>
+    terminal.writeln(
+      (prelude ? TERMINAL_PRELUDE : '') +
+        line.replace(/(?:\r\n|\r|\n)$/im, '') +
+        '\u001b[0m'
+    )
+
+  const handleTransferStatus = (status) => {
+    switch (status) {
+      // Sent by either the source or target node if a failure occurs.
+      case 'failure':
+        terminal.writeln(TERMINAL_PRELUDE + '迁移服务器失败。 \u001b[0m')
+        return
+
+      // Sent by the source node whenever the server was archived successfully.
+      case 'archive':
+        terminal.writeln(
+          TERMINAL_PRELUDE +
+            '服务器已经打包完成，正在发往下一个节点。 \u001b[0m'
+        )
+    }
+  }
+
+  const handleDaemonErrorOutput = (line) =>
+    terminal.writeln(
+      TERMINAL_PRELUDE +
+        '\u001b[1m\u001b[41m' +
+        line.replace(/(?:\r\n|\r|\n)$/im, '') +
+        '\u001b[0m'
+    )
+
+  const handlePowerChangeEvent = (state) =>
+    terminal.writeln(
+      TERMINAL_PRELUDE + '服务器标记为: ' + state + '...\u001b[0m'
+    )
+
+  function initTerm(socket) {
+    terminal = new Terminal({ ...terminalProps })
+
+    var i = 0
+    while (!document.getElementById('terminal')) {
+      i++
+      if (i > 1000) {
+        break
+      }
+
+      continue
+    }
+
+    terminal.open(document.getElementById('terminal'))
+
+    terminal.loadAddon(fitAddon)
+    terminal.loadAddon(searchAddon)
+    terminal.loadAddon(searchBar)
+
+    fitAddon.fit()
+
+    // when window resize
+    window.addEventListener('resize', () => {
+      fitAddon.fit()
+    })
+
+    // send
+    socket.send(
+      JSON.stringify({
+        event: 'send logs',
+        args: [null],
+      })
+    )
+
+    socket.send(
+      JSON.stringify({
+        event: 'send stats',
+        args: [null],
+      })
+    )
+
+    socket.onmessage = (ev) => {
+      const data = ev.data
+      const msg = JSON.parse(data)
+
+      // convert to switch
+      switch (msg.event) {
+        case 'console output':
+        case 'install output':
+        case 'transfer logs':
+        case 'daemon message':
+          msg.args.forEach((line) => {
+            handleConsoleOutput(line)
+          })
+          break
+        case 'status':
+          msg.args.forEach((line) => {
+            handlePowerChangeEvent(line)
+          })
+          break
+
+        case 'transfer status':
+          msg.args.forEach((line) => {
+            handleTransferStatus(line)
+          })
+          break
+        case 'daemon error':
+          msg.args.forEach((line) => {
+            handleDaemonErrorOutput(line)
+          })
+          break
+      }
+    }
+  }
 
   function change() {
     http.patch('/modules/gct/hosts/' + router.params.id, {
@@ -289,4 +517,46 @@
         console.log(err)
       })
   }
+
+  function sendCommand() {
+    socket.send(
+      JSON.stringify({
+        event: 'send command',
+        args: [command.value],
+      })
+    )
+    command.value = ''
+  }
+
+  function setState(status) {
+    socket.send(JSON.stringify({ event: 'set state', args: [status] }))
+  }
+
+  //   before unmount
+  onBeforeUnmount(() => {
+    socket.close()
+
+    // remove event listener
+    window.removeEventListener('resize', () => {
+      fitAddon.fit()
+    })
+
+    // clear terminal
+    terminal.clear()
+  })
+
+  //
 </script>
+
+<style>
+  .command {
+    background: transparent;
+    width: 100%;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 12px;
+    padding-left: 5px;
+    height: 20px;
+  }
+</style>

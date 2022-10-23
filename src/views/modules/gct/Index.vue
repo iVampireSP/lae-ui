@@ -3,7 +3,7 @@
     <h3>游戏容器</h3>
 
     <div class="overflow-auto">
-      <table class="table">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th scope="col">ID</th>
@@ -12,11 +12,28 @@
             <th scope="col">模板</th>
             <th scope="col">修改时间</th>
             <th scope="col">创建时间</th>
-            <th scope="col">操作</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="host in hosts">
+          <template v-for="host in hosts">
+            <tr
+              @click="
+                route.push({
+                  name: 'modules.gct.show',
+                  params: { id: host.id },
+                })
+              "
+              class="cursor-pointer"
+            >
+              <td>{{ host.id }}</td>
+              <td>{{ host.name }}</td>
+              <td>{{ host.ip + ':' + host.port }}</td>
+              <td>{{ host.egg.name }}</td>
+              <td>{{ new Date(host.updated_at).toLocaleString() }}</td>
+              <td>{{ new Date(host.created_at).toLocaleString() }}</td>
+            </tr>
+          </template>
+          <!-- <tr v-for="host in hosts">
             <td>{{ host.id }}</td>
             <td>{{ host.name }}</td>
             <td>{{ host.ip + ':' + host.port }}</td>
@@ -29,7 +46,7 @@
                 >查看</router-link
               >
             </td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     </div>
@@ -142,9 +159,11 @@
   import { ref } from 'vue'
   //   import { useRoute } from 'vue-router'
   import http from '../../../api/http'
-  //   import route from '../../../plugins/router'
+  import route from '../../../plugins/router'
 
   const hosts = ref([])
+
+  //   const route = useRoute()
 
   const passwordChanged = ref('')
   const password = ref('')
@@ -168,7 +187,6 @@
   //   }
 
   function updatePwd() {
-
     if (password.value.length < 8) {
       passwordChanged.value = 'wrong'
       return
@@ -180,7 +198,8 @@
       })
       .then(() => {
         passwordChanged.value = 'success'
-      }).catch(() => {
+      })
+      .catch(() => {
         passwordChanged.value = 'error'
       })
   }
