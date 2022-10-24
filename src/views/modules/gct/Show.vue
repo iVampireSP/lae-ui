@@ -284,7 +284,14 @@
   const loaded = ref(false)
 
   const gct = ref({
-    name: '正在加载...',
+    name: '',
+    cpu_limit: 0,
+    memory: 0,
+    disk: 0,
+    backups: 0,
+    allocations: 0,
+    databases: 0,
+    egg_id: 0,
   })
 
   const command = ref('')
