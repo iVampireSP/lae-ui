@@ -46,7 +46,7 @@
     </div>
 
     <div style="height: 100%; background: #002833" class="mt-3">
-      <div id="terminal" ref="terminal"></div>
+      <div id="terminal"></div>
       <input
         class="command"
         type="text"
