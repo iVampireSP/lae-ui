@@ -9,10 +9,11 @@
       />
     </h3>
 
-    <div class="mt-3" v-if="gct.server">
+    <div class="mt-3" v-show="gct.server">
       <!-- btn group -->
       <div class="btn-group" role="group" aria-label="控制面板和电源管理">
         <a
+          v-if="gct.server"
           type="button"
           class="btn btn-outline-primary"
           target="_blank"
@@ -61,7 +62,7 @@
       <div id="chart-cpu"></div>
     </div>
 
-    <div v-if="gct.server">
+    <div v-show="gct.server">
       <h4 class="mt-5">服务器参数</h4>
 
       <p>连接信息: {{ gct.ip }}:{{ gct.port }}</p>
