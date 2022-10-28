@@ -15,7 +15,7 @@
             <th scope="col">服务</th>
             <th scope="col">名称</th>
             <th scope="col">Drops / 5 Min</th>
-            <th scope="col">余额 / 月</th>
+            <!-- <th scope="col">余额 / 月</th> -->
             <th scope="col">本月消耗</th>
             <th scope="col">状态</th>
             <th scope="col">创建时间</th>
@@ -40,14 +40,14 @@
                 被接管
               </span>
             </td>
-            <td>
+            <!-- <td>
                 <span v-if="host.managed_price" class="text-success">
                     {{ host.managed_price ?? 0 }} 元 / 月
                 </span>
                 <span v-else>
                     <i class="bi bi-arrow-left"></i> Drops
                 </span>
-            </td>
+            </td> -->
             <td>
               <span v-if="usages.drops[host.id]">
                 {{ usages.drops[host.id] + ' Drops' ?? '未计量' }}
