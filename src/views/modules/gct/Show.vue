@@ -46,12 +46,13 @@
     </div>
 
     <div style="height: 100%; background: #002833" class="mt-3">
-      <div id="terminal"></div>
+      <div id="terminal" style="height: 90%"></div>
       <input
         class="command"
         type="text"
         v-model="command"
         placeholder="在这里输入命令..."
+        style="height: 20px"
         @keyup.enter="sendCommand"
       />
     </div>
