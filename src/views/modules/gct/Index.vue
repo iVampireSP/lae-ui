@@ -38,17 +38,22 @@
                     运行中
                   </span>
                   <span
-                    v-else-if="host.stats.attributes.current_state === 'offline'"
+                    v-else-if="
+                      host.stats.attributes.current_state === 'offline'
+                    "
                     class="text-danger"
                   >
                     关机
                   </span>
                   <span
-                    v-else-if="host.stats.attributes.current_state === 'starting'"
+                    v-else-if="
+                      host.stats.attributes.current_state === 'starting'
+                    "
                     class="text-warning"
                   >
                     启动中
-                  </span></span
+                  </span>
+                  <span v-else> ... </span></span
                 >
               </td>
               <td>{{ new Date(host.created_at).toLocaleString() }}</td>
