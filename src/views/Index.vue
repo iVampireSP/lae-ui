@@ -48,6 +48,7 @@
 <script setup>
   import { ref, onMounted, onUnmounted } from 'vue'
   import http from '../api/http'
+  import store from '../plugins/store'
 
   import * as echarts from 'echarts/core'
   import { GraphicComponent } from 'echarts/components'
@@ -64,7 +65,9 @@
 
     base_url.value = pinned.value.base_url
 
-    show.value = true
+    setTimeout(() => {
+      show.value = true
+    }, 1000)
   })
 
   function randomInt() {
@@ -74,20 +77,22 @@
   let fontSize = 100
   let color = 'black'
 
-  let sentences = [
-    'Make LAE great again!',
-    '莱云',
-    'LAECLOUD',
-    '正在点咖啡',
-    '正在拉花',
-    '正在制作卡布奇诺',
-    '正在制作拿铁',
-    'Mirror Edge 现在是莱云的一部分!',
-    '齉龘齉齾爩麤龗灪龖厵纞虋',
-    '锟斤拷烫烫烫屯屯屯'
-  ]
-  // pick
-  let sentence = sentences[Math.floor(Math.random() * sentences.length)]
+  // let sentences = [
+  //   'Make LAE great again!',
+  //   '莱云',
+  //   'LAECLOUD',
+  //   '正在点咖啡',
+  //   '正在拉花',
+  //   '正在制作卡布奇诺',
+  //   '正在制作拿铁',
+  //   'Mirror Edge 现在是莱云的一部分!',
+  //   '齉龘齉齾爩麤龗灪龖厵纞虋',
+  //   '锟斤拷烫烫烫屯屯屯'
+  // ]
+  // // pick
+  // let sentence = sentences[Math.floor(Math.random() * sentences.length)]
+
+  let sentence = store.state.user.name ?? '莱云'
 
   function resizeFont() {
     if (window.innerWidth < 768) {
@@ -133,7 +138,7 @@
               text: sentence,
               fontSize: fontSize,
               fontWeight: 300,
-              lineDash: [0, randomInt()],
+              lineDash: [0, 200],
               lineDashOffset: 0,
               fill: 'transparent',
               stroke: color,
