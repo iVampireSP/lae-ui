@@ -10,7 +10,7 @@
             <th scope="col">名称</th>
             <th scope="col">IP:端口</th>
             <th scope="col">模板</th>
-            <th scope="col">修改时间</th>
+            <th scope="col">状态</th>
             <th scope="col">创建时间</th>
           </tr>
         </thead>
@@ -29,7 +29,28 @@
               <td>{{ host.name }}</td>
               <td>{{ host.ip + ':' + host.port }}</td>
               <td>{{ host.egg.name }}</td>
-              <td>{{ new Date(host.updated_at).toLocaleString() }}</td>
+              <td>
+                <span v-if="host.stats">
+                  <span
+                    v-if="host.stats.attributes.current_state === 'running'"
+                    class="text-success"
+                  >
+                    运行中
+                  </span>
+                  <span
+                    v-else-if="host.stats.attributes.current_state === 'offline'"
+                    class="text-danger"
+                  >
+                    关机
+                  </span>
+                  <span
+                    v-else-if="host.stats.attributes.current_state === 'starting'"
+                    class="text-warning"
+                  >
+                    启动中
+                  </span></span
+                >
+              </td>
               <td>{{ new Date(host.created_at).toLocaleString() }}</td>
             </tr>
           </template>
@@ -161,7 +182,7 @@
   import http from '../../../api/http'
   import route from '../../../plugins/router'
 
-  const hosts = ref([])
+  const hosts = ref({})
 
   //   const route = useRoute()
 
@@ -205,5 +226,14 @@
   }
   http.get('/modules/gct/hosts').then((res) => {
     hosts.value = res.data
+
+    //   get resources
+    hosts.value.forEach((host) => {
+      http
+        .get('/modules/gct/hosts/' + host.id + '/server/resources')
+        .then((res) => {
+          host.stats = res.data
+        })
+    })
   })
 </script>
