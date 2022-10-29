@@ -50,7 +50,7 @@
             </td> -->
             <td>
               <span v-if="usages.drops[host.id]">
-                {{ usages.drops[host.id] + ' Drops' ?? '未计量' }}
+                {{ usages.drops[host.id].toFixed(4) + ' Drops' ?? '未计量' }}
               </span>
               <span v-else>
                 0 Drops
