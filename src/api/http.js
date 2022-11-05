@@ -5,8 +5,6 @@ import router from '../plugins/router';
 
 // import { Modal } from 'bootstrap';
 
-// if build for production, use production api
-// if build for development, use development api
 const baseURL = api.api;
 
 // axios.defaults.withCredentials = true;
