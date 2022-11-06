@@ -22,6 +22,10 @@ const baseURL = api.api;
 //     production: "https://www.leaf.test/api/",
 // }
 
+let temp = {
+  isAlertedToken: false,
+};
+
 // 实例
 let instance = axios.create({
   baseURL: baseURL,
@@ -72,7 +76,14 @@ instance.interceptors.response.use(
       alert('请求次数过多');
     } else if (error.response.status === 401) {
       if (router.currentRoute.value.name !== 'login') {
-        alert('您的 访问密钥 可能已经失效，请尝试通过侧边栏来重新登录。');
+        if (!temp.isAlertedToken) {
+          alert(
+            '您的 访问密钥 可能已经失效，请尝试通过侧边栏来重新登录。'
+          );
+          temp.isAlertedToken = true;
+
+        } 
+
 
         // var myModal = new Modal(document.getElementById('tokenExpiredModal'), {
         //   backdrop: true,
