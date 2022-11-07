@@ -8,7 +8,7 @@ const config = {
   },
   prod: {
     api: 'https://api.lae.yistars.net/api/',
-    auth: 'https://auth.laecloud.com',
+    auth: 'https://api.laecloud.com',
 
     ws_host: 'socket.lae.yistars.net',
     ws_port: 443,
