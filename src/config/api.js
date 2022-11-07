@@ -7,12 +7,12 @@ const config = {
     ws_auth_endpoint: 'http://www.lae.test/api/broadcasting/auth',
   },
   prod: {
-    api: 'https://api.lae.yistars.net/api/',
-    auth: 'https://www.laecloud.com',
+    api: 'https://api.laecloud.com/api/',
+    auth: 'https://api.laecloud.com',
 
     ws_host: 'socket.lae.yistars.net',
     ws_port: 443,
-    ws_auth_endpoint: 'https://api.lae.yistars.net/api/broadcasting/auth',
+    ws_auth_endpoint: 'https://api.lae.yistars.net/broadcasting/auth',
   },
 };
 
