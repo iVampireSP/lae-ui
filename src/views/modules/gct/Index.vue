@@ -20,12 +20,12 @@
               @click="
                 route.push({
                   name: 'modules.gct.show',
-                  params: { id: host.id },
+                  params: { id: host.host_id },
                 })
               "
               class="cursor-pointer"
             >
-              <td>{{ host.id }}</td>
+              <td>{{ host.host_id }}</td>
               <td>{{ host.name }}</td>
               <td>{{ host.ip + ':' + host.port }}</td>
               <td>{{ host.egg.name }}</td>
@@ -60,7 +60,7 @@
             </tr>
           </template>
           <!-- <tr v-for="host in hosts">
-            <td>{{ host.id }}</td>
+            <td>{{ host.host_id }}</td>
             <td>{{ host.name }}</td>
             <td>{{ host.ip + ':' + host.port }}</td>
             <td>{{ host.egg.name }}</td>
@@ -68,7 +68,7 @@
             <td>{{ new Date(host.created_at).toLocaleString() }}</td>
             <td>
               <router-link
-                :to="{ name: 'modules.gct.show', params: { id: host.id } }"
+                :to="{ name: 'modules.gct.show', params: { id: host.host_id } }"
                 >查看</router-link
               >
             </td>
@@ -235,7 +235,7 @@
     //   get resources
     hosts.value.forEach((host) => {
       http
-        .get('/modules/gct/hosts/' + host.id + '/server/resources')
+        .get('/modules/gct/hosts/' + host.host_id + '/server/resources')
         .then((res) => {
           host.stats = res.data
         })

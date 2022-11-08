@@ -7,7 +7,7 @@
     <div class="list-group mt-3" v-for="host in hosts">
       <div
         class="list-group-item list-group-item-action shadow-sm rounded"
-        @click="chooseHost(host.id)"
+        @click="chooseHost(host.host_id)"
       >
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1">{{ host.name }}</h5>

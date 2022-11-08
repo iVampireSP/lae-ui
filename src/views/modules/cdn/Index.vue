@@ -16,7 +16,7 @@
         </thead>
         <tbody>
           <tr v-for="host in hosts">
-            <td>{{ host.id }}</td>
+            <td>{{ host.host_id }}</td>
             <td>{{ host.name }}</td>
             <td>
               <span>
@@ -45,7 +45,7 @@
             <td>{{ new Date(host.created_at).toLocaleString() }}</td>
             <td>
               <router-link
-                :to="{ name: 'modules.cdn.show', params: { id: host.id } }"
+                :to="{ name: 'modules.cdn.show', params: { id: host.host_id } }"
                 >查看</router-link
               >
             </td>
