@@ -44,8 +44,11 @@
         请注意: 由于计费方式的特殊性，我们不支持退款，请合理充值。
 
         <br />
-        <a target="_blank" href="https://forum.laecloud.com/d/4-wo-chong-zhi-hou-jin-e-mei-you-li-ji-dao-zhang">
-        必看! 充值后金额没有立即到账的原因。
+        <a
+          target="_blank"
+          href="https://forum.laecloud.com/d/4-wo-chong-zhi-hou-jin-e-mei-you-li-ji-dao-zhang"
+        >
+          必看! 充值后金额没有立即到账的原因。
         </a>
       </div>
     </div>
@@ -53,32 +56,33 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import http from '../../api/http'
-import store from '../../plugins/store'
+  import { ref } from 'vue'
+  import http from '../../api/http'
+  import store from '../../plugins/store'
 
-const dropsRate = ref(store.state.user.drops_rate)
+  const dropsRate = ref(store.state.user.drops_rate)
 
-const chargeSuccess = ref(false)
+  const chargeSuccess = ref(false)
 
-const charge = ref({
+  const charge = ref({
     amount: 10,
     payment: 'alipay',
-})
+  })
 
-function doCharge() {
-    let winOpen = window.open('', '_blank')
-
+  function doCharge() {
     http
-        .post('/balances', charge.value)
-        .then((res) => {
-            if (res.data.pay_url) {
-                winOpen.location = res.data.pay_url
-            }
-            chargeSuccess.value = true
-        })
-        .catch((err) => {
-            alert('金额输入错误，它应该为整数。')
-        })
-}
+      .post('/balances', charge.value)
+      .then((res) => {
+        if (res.data.pay_url !== undefined) {
+          let winOpen = window.open('', '_blank')
+
+          winOpen.location = res.data.pay_url
+        }
+
+        chargeSuccess.value = true
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
 </script>
