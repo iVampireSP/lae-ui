@@ -48,12 +48,7 @@ links.value = [
     {
         name: 'Windows 图形启动器',
         arch: 'amd64',
-        url: 'http://cdn.114514.space/Download/Files/MirrorEdge/Mirror_Edge_Frp_Python_Win.zip',
-    },
-    {
-        name: 'Linux 图形启动器',
-        arch: 'amd64',
-        url: 'http://cdn.114514.space/Download/Files/MirrorEdge/Mirror_Edge_Frp_Python_Lin.tar.gz',
+        url: 'https://mefrp-kingc.lanzouv.com/iMxdt0fxavej',
     },
     {
         name: 'Windows',
