@@ -2,6 +2,13 @@
   <div>
     <h3>交易记录</h3>
 
+    <div>
+      交易记录，已经迁移到了 <a target="_blank" :href="url"> {{ url }}</a>
+      <br />
+      以后查看交易记录请都在上面的网站进行。
+    </div>
+  </div>
+  <!-- 
     <p>
       注意:
       这里使用的了四舍五入等，以及在我们进行浮点计算时可能会有一些误差。<br />
@@ -82,55 +89,59 @@
         </tbody>
       </table>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script setup>
-import http from '../../api/http'
-import router from '../../plugins/router'
+  //   import http from '../../api/http'
+  //   import router from '../../plugins/router'
 
-import { ref } from 'vue'
+  import { ref } from 'vue'
 
-const transactions = ref([])
+  import api from '../../config/api'
 
-let modules = []
+  const url = ref('')
+  url.value = api.auth + '/transactions'
 
-function refresh(params = {}) {
-    http.get('/balances/transactions', {
-        params: {
-            payment: params.payment ?? router.currentRoute.value.query.payment,
-            type: params.type ?? router.currentRoute.value.query.type,
-        }
-    }).then((res) => {
-        transactions.value = res.data
+  //   const transactions = ref([])
 
-        transactions.value.forEach((transaction) => {
-            // transaction.income = (transaction.income / 100).toFixed(2)
-            // transaction.outcome = (transaction.outcome / 100).toFixed(2)
-            // transaction.balance = (transaction.balance / 100).toFixed(2)
-            // transaction.module =
-            // search modules
-            transaction.module = '莱云'
+  //   let modules = []
 
-            modules.forEach((module) => {
-                if (module.id == transaction.module_id) {
-                    transaction.module = module.name
-                }
-            })
-        })
+  //   function refresh(params = {}) {
+  //     http
+  //       .get('/balances/transactions', {
+  //         params: {
+  //           payment: params.payment ?? router.currentRoute.value.query.payment,
+  //           type: params.type ?? router.currentRoute.value.query.type,
+  //         },
+  //       })
+  //       .then((res) => {
+  //         transactions.value = res.data
 
+  //         transactions.value.forEach((transaction) => {
+  //           // transaction.income = (transaction.income / 100).toFixed(2)
+  //           // transaction.outcome = (transaction.outcome / 100).toFixed(2)
+  //           // transaction.balance = (transaction.balance / 100).toFixed(2)
+  //           // transaction.module =
+  //           // search modules
+  //           transaction.module = '莱云'
 
-        // router.push({
-        //     query: params
-        // })
-    })
-}
+  //           modules.forEach((module) => {
+  //             if (module.id == transaction.module_id) {
+  //               transaction.module = module.name
+  //             }
+  //           })
+  //         })
 
-http.get('/modules').then((res) => {
-    modules = res.data
+  //         // router.push({
+  //         //     query: params
+  //         // })
+  //       })
+  //   }
 
+  //   http.get('/modules').then((res) => {
+  //     modules = res.data
 
-    refresh()
-
-})
+  //     refresh()
+  //   })
 </script>

@@ -1,88 +1,56 @@
 <template>
   <div>
-    <div v-show="chargeSuccess" class="alert alert-success" role="alert">
-      非常感谢，请在新打开的窗口进行支付。
-    </div>
     <h3>添加到余额</h3>
+
     <div>
-      <!-- 金额 -->
-      <div class="form-group">
-        <label for="amount">金额(元)</label>
-        <input
-          type="number"
-          class="form-control"
-          id="amount"
-          placeholder="请输入金额"
-          v-model="charge.amount"
-        />
+      充值，已经迁移到了 <a target="_blank" :href="url"> {{ url }}</a>
+      <br />
+      以后充值请都在上面的网站进行。
+    </div>
+    <div class="mt-5">
+      请注意: 由于计费方式的特殊性，我们不支持退款，请合理充值。
 
-        <span>≈ {{ charge.amount * dropsRate }} Drops</span>
-      </div>
-
-      <div class="mt-3">
-        <span>选择支付方式</span>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="radio"
-            v-model="charge.payment"
-            value="alipay"
-            id="paymentAlipay"
-          />
-          <label class="form-check-label" for="paymentAlipay"> 支付宝 </label>
-        </div>
-      </div>
-
-      <div class="mt-3">
-        <!-- button -->
-        <button class="btn btn-outline-primary" @click="doCharge()">
-          充值
-        </button>
-      </div>
-
-      <div class="mt-2">
-        请注意: 由于计费方式的特殊性，我们不支持退款，请合理充值。
-
-        <br />
-        <a
-          target="_blank"
-          href="https://forum.laecloud.com/d/4-wo-chong-zhi-hou-jin-e-mei-you-li-ji-dao-zhang"
-        >
-          必看! 充值后金额没有立即到账的原因。
-        </a>
-      </div>
+      <br />
+      <a
+        target="_blank"
+        href="https://forum.laecloud.com/d/4-wo-chong-zhi-hou-jin-e-mei-you-li-ji-dao-zhang"
+      >
+        必看! 充值后金额没有立即到账的原因。
+      </a>
     </div>
   </div>
 </template>
 
 <script setup>
   import { ref } from 'vue'
-  import http from '../../api/http'
-  import store from '../../plugins/store'
+  import api from '../../config/api'
 
-  const dropsRate = ref(store.state.user.drops_rate)
+  const url = ref('')
+  url.value = api.auth + '/balances'
 
-  const chargeSuccess = ref(false)
+  //   const dropsRate = ref(store.state.user.drops_rate)
 
-  const charge = ref({
-    amount: 10,
-    payment: 'alipay',
-  })
+  //   const chargeSuccess = ref(false)
 
-  function doCharge() {
-    http
-      .post('/balances', charge.value)
-      .then((res) => {
-        if (res.data.pay_url !== undefined) {
-          let winOpen = window.open('', '_blank')
+  //   const charge = ref({
+  //     amount: 10,
+  //     payment: 'alipay',
+  //   })
 
-          winOpen.location = res.data.pay_url
-        }
+  //   function doCharge() {
+  //     http
+  //       .post('/balances', charge.value)
+  //       .then((res) => {
+  //         if (res.data.pay_url !== undefined) {
+  //           let winOpen = window.open('', '_blank')
 
-        chargeSuccess.value = true
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
+  //           winOpen.location = res.data.pay_url
+  //         }
+
+  //         chargeSuccess.value = true
+  //       })
+  //       .catch((err) => {
+  //         console.log(err)
+  //       })
+  //   }
 </script>
