@@ -162,7 +162,7 @@
         <h4>财务</h4>
         <div>余额: {{ store.state.user.balance }} 元</div>
 
-        <div>Drops: {{ drops.drops ?? 0 }} Drops</div>
+        <div>Drops: {{ store.state.user.drops ?? 0 }} Drops</div>
 
         <!-- <div>本月消耗: {{ drops.monthly_usages ?? 0 }} Drops</div> -->
         <div>
@@ -214,12 +214,6 @@
   //   import app from '../config/app'
   import http from '../api/http'
   import store from '../plugins/store'
-
-  const drops = ref({})
-
-  http.get('/balances/drops').then((res) => {
-    drops.value = res.data
-  })
 
   const show = ref(true)
   if (store.state.token == null) {
