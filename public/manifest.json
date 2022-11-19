@@ -2,7 +2,7 @@
     "name"              : "莱云 控制面板",
     "short_name"        : "LAE Dashboard",
     "description"       : "莱云 镜缘映射 游戏容器 CDN 等服务的控制面板",
-    "start_url"         : "/login",
+    "start_url"         : "/",
     "display"           : "standalone",
     "background_color"  : "#F0F0F0",
     "theme_color"       : "#F0F0F0",
