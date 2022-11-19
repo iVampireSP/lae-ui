@@ -1,3 +1,2 @@
 User-agent: *
-Disallow: 
-Sitemap: http://dash.laecloud.com/sitemap.xml
+Allow: /
