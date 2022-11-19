@@ -42,6 +42,11 @@
         </span>
       </div>
     </div>
+
+    <!-- 贡献代码 -->
+    <h3>GitHub</h3>
+    <p>如果您想要为莱云 控制面板 贡献代码，或者自定义它。</p>
+    <a target="_blank" href="https://github.com/iVampireSP/lae-ui">https://github.com/iVampireSP/lae-ui</a>
   </div>
 </template>
 
