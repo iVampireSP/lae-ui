@@ -75,13 +75,9 @@ instance.interceptors.response.use(
     } else if (error.response.status === 401) {
       if (router.currentRoute.value.name !== 'login') {
         if (!temp.isAlertedToken) {
-          alert(
-            '您的 访问密钥 可能已经失效，请尝试通过侧边栏来重新登录。'
-          );
+          alert('您的 访问密钥 可能已经失效，请尝试通过侧边栏来重新登录。');
           temp.isAlertedToken = true;
-
-        } 
-
+        }
 
         // var myModal = new Modal(document.getElementById('tokenExpiredModal'), {
         //   backdrop: true,
@@ -94,6 +90,8 @@ instance.interceptors.response.use(
         // });
         // router.push({ name: 'login' });
       }
+    } else if (error.response.status === 404) {
+      router.push({ name: 'index' });
     } else {
       if (data.length !== 0) {
         alert(data);
