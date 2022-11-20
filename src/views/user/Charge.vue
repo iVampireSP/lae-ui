@@ -28,8 +28,6 @@
   const url = ref('')
   url.value = api.auth + '/balances'
 
-  //   const dropsRate = ref(store.state.user.drops_rate)
-
   //   const chargeSuccess = ref(false)
 
   //   const charge = ref({

@@ -92,48 +92,6 @@
                 ></i>
               </a>
             </li>
-
-            <!-- <li class="nav-item dropdown">
-              <a
-                id="navbarDropdown"
-                class="nav-link dropdown-toggle text-auto"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                {{ store.state.user.name }}
-              </a>
-
-              <div
-                class="dropdown-menu dropdown-menu-right"
-                aria-labelledby="navbarDropdown"
-              >
-                <span class="dropdown-item text-auto"
-                  >余额: {{ store.state.user.balance }} 元</span
-                >
-                <span class="dropdown-item text-auto"
-                  >Drops: {{ drops.drops ?? 0 }} Drops</span
-                >
-                <span class="dropdown-item text-auto"
-                  >本月消耗: {{ drops.monthly_usages ?? 0 }} Drops</span
-                >
-
-                <router-link
-                  class="dropdown-item text-auto"
-                  active-class="active"
-                  :to="{ name: 'hosts' }"
-                  >计费项目列表</router-link
-                >
-                <router-link
-                  class="dropdown-item text-auto"
-                  active-class="active"
-                  :to="{ name: 'login' }"
-                  >更换账号</router-link
-                >
-              </div>
-            </li> -->
           </ul>
         </div>
       </div>
@@ -161,10 +119,6 @@
       <div class="mt-3">
         <h4>财务</h4>
         <div>余额: {{ store.state.user.balance }} 元</div>
-
-        <div>Drops: {{ store.state.user.drops ?? 0 }} Drops</div>
-
-        <!-- <div>本月消耗: {{ drops.monthly_usages ?? 0 }} Drops</div> -->
         <div>
           交易记录:
           <router-link class="text-auto" :to="{ name: 'billing.transactions' }"
