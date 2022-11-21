@@ -4,7 +4,7 @@ const config = {
     auth: 'http://www.lae.test',
     ws_host: 'www.lae.test',
     ws_port: 6001,
-    ws_auth_endpoint: 'http://www.lae.test/api/broadcasting/auth',
+    ws_auth_endpoint: 'http://www.lae.test/broadcasting/auth',
   },
   prod: {
     api: 'https://api.laecloud.com/api/',
