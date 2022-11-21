@@ -51,6 +51,11 @@ links.value = [
         url: 'https://download.mefrp.com/d/client/MirrorEdgeFrpSetup.exe',
     },
     {
+        name: 'Windows/Linux图形界面客户端',
+        arch: 'amd64',
+        url: 'https://github.com/FloppyBetaStudio/LaeFrpDesktop/releases',
+    },
+    {
         name: 'Windows',
         arch: 'amd64',
         url: 'http://cdn.114514.space/Download/Files/2.0.0/frp_0.44.0_windows_amd64.zip',
