@@ -48,7 +48,12 @@ links.value = [
     {
         name: 'Windows 图形启动器',
         arch: 'amd64',
-        url: 'https://mefrp-kingc.lanzouv.com/iMxdt0fxavej',
+        url: 'https://download.mefrp.com/d/client/MirrorEdgeFrpSetup.exe',
+    },
+    {
+        name: 'Windows/Linux图形界面客户端',
+        arch: 'amd64',
+        url: 'https://github.com/FloppyBetaStudio/LaeFrpDesktop/releases',
     },
     {
         name: 'Windows',
