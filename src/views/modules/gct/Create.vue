@@ -15,7 +15,7 @@
         {{ location.name }} - (服务器数量: {{ location.servers }})
       </option>
     </select>
-    <p>此节点基础价格 <span v-text="selectedLocation.price * 100"></span> 元</p>
+    <p>此节点基础价格 <span v-text="selectedLocation.price"></span> 元</p>
 
     <div class="mt-3">
       <h4 class="mt-5">您想要多少个 CPU 核心？</h4>
