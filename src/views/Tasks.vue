@@ -17,7 +17,15 @@
         </thead>
         <tbody>
           <tr v-for="task in tasks">
-            <td>{{ task.host.name }}</td>
+            <td>
+              <span v-if="task.host">
+                {{ task.host.name }}
+              </span>
+              <span v-else class="text-danger">
+                <i class="bi bi-trash"></i>
+                已删除的主机
+              </span>
+            </td>
             <td class="text-nowrap">
               <span v-if="task.status == 'pending'">
                 <i class="bi bi-clock"></i>&nbsp;</span
