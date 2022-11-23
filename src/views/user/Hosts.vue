@@ -17,7 +17,7 @@
             <th scope="col">元 / 月(大约)</th>
             <th scope="col">本月消耗</th>
             <th scope="col">状态</th>
-            <th scope="col">几时扣费</th>
+            <th scope="col">几分扣费</th>
             <th scope="col">创建时间</th>
             <!-- <th scope="col">更新时间</th> -->
             <th scope="col">释放</th>
@@ -75,7 +75,7 @@
                 </span>
               </span>
             </td>
-            <td>{{ new Date(host.created_at).getHours() }} 时</td>
+            <td>{{ new Date(host.created_at).getMinutes() }} 分</td>
             <td>{{ new Date(host.created_at).toLocaleString() }}</td>
             <!-- <td>{{ new Date(host.updated_at).toLocaleString() }}</td> -->
             <td>
@@ -98,7 +98,7 @@
 
     <p>当您释放资源后，我们将会在后台排队处理，这可能需要一些时间。</p>
     <p>请注意: 余额 计算并不准确。它可能与实际获得有点偏差。</p>
-    <p>现在，计费已经改为每小时一次。</p>
+    <p>现在，计费已经改为每小时一次。在每小时的第几分扣费。</p>
   </div>
 </template>
 
