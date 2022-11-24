@@ -16,7 +16,10 @@
           <template v-for="workOrder in workOrders">
             <tr class="cursor-pointer" @click="viewWorkOrder(workOrder.id)">
               <td>{{ workOrder.title }}</td>
-              <td>{{ workOrder.host.name }}</td>
+              <td>
+                <span v-if="workOrder.host">{{ workOrder.host.name }}</span>
+                <span v-else>无</span>
+              </td>
               <td>{{ workOrder.module.name }}</td>
               <td>
                 <WorkOrderStatus :status="workOrder.status" />
