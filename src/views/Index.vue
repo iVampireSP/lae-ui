@@ -98,7 +98,7 @@
     base_url.value = pinned.value.base_url
 
     setTimeout(() => {
-        show.value = true
+      show.value = true
     }, 1000)
   })
 </script>
