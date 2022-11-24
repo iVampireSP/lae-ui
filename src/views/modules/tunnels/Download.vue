@@ -53,7 +53,7 @@ links.value = [
     {
         name: 'Windows 图形启动器 (Python 版)',
         arch: 'amd64',
-        url: 'https://download.mefrp.com/d/client/MirrorEdgeFrpSetup.exe',
+        url: 'https://download.mefrp.com/d/client/Mirror_Edge_Frp_Python_Win.zip',
     },
     {
         name: 'Windows/Linux 图形界面客户端',
