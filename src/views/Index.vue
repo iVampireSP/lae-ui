@@ -3,9 +3,9 @@
     class="w-100 text-center justify-content-center align-middle"
     v-show="!show"
   >
-    <div id="svg-container" class="w-100">
+    <div id="lae-logo-container" class="w-100">
       <!-- 插入 SVG -->
-      <embed :src="laeSvg" id="svg" class="h-auto" type="image/svg+xml" />
+      <img :src="laeLogoUrl" id="lae-logo" class="h-auto" />
 
       <div class="mt-3"></div>
       <div class="spinner-border" role="status">
@@ -75,20 +75,20 @@
     color = 'white'
   }
 
-  let laeSvg = '/assets/lae-' + color + '.svg'
+  let laeLogoUrl = '/assets/lae-' + color + '.png'
 
   onMounted(() => {
-    let svgContainer = document.getElementById('svg-container')
-    let svg = document.getElementById('svg')
+    let laeLogoContainer = document.getElementById('lae-logo-container')
+    let laeLogo = document.getElementById('lae-logo')
     // 上下居中
-    svgContainer.style.marginTop =
-      (window.innerHeight - svgContainer.offsetHeight) / 2 - 75 + 'px'
+    laeLogoContainer.style.marginTop =
+      (laeLogoContainer.clientHeight - laeLogo.clientHeight) / 2 + 100 + 'px'
 
     // 如果屏幕比较大，就把 SVG 缩小一点
     if (window.innerWidth > 768) {
-      svg.style.width = '20%'
+      laeLogo.style.width = '20%'
     } else {
-      svg.style.width = '50%'
+      laeLogo.style.width = '50%'
     }
   })
 
@@ -98,7 +98,7 @@
     base_url.value = pinned.value.base_url
 
     setTimeout(() => {
-      show.value = true
+    //   show.value = true
     }, 300)
   })
 </script>
