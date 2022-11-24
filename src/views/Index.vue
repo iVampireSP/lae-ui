@@ -1,8 +1,11 @@
 <template>
-  <div class="w-100 text-center justify-content-center align-middle" v-show="!show">
-    <div id="svg-container">
+  <div
+    class="w-100 text-center justify-content-center align-middle"
+    v-show="!show"
+  >
+    <div id="svg-container" class="w-100">
       <!-- 插入 SVG -->
-      <embed :src="laeSvg" id="svg" class="w-50 h-auto" type="image/svg+xml" />
+      <embed :src="laeSvg" id="svg" class="h-auto" type="image/svg+xml" />
 
       <div class="mt-3"></div>
       <div class="spinner-border" role="status">
@@ -76,15 +79,16 @@
 
   onMounted(() => {
     let svgContainer = document.getElementById('svg-container')
-
-    svgContainer.style.position = 'absolute'
-    svgContainer.style.top = '50%'
-    svgContainer.style.left = '50%'
-    svgContainer.style.transform = 'translate(-50%, -50%)'
+    let svg = document.getElementById('svg')
+    // 上下居中
+    svgContainer.style.marginTop =
+      (window.innerHeight - svgContainer.offsetHeight) / 2 - 75 + 'px'
 
     // 如果屏幕比较大，就把 SVG 缩小一点
     if (window.innerWidth > 768) {
-      svgContainer.style.width = '20%'
+      svg.style.width = '20%'
+    } else {
+      svg.style.width = '50%'
     }
   })
 
@@ -94,7 +98,7 @@
     base_url.value = pinned.value.base_url
 
     setTimeout(() => {
-      show.value = true
+      //   show.value = true
     }, 1000)
   })
 </script>
