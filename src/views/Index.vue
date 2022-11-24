@@ -99,6 +99,6 @@
 
     setTimeout(() => {
       show.value = true
-    }, 1000)
+    }, 300)
   })
 </script>
