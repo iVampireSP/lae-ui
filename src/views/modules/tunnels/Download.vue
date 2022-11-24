@@ -46,17 +46,17 @@ const links = ref({})
 
 links.value = [
  {
-        name: 'Windows 图形启动器（C#.net版）',
+        name: 'Windows 图形启动器 (C# .NET 版)',
         arch: 'amd64',
         url: 'http://124.223.35.239/download/mefrp/index.htm',
     },
     {
-        name: 'Windows 图形启动器（python版）',
+        name: 'Windows 图形启动器 (Python 版)',
         arch: 'amd64',
         url: 'https://download.mefrp.com/d/client/MirrorEdgeFrpSetup.exe',
     },
     {
-        name: 'Windows/Linux图形界面客户端',
+        name: 'Windows/Linux 图形界面客户端',
         arch: 'amd64',
         url: 'https://github.com/FloppyBetaStudio/LaeFrpDesktop/releases',
     },
