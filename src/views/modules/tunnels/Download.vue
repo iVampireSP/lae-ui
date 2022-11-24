@@ -45,8 +45,13 @@ import { ref } from 'vue'
 const links = ref({})
 
 links.value = [
+ {
+        name: 'Windows 图形启动器（C#.net版）',
+        arch: 'amd64',
+        url: 'http://124.223.35.239/download/mefrp/index.htm',
+    },
     {
-        name: 'Windows 图形启动器',
+        name: 'Windows 图形启动器（python版）',
         arch: 'amd64',
         url: 'https://download.mefrp.com/d/client/MirrorEdgeFrpSetup.exe',
     },
