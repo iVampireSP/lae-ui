@@ -53,6 +53,14 @@
           <!-- Right Side Of Navbar -->
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
+              <router-link
+                class="nav-link text-auto"
+                active-class="active"
+                :to="{ name: 'about' }"
+                >关于定价</router-link
+              >
+            </li>
+            <li class="nav-item">
               <a
                 class="nav-link text-auto"
                 target="_blank"

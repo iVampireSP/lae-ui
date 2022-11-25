@@ -14,6 +14,15 @@ const routes = [
     },
   },
   {
+    path: '/about',
+    name: 'about',
+    component: () => import('../views/About.vue'),
+    meta: {
+      auth: true,
+      keepalive: true,
+    },
+  },
+  {
     path: '/login',
     name: 'login',
     meta: {
