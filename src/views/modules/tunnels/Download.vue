@@ -41,36 +41,15 @@
 <script setup>
 import { ref } from 'vue'
 
+import axios from 'axios'
 
 const links = ref({})
-
-links.value = [
- {
-        name: 'Windows 图形启动器 (C# .NET 版)',
-        arch: 'amd64',
-        url: 'http://124.223.35.239/download/mefrp/index.htm',
-    },
-    {
-        name: 'Windows 图形启动器 (Python 版)',
-        arch: 'amd64',
-        url: 'https://download.mefrp.com/d/client/Mirror_Edge_Frp_Python_Win.zip',
-    },
-    {
-        name: 'Windows/Linux 图形界面客户端',
-        arch: 'amd64',
-        url: 'https://github.com/FloppyBetaStudio/LaeFrpDesktop/releases',
-    },
-    {
-        name: 'Windows',
-        arch: 'amd64',
-        url: 'http://cdn.114514.space/Download/Files/2.0.0/frp_0.44.0_windows_amd64.zip',
-    },
-    {
-        name: 'Linux',
-        arch: 'amd64',
-        url: 'http://cdn.114514.space/Download/Files/2.0.0/frp_0.44.0_linux_amd64.tar.gz',
-    },
-];
-
+axios({
+  method:'get',
+  url:'/downloads.json'
+}).then((res)=>{
+  console.log(res.data.links)
+  links.value = res.data
+})
 
 </script>
