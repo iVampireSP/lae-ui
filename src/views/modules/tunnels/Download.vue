@@ -51,5 +51,4 @@ axios({
   console.log(res.data.links)
   links.value = res.data
 })
-
 </script>
