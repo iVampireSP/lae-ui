@@ -40,6 +40,14 @@
                 >游戏容器</router-link
               >
             </li>
+            <li class="nav-item">
+              <router-link
+                class="nav-link text-auto"
+                active-class="active"
+                :to="{ name: 'modules.user-mqtt' }"
+                >消息队列</router-link
+              >
+            </li>
             <!-- <li class="nav-item">
               <router-link
                 class="nav-link text-auto"
