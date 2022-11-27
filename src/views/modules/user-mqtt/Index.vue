@@ -6,7 +6,7 @@
 
       <label for="password">请输入密码</label>
       <input
-        type="text"
+        type="password"
         class="form-control"
         id="password"
         v-model="create.password"
