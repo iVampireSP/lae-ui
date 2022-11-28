@@ -112,7 +112,7 @@
 
   const allow_host_id = ref('')
 
-  const pwd = ref('点击显示')
+//   const pwd = ref('点击显示')
 
   const create = ref({
     password: '',
