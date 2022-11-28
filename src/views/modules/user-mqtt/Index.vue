@@ -24,9 +24,9 @@
         <br />
         <span>MQTT 服务器地址: mqtt.laecloud.com:1883</span>
         <br />
-        <span>MQTT WS 接入地址: mqtt.laecloud.com:8083</span>
+        <span>MQTT WS 接入地址: mqtt.laecloud.com:8083, Path 为 /mqtt</span>
         <br />
-        <span>MQTT WSS 接入地址: mqtt.laecloud.com:8084</span>
+        <span>MQTT WSS 接入地址: mqtt.laecloud.com:8084, Path 为 /mqtt</span>
         <br />
 
         <span>用户名: user-mqtt.{{ host.host_id }}</span>
