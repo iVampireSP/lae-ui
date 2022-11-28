@@ -73,31 +73,19 @@
 
   let laeLogoUrl = '/assets/js/animate/' + color + '.json'
 
-  axios.get(laeLogoUrl).then((res) => {
-    lottie.loadAnimation({
-      container: document.getElementById('lottie'),
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      animationData: res.data,
-    })
-  })
-
   onMounted(() => {
-    // let animation = lottie.loadAnimation({
-    //   container: document.getElementById('lottie'),
-    //   renderer: 'svg',
-    //   loop: false,
-    //   autoplay: false,
-    //   animationData: import('../assets/js/animate/dark.json'),
-    // })
-    // animation.play()
-    let laeLogoContainer = document.getElementById('lae-logo-container')
-    // let laeLogo = document.getElementById('lae-logo')
-    // // 上下居中
-    // laeLogoContainer.style.marginTop =
-    //   (laeLogoContainer.clientHeight - laeLogo.clientHeight) / 2 + 100 + 'px'
+    axios.get(laeLogoUrl).then((res) => {
+      lottie.loadAnimation({
+        container: document.getElementById('lottie'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        animationData: res.data,
+      })
+    })
 
+    let laeLogoContainer = document.getElementById('lae-logo-container')
+ 
     // 调整高度为适合页面居中
     laeLogoContainer.style.height = laeLogoContainer.clientHeight + 500 + 'px'
   })
