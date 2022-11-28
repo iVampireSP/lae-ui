@@ -58,6 +58,7 @@
 <script setup>
   import { ref, onMounted } from 'vue'
   import http from '../api/http'
+  import axios from 'axios'
   import lottie from 'lottie-web'
   //   import store from '../plugins/store'
 
@@ -70,16 +71,15 @@
     color = 'white'
   }
 
-  let laeLogoUrl = '../assets/js/animate/' + color + '.json'
+  let laeLogoUrl = '/assets/js/animate/' + color + '.json'
 
-  const j = import(laeLogoUrl)
-  j.then((res) => {
+  axios.get(laeLogoUrl).then((res) => {
     lottie.loadAnimation({
       container: document.getElementById('lottie'),
       renderer: 'svg',
       loop: true,
       autoplay: true,
-      animationData: res.default,
+      animationData: res.data,
     })
   })
 
@@ -97,12 +97,9 @@
     // // 上下居中
     // laeLogoContainer.style.marginTop =
     //   (laeLogoContainer.clientHeight - laeLogo.clientHeight) / 2 + 100 + 'px'
-    
 
     // 调整高度为适合页面居中
     laeLogoContainer.style.height = laeLogoContainer.clientHeight + 500 + 'px'
-
-
   })
 
   http.get('forum/pinned').then((res) => {
@@ -111,7 +108,7 @@
     base_url.value = pinned.value.base_url
 
     setTimeout(() => {
-        show.value = true
+    //   show.value = true
     }, 300)
   })
 </script>
