@@ -38,8 +38,8 @@
         type="range"
         class="form-range"
         min="1024"
-        max="10240"
-        step="512"
+        max="16384"
+        step="1024"
         v-model="gct.memory"
       />
       将使用 <span v-text="gct.memory / 1024"></span> GB 内存。价格为
