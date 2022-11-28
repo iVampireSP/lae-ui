@@ -3,7 +3,7 @@
     class="w-100 text-center justify-content-center align-middle"
     v-show="!show"
   >
-    <div id="lae-logo-container" class="w-100">
+    <div id="lae-logo-container" class="w-100" style="height: 500px">
       <div id="lottie"></div>
     </div>
   </div>
@@ -36,11 +36,6 @@
                 {{ new Date(item.attributes.lastPostedAt).toLocaleString() }}
               </small>
             </div>
-            <!-- <p class="mb-1">
-            <span></span>
-          </p> -->
-            <!-- <small class="text-muted">
-        </small> -->
           </a>
         </span>
       </div>
@@ -56,7 +51,7 @@
 </template>
 
 <script setup>
-  import { ref, onMounted } from 'vue'
+  import { ref, onMounted, onUnmounted } from 'vue'
   import http from '../api/http'
   import axios from 'axios'
   import lottie from 'lottie-web'
@@ -73,21 +68,31 @@
 
   let laeLogoUrl = '/assets/js/animate/' + color + '.json'
 
-  onMounted(() => {
-    axios.get(laeLogoUrl).then((res) => {
-      lottie.loadAnimation({
-        container: document.getElementById('lottie'),
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        animationData: res.data,
-      })
+  let animation_data = null
+
+  axios.get(laeLogoUrl).then((res) => {
+    let animation = lottie.loadAnimation({
+      container: document.getElementById('lottie'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      animationData: res.data,
     })
 
-    let laeLogoContainer = document.getElementById('lae-logo-container')
- 
-    // 调整高度为适合页面居中
-    laeLogoContainer.style.height = laeLogoContainer.clientHeight + 500 + 'px'
+    animation_data = animation
+
+    onMounted(() => {
+      animation.play()
+
+    //   animation.destroy()
+    })
+  })
+
+  onUnmounted(() => {
+    if (animation_data !== null) {
+        animation_data.destroy()
+
+    }
   })
 
   http.get('forum/pinned').then((res) => {
@@ -96,7 +101,7 @@
     base_url.value = pinned.value.base_url
 
     setTimeout(() => {
-      show.value = true
+        show.value = true
     }, 500)
   })
 </script>
