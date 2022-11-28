@@ -47,6 +47,10 @@
     <a target="_blank" href="https://github.com/iVampireSP/lae-ui"
       >https://github.com/iVampireSP/lae-ui</a
     >
+
+    <br />
+    <br />
+    <a @click="toggleAnimation()" class="link cursor-pointer">动画好可爱，去看动画～</a>
   </div>
 </template>
 
@@ -84,14 +88,13 @@
     onMounted(() => {
       animation.play()
 
-    //   animation.destroy()
+      //   animation.destroy()
     })
   })
 
   onUnmounted(() => {
     if (animation_data !== null) {
-        animation_data.destroy()
-
+      animation_data.destroy()
     }
   })
 
@@ -101,7 +104,11 @@
     base_url.value = pinned.value.base_url
 
     setTimeout(() => {
-        show.value = true
+      show.value = true
     }, 500)
   })
+
+  function toggleAnimation() {
+    show.value = false
+  }
 </script>
