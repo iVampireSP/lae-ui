@@ -4,13 +4,7 @@
     v-show="!show"
   >
     <div id="lae-logo-container" class="w-100">
-      <!-- 插入 SVG -->
-      <img :src="laeLogoUrl" id="lae-logo" class="h-auto" />
-
-      <div class="mt-3"></div>
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
+      <div id="lottie"></div>
     </div>
   </div>
 
@@ -64,6 +58,7 @@
 <script setup>
   import { ref, onMounted } from 'vue'
   import http from '../api/http'
+  import lottie from 'lottie-web'
   //   import store from '../plugins/store'
 
   const pinned = ref([])
@@ -75,21 +70,39 @@
     color = 'white'
   }
 
-  let laeLogoUrl = '/assets/lae-' + color + '.png'
+  let laeLogoUrl = '../assets/js/animate/' + color + '.json'
+
+  const j = import(laeLogoUrl)
+  j.then((res) => {
+    lottie.loadAnimation({
+      container: document.getElementById('lottie'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      animationData: res.default,
+    })
+  })
 
   onMounted(() => {
+    // let animation = lottie.loadAnimation({
+    //   container: document.getElementById('lottie'),
+    //   renderer: 'svg',
+    //   loop: false,
+    //   autoplay: false,
+    //   animationData: import('../assets/js/animate/dark.json'),
+    // })
+    // animation.play()
     let laeLogoContainer = document.getElementById('lae-logo-container')
-    let laeLogo = document.getElementById('lae-logo')
-    // 上下居中
-    laeLogoContainer.style.marginTop =
-      (laeLogoContainer.clientHeight - laeLogo.clientHeight) / 2 + 100 + 'px'
+    // let laeLogo = document.getElementById('lae-logo')
+    // // 上下居中
+    // laeLogoContainer.style.marginTop =
+    //   (laeLogoContainer.clientHeight - laeLogo.clientHeight) / 2 + 100 + 'px'
+    
 
-    // 如果屏幕比较大，就把 SVG 缩小一点
-    if (window.innerWidth > 768) {
-      laeLogo.style.width = '20%'
-    } else {
-      laeLogo.style.width = '50%'
-    }
+    // 调整高度为适合页面居中
+    laeLogoContainer.style.height = laeLogoContainer.clientHeight + 500 + 'px'
+
+
   })
 
   http.get('forum/pinned').then((res) => {
@@ -98,7 +111,7 @@
     base_url.value = pinned.value.base_url
 
     setTimeout(() => {
-      show.value = true
+        show.value = true
     }, 300)
   })
 </script>
