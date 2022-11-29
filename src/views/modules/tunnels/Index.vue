@@ -490,8 +490,14 @@
       )
     }
   }
-
+  function JSONLength(obj) {
+  var size = 0, key;
+  for (key in obj) {
+    if (obj.hasOwnProperty(key)) size++;
+  } return size;
+  };
   function create() {
+    if (JSONLength(tunnels.value) < 3) {
     http
       .post('/modules/frp/hosts', createTunnel.value)
       .then((res) => {
@@ -538,5 +544,9 @@
         tunnelCreateError.value =
           '无法创建隧道，可能是表单没有填写完整，或者服务器不接受此端口（端口被占用或者不在范围内）'
       })
+    } else {
+      tunnelCreateError.value =
+          '无法创建隧道，隧道数量已达上限'
+    }
   }
 </script>
