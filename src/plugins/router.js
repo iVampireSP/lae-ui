@@ -158,6 +158,11 @@ const routes = [
         props: true,
         component: () => import('../views/modules/cdn/Show.vue'),
       },
+      {
+        path: 'user-mqtt',
+        name: 'modules.user-mqtt',
+        component: () => import('../views/modules/user-mqtt/Index.vue'),
+      },
     ],
   },
 

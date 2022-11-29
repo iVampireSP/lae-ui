@@ -179,6 +179,10 @@
   <div class="mt-3">
     <p>如果您是第一次使用，请在创建好服务器后前往邮箱中查看账号或密码。</p>
   </div>
+
+  <div class="mt-3 text-center text-muted">
+    <span>莱云 策划 / 运营 / 所有</span>
+  </div>
 </template>
 
 <script setup>

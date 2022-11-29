@@ -3,14 +3,8 @@
     class="w-100 text-center justify-content-center align-middle"
     v-show="!show"
   >
-    <div id="lae-logo-container" class="w-100">
-      <!-- 插入 SVG -->
-      <img :src="laeLogoUrl" id="lae-logo" class="h-auto" />
-
-      <div class="mt-3"></div>
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
+    <div id="lae-logo-container" class="w-100" style="height: 500px">
+      <div id="lottie"></div>
     </div>
   </div>
 
@@ -42,11 +36,6 @@
                 {{ new Date(item.attributes.lastPostedAt).toLocaleString() }}
               </small>
             </div>
-            <!-- <p class="mb-1">
-            <span></span>
-          </p> -->
-            <!-- <small class="text-muted">
-        </small> -->
           </a>
         </span>
       </div>
@@ -58,12 +47,18 @@
     <a target="_blank" href="https://github.com/iVampireSP/lae-ui"
       >https://github.com/iVampireSP/lae-ui</a
     >
+
+    <br />
+    <br />
+    <a @click="toggleAnimation()" class="link cursor-pointer">动画好可爱，去看动画～</a>
   </div>
 </template>
 
 <script setup>
-  import { ref, onMounted } from 'vue'
+  import { ref, onMounted, onUnmounted } from 'vue'
   import http from '../api/http'
+  import axios from 'axios'
+  import lottie from 'lottie-web'
   //   import store from '../plugins/store'
 
   const pinned = ref([])
@@ -75,20 +70,31 @@
     color = 'white'
   }
 
-  let laeLogoUrl = '/assets/lae-' + color + '.png'
+  let laeLogoUrl = '/assets/js/animate/' + color + '.json'
 
-  onMounted(() => {
-    let laeLogoContainer = document.getElementById('lae-logo-container')
-    let laeLogo = document.getElementById('lae-logo')
-    // 上下居中
-    laeLogoContainer.style.marginTop =
-      (laeLogoContainer.clientHeight - laeLogo.clientHeight) / 2 + 100 + 'px'
+  let animation_data = null
 
-    // 如果屏幕比较大，就把 SVG 缩小一点
-    if (window.innerWidth > 768) {
-      laeLogo.style.width = '20%'
-    } else {
-      laeLogo.style.width = '50%'
+  axios.get(laeLogoUrl).then((res) => {
+    let animation = lottie.loadAnimation({
+      container: document.getElementById('lottie'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      animationData: res.data,
+    })
+
+    animation_data = animation
+
+    onMounted(() => {
+      animation.play()
+
+      //   animation.destroy()
+    })
+  })
+
+  onUnmounted(() => {
+    if (animation_data !== null) {
+      animation_data.destroy()
     }
   })
 
@@ -99,6 +105,10 @@
 
     setTimeout(() => {
       show.value = true
-    }, 300)
+    }, 500)
   })
+
+  function toggleAnimation() {
+    show.value = false
+  }
 </script>
