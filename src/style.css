@@ -1,6 +1,11 @@
 /* import google fonts */
 @import url(https://fonts.googleapis.com/css?family=Nunito);
 
+/* 灰白 */
+body {
+  filter: grayscale(100%);
+}
+
 .h1,
 .h2,
 .h3,
