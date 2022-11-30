@@ -138,7 +138,7 @@
                 type="range"
                 class="form-range"
                 min="1024"
-                max="10240"
+                max="16384"
                 step="512"
                 v-model="gct.memory"
               />
