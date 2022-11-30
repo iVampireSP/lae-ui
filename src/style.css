@@ -1,7 +1,7 @@
 /* import google fonts */
 @import url(https://fonts.googleapis.com/css?family=Nunito);
 
-// 缅怀
+/* 灰白 */
 body {
   filter: grayscale(100%);
 }
