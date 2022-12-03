@@ -245,10 +245,10 @@
       http
         .get('/modules/gct/hosts/' + host.host_id + '/server/resources')
         .then((res) => {
-          if (res.status == 200) {
-            host.stats = res.data
-          } else {
+          if (res.data.errors) {
             host.stats = null
+          } else {
+            host.stats = res.data
           }
         })
     })
