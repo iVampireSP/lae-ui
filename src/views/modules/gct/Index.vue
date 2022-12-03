@@ -30,7 +30,7 @@
               <td>{{ host.ip + ':' + host.port }}</td>
               <td>{{ host.egg.name }}</td>
               <td>
-                <span v-if="host.stats">
+                <span v-if="host.stats.attributes.current_state">
                   <span
                     v-if="host.stats.attributes.current_state === 'running'"
                     class="text-success"
