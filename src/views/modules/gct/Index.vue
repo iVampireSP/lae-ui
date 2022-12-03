@@ -58,7 +58,7 @@
                   </span>
                 </span>
 
-                <span v-else> ... </span>
+                <span v-else> 即将就绪 </span>
               </td>
               <td>{{ new Date(host.created_at).toLocaleString() }}</td>
             </tr>
