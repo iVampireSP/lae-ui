@@ -163,16 +163,6 @@ const routes = [
         name: 'modules.user-mqtt',
         component: () => import('../views/modules/user-mqtt/Index.vue'),
       },
-      {
-        path: 'forest-mc',
-        name: 'modules.forest-mc',
-        component: () => import('../views/modules/forest-mc/Index.vue'),
-      },
-      {
-        path: 'forest-mc/direction',
-        name: 'modules.forest-mc.direction',
-        component: () => import('../views/modules/forest-mc/Direction.vue'),
-      },
     ],
   },
 
