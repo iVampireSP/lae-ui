@@ -6,6 +6,10 @@ import './style.css';
 import { createApp } from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+
+import { Buffer } from 'buffer';
+window.Buffer = Buffer;
+
 // import pangu from 'pangu';
 // import { useRoute } from 'vue-router';
 

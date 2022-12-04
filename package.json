@@ -15,13 +15,17 @@
     "axios-retry": "^3.3.1",
     "bootstrap": "^5.2.0",
     "bootstrap-icons": "^1.9.1",
+    "browserify": "^17.0.0",
     "echarts": "^5.3.3",
     "humanize-plus": "^1.8.2",
     "laravel-echo": "^1.14.0",
     "lottie-web": "^5.10.0",
+    "mqtt": "^4.3.7",
     "pangu": "^4.0.7",
     "pusher-js": "^7.4.0",
     "smooth-corners": "^1.0.8",
+    "tinyify": "^4.0.0",
+    "vite-plugin-ngmi-polyfill": "^0.0.2",
     "vue": "^3.2.37",
     "vue-axios": "^3.4.1",
     "vue-router": "4",
@@ -35,6 +39,6 @@
   "devDependencies": {
     "@types/node": "^18.7.18",
     "@vitejs/plugin-vue": "^3.0.3",
-    "vite": "^3.0.7"
+    "vite": "^3.2.4"
   }
 }
