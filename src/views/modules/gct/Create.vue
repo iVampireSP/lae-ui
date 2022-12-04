@@ -17,6 +17,8 @@
     </select>
     <p>此节点基础价格 <span v-text="selectedLocation.price"></span> 元</p>
 
+    <div class="mt-3" v-if="selectedLocation.description" v-text="selectedLocation.description"></div>
+
     <div class="mt-3">
       <h4 class="mt-5">您想要多少个 CPU 核心？</h4>
       <input
