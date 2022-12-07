@@ -137,17 +137,23 @@
         <div>余额: {{ store.state.user.balance }} 元</div>
         <div>
           交易记录:
-          <router-link class="text-auto" :to="{ name: 'billing.transactions' }"
-            >浏览列表</router-link
-          >
+          <a target="_blank" :href="api.auth + '/transactions'">查看</a>
         </div>
 
         <div>
           充值余额:
-          <router-link class="text-auto" :to="{ name: 'billing.charge' }"
-            >充值</router-link
-          >
+          <a target="_blank" :href="api.auth + '/transactions'">充值</a>
         </div>
+      </div>
+
+      <div class="mt-5" v-if="store.state.user.user_group_id">
+        <h4>{{ store.state.user.user_group.name }}</h4>
+
+        <p>
+          享受 {{ store.state.user.user_group.discount }}% 的折扣
+          <br />
+          <span v-if="store.state.user.user_group.exempt"> 并且豁免计费 </span>
+        </p>
       </div>
 
       <div class="mt-5">
@@ -184,6 +190,8 @@
   //   import app from '../config/app'
   import http from '../api/http'
   import store from '../plugins/store'
+
+  import api from '../config/api'
 
   const show = ref(true)
   if (store.state.token == null) {

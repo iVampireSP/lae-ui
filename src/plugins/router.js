@@ -32,22 +32,6 @@ const routes = [
     component: () => import('../views/auth/Login.vue'),
   },
   {
-    path: '/billing/charge',
-    name: 'billing.charge',
-    component: () => import('../views/user/Charge.vue'),
-    meta: {
-      auth: true,
-    },
-  },
-  {
-    path: '/billing/transactions',
-    name: 'billing.transactions',
-    component: () => import('../views/user/Transactions.vue'),
-    meta: {
-      auth: true,
-    },
-  },
-  {
     path: '/servers',
     name: 'servers',
     component: () => import('../views/Servers.vue'),
