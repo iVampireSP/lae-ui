@@ -137,12 +137,12 @@
         <div>余额: {{ store.state.user.balance }} 元</div>
         <div>
           交易记录:
-          <a target="_blank" :href="api.auth + '/transactions'">查看</a>
+          <a target="_blank" class="link" :href="api.auth + '/transactions'">查看</a>
         </div>
 
         <div>
           充值余额:
-          <a target="_blank" :href="api.auth + '/transactions'">充值</a>
+          <a target="_blank" class="link" :href="api.auth + '/transactions'">充值</a>
         </div>
       </div>
 
@@ -158,14 +158,14 @@
 
       <div class="mt-5">
         <h4>计费项目列表</h4>
-        <router-link class="text-auto" :to="{ name: 'hosts' }"
+        <router-link class="link" :to="{ name: 'hosts' }"
           >计费项目列表</router-link
         >
       </div>
 
       <div class="mt-5">
         <h4>您的工单</h4>
-        <router-link class="text-auto" :to="{ name: 'work-orders' }"
+        <router-link class="link" :to="{ name: 'work-orders' }"
           >工单列表</router-link
         >
       </div>
