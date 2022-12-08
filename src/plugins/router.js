@@ -52,7 +52,7 @@ const routes = [
   {
     path: '/hosts',
     name: 'hosts',
-    component: () => import('../views/user/Hosts.vue'),
+    component: () => import('../views/Hosts.vue'),
     meta: {
       auth: true,
       keepalive: true,

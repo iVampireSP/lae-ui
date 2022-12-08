@@ -2,11 +2,11 @@
   <div>
     <h3>计费项目列表</h3>
 
-    <p>
-      注意:
-      部分服务会接管价格。价格被接管后，我们将不会自动扣费，扣费控制权将交给对应服务。
+    <p v-if="store.state.user.user_group_id !== null">
+      此账号拥有 {{ store.state.user.user_group.discount }}% 的折扣。
+      <span v-if="store.state.user.user_group.exempt"> 并且豁免计费。 </span>
+      <span class="text-danger">价格均为使用折扣后的价格。</span>
     </p>
-    <p>如果价格被接管，则可能是按量计费等。</p>
 
     <div class="overflow-auto">
       <table class="table">
@@ -28,21 +28,17 @@
             <td>{{ host.module.name }}</td>
             <td>{{ host.name }}</td>
             <td>
-              <span v-if="host.managed_price !== null" class="text-success">
-                {{ host.managed_price }} 元 / 月
-                <br />
-              </span>
-              <span v-else-if="host.price > 0" class="text-success">
-                {{ host.price }} 元 / 月
-              </span>
               <span
-                v-else-if="
+                v-if="
                   host.price == 0 &&
                   (host.managed_price == 0 || host.managed_price == null)
                 "
                 class="text-danger"
               >
                 被接管
+              </span>
+              <span v-else class="text-success">
+                {{ host.price }} 元 / 月
               </span>
             </td>
             <td>
@@ -96,6 +92,12 @@
       </table>
     </div>
 
+    <p>
+      注意:
+      部分服务会接管价格。价格被接管后，我们将不会自动扣费，扣费控制权将交给对应服务。
+    </p>
+    <p>如果价格被接管，则可能是按量计费等。</p>
+
     <p>当您释放资源后，我们将会在后台排队处理，这可能需要一些时间。</p>
     <p>请注意: 余额 计算并不准确。它可能与实际获得有点偏差。</p>
     <p>现在，计费已经改为每小时一次。在每小时的第几分扣费。</p>
@@ -103,7 +105,8 @@
 </template>
 
 <script setup>
-  import http from '../../api/http'
+  import http from '../api/http'
+  import store from '../plugins/store'
   import { ref, onMounted, onUnmounted } from 'vue'
 
   const hosts = ref([])
@@ -114,7 +117,31 @@
     http
       .get('/hosts')
       .then((res) => {
-        hosts.value = res.data
+        const user = store.state.user
+
+        let temp_hosts = []
+
+        if (user.user_group_id !== null) {
+          res.data.forEach((host) => {
+            host.price = parseFloat(host.managed_price ?? host.price)
+
+            if (host.price != 0) {
+              host.price = host.price * ((1 - user.user_group.discount) / 100)
+
+              // 转正数
+              host.price = Math.abs(host.price)
+
+              // 保留两位小数
+              host.price = host.price.toFixed(4)
+            }
+
+            temp_hosts.push(host)
+          })
+        } else {
+          temp_hosts = res.data
+        }
+
+        hosts.value = temp_hosts
       })
       .catch((err) => {
         console.log(err)
