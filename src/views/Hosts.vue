@@ -132,7 +132,7 @@
               host.price = Math.abs(host.price)
 
               // 保留两位小数
-              host.price = host.price.toFixed(4)
+              host.price = host.price.toFixed(2)
             }
 
             temp_hosts.push(host)
