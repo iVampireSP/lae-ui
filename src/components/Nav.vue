@@ -203,4 +203,8 @@
       store.commit('updateUser', res.data)
     })
   }
+
+  setInterval(() => {
+    refresh_user()
+  }, 10000)
 </script>
