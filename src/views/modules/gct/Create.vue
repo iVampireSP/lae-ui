@@ -139,8 +139,8 @@
         </div>
       </div>
 
-      <p v-text="nest_info.description"></p>
-      <p v-text="egg_info.description"></p>
+      <pre v-text="nest_info.description"></pre>
+      <pre v-text="egg_info.description"></pre>
     </div>
 
     <div class="mt-3">
