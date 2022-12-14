@@ -142,7 +142,7 @@
 
         <div>
           充值余额:
-          <a target="_blank" class="link" :href="api.auth + '/transactions'">充值</a>
+          <a target="_blank" class="link" :href="api.auth + '/balances'">充值</a>
         </div>
       </div>
 

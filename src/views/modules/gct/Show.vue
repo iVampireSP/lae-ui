@@ -66,7 +66,18 @@
     <div v-show="gct.server">
       <h4 class="mt-5">服务器参数</h4>
 
-      <p>连接信息: {{ gct.ip }}:{{ gct.port }}</p>
+      <p>
+        连接信息:&nbsp;
+        <span
+          class="cursor-pointer"
+          data-bs-toggle="tooltip"
+          data-bs-placement="right"
+          title="点击来复制"
+          @click="copy(gct.ip + ':' + gct.port)"
+        >
+          {{ gct.ip }}:{{ gct.port }}
+        </span>
+      </p>
       <div class="mt-3">
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
           <li class="nav-item" role="presentation">
@@ -402,6 +413,10 @@
     terminal.writeln(
       TERMINAL_PRELUDE + '服务器标记为: ' + state + '...\u001b[0m'
     )
+
+  function copy(text) {
+    navigator.clipboard.writeText(text);
+  }
 
   function initTerm(socket) {
     terminal = new Terminal({ ...terminalProps })
