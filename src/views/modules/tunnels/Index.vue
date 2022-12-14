@@ -10,6 +10,12 @@
         >如果您是第一次使用，请务必看这里。</a
       >
     </p>
+    <p>
+      <a
+        href="https://forum.laecloud.com/d/56-jing-yuan-ying-she-ti-wen-qian-zi-cha"
+        target="_blank"
+        >映射成功访问不了？请看这里</a>
+    </p>
     <p v-show="traffics.free_traffic">
       您当前的可抵用流量: {{ traffics.free_traffic }} GB
     </p>
