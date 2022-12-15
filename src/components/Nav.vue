@@ -1,6 +1,9 @@
 <template>
   <div v-show="show">
-    <nav class="navbar navbar-expand-md shadow-sm bg-body">
+    <nav
+      class="navbar navbar-expand-md shadow-sm"
+      style="background-color: rgb(254 178 114 / 43%)"
+    >
       <div class="container">
         <router-link
           class="navbar-brand text-auto lae-logo"
@@ -60,14 +63,14 @@
 
           <!-- Right Side Of Navbar -->
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <router-link
                 class="nav-link text-auto"
                 active-class="active"
                 :to="{ name: 'about' }"
                 >关于定价</router-link
               >
-            </li>
+            </li> -->
             <li class="nav-item">
               <a
                 class="nav-link text-auto"
@@ -137,12 +140,16 @@
         <div>余额: {{ store.state.user.balance }} 元</div>
         <div>
           交易记录:
-          <a target="_blank" class="link" :href="api.auth + '/transactions'">查看</a>
+          <a target="_blank" class="link" :href="api.auth + '/transactions'"
+            >查看</a
+          >
         </div>
 
         <div>
           充值余额:
-          <a target="_blank" class="link" :href="api.auth + '/balances'">充值</a>
+          <a target="_blank" class="link" :href="api.auth + '/balances'"
+            >充值</a
+          >
         </div>
       </div>
 
