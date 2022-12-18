@@ -67,7 +67,7 @@
   import echo from '../plugins/echo'
   import store from '../plugins/store'
 
-  import { Toast } from 'bootstrap'
+//   import { Toast } from 'bootstrap'
 
   import { ref, onMounted, onUnmounted } from 'vue'
 
@@ -92,7 +92,7 @@
 
   onUnmounted(() => {
     echo.leave(private_channel)
-  })
+  });
 </script>
 
 <style scoped>

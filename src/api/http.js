@@ -49,7 +49,6 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (res) => {
-    res.data = res.data.data;
 
     return Promise.resolve(res);
   },
