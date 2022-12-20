@@ -17,7 +17,7 @@
           type="button"
           class="btn btn-outline-primary"
           target="_blank"
-          :href="'https://panel.muhanyun.cn/server/' + gct.server.identifier"
+          :href="'https://ptero.laecloud.com/server/' + gct.server.identifier"
           >前往控制面板</a
         >
 
