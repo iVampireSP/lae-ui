@@ -7,7 +7,7 @@ const routes = [
   {
     path: '/',
     name: 'index',
-    component: () => import('../views/Index.vue'),
+    component: () => import('../views/IndexNew.vue'),
     meta: {
       auth: true,
       keepalive: true,
