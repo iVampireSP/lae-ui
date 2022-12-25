@@ -49,12 +49,6 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (res) => {
-    // 如果有 current_page 字段，说明是分页数据
-    if (res.data.current_page !== undefined) {
-        // 将 res.data.data 里的内容 merge 到 res.data 里
-        Object.assign(res.data, res.data.data);
-    }
-
     return Promise.resolve(res);
   },
   (error) => {

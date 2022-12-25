@@ -54,7 +54,7 @@
 
   function refresh() {
     http.get('/work-orders').then((res) => {
-      workOrders.value = res.data
+      workOrders.value = res.data.data
     })
   }
 
