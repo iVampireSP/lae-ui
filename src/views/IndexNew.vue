@@ -122,6 +122,11 @@
   const progress = ref(0)
 
   function setGct(name, cpu_limit, memory, egg_id) {
+    gct.value.cpu_limit = cpu_limit
+    gct.value.memory = memory
+    gct.value.egg_id = egg_id
+    gct.value.name = name
+
     let inter = setInterval(() => {
       progress.value += 1
 
@@ -141,7 +146,7 @@
           progress.value = 0
 
           route.push({
-            name: 'modules.gct'
+            name: 'modules.gct',
           })
         }, 5000)
       })
@@ -149,11 +154,6 @@
         console.log(err)
         alert('创建失败')
       })
-
-    gct.value.cpu_limit = cpu_limit
-    gct.value.memory = memory
-    gct.value.egg_id = egg_id
-    gct.value.name = name
 
     showProgress.value = true
   }
