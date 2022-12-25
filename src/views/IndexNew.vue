@@ -7,7 +7,7 @@
     <p>
       我们的价格再次跌破底线，1 核心，1G 内存，1G 硬盘。
       <br />
-      <span class="fs-3">最低仅需</span> <span class="fs-1">￥4.16/月！</span>
+      <span class="fs-3">最低仅需</span> <span class="fs-1">￥3.95/月！</span>
     </p>
 
     <h4 class="mt-3">为何会如此便宜？</h4>
