@@ -1,8 +1,8 @@
 [
        {
-        "name": "Windows Pascal 启动器",
+        "name": "Windows 简易启动器",
         "arch": "amd64",
-        "url": "https://download.mefrp.com/d/alidrive/LaeFrpDesktopB4Win64.7z"
+        "url": "https://download.mefrp.com/d/release/frp_0.46.0_windows_amd64.zip"
        },
        {
            "name": "Windows Python 启动器",
@@ -15,23 +15,14 @@
         "url": "http://124.223.35.239/download/mefrp/"
        },
        {
-        "name": "Windows 公版启动器",
-        "arch": "amd64",
-        "url": "https://github.com/fatedier/frp/releases/download/v0.44.0/frp_0.44.0_windows_amd64.zip"
+           "name": "Linux 启动器",
+           "arch": "amd64",
+           "url": "https://download.mefrp.com/d/release/frp_0.46.0_linux_amd64.tar.gz"
        },
        {
-           "name": "Linux Pascal 启动器",
-           "arch": "amd64",
-           "url": "https://download.mefrp.com/d/alidrive/LaeFrpDesktopB4Linux64.7z"
+           "name": "更多版本",
+           "arch": "any",
+           "url": "https://download.mefrp.com/release/"
        },
-       {
-           "name": "Linux 公版启动器",
-           "arch": "amd64",
-           "url": "https://github.com/fatedier/frp/releases/download/v0.44.0/frp_0.44.0_linux_amd64.tar.gz"
-       },
-       {
-           "name": "macOS 公版启动器",
-           "arch": "amd64",
-           "url": "https://github.com/fatedier/frp/releases/download/v0.44.0/frp_0.44.0_darwin_amd64.tar.gz"
-       }
+       
    ]
