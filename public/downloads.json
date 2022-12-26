@@ -5,11 +5,6 @@
         "url": "https://download.mefrp.com/d/release/frp_0.46.0_windows_amd64.zip"
        },
        {
-        "name": "Windows Pascal 启动器",
-        "arch": "amd64",
-        "url": "https://download.mefrp.com/d/alidrive/LaeFrpDesktopB4Win64.7z"
-       },
-       {
            "name": "Windows Python 启动器",
            "arch": "amd64",
            "url": "https://download.mefrp.com/d/alidrive/Mirror_Edge_Frp_Python_Win.zip"
@@ -18,11 +13,6 @@
         "name": "Windows C# .NET 启动器",
         "arch": "amd64",
         "url": "http://124.223.35.239/download/mefrp/"
-       },
-       {
-           "name": "Linux Pascal 启动器",
-           "arch": "amd64",
-           "url": "https://download.mefrp.com/d/alidrive/LaeFrpDesktopB4Linux64.7z"
        },
        {
            "name": "Linux 启动器",
