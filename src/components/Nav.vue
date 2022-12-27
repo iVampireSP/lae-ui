@@ -101,7 +101,7 @@
               </a>
             </li>
 
-            <li class="nav-item" style="margin-left: 5px">
+            <li class="nav-item" style="margin-left: 10px">
               <div class="btn btn-primary bg-reverse m-0 p-0" style="height: 41px">
                 <span v-if="(store.state.user.balance ?? 0) > 100">
                   <router-link
