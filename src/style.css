@@ -20,6 +20,14 @@ h6 {
   color: #333;
 }
 
+.text-reverse {
+  color: #fff;
+}
+
+.bg-reverse {
+  background-color: #333;
+}
+
 .lae-logo {
   background-image: url('/assets/lae-dark.png');
   background-size: 40px;
@@ -87,6 +95,14 @@ td {
 
   .text-auto {
     color: #fff;
+  }
+
+  .text-reverse {
+    color: #333;
+  }
+
+  .bg-reverse {
+    background-color: #fff;
   }
 
   .text-auto:hover {

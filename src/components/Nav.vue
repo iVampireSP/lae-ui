@@ -61,14 +61,6 @@
           <!-- Right Side Of Navbar -->
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <router-link
-                class="nav-link text-auto"
-                active-class="active"
-                :to="{ name: 'about' }"
-                >关于定价</router-link
-              >
-            </li>
-            <li class="nav-item">
               <a
                 class="nav-link text-auto"
                 target="_blank"
@@ -108,6 +100,27 @@
                 ></i>
               </a>
             </li>
+
+            <li class="nav-item">
+              <div class="btn btn-primary bg-reverse m-0 p-0" style="height: 41px">
+                <span v-if="(store.state.user.balance ?? 0) > 100">
+                  <router-link
+                    class="nav-link text-reverse"
+                    active-class="active"
+                    :to="{ name: 'about' }"
+                    >关于定价</router-link
+                  >
+                </span>
+                <span v-else>
+                  <a
+                    class="nav-link text-reverse"
+                    target="_blank"
+                    :href="api.auth + '/balances'"
+                    >充值余额</a
+                  >
+                </span>
+              </div>
+            </li>
           </ul>
         </div>
       </div>
@@ -137,12 +150,16 @@
         <div>余额: {{ store.state.user.balance }} 元</div>
         <div>
           交易记录:
-          <a target="_blank" class="link" :href="api.auth + '/transactions'">查看</a>
+          <a target="_blank" class="link" :href="api.auth + '/transactions'"
+            >查看</a
+          >
         </div>
 
         <div>
           充值余额:
-          <a target="_blank" class="link" :href="api.auth + '/balances'">充值</a>
+          <a target="_blank" class="link" :href="api.auth + '/balances'"
+            >充值</a
+          >
         </div>
       </div>
 
