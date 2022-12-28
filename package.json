@@ -19,6 +19,7 @@
     "bootstrap-icons": "^1.9.1",
     "echarts": "^5.3.3",
     "humanize-plus": "^1.8.2",
+    "js-md5": "^0.7.3",
     "laravel-echo": "^1.14.0",
     "lottie-web": "^5.10.0",
     "pangu": "^4.0.7",

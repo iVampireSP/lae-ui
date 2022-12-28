@@ -14,6 +14,15 @@ const routes = [
     },
   },
   {
+    path: '/birthdays',
+    name: 'birthdays',
+    component: () => import('../views/Birthdays.vue'),
+    meta: {
+      auth: true,
+      keepalive: true,
+    },
+  },
+  {
     path: '/about',
     name: 'about',
     component: () => import('../views/About.vue'),

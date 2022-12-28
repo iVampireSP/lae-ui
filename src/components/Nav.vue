@@ -2,11 +2,7 @@
   <div v-show="show">
     <nav class="navbar navbar-expand-md shadow-sm bg-body">
       <div class="container">
-        <router-link
-          class="navbar-brand text-auto lae-logo"
-          active-class="active"
-          to="/"
-        >
+        <router-link class="navbar-brand text-auto lae-logo" to="/">
         </router-link>
 
         <button
@@ -27,7 +23,6 @@
             <li class="nav-item">
               <router-link
                 class="nav-link text-auto"
-                active-class="active"
                 :to="{ name: 'modules.tunnels' }"
                 >镜缘映射</router-link
               >
@@ -35,7 +30,6 @@
             <li class="nav-item">
               <router-link
                 class="nav-link text-auto"
-                active-class="active"
                 :to="{ name: 'modules.gct' }"
                 >游戏容器</router-link
               >
@@ -43,7 +37,6 @@
             <li class="nav-item">
               <router-link
                 class="nav-link text-auto"
-                active-class="active"
                 :to="{ name: 'modules.user-mqtt' }"
                 >消息队列</router-link
               >
@@ -51,7 +44,7 @@
             <!-- <li class="nav-item">
               <router-link
                 class="nav-link text-auto"
-                active-class="active"
+                
                 :to="{ name: 'modules.cdn' }"
                 >内容分发</router-link
               >
@@ -69,22 +62,23 @@
               >
             </li>
             <li class="nav-item">
-              <router-link
-                class="nav-link text-auto"
-                active-class="active"
-                :to="{ name: 'servers' }"
+              <router-link class="nav-link text-auto" :to="{ name: 'servers' }"
                 >状态</router-link
               >
             </li>
             <li class="nav-item">
-              <router-link
-                class="nav-link text-auto"
-                active-class="active"
-                :to="{ name: 'tasks' }"
+              <router-link class="nav-link text-auto" :to="{ name: 'tasks' }"
                 >任务</router-link
               >
             </li>
-
+            <li class="nav-item">
+              <router-link
+                v-show="birthdays.data.length > 0"
+                class="nav-link text-auto"
+                :to="{ name: 'birthdays' }"
+                >生日</router-link
+              >
+            </li>
             <li class="nav-item">
               <a
                 class="nav-link text-auto cursor-pointer"
@@ -102,11 +96,13 @@
             </li>
 
             <li class="nav-item" style="margin-left: 10px">
-              <div class="btn btn-primary bg-reverse m-0 p-0" style="height: 41px">
+              <div
+                class="btn btn-primary bg-reverse m-0 p-0"
+                style="height: 41px"
+              >
                 <span v-if="(store.state.user.balance ?? 0) > 100">
                   <router-link
                     class="nav-link text-reverse"
-                    active-class="active"
                     :to="{ name: 'about' }"
                     >关于定价</router-link
                   >
@@ -191,10 +187,7 @@
         class="btn-group position-absolute rounded-0"
         style="bottom: 0; left: 0; right: 0"
       >
-        <router-link
-          class="btn btn-danger rounded-0"
-          active-class="active"
-          :to="{ name: 'login' }"
+        <router-link class="btn btn-danger rounded-0" :to="{ name: 'login' }"
           >更换账号</router-link
         >
       </div>
@@ -224,4 +217,10 @@
   setInterval(() => {
     refresh_user()
   }, 10000)
+
+  const birthdays = ref({ data: [] })
+
+  http.get('/birthdays').then((res) => {
+    birthdays.value = res.data
+  })
 </script>
