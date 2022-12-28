@@ -5,15 +5,18 @@
 
   <div>
     <div v-for="user in birthdays.data" :key="user.id">
-      <div class="d-flex align-items-center mt-3">
+      <div
+        class="d-flex align-items-center mt-3"
+      >
         <img
           :src="api.avatar + md5(user.email) + '?s=90&d=retro'"
           class="rounded-circle"
           width="48"
+          style="object-fit: cover; width: 48px; height: 48px"
         />
         <div class="ms-3">
           <h5 class="mb-0">{{ user.name }}</h5>
-          <div class="text-muted" v-if="user.id === store.state.user.id">
+          <div class="text-muted animate__animated animate__bounceInRight" v-if="user.id === store.state.user.id">
             这是你
           </div>
         </div>
@@ -26,7 +29,7 @@
         <span class="visually-hidden">Loading...</span>
       </div>
 
-      <button type="button" class="btn btn-primary" @click="load()" v-else>
+      <button type="button" class="btn btn-primary" @click="load(1)" v-else>
         加载更多
       </button>
     </div>
@@ -49,7 +52,7 @@
 
   const loading = ref(false)
 
-  function load() {
+  function load(scroll = false) {
     page.value++
 
     loading.value = true
@@ -70,6 +73,12 @@
       })
       .finally(() => {
         loading.value = false
+
+        if (scroll) {
+         setTimeout(() => {
+           window.scrollTo(0, document.body.scrollHeight)
+         }, 100)
+        }
       })
   }
 
