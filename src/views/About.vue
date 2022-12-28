@@ -6,5 +6,5 @@
   我们这个价格，也就这个价格的服务，你想要得到的东西我们都写在价格里。我们又没骗你又没骂你又没跑路也没侮辱你。给你劝退，给你退款，给你主群里面推荐友商，你还不去，你说你还想继续用其他服务。你搁这骂完还赖着不走，那我只好自己给你踢喽。
   <br />
   <br />
-  <img src="/assets/images/about-1.jpg" class="img-fluid" />
+  <img src="/assets/images/about-1.jpg" class="img-fluid img-revert" />
 </template>

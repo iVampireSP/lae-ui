@@ -83,6 +83,10 @@ td {
   opacity: 1;
 }
 
+.img-revert {
+  filter: invert(0);
+}
+
 @media (prefers-color-scheme: dark) {
   /* .background-container {
     background: url('/assets/images/bg-dark.jpg');
@@ -136,6 +140,10 @@ td {
   .v-md-textarea-editor pre,
   .v-md-textarea-editor textarea {
     color: #cacaca !important;
+  }
+
+  .img-revert {
+    filter: invert(1);
   }
 }
 
