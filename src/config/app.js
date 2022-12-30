@@ -1,5 +1,5 @@
 export default {
-    name: "LAE",
+    name: "莱云",
 
     // isLogin: false,
 }
