@@ -161,6 +161,15 @@ const routes = [
         },
       },
       {
+        path: 'gct/intro',
+        name: 'modules.gct.intro',
+        props: true,
+        component: () => import('../views/modules/gct/Intro.vue'),
+        meta: {
+          title: '引导创建',
+        },
+      },
+      {
         path: 'gct/:id',
         name: 'modules.gct.show',
         props: true,

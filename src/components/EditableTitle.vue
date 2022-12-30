@@ -25,6 +25,6 @@
     border: 0;
     outline: 0;
     background: transparent;
-    width: 100%;
+    width: 70%;
   }
 </style>
