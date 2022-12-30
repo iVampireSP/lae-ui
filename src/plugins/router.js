@@ -7,11 +7,11 @@ const routes = [
   {
     path: '/',
     name: 'index',
-    component: () => import('../views/IndexNew.vue'),
+    component: () => import('../views/IndexIntro.vue'),
     meta: {
       auth: true,
       keepalive: true,
-      title: '游戏容器 促销',
+      title: '引导您创建游戏容器给',
     },
   },
   {
