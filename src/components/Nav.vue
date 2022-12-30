@@ -72,6 +72,12 @@
               >
             </li>
             <li class="nav-item">
+              <router-link class="nav-link text-auto" :to="{ name: 'hosts' }"
+                >主机</router-link
+              >
+            </li>
+
+            <li class="nav-item">
               <router-link
                 v-show="birthdays.data.length > 0"
                 class="nav-link text-auto"
@@ -172,12 +178,12 @@
       <div class="mt-5">
         <h4>计费项目列表</h4>
         <router-link class="link" :to="{ name: 'hosts' }"
-          >计费项目列表</router-link
+          >主机</router-link
         >
       </div>
 
       <div class="mt-5">
-        <h4>您的工单</h4>
+        <h4>服务与支持</h4>
         <router-link class="link" :to="{ name: 'work-orders' }"
           >工单列表</router-link
         >
