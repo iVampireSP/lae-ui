@@ -99,7 +99,9 @@
     aria-labelledby="metaModalLabel"
     aria-hidden="true"
   >
-    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div
+      class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
+    >
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="metaModalLabel">元数据</h5>
@@ -110,9 +112,7 @@
             aria-label="Close"
           ></button>
         </div>
-        <div
-          class="modal-body overflow-auto p-0  rounded"
-        >
+        <div class="modal-body overflow-auto p-0 rounded">
           <table class="table table-striped table-hover">
             <thead>
               <tr>
@@ -144,7 +144,6 @@
 
 <script setup>
   import http from '../api/http'
-  import echo from '../plugins/echo'
   import { ref, onMounted, onUnmounted } from 'vue'
   import { Modal } from 'bootstrap'
 
@@ -167,17 +166,17 @@
     myModal.show()
   }
 
-  onMounted(() => {
-    echo.channel('servers').listen('.servers', (e) => {
-      servers.value = e.data
-
-      http.get('/modules').then((res) => {
-        modules.value = res.data
-      })
+  const inter = setInterval(() => {
+    http.get('/servers').then((res) => {
+      servers.value = res.data
     })
-  })
+
+    http.get('/modules').then((res) => {
+      modules.value = res.data
+    })
+  }, 2000)
 
   onUnmounted(() => {
-    echo.leave('servers')
+    clearInterval(inter)
   })
 </script>
