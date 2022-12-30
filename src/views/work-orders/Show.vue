@@ -12,7 +12,7 @@
   <div class="mt-3">
     <!-- replies -->
     <h4>对话记录</h4>
-    <template v-for="reply in replies">
+    <template v-for="reply in replies.data">
       <div class="card border-light mb-3 markdown-preview shadow">
         <div class="card-header">
           <span v-if="reply.user_id == null" class="text-primary">
@@ -71,7 +71,7 @@
 
   const workOrder = ref({
     title: '工单',
-    content: '### Content',
+    content: '### ...',
   })
 
   const replies = ref([])
