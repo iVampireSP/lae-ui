@@ -11,6 +11,7 @@ const routes = [
     meta: {
       auth: true,
       keepalive: true,
+      title: '游戏容器 促销',
     },
   },
   {
@@ -20,6 +21,7 @@ const routes = [
     meta: {
       auth: true,
       keepalive: true,
+      title: '繁星',
     },
   },
   {
@@ -29,6 +31,7 @@ const routes = [
     meta: {
       auth: true,
       keepalive: true,
+      title: '关于',
     },
   },
   {
@@ -37,6 +40,7 @@ const routes = [
     meta: {
       keepalive: false,
       auth: false,
+      title: '登录',
     },
     component: () => import('../views/auth/Login.vue'),
   },
@@ -47,6 +51,7 @@ const routes = [
     meta: {
       auth: true,
       keepalive: true,
+      title: '服务器状态',
     },
   },
   {
@@ -56,6 +61,7 @@ const routes = [
     meta: {
       auth: true,
       keepalive: true,
+      title: '任务队列',
     },
   },
   {
@@ -65,6 +71,7 @@ const routes = [
     meta: {
       auth: true,
       keepalive: true,
+      title: '主机 - 计费项目列表',
     },
   },
   {
@@ -73,17 +80,24 @@ const routes = [
     component: () => import('../views/work-orders/Index.vue'),
     meta: {
       auth: true,
+      title: '工单',
     },
   },
   {
     path: '/work-orders/create',
     name: 'work-orders.create',
     component: () => import('../views/work-orders/Create.vue'),
+    meta: {
+      title: '创建工单',
+    },
   },
   {
     path: '/work-orders/:id',
     name: 'work-orders.show',
     component: () => import('../views/work-orders/Show.vue'),
+    meta: {
+      title: '跟进工单',
+    },
   },
 
   // Modules
@@ -100,39 +114,60 @@ const routes = [
         path: 'tunnels',
         name: 'modules.tunnels',
         component: () => import('../views/modules/tunnels/Index.vue'),
+        meta: {
+          title: '隧道列表',
+        },
       },
       {
         path: 'tunnels/compact',
         name: 'modules.tunnels.compact',
         component: () => import('../views/modules/tunnels/Compact.vue'),
+        meta: {
+          title: '整合配置文件',
+        },
       },
       {
         path: 'tunnels/downloads',
         name: 'modules.tunnels.download',
         component: () => import('../views/modules/tunnels/Download.vue'),
+        meta: {
+          title: '下载客户端',
+        },
       },
       {
         path: 'tunnels/:id',
         name: 'modules.tunnels.show',
         props: true,
         component: () => import('../views/modules/tunnels/Show.vue'),
+        meta: {
+          title: '隧道详情',
+        },
       },
       {
         path: 'gct',
         name: 'modules.gct',
         component: () => import('../views/modules/gct/Index.vue'),
+        meta: {
+          title: '游戏容器',
+        },
       },
       {
         path: 'gct/create',
         name: 'modules.gct.create',
         props: true,
         component: () => import('../views/modules/gct/Create.vue'),
+        meta: {
+          title: '创建容器',
+        },
       },
       {
         path: 'gct/:id',
         name: 'modules.gct.show',
         props: true,
         component: () => import('../views/modules/gct/Show.vue'),
+        meta: {
+          title: '显示游戏容器',
+        },
       },
       {
         path: 'cdn',
@@ -155,6 +190,9 @@ const routes = [
         path: 'user-mqtt',
         name: 'modules.user-mqtt',
         component: () => import('../views/modules/user-mqtt/Index.vue'),
+        meta: {
+          title: '用户消息队列',
+        },
       },
     ],
   },
@@ -190,6 +228,12 @@ router.beforeEach((to, from) => {
 
   if (to.matched.length === 0) {
     return router.push({ name: 'errors.404' });
+  }
+
+  if (to.meta.title) {
+    document.title = to.meta.title + ' - ' + app.name;
+  } else {
+    document.title = app.name;
   }
 
   if (to.meta.auth ?? true) {
