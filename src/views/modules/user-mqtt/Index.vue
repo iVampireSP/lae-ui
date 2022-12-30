@@ -10,7 +10,7 @@
         class="form-control"
         id="password"
         v-model="create.password"
-        placeholder="设置一个登录密码。"
+        placeholder="设置一个用于 MQTT 的登录密码。"
       />
 
       <button class="btn btn-primary mt-3" @click="createHost">创建</button>
