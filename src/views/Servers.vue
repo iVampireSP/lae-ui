@@ -174,7 +174,7 @@
     http.get('/modules').then((res) => {
       modules.value = res.data
     })
-  }, 2000)
+  }, 5000)
 
   onUnmounted(() => {
     clearInterval(inter)
