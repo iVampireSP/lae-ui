@@ -1,7 +1,7 @@
 <template>
   <h4>您遇到了什么问题？</h4>
   <div class="mt-3"></div>
-  <div v-show="workOrder.host_id == null" class="cursor-pointer">
+  <div v-show="!(workOrder.host_id || workOrder.module_id)" class="cursor-pointer">
     <h5>请选择您遇到问题的服务</h5>
 
     <div class="list-group mt-3" v-for="host in hosts">
@@ -41,7 +41,34 @@
     </div>
   </div>
 
-  <div v-show="workOrder.host_id">
+  <div v-show="workOrder.module_id == null" class="cursor-pointer mt-3">
+    <h5>请选择您遇到问题的模块</h5>
+
+    <div class="list-group mt-3" v-for="module in modules">
+      <div
+        class="list-group-item list-group-item-action shadow-sm rounded"
+        @click="workOrder.module_id = module.id"
+      >
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{ module.name }}</h5>
+        </div>
+        <p class="mb-1">
+          <span v-if="module.status == 'up'">
+            <span class="text-success"
+              ><i class="bi bi-check-circle"></i> &nbsp;正常</span
+            >
+          </span>
+          <span v-else>
+            <span class="text-success"
+              ><i class="bi bi-clock-history"></i> &nbsp;维护</span
+            >
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div v-show="workOrder.host_id || workOrder.module_id">
     <h5>嗯，接下来请简要描述一下。</h5>
 
     <form class="form-floating mt-3">
@@ -89,12 +116,18 @@
     title: null,
     content: '',
     host_id: null,
+    module_id: null,
   })
 
   const hosts = ref([])
+  const modules = ref([])
 
   http.get('/hosts').then((res) => {
     hosts.value = res.data
+  })
+
+  http.get('/modules').then((res) => {
+    modules.value = res.data
   })
 
   function chooseHost(host_id) {
