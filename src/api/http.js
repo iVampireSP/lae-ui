@@ -73,7 +73,12 @@ instance.interceptors.response.use(
     } else if (error.response.status === 401) {
       if (router.currentRoute.value.name !== 'login') {
         if (!temp.isAlertedToken) {
-          alert('您的 访问密钥 可能已经失效，请尝试通过侧边栏来重新登录。');
+          //   alert('您的 访问密钥 可能已经失效，请尝试通过侧边栏来重新登录。');
+
+          setTimeout(() => {
+            router.push({ name: 'login' });
+          }, 1000);
+
           temp.isAlertedToken = true;
         }
 
