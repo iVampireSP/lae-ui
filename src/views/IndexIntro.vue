@@ -3,6 +3,7 @@
     <GctIntroVue />
   </div>
 
+  <hr />
   <a href="https://forum.laecloud.com/d/73-wo-men-ke-yi-yin-dao-chuang-jian-fu-wu-qi-liao" class="d-block mt-3" target="_blank">反馈此向导</a>
 </template>
 
