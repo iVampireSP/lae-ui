@@ -25,9 +25,9 @@
   <div v-show="step === 1">
     <h3>
       我的服务器名字是:<input
-        class="editable"
+        class="editable mt-2"
         v-model="gct.name"
-        placeholder="大胆的点击这里，告诉我们你的服务器叫什么名字。"
+        placeholder="大胆地点击这里，告诉我们你的服务器叫什么名字。"
       />
     </h3>
     <small class="text-muted">没关系，这个之后可以改。</small>
@@ -103,14 +103,14 @@
           class="link mt-3 d-block cursor-pointer"
           @click="mc.platform = 'java'"
         >
-          Java, 我更倾向于电脑。
+          Java, 我更倾向于电脑
         </a>
 
         <a
           class="link mt-3 d-block cursor-pointer"
           @click="mc.platform = 'bedrock'"
         >
-          基岩版。
+          基岩版
         </a>
       </div>
       <div v-else>
@@ -423,7 +423,7 @@
       <input
         class="editable"
         v-model="gct.name"
-        placeholder="大胆的点击这里，告诉我们你的服务器叫什么名字。"
+        placeholder="大胆地点击这里，告诉我们你的服务器叫什么名字。"
       />
     </h4>
     <hr />
