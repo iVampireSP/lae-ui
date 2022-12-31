@@ -24,6 +24,15 @@ h6 {
   color: #fff;
 }
 
+.text-reverse:hover {
+  color: #fff;
+}
+
+.text-reverse:visited {
+  color: #fff;
+}
+
+
 .bg-reverse {
   background-color: #333;
 }
@@ -105,6 +114,14 @@ td {
     color: #333;
   }
 
+  .text-reverse:hover {
+    color: #333;
+  }
+
+  .text-reverse:visited {
+    color: #333;
+  }
+
   .bg-reverse {
     background-color: #fff;
   }
@@ -113,9 +130,9 @@ td {
     color: #fff !important;
   }
 
-  .active {
-    color: #fff !important;
-  }
+  /*.active {*/
+  /*  color: #fff !important;*/
+  /*}*/
 
   .v-md-editor {
     background-color: #3b3b3b !important;
