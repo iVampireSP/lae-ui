@@ -482,7 +482,7 @@
       <tr>
         <td>*合计</td>
         <td>
-          <span
+          大约 <span
             v-text="
               (
                 (gct.disk / 1024) * selectedLocation.disk_price +
@@ -492,7 +492,7 @@
               ).toFixed(2)
             "
           ></span>
-          元
+          元 / 月
         </td>
       </tr>
     </table>
