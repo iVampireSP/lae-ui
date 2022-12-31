@@ -1,7 +1,10 @@
 <template>
   <h4>您遇到了什么问题？</h4>
   <div class="mt-3"></div>
-  <div v-show="!(workOrder.host_id || workOrder.module_id)" class="cursor-pointer">
+  <div
+    v-show="!(workOrder.host_id || workOrder.module_id)"
+    class="cursor-pointer"
+  >
     <h5>请选择您遇到问题的服务</h5>
 
     <div class="list-group mt-3" v-for="host in hosts">
@@ -41,7 +44,10 @@
     </div>
   </div>
 
-  <div v-show="workOrder.module_id == null" class="cursor-pointer mt-3">
+  <div
+    v-show="workOrder.module_id == null && workOrder.host_id === null"
+    class="cursor-pointer mt-3"
+  >
     <h5>请选择您遇到问题的模块</h5>
 
     <div class="list-group mt-3" v-for="module in modules">
