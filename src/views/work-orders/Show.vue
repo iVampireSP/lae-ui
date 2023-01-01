@@ -13,7 +13,7 @@
     <!-- replies -->
     <h4>对话记录</h4>
     <template v-for="(item, index) in replies">
-      <h3 :id="'page-' + index" v-if="index">第 {{ index }} 页</h3>
+      <h4 :id="'page-' + index" v-if="index">第 {{ index }} 页</h4>
 
       <div v-for="reply in item">
         <div class="card border-light mb-3 markdown-preview shadow">
@@ -59,12 +59,12 @@
   </div>
 
   <div v-if="!store.state.token" class="mt-5">
-    <h3>您的称呼</h3>
+    <h4>您的称呼</h4>
     <input
       type="text"
       class="form-control"
       v-model="reply.name"
-      placeholder="您的称呼"
+      placeholder="在提交回复后可见。"
     />
   </div>
 
@@ -152,12 +152,14 @@
             },
           })
           .then((res) => {
-            // 附加页面和内容到 replies
-            if (replies.value[page.value] == null) {
-              replies.value[page.value] = []
-            }
+            if (res.data.data.length) {
+              // 附加页面和内容到 replies
+              if (replies.value[page.value] == null) {
+                replies.value[page.value] = []
+              }
 
-            replies.value[page.value] = res.data.data
+              replies.value[page.value] = res.data.data
+            }
 
             if (res.data.next_page_url == null) {
               can_next.value = false
