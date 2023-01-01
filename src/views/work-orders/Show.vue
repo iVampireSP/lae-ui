@@ -1,90 +1,100 @@
 <template>
-  <div>
-    <h3 v-text="workOrder.title"></h3>
-
-    <div class="markdown-preview">
-      <v-md-editor v-model="workOrder.content" mode="preview"></v-md-editor>
+  <div v-if="!loaded">
+    <!-- 加载中 -->
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
     </div>
   </div>
+  <div v-if="loaded">
+    <div>
+      <h3 v-text="workOrder.title"></h3>
 
-  <WorkOrderStatus v-if="workOrder.status" :status="workOrder.status" />
+      <div class="markdown-preview">
+        <v-md-editor v-model="workOrder.content" mode="preview"></v-md-editor>
+      </div>
+    </div>
 
-  <div class="mt-3" v-if="replies.length">
-    <!-- replies -->
-    <h4>对话记录</h4>
-    <template v-for="(item, index) in replies">
-      <h4 :id="'page-' + index" v-if="index">第 {{ index }} 页</h4>
+    <WorkOrderStatus v-if="workOrder.status" :status="workOrder.status" />
 
-      <div v-for="reply in item">
-        <div class="card border-light mb-3 markdown-preview shadow">
-          <div class="card-header d-flex w-100 justify-content-between">
-            <span v-if="reply.role === 'module'" class="text-primary">
-              <span v-text="reply.module.name"></span>
-              <span v-if="reply.name"> 的 {{ reply.name }} </span>
-            </span>
-            <span v-else-if="reply.role === 'admin'">
-              <span class="text-primary">莱云</span>
-            </span>
-            <span v-else>
-              <span>
-                {{ reply.name ?? reply.user.name }}
+    <div class="mt-3" v-if="replies.length">
+      <!-- replies -->
+      <h4>对话记录</h4>
+      <template v-for="(item, index) in replies">
+        <h4 :id="'page-' + index" v-if="index">第 {{ index }} 页</h4>
+
+        <div v-for="reply in item">
+          <div class="card border-light mb-3 markdown-preview shadow">
+            <div class="card-header d-flex w-100 justify-content-between">
+              <span v-if="reply.role === 'module'" class="text-primary">
+                <span v-text="reply.module.name"></span>
+                <span v-if="reply.name"> 的 {{ reply.name }} </span>
               </span>
-            </span>
-            <span class="text-end">
-              <span>
-                <span v-if="reply.is_pending === 1" class="badge bg-primary"
-                  >投递中</span
-                >
+              <span v-else-if="reply.role === 'admin'">
+                <span class="text-primary">莱云</span>
               </span>
-              {{ new Date(reply.created_at).toLocaleString() }}
-            </span>
-          </div>
-          <div class="card-body">
-            <v-md-editor v-model="reply.content" mode="preview"></v-md-editor>
+              <span v-else>
+                <span>
+                  {{ reply.name ?? reply.user.name }}
+                </span>
+              </span>
+              <span class="text-end">
+                <span>
+                  <span v-if="reply.is_pending === 1" class="badge bg-primary"
+                    >投递中</span
+                  >
+                </span>
+                {{ new Date(reply.created_at).toLocaleString() }}
+              </span>
+            </div>
+            <div class="card-body">
+              <v-md-editor v-model="reply.content" mode="preview"></v-md-editor>
+            </div>
           </div>
         </div>
+      </template>
+    </div>
+
+    <!-- 中央按钮 -->
+    <div class="d-flex justify-content-center mt-5" v-if="can_next">
+      <div class="spinner-border text-primary" role="status" v-if="loading">
+        <span class="visually-hidden">Loading...</span>
       </div>
-    </template>
-  </div>
 
-  <!-- 中央按钮 -->
-  <div class="d-flex justify-content-center mt-5" v-if="can_next">
-    <div class="spinner-border text-primary" role="status" v-if="loading">
-      <span class="visually-hidden">Loading...</span>
+      <button type="button" class="btn btn-primary" @click="load(1)" v-else>
+        加载更多
+      </button>
     </div>
 
-    <button type="button" class="btn btn-primary" @click="load(1)" v-else>
-      加载更多
-    </button>
-  </div>
-
-  <div v-if="!store.state.token" class="mt-5">
-    <h4>您的称呼</h4>
-    <input
-      type="text"
-      class="form-control"
-      v-model="reply.name"
-      placeholder="在提交回复后可见。"
-    />
-  </div>
-
-  <div class="mt-2">
-    <h4>回复</h4>
-    <v-md-editor
-      v-model="reply.content"
-      height="500px"
-      placeholder="继续跟进问题。如果问题已解决，请关闭工单。"
-    ></v-md-editor>
-
-    <!-- btn -->
-    <div class="btn-group mt-4" role="group" aria-label="Basic example">
-      <button class="btn btn-primary" @click="replyWorkOrder">回复</button>
-      <button class="btn btn-secondary" @click="closeWorkOrder">关闭</button>
+    <div v-if="!store.state.token" class="mt-5">
+      <h4>您的称呼</h4>
+      <input
+        type="text"
+        class="form-control"
+        v-model="reply.name"
+        placeholder="在提交回复后可见。"
+      />
     </div>
-  </div>
 
-  <div class="mt-2">
-    <WorkOrderStatus v-if="workOrder.status" :status="workOrder.status" />
+    <div class="mt-2">
+      <h4>回复</h4>
+      <v-md-editor
+        v-model="reply.content"
+        height="500px"
+        placeholder="继续跟进问题。如果问题已解决，请关闭工单。"
+      ></v-md-editor>
+
+      <!-- btn -->
+      <div class="btn-group mt-4" role="group" aria-label="Basic example">
+        <button class="btn btn-primary" @click="replyWorkOrder">回复</button>
+        <button class="btn btn-secondary" @click="closeWorkOrder">关闭</button>
+      </div>
+    </div>
+
+    <div class="mt-2">
+      <WorkOrderStatus v-if="workOrder.status" :status="workOrder.status" />
+    </div>
   </div>
 </template>
 

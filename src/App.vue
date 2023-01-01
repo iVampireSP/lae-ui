@@ -1,6 +1,7 @@
 <template>
-  <div v-if="store.state.token">
-    <Nav />
+  <div>
+    <Nav v-if="store.state.token" />
+    <NavGuest v-else="store.state.token" />
   </div>
   <div>
     <!-- <Modals /> -->
@@ -11,6 +12,7 @@
 <script setup>
   import Layout from './components/Layout.vue'
   import Nav from './components/Nav.vue'
+import NavGuest from './components/NavGuest.vue';
 
   import store from './plugins/store'
 

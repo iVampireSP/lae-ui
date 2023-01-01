@@ -18,38 +18,8 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <!-- Left Side Of Navbar -->
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-              <router-link
-                class="nav-link text-auto"
-                :to="{ name: 'modules.tunnels' }"
-                >镜缘映射</router-link
-              >
-            </li>
-            <li class="nav-item">
-              <router-link
-                class="nav-link text-auto"
-                :to="{ name: 'modules.gct' }"
-                >游戏容器</router-link
-              >
-            </li>
-            <li class="nav-item">
-              <router-link
-                class="nav-link text-auto"
-                :to="{ name: 'modules.user-mqtt' }"
-                >消息队列</router-link
-              >
-            </li>
-            <!-- <li class="nav-item">
-              <router-link
-                class="nav-link text-auto"
-                
-                :to="{ name: 'modules.cdn' }"
-                >内容分发</router-link
-              >
-            </li> -->
-          </ul>
+            
+          <MenuVue />
 
           <!-- Right Side Of Navbar -->
           <ul class="navbar-nav ms-auto">
@@ -177,9 +147,7 @@
 
       <div class="mt-5">
         <h4>计费项目列表</h4>
-        <router-link class="link" :to="{ name: 'hosts' }"
-          >主机</router-link
-        >
+        <router-link class="link" :to="{ name: 'hosts' }">主机</router-link>
       </div>
 
       <div class="mt-5">
@@ -208,6 +176,8 @@
   import store from '../plugins/store'
 
   import api from '../config/api'
+
+  import MenuVue from './Menu.vue'
 
   const show = ref(true)
   if (store.state.token == null) {

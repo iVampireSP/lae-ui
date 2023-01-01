@@ -1,0 +1,17 @@
+[
+    {
+        "id": "tunnels",
+        "name": "镜缘映射",
+        "route": "modules.tunnels"
+    },
+    {
+        "id": "gct",
+        "name": "游戏容器",
+        "route": "modules.gct"
+    },
+    {
+        "id": "user-mqtt",
+        "name": "消息队列",
+        "route": "modules.user-mqtt"
+    }
+]
