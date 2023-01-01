@@ -36,6 +36,9 @@
               </span>
               <span v-else>
                 <span>
+                    <span v-if="reply.role == 'guest'">
+                        <span class="text-primary">访客</span> &nbsp;
+                    </span>
                   {{ reply.name ?? reply.user.name }}
                 </span>
               </span>
