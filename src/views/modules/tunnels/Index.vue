@@ -93,9 +93,9 @@
       >
         创建隧道
       </button>
-      <button type="button" class="btn btn-outline-primary" @click="stopAll">
+      <!-- <button type="button" class="btn btn-outline-primary" @click="stopAll">
         停止全部
-      </button>
+      </button> -->
       <router-link
         type="button"
         class="btn btn-outline-primary"
