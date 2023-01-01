@@ -397,13 +397,17 @@
 
   function stopTunnel() {
     http.patch(url, { status: 'stopped' }).then(() => {
-      refresh()
+      setTimeout(() => {
+        refresh()
+      }, 1000)
     })
   }
 
   function startTunnel() {
     http.patch(url, { status: 'running' }).then(() => {
-      refresh()
+      setTimeout(() => {
+        refresh()
+      }, 1000)
     })
   }
 
