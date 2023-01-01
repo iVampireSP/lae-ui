@@ -12,6 +12,25 @@
 
       <div class="btn-group" role="group" aria-label="隧道控制按钮组">
         <button
+          class="btn btn-outline-primary"
+          v-if="tunnel.status == 'running'"
+          @click="stopTunnel()"
+          data-bs-toggle="tooltip"
+          data-bs-placement="right"
+          title="不再接受新的隧道连接并立即下线客户端。"
+        >
+          停用隧道
+        </button>
+
+        <button
+          v-else-if="tunnel.status == 'stopped'"
+          class="btn btn-outline-primary"
+          @click="startTunnel()"
+        >
+          启用隧道
+        </button>
+
+        <button
           class="btn btn-outline-secondary"
           v-show="canDelete"
           @click="resetToken()"
@@ -36,36 +55,17 @@
         </button>
       </div>
 
-      <!-- <button
-        class="btn btn-outline-primary"
-        v-if="tunnel.status == 'running'"
-        @click="stop()"
-        data-bs-toggle="tooltip"
-        data-bs-placement="right"
-        title="不再接受新的隧道连接。"
-      >
-        停用隧道
-      </button> -->
-
       <!-- <p v-else-if="tunnel.status == 'suspended'">
         隧道已被暂停，无法进一步操作。
       </p> -->
 
       <p v-if="tunnel.status == 'suspended'">隧道已被暂停，无法进一步操作。</p>
 
-      <!-- <button
-        v-else-if="tunnel.status == 'stopped'"
-        class="btn btn-outline-primary"
-        @click="start()"
-      >
-        启用隧道
-      </button> -->
-
       <div v-if="showChart">
         <vue-echarts :option="option" style="height: 500px" ref="chart" />
       </div>
 
-      <p v-if="tunnel.status == 'stopped'">
+      <p v-if="tunnel.status == 'stopped'" class="mt-1">
         隧道已经停止，如果客户端还在运行，则会正常计费。<span
           v-show="!canDelete"
           >在客户端关闭大约1分钟左右，才可以删除隧道。</span
@@ -241,9 +241,8 @@
               <div v-if="tunnel.tunnel">
                 <h4 class="mt-3">连接信息</h4>
 
-
                 <div class="p">
-                    域名解析到: {{ tunnel.server.server_address }}
+                  域名解析到: {{ tunnel.server.server_address }}
                 </div>
 
                 <div class="p">
@@ -318,175 +317,187 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useRoute } from 'vue-router'
-import { VueEcharts } from 'vue3-echarts'
+  import { ref } from 'vue'
+  import { useRoute } from 'vue-router'
+  import { VueEcharts } from 'vue3-echarts'
 
-import Humanize from 'humanize-plus'
+  import Humanize from 'humanize-plus'
 
-import http from '../../../api/http'
-import route from '../../../plugins/router'
+  import http from '../../../api/http'
+  import route from '../../../plugins/router'
 
-const router = useRoute()
+  const router = useRoute()
 
-const tunnel = ref({})
+  const tunnel = ref({})
 
-const loaded = ref(false)
+  const loaded = ref(false)
 
-const url = '/modules/frp/hosts/' + router.params.id
+  const url = '/modules/frp/hosts/' + router.params.id
 
-const canDelete = ref(true)
-const showChart = ref(false)
+  const canDelete = ref(true)
+  const showChart = ref(false)
 
-function refresh() {
+  function refresh() {
     http.get(url).then((res) => {
-        tunnel.value = res.data
-        loaded.value = true
+      tunnel.value = res.data
+      loaded.value = true
 
-        if (tunnel.value.tunnel.length !== 0) {
-            if (tunnel.value.tunnel.status !== 'offline') {
-                canDelete.value = false
-            }
+      if (tunnel.value.tunnel.length !== 0) {
+        if (tunnel.value.tunnel.status !== 'offline') {
+          canDelete.value = false
         }
+      }
 
-        if (tunnel.value.traffic.length !== 0) {
-            showChart.value = true
-            freshChart()
-        }
+      if (tunnel.value.traffic.length !== 0) {
+        showChart.value = true
+        freshChart()
+      }
     })
-}
+  }
 
-refresh()
+  refresh()
 
-function change() {
+  function change() {
     http.patch(url, { name: tunnel.value.name })
-}
+  }
 
-//   function stop() {
-//     http.patch(url, { status: 'stopped' }).then(() => {
-//       tunnel.value.status = 'stopped'
-//     })
-//     refresh()
-//   }
+  //   function stop() {
+  //     http.patch(url, { status: 'stopped' }).then(() => {
+  //       tunnel.value.status = 'stopped'
+  //     })
+  //     refresh()
+  //   }
 
-//   function start() {
-//     http.patch(url, { status: 'running' }).then(() => {
-//       tunnel.value.status = 'running'
-//     })
-//     refresh()
-//   }
+  //   function start() {
+  //     http.patch(url, { status: 'running' }).then(() => {
+  //       tunnel.value.status = 'running'
+  //     })
+  //     refresh()
+  //   }
 
-function copy(text) {
+  function copy(text) {
     navigator.clipboard.writeText(text)
-}
+  }
 
-function deleteTunnel() {
+  function deleteTunnel() {
     if (confirm('确定删除该隧道？')) {
-        http.delete(url).then(() => {
-            route.push({ name: 'modules.tunnels' })
-        })
+      http.delete(url).then(() => {
+        route.push({ name: 'modules.tunnels' })
+      })
     }
-}
+  }
 
-function resetToken() {
+  function resetToken() {
     if (confirm('重置后，原来的配置文件将不能登录隧道。要继续吗？')) {
-        http.patch(url, { reset_token: true }).then(() => {
-            refresh()
-        })
+      http.patch(url, { reset_token: true }).then(() => {
+        refresh()
+      })
     }
-}
+  }
 
-const option = ref({})
+  function stopTunnel() {
+    http.patch(url, { status: 'stopped' }).then(() => {
+      refresh()
+    })
+  }
 
-function freshChart() {
+  function startTunnel() {
+    http.patch(url, { status: 'running' }).then(() => {
+      refresh()
+    })
+  }
+
+  const option = ref({})
+
+  function freshChart() {
     if (showChart.value) {
-        let trafficInArr = tunnel.value.traffic.traffic_in
-        let trafficOutArr = tunnel.value.traffic.traffic_out
+      let trafficInArr = tunnel.value.traffic.traffic_in
+      let trafficOutArr = tunnel.value.traffic.traffic_out
 
-        trafficInArr = trafficInArr.reverse()
-        trafficOutArr = trafficOutArr.reverse()
-        let now = new Date()
-        now = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6)
-        let dates = new Array()
-        for (let i = 0; i < 7; i++) {
-            dates.push(
-                now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()
-            )
-            now = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1)
-        }
+      trafficInArr = trafficInArr.reverse()
+      trafficOutArr = trafficOutArr.reverse()
+      let now = new Date()
+      now = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6)
+      let dates = new Array()
+      for (let i = 0; i < 7; i++) {
+        dates.push(
+          now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()
+        )
+        now = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1)
+      }
 
-        option.value = {
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'shadow',
-                },
-                formatter: function (data) {
-                    let html = ''
-                    if (data.length > 0) {
-                        html += data[0].name + '<br/>'
-                    }
-                    for (let v of data) {
-                        let colorEl =
-                            '<span style="display:inline-block;margin-right:5px;' +
-                            'border-radius:10px;width:9px;height:9px;background-color:' +
-                            v.color +
-                            '"></span>'
-                        html +=
-                            colorEl +
-                            v.seriesName +
-                            ': ' +
-                            Humanize.fileSize(v.value) +
-                            '<br/>'
-                    }
-                    return html
-                },
+      option.value = {
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow',
+          },
+          formatter: function (data) {
+            let html = ''
+            if (data.length > 0) {
+              html += data[0].name + '<br/>'
+            }
+            for (let v of data) {
+              let colorEl =
+                '<span style="display:inline-block;margin-right:5px;' +
+                'border-radius:10px;width:9px;height:9px;background-color:' +
+                v.color +
+                '"></span>'
+              html +=
+                colorEl +
+                v.seriesName +
+                ': ' +
+                Humanize.fileSize(v.value) +
+                '<br/>'
+            }
+            return html
+          },
+        },
+        legend: {
+          data: ['入站流量', '出站流量'],
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true,
+        },
+        xAxis: [
+          {
+            type: 'category',
+            data: dates,
+          },
+        ],
+        yAxis: [
+          {
+            type: 'value',
+            axisLabel: {
+              formatter: function (value) {
+                return Humanize.fileSize(value)
+              },
             },
-            legend: {
-                data: ['入站流量', '出站流量'],
-            },
-            grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                containLabel: true,
-            },
-            xAxis: [
-                {
-                    type: 'category',
-                    data: dates,
-                },
-            ],
-            yAxis: [
-                {
-                    type: 'value',
-                    axisLabel: {
-                        formatter: function (value) {
-                            return Humanize.fileSize(value)
-                        },
-                    },
-                },
-            ],
-            series: [
-                {
-                    name: '入站流量',
-                    type: 'bar',
-                    data: trafficInArr,
-                },
-                {
-                    name: '出站流量',
-                    type: 'bar',
-                    data: trafficOutArr,
-                },
-            ],
-        }
+          },
+        ],
+        series: [
+          {
+            name: '入站流量',
+            type: 'bar',
+            data: trafficInArr,
+          },
+          {
+            name: '出站流量',
+            type: 'bar',
+            data: trafficOutArr,
+          },
+        ],
+      }
     }
-}
+  }
 </script>
 
 <style scoped>
-.p p {
+  .p p {
     padding: 0;
     margin: 1px;
-}
+  }
 </style>
