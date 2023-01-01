@@ -31,7 +31,7 @@
         <span class="visually-hidden">Loading...</span>
       </div>
 
-      <button type="button" class="btn btn-primary" @click="load(1)" v-else>
+      <button type="button" class="btn btn-primary" @click="load(true)" v-else>
         加载更多
       </button>
     </div>

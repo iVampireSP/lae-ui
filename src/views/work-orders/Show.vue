@@ -9,38 +9,53 @@
 
   <WorkOrderStatus v-if="workOrder.status" :status="workOrder.status" />
 
-  <div class="mt-3" v-if="replies.data.length">
+  <div class="mt-3" v-if="replies.length">
     <!-- replies -->
     <h4>对话记录</h4>
-    <template v-for="reply in replies.data">
-      <div class="card border-light mb-3 markdown-preview shadow">
-        <div class="card-header d-flex w-100 justify-content-between">
-          <span v-if="reply.role === 'module'" class="text-primary">
-            <span v-text="reply.module.name"></span>
-            <span v-if="reply.name"> 的 {{ reply.name }} </span>
-          </span>
-          <span v-else-if="reply.role === 'admin'">
-            <span class="text-primary">莱云</span>
-          </span>
-          <span v-else>
-            <span>
-              {{ reply.name ?? reply.user.name }}
+    <template v-for="(item, index) in replies">
+      <h3 :id="'page-' + index" v-if="index">第 {{ index }} 页</h3>
+
+      <div v-for="reply in item">
+        <div class="card border-light mb-3 markdown-preview shadow">
+          <div class="card-header d-flex w-100 justify-content-between">
+            <span v-if="reply.role === 'module'" class="text-primary">
+              <span v-text="reply.module.name"></span>
+              <span v-if="reply.name"> 的 {{ reply.name }} </span>
             </span>
-          </span>
-          <span class="text-end">
-            <span>
-              <span v-if="reply.is_pending === 1" class="badge bg-primary"
-                >投递中</span
-              >
+            <span v-else-if="reply.role === 'admin'">
+              <span class="text-primary">莱云</span>
             </span>
-            {{ new Date(reply.created_at).toLocaleString() }}
-          </span>
-        </div>
-        <div class="card-body">
-          <v-md-editor v-model="reply.content" mode="preview"></v-md-editor>
+            <span v-else>
+              <span>
+                {{ reply.name ?? reply.user.name }}
+              </span>
+            </span>
+            <span class="text-end">
+              <span>
+                <span v-if="reply.is_pending === 1" class="badge bg-primary"
+                  >投递中</span
+                >
+              </span>
+              {{ new Date(reply.created_at).toLocaleString() }}
+            </span>
+          </div>
+          <div class="card-body">
+            <v-md-editor v-model="reply.content" mode="preview"></v-md-editor>
+          </div>
         </div>
       </div>
     </template>
+  </div>
+
+  <!-- 中央按钮 -->
+  <div class="d-flex justify-content-center mt-5" v-if="can_next">
+    <div class="spinner-border text-primary" role="status" v-if="loading">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+
+    <button type="button" class="btn btn-primary" @click="load(1)" v-else>
+      加载更多
+    </button>
   </div>
 
   <div v-if="!store.state.token" class="mt-5">
@@ -86,6 +101,12 @@
   import http from '../../api/http'
   import WorkOrderStatus from '../../components/WorkOrderStatus.vue'
 
+  const page = ref(0)
+
+  const can_next = ref(true)
+
+  const loading = ref(false)
+
   const router = useRoute()
   const loaded = ref(false)
 
@@ -99,26 +120,64 @@
     name: null,
   })
 
-  const replies = ref({
-    data: {},
-  })
+  const replies = ref([])
 
   const reply = ref({
     content: '',
   })
 
-  function refresh() {
-    http.get('/work-orders/' + router.params.id).then((res) => {
-      workOrder.value = res.data
-      loaded.value = true
-    })
+  function load(scroll = false) {
+    page.value++
 
-    http.get('/work-orders/' + router.params.id + '/replies').then((res) => {
-      replies.value = res.data
-    })
+    refresh(scroll)
   }
 
-  refresh()
+  load(false)
+
+  function refresh(scroll = false) {
+    loading.value = true
+
+    http
+      .get('/work-orders/' + router.params.id)
+      .then((res) => {
+        workOrder.value = res.data
+        loaded.value = true
+        loading.value = false
+      })
+      .finally(() => {
+        http
+          .get('/work-orders/' + router.params.id + '/replies', {
+            params: {
+              page: page.value,
+            },
+          })
+          .then((res) => {
+            // 附加页面和内容到 replies
+            if (replies.value[page.value] == null) {
+              replies.value[page.value] = []
+            }
+
+            replies.value[page.value] = res.data.data
+
+            if (res.data.next_page_url == null) {
+              can_next.value = false
+            }
+          })
+          .finally(() => {
+            loading.value = false
+
+            if (scroll) {
+              setTimeout(() => {
+                let height = document.querySelector(
+                  '#page-' + page.value
+                ).offsetTop
+
+                window.scrollTo(0, height)
+              }, 100)
+            }
+          })
+      })
+  }
 
   // auto refresh
   const interval = setInterval(refresh, 10000)
