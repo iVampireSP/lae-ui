@@ -103,7 +103,7 @@
 
   const page = ref(0)
 
-  const can_next = ref(true)
+  const can_next = ref(false)
 
   const loading = ref(false)
 
