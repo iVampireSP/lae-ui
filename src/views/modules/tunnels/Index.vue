@@ -14,7 +14,8 @@
       <a
         href="https://forum.laecloud.com/d/56-jing-yuan-ying-she-ti-wen-qian-zi-cha"
         target="_blank"
-        >映射成功访问不了？请看这里</a>
+        >映射成功访问不了？请看这里</a
+      >
     </p>
     <p v-show="traffics.free_traffic">
       您当前的可抵用流量: {{ traffics.free_traffic }} GB
@@ -29,7 +30,19 @@
           <h5 class="mb-1 text-success">{{ tunnel.name }}</h5>
           <small>{{ new Date(tunnel.updated_at).toLocaleString() }}</small>
         </div>
-        <p class="mb-1">
+        <div class="mb-1">
+          <span v-if="tunnel.status == 'suspended'">
+            <span class="text-danger">
+              <i class="bi bi-x-circle"></i>
+              &nbsp;已暂停
+            </span>
+          </span>
+          <span v-else-if="tunnel.status == 'stopped'">
+            <span class="text-danger">
+              <i class="bi bi-x-circle"></i>
+              &nbsp;已停止
+            </span>
+          </span>
           <span
             v-if="tunnel.protocol == 'http' || tunnel.protocol == 'https'"
             data-bs-toggle="tooltip"
@@ -56,7 +69,7 @@
               tunnel.remote_port
             }}
           </span>
-        </p>
+        </div>
         <!-- <small class="text-muted">
         
         </small> -->
@@ -79,6 +92,9 @@
         "
       >
         创建隧道
+      </button>
+      <button type="button" class="btn btn-outline-primary" @click="stopAll">
+        停止全部
       </button>
       <router-link
         type="button"
@@ -401,7 +417,7 @@
 
   //   const packages = ref({})
 
-  const cdn = ref({})
+  //   const cdn = ref({})
 
   const selectedServer = ref({
     name: null,
@@ -550,5 +566,15 @@
         tunnelCreateError.value =
           '无法创建隧道，可能是表单没有填写完整，或者服务器不接受此端口（端口被占用或者不在范围内）'
       })
+  }
+
+  function stopAll() {
+    if (confirm('确定要停止所有隧道吗？')) {
+      http.post('/modules/frp/stop').then((res) => {
+        http.get('/modules/frp/hosts').then((res) => {
+          tunnels.value = res.data
+        })
+      })
+    }
   }
 </script>
