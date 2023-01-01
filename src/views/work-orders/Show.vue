@@ -156,6 +156,8 @@
         workOrder.value = res.data
         loaded.value = true
         loading.value = false
+
+        document.title = workOrder.value.title
       })
       .finally(() => {
         http
