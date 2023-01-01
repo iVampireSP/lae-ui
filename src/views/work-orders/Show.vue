@@ -131,6 +131,7 @@
     http
       .post('/work-orders/' + router.params.id + '/replies', reply.value)
       .then(() => {
+        reply.value.content = ''
         refresh()
       })
   }
