@@ -161,6 +161,8 @@
 
             if (res.data.next_page_url == null) {
               can_next.value = false
+            } else {
+              can_next.value = true
             }
           })
           .finally(() => {
