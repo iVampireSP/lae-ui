@@ -77,23 +77,23 @@
       />
     </div>
 
-    <div class="mt-2">
+    <div class="mt-3">
       <h4>回复</h4>
       <v-md-editor
         v-model="reply.content"
         height="500px"
         placeholder="继续跟进问题。如果问题已解决，请关闭工单。"
       ></v-md-editor>
+    </div>
 
-      <!-- btn -->
+    <div>
       <div class="btn-group mt-4" role="group" aria-label="Basic example">
         <button class="btn btn-primary" @click="replyWorkOrder">回复</button>
         <button class="btn btn-secondary" @click="closeWorkOrder">关闭</button>
       </div>
-    </div>
-
-    <div class="mt-2">
-      <WorkOrderStatus v-if="workOrder.status" :status="workOrder.status" />
+      <div class="mt-2">
+        <WorkOrderStatus v-if="workOrder.status" :status="workOrder.status" />
+      </div>
     </div>
   </div>
 </template>
