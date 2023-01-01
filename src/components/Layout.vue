@@ -62,12 +62,12 @@
   </div> -->
 </template>
 
-<script>
+<script setup>
   import http from '../api/http'
   import echo from '../plugins/echo'
   import store from '../plugins/store'
 
-//   import { Toast } from 'bootstrap'
+  //   import { Toast } from 'bootstrap'
 
   import { ref, onMounted, onUnmounted } from 'vue'
 
@@ -79,20 +79,26 @@
     })
   }
 
-  refresh()
+  if (store.state.token) {
+    refresh()
+  }
 
   const private_channel = `users.${store.state.user.id}`
 
   onMounted(() => {
-    echo.private(private_channel).listen('.user', (e) => {
-      console.log(e)
-      refresh()
-    })
+    if (store.state.token) {
+      echo.private(private_channel).listen('.user', (e) => {
+        console.log(e)
+        refresh()
+      })
+    }
   })
 
   onUnmounted(() => {
-    echo.leave(private_channel)
-  });
+    if (store.state.token) {
+      echo.leave(private_channel)
+    }
+  })
 </script>
 
 <style scoped>

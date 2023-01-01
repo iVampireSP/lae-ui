@@ -89,6 +89,7 @@ const routes = [
     component: () => import('../views/work-orders/Create.vue'),
     meta: {
       title: '创建工单',
+      auth: false,
     },
   },
   {
@@ -97,6 +98,7 @@ const routes = [
     component: () => import('../views/work-orders/Show.vue'),
     meta: {
       title: '跟进工单',
+      auth: false,
     },
   },
 

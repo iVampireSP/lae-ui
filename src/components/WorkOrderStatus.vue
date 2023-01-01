@@ -17,6 +17,10 @@
     >
   </span>
 
+  <span v-else-if="status == 'read'">
+    <span class="text-info"><i class="bi bi-info-circle"></i> &nbsp;已读</span>
+  </span>
+
   <span v-else-if="status == 'open'">
     <span class="text-primary"
       ><i class="bi bi-x-diamond"></i> &nbsp;已开启</span

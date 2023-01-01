@@ -14,7 +14,7 @@
         </thead>
         <tbody>
           <template v-for="workOrder in workOrders">
-            <tr class="cursor-pointer" @click="viewWorkOrder(workOrder.id)">
+            <tr class="cursor-pointer" @click="viewWorkOrder(workOrder.uuid)">
               <td>{{ workOrder.title }}</td>
               <td>
                 <span v-if="workOrder.host">{{ workOrder.host.name }}</span>

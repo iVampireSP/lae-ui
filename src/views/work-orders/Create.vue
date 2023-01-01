@@ -96,7 +96,7 @@
       ></v-md-editor>
     </div>
 
-    <button class="mt-3 btn btn-outline-primary" @click="submitWorkOrder()">
+    <button class="mt-3 btn btn-primary" @click="submitWorkOrder()">
       提交工单
     </button>
   </div>
@@ -145,7 +145,7 @@
       router.push({
         name: 'work-orders.show',
         params: {
-          id: res.data.id,
+          id: res.data.uuid,
         },
       })
     })

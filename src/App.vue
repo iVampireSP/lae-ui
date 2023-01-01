@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="store.state.token">
     <Nav />
   </div>
   <div>
@@ -11,6 +11,8 @@
 <script setup>
   import Layout from './components/Layout.vue'
   import Nav from './components/Nav.vue'
+
+  import store from './plugins/store'
 
   // import Modals from './components/Modals.vue';
   //   import app from './config/app'

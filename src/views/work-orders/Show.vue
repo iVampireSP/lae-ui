@@ -7,19 +7,33 @@
     </div>
   </div>
 
-  <WorkOrderStatus :status="workOrder.status" />
+  <WorkOrderStatus v-if="workOrder.status" :status="workOrder.status" />
 
-  <div class="mt-3">
+  <div class="mt-3" v-if="replies.data.length">
     <!-- replies -->
     <h4>对话记录</h4>
     <template v-for="reply in replies.data">
       <div class="card border-light mb-3 markdown-preview shadow">
-        <div class="card-header">
-          <span v-if="reply.user_id == null" class="text-primary">
-            提供方
+        <div class="card-header d-flex w-100 justify-content-between">
+          <span v-if="reply.module_id" class="text-primary">
+            <span v-if="reply.module">
+              <span v-text="reply.module.name"></span>
+              <span v-if="reply.name"> 的 {{ reply.name }} </span>
+            </span>
+            <span v-else> 提供方 </span>
           </span>
-          <span v-else> 您 </span>
+          <span v-else>
+            <span class="text-primary" v-if="reply.module_id === null && reply.user_id === null"
+              >莱云</span
+            >
+            <span v-else>
+              {{ reply.name ?? reply.user.name }}
+            </span>
+          </span>
           <span class="text-end">
+            <span>
+                <span v-if="reply.is_pending === 1" class="badge bg-primary">投递中</span>
+            </span>
             {{ new Date(reply.created_at).toLocaleString() }}
           </span>
         </div>
@@ -30,7 +44,17 @@
     </template>
   </div>
 
-  <div class="mt-5">
+  <div v-if="!store.state.token" class="mt-5">
+    <h3>您的称呼</h3>
+    <input
+      type="text"
+      class="form-control"
+      v-model="reply.name"
+      placeholder="您的称呼"
+    />
+  </div>
+
+  <div class="mt-2">
     <h4>回复</h4>
     <v-md-editor
       v-model="reply.content"
@@ -40,19 +64,22 @@
 
     <!-- btn -->
     <div class="btn-group mt-4" role="group" aria-label="Basic example">
-      <button class="btn btn-outline-primary" @click="replyWorkOrder">回复</button>
-      <button class="btn btn-danger" @click="closeWorkOrder">关闭</button>
+      <button class="btn btn-primary" @click="replyWorkOrder">
+        回复
+      </button>
+      <button class="btn btn-secondary" @click="closeWorkOrder">关闭</button>
     </div>
   </div>
 
   <div class="mt-2">
-    <WorkOrderStatus :status="workOrder.status" />
+    <WorkOrderStatus v-if="workOrder.status" :status="workOrder.status" />
   </div>
 </template>
 
 <script setup>
   import { useRoute } from 'vue-router'
   import { ref, onUnmounted } from 'vue'
+  import store from '../../plugins/store'
 
   import hljs from 'highlight.js'
   import VMdEditor from '@kangc/v-md-editor'
@@ -72,9 +99,12 @@
   const workOrder = ref({
     title: '工单',
     content: '### ...',
+    name: null,
   })
 
-  const replies = ref([])
+  const replies = ref({
+    data: {},
+  })
 
   const reply = ref({
     content: '',
