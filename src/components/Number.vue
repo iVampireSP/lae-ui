@@ -27,7 +27,7 @@ export default {
     },
     duration: {
       type: Number,
-      default: 1 // Duration of animation in seconds
+      default: 2 // Duration of animation in seconds
     },
     easing: {
       type: String,
