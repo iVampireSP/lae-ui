@@ -44,6 +44,17 @@ const routes = [
     },
     component: () => import('../views/auth/Login.vue'),
   },
+  ,
+  {
+    path: '/status',
+    name: 'status',
+    meta: {
+      keepalive: false,
+      auth: false,
+      title: '状态',
+    },
+    component: () => import('../views/Status.vue'),
+  },
   {
     path: '/servers',
     name: 'servers',
