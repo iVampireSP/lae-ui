@@ -36,9 +36,9 @@
               </span>
               <span v-else>
                 <span>
-                    <span v-if="reply.role == 'guest'">
-                        <span class="text-primary">访客</span> &nbsp;
-                    </span>
+                  <span v-if="reply.role == 'guest'">
+                    <span class="text-primary">访客</span> &nbsp;
+                  </span>
                   {{ reply.name ?? reply.user.name }}
                 </span>
               </span>
@@ -208,8 +208,12 @@
   function replyWorkOrder() {
     http
       .post('/work-orders/' + router.params.id + '/replies', reply.value)
-      .then(() => {
-        reply.value.content = ''
+      .then((res) => {
+        // if 200
+        if (res.status == 200) {
+          reply.value.content = ''
+        }
+
         refresh()
       })
   }
