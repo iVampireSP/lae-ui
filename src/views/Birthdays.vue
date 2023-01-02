@@ -9,7 +9,7 @@
         class="d-flex align-items-center mt-3"
       >
         <img
-          :src="api.avatar + md5(user.email) + '?s=90&d=retro'"
+          :src="api.avatar + user.email_md5 + '?s=90&d=retro'"
           class="rounded-circle"
           width="48"
           style="object-fit: cover; width: 48px; height: 48px"
