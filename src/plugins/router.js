@@ -11,7 +11,7 @@ const routes = [
     meta: {
       auth: true,
       keepalive: true,
-      title: '引导创建游戏容器',
+      title: '欢迎',
     },
   },
   {
