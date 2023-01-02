@@ -61,7 +61,7 @@
     </div>
   </div> -->
 </template>
-
+<!-- 
 <script setup>
   import http from '../api/http'
   import echo from '../plugins/echo'
@@ -69,37 +69,7 @@
 
   //   import { Toast } from 'bootstrap'
 
-  import { ref, onMounted, onUnmounted } from 'vue'
-
-  const tasks = ref([])
-
-  function refresh() {
-    http.get('/tasks').then((res) => {
-      tasks.value = res.data
-    })
-  }
-
-  if (store.state.token) {
-    refresh()
-  }
-
-  const private_channel = `users.${store.state.user.id}`
-
-  onMounted(() => {
-    if (store.state.token) {
-      echo.private(private_channel).listen('.user', (e) => {
-        console.log(e)
-        refresh()
-      })
-    }
-  })
-
-  onUnmounted(() => {
-    if (store.state.token) {
-      echo.leave(private_channel)
-    }
-  })
-</script>
+</script> -->
 
 <style scoped>
   .mb-8 {

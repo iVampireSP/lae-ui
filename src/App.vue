@@ -12,7 +12,7 @@
 <script setup>
   import Layout from './components/Layout.vue'
   import Nav from './components/Nav.vue'
-import NavGuest from './components/NavGuest.vue';
+  import NavGuest from './components/NavGuest.vue'
 
   import store from './plugins/store'
 
