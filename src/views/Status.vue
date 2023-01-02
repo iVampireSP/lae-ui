@@ -1,39 +1,52 @@
 <template>
-  <!-- 3 行 col -->
   <div class="text-center">
     <div class="row mt-5">
       <div class="col">
         <h3>活动连接</h3>
-        <p class="display-5">{{ array.active }}</p>
+        <p class="display-5">
+          <Number :to="array.active" />
+        </p>
       </div>
     </div>
     <div class="row mt-5">
       <div class="col">
-        <h3>连接数</h3>
-        <p class="display-5">{{ array.accepts }}</p>
+        <h3>连接量</h3>
+        <p class="display-5">
+          <Number :to="array.accepts" />
+        </p>
       </div>
       <div class="col">
         <h3>握手数</h3>
-        <p class="display-5">{{ array.handled }}</p>
+        <p class="display-5">
+          <Number :to="array.handled" />
+        </p>
       </div>
       <div class="col">
         <h3>请求数</h3>
-        <p class="display-5">{{ array.requests }}</p>
+        <p class="display-5">
+          <Number :to="array.requests" />
+        </p>
       </div>
     </div>
 
     <div class="row mt-5">
       <div class="col">
         <h3>读取连接</h3>
-        <p class="display-5">{{ array.reading }}</p>
+        <p class="display-5">
+          <Number :to="array.reading" />
+        </p>
       </div>
       <div class="col">
         <h3>响应量</h3>
-        <p class="display-5">{{ array.writing }}</p>
+        <p class="display-5">
+          <Number :to="array.writing" />
+        </p>
       </div>
       <div class="col">
         <h3>驻留连接</h3>
-        <p class="display-5">{{ array.waiting }}</p>
+        <p class="display-5">
+          <Number :to="array.waiting" />
+        </p>
       </div>
     </div>
   </div>
@@ -42,11 +55,21 @@
 <script setup>
   import { ref, onUnmounted } from 'vue'
 
+  import Number from '../components/Number.vue'
+
   import axios from 'axios'
 
   import api from '../config/api'
 
-  const array = ref({})
+  const array = ref({
+    active: 0,
+    accepts: 0,
+    handled: 0,
+    requests: 0,
+    reading: 0,
+    writing: 0,
+    waiting: 0,
+  })
 
   function refresh() {
     axios
