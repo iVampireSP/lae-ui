@@ -151,11 +151,6 @@
       </div>
 
       <div class="mt-5">
-        <h4>统计数据</h4>
-        <router-link class="link" :to="{ name: 'status' }">统计</router-link>
-      </div>
-
-      <div class="mt-5">
         <h4>服务与支持</h4>
         <router-link class="link" :to="{ name: 'work-orders' }"
           >工单列表</router-link
