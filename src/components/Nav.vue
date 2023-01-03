@@ -18,7 +18,6 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            
           <MenuVue />
 
           <!-- Right Side Of Navbar -->
@@ -86,8 +85,8 @@
                 <span v-else>
                   <a
                     class="nav-link text-reverse"
-                    target="_blank"
-                    :href="api.auth + '/balances'"
+                    data-bs-toggle="modal"
+                    data-bs-target="#quickCharge"
                     >充值余额</a
                   >
                 </span>

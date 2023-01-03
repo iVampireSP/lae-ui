@@ -43,6 +43,10 @@
     </div>
   </main>
 
+  <div>
+    <QuickChargeModal />
+  </div>
+
   <!-- <div
     class="toast align-items-center text-white bg-primary border-0"
     role="alert"
@@ -61,15 +65,16 @@
     </div>
   </div> -->
 </template>
-<!-- 
+
 <script setup>
-  import http from '../api/http'
-  import echo from '../plugins/echo'
-  import store from '../plugins/store'
+  //   import http from '../api/http'
+  //   import echo from '../plugins/echo'
+  //   import store from '../plugins/store'
 
   //   import { Toast } from 'bootstrap'
 
-</script> -->
+  import QuickChargeModal from './QuickChargeModal.vue'
+</script>
 
 <style scoped>
   .mb-8 {
