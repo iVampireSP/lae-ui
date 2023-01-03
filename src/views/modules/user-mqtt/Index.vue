@@ -22,14 +22,15 @@
 
         <span>此主机 ID: {{ host.host_id }}</span>
         <br />
-        <span>MQTT 服务器地址: mqtt.laecloud.com:1883</span>
+        <span>MQTT 服务器地址: <code>mqtt.laecloud.com:1883</code></span>
         <br />
-        <span>MQTT WS 接入地址: mqtt.laecloud.com:8083, Path 为 /mqtt</span>
+        <span>MQTT WS 接入地址: <code>mqtt.laecloud.com:8083</code>, Path 为 <code>/mqtt</code></span>
         <br />
-        <span>MQTT WSS 接入地址: mqtt.laecloud.com:8084, Path 为 /mqtt</span>
+        <span>MQTT WSS 接入地址: <code>mqtt.laecloud.com:8084</code>, Path 为 <code>/mqtt</code></span>
+        <br />
         <br />
 
-        <span>用户名: user-mqtt.{{ host.host_id }}</span>
+        <span>用户名: <code>user-mqtt.{{ host.host_id }}</code></span>
         <br />
 
         <span>密码: 您设置的密码</span>

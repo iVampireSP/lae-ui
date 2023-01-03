@@ -33,7 +33,7 @@
         <div class="mb-1">
           <span v-if="tunnel.status == 'suspended'">
             <span class="text-danger">
-              <i class="bi bi-x-circle"></i>
+              <i class="bi bi-pause-circle"></i>
               &nbsp;已暂停
             </span>
           </span>

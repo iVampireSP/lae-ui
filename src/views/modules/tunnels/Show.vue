@@ -9,21 +9,21 @@
           placeholder="隧道名称是必填项"
         />
       </h3>
+      
+      <button
+        class="btn btn-outline-primary"
+        v-if="tunnel.status == 'running'"
+        @click="stopTunnel()"
+        data-bs-toggle="tooltip"
+        data-bs-placement="right"
+        title="不再接受新的隧道连接并立即下线客户端。"
+      >
+        停用隧道
+      </button>
 
       <div class="btn-group" role="group" aria-label="隧道控制按钮组">
         <button
-          class="btn btn-outline-primary"
-          v-if="tunnel.status == 'running'"
-          @click="stopTunnel()"
-          data-bs-toggle="tooltip"
-          data-bs-placement="right"
-          title="不再接受新的隧道连接并立即下线客户端。"
-        >
-          停用隧道
-        </button>
-
-        <button
-          v-else-if="tunnel.status == 'stopped'"
+          v-if="tunnel.status == 'stopped'"
           class="btn btn-outline-primary"
           @click="startTunnel()"
         >
@@ -192,7 +192,7 @@
             aria-labelledby="nav-conf-all-tab"
           >
             <p class="mt-1">您可以随时更改<strong>本地 IP 和端口</strong>。</p>
-            <textarea class="w-100" rows="20" readonly
+            <textarea class="w-100 form-control mt-3 cursor-pointer" rows="20" readonly style="background-color: #fff !important;" data-bs-toggle="tooltip" title="点击我复制配置文件" @click="copy(11)" id="all"
               >{{ tunnel.config.server }} 
 
 # {{ tunnel.name }} 在 {{ tunnel.server.name }} 上
@@ -208,7 +208,7 @@
           >
             <p class="mt-1">您可以在同一个服务器中启动多个隧道。</p>
 
-            <textarea class="w-100" rows="20" readonly>{{
+            <textarea class="w-100 form-control mt-3 cursor-pointer" rows="20" readonly style="background-color: #fff !important;" data-bs-toggle="tooltip" title="点击我复制配置文件" @click="copy(45)" id="server">{{
               tunnel.config.server
             }}</textarea>
           </div>
@@ -220,7 +220,7 @@
           >
             <p class="mt-1">您可以随时更改<strong>本地 IP 和端口</strong>。</p>
 
-            <textarea class="w-100" rows="20" readonly>{{
+            <textarea class="w-100 form-control mt-3 cursor-pointer" rows="20" readonly style="background-color: #fff !important;" data-bs-toggle="tooltip" title="点击我复制配置文件" @click="copy(14)" id="client">{{
               '# ' +
               tunnel.name +
               ' 在 ' +
@@ -376,7 +376,15 @@
   //   }
 
   function copy(text) {
-    navigator.clipboard.writeText(text)
+    if (text == 11) {
+      navigator.clipboard.writeText(document.querySelector("#all").value)
+    } else if (text == 45) {
+      navigator.clipboard.writeText(document.querySelector("#server").value)
+    } else if (text == 14) {
+      navigator.clipboard.writeText(document.querySelector("#client").value)
+    } else {
+      navigator.clipboard.writeText(text)
+    }
   }
 
   function deleteTunnel() {

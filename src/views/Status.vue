@@ -1,10 +1,8 @@
 <template>
-  <div class="mb-3">
-    <a href="#" @click="changeType('basic')">基础</a>
-    &nbsp;
-    <a href="#" @click="changeType('gauge')">仪表</a>
-    &nbsp;
-    <a href="#" @click="changeType('chart')">折线</a>
+  <div class="mb-3 btn-group container">
+    <a href="#" @click="changeType('basic')" class="btn btn-outline-primary">基础</a>
+    <a href="#" @click="changeType('gauge')" class="btn btn-outline-primary">仪表</a>
+    <a href="#" @click="changeType('chart')" class="btn btn-outline-primary">折线</a>
   </div>
   <div class="text-center" v-show="type === 'basic'">
     <div class="row mt-5">
