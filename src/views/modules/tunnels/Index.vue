@@ -347,8 +347,53 @@
           >
             取消
           </button>
-          <button type="button" class="btn btn-primary" @click="create">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#termsOfUse">
             创建
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="modal fade"
+    id="termsOfUse"
+    tabindex="-1"
+    aria-labelledby="termsOfUse"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">使用条款</h5>
+        </div>
+
+        <div class="modal-body">
+<h4>您不能用来做什么</h4>
+1. 禁止使用我们提供的服务搭建任何违反中华人民共和国和服务器所在 国家/地区 法律的事情。<br/>
+2. 禁止使用我们的服务搭建任何以任何形式运营的视频解析站等。<br/>
+3. 禁止搭建任何有关  V*N 类型业务 下载站 / 视频网站 / 代刷网 类型业务<br/>
+4. 禁止使用我们的服务映射容易遭受流量攻击的服务<br/>
+5. 禁止以个人言论抹黑 莱云 / 镜缘映射 服务的行为<br/>
+6. 我们严禁您搭建任何包含文件下载服务的内容，比如 NAS / 网盘 / 下载站等。<br/>
+<br/>
+<br/>
+<h4>我们会暂停/删除什么</h4>
+1. 使用大陆节点进行 TCP 建站的隧道。<br/>
+2. 在隧道创建后的 1 天内域名没有正确解析的隧道。<br/>
+3. 违反上述 <b>“您不能用来做什么”</b>的隧道。<br/>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            我不同意使用条款
+          </button>
+          <button type="button" class="btn btn-primary" @click="create" data-bs-dismiss="modal">
+            我同意使用条款
           </button>
         </div>
       </div>
