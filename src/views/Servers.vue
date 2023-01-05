@@ -117,7 +117,7 @@
               <span v-else-if="value.type == 'edge'">
                  <span style="color: #ff7e15">
                   <i class="bi bi-lightning-fill"></i>
-                  &nbsp; 边缘
+                    边缘
                 </span>
               </span>
             </td>
