@@ -192,7 +192,7 @@
             aria-labelledby="nav-conf-all-tab"
           >
             <p class="mt-1">您可以随时更改<strong>本地 IP 和端口</strong>。</p>
-            <textarea class="w-100 form-control mt-3 cursor-pointer" rows="20" readonly data-bs-toggle="tooltip" title="点击我复制配置文件" @click="copy(11)" id="all"
+            <textarea class="w-100 form-control mt-3 cursor-pointer config-file" rows="20" readonly data-bs-toggle="tooltip" title="点击我复制配置文件" @click="copy(11)" id="all"
               >{{ tunnel.config.server }} 
 
 # {{ tunnel.name }} 在 {{ tunnel.server.name }} 上
