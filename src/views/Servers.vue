@@ -89,6 +89,54 @@
         </tbody>
       </table>
     </div>
+
+    <h3 class="mt-3">节点</h3>
+    <p>莱云 Cluster Ready! 的节点列表</p>
+
+    <div class="overflow-auto">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>类型</th>
+            <th>ID</th>
+            <th>上次心跳</th>
+            <th>当前节点</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(value, key) in nodes" :key="key">
+            <td>
+              <span v-if="value.type == 'master'" class="text-primary">
+                <i class="bi bi-nut-fill"></i>
+                主
+              </span>
+              <span v-if="value.type == 'slave'" class="text-secondary">
+                <i class="bi bi-nut"></i>
+                从
+              </span>
+              <span v-else-if="value.type == 'edge'" class="text-danger">
+                <i class="bi bi-plugin"></i>
+                边缘
+              </span>
+            </td>
+            <td>{{ value.id }}</td>
+            <td>
+              {{ new Date(value.last_heartbeat * 1000).toLocaleTimeString() }}
+            </td>
+
+            <td>
+              <span v-if="value.id === current_node_id">
+                <span class="text-success">
+                  <i class="bi bi-check-circle"></i>
+                  &nbsp; 是
+                </span>
+              </span>
+              <span v-else>&nbsp;</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <!-- model to display meta -->
@@ -149,16 +197,28 @@
 
   const servers = ref([])
   const modules = ref([])
+  const nodes = ref({
+    nodes: [],
+  })
+
+  const current_node_id = ref('')
 
   const meta = ref([])
 
-  http.get('/servers').then((res) => {
-    servers.value = res.data
-  })
+  function refresh() {
+    http.get('/servers').then((res) => {
+      servers.value = res.data
+    })
 
-  http.get('/modules').then((res) => {
-    modules.value = res.data
-  })
+    http.get('/modules').then((res) => {
+      modules.value = res.data
+    })
+
+    http.get('/nodes').then((res) => {
+      nodes.value = res.data['nodes']
+      current_node_id.value = res.data['current_node_id']
+    })
+  }
 
   function showMeta(meta_data) {
     meta.value = meta_data
@@ -167,14 +227,12 @@
   }
 
   const inter = setInterval(() => {
-    http.get('/servers').then((res) => {
-      servers.value = res.data
-    })
-
-    http.get('/modules').then((res) => {
-      modules.value = res.data
-    })
+    refresh()
   }, 5000)
+
+  onMounted(() => {
+    refresh()
+  })
 
   onUnmounted(() => {
     clearInterval(inter)
