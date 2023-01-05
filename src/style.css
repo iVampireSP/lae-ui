@@ -96,6 +96,11 @@ td {
   filter: invert(0);
 }
 
+.config-file {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
 @media (prefers-color-scheme: dark) {
   /* .background-container {
     background: url('/assets/images/bg-dark.jpg');
@@ -161,6 +166,11 @@ td {
 
   .img-revert {
     filter: invert(1);
+  }
+
+  .config-file {
+    background-color: #222222 !important;
+    color: #fff !important;
   }
 }
 

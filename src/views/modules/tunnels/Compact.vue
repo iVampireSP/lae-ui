@@ -15,7 +15,7 @@
 
   <h3 class="mt-4">配置文件</h3>
   
-  <textarea class="w-100 form-control mt-3 cursor-pointer" rows="50" readonly style="background-color: #fff !important;" data-bs-toggle="tooltip" title="点击我复制配置文件" @click="copy()">{{ all_config }}</textarea>
+  <textarea class="w-100 form-control mt-3 cursor-pointer config-file" rows="50" readonly data-bs-toggle="tooltip" title="点击我复制配置文件" @click="copy()">{{ all_config }}</textarea>
 </template>
 
 <script setup>
