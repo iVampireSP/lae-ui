@@ -115,9 +115,9 @@
                 从
               </span>
               <span v-else-if="value.type == 'edge'">
-                 <span style="color: #ff7e15">
+                <span style="color: #ff7e15">
                   <i class="bi bi-lightning-fill"></i>
-                    边缘
+                  边缘
                 </span>
               </span>
             </td>
@@ -130,13 +130,13 @@
               <span v-if="value.id === current_node_id">
                 <span class="text-success">
                   <i class="bi bi-code-slash"></i>
-                  &nbsp; 计算
+                  计算
                 </span>
               </span>
               <span v-else-if="value.id === current_edge_node_id">
                 <span style="color: #ff7e15">
                   <i class="bi bi-lightning-fill"></i>
-                  &nbsp; Cluster Ready!
+                  Cluster Ready!
                 </span>
               </span>
             </td>
