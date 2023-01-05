@@ -1,8 +1,8 @@
 [
        {
-        "name": "Windows 简易启动器",
+        "name": "Windows Frpc",
         "arch": "amd64",
-        "url": "https://download.mefrp.com/d/release/frp_0.46.0_windows_amd64.zip"
+        "url": "https://download.mefrp.com/d/release/MirrorEdgeFrp_0.46.0_beta_windows_amd64.zip"
        },
        {
            "name": "Windows Python 启动器",
@@ -15,12 +15,12 @@
         "url": "http://124.223.35.239/download/mefrp/"
        },
        {
-           "name": "Linux 启动器",
+           "name": "Linux Frpc",
            "arch": "amd64",
-           "url": "https://download.mefrp.com/d/release/frp_0.46.0_linux_amd64.tar.gz"
+           "url": "https://download.mefrp.com/d/release/MirrorEdgeFrp_0.46.0_beta_linux_amd64.tar.gz"
        },
        {
-           "name": "更多版本",
+           "name": "更多版本 Frpc",
            "arch": "any",
            "url": "https://download.mefrp.com/release/"
        }
