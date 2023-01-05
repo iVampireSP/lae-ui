@@ -51,6 +51,15 @@
             />
             <label for="balanceFloatingInputValue">输入金额 (元)</label>
           </form>
+
+          <div v-if="link" class="mt-3">
+            <a
+              :href="link"
+              @click="link = ''"
+              target="_blank"
+              >请点此打开支付页面。</a
+            >
+          </div>
         </div>
         <div class="modal-footer">
           <button
@@ -60,12 +69,7 @@
           >
             关闭
           </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-bs-dismiss="modal"
-            @click="charge()"
-          >
+          <button type="button" class="btn btn-primary" @click="charge()">
             充值
           </button>
         </div>
@@ -83,14 +87,11 @@
     amount: 10,
   })
 
+  const link = ref('')
+
   function charge() {
     http.post('/balances', balance.value).then((res) => {
-      let a = document.createElement('a')
-      a.setAttribute('href', res.data.url)
-      a.setAttribute('target', '_blank')
-      document.body.appendChild(a)
-      a.click()
-      a.remove()
+      link.value = res.data.url
     })
   }
 </script>
