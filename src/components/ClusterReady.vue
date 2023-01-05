@@ -17,7 +17,7 @@
   const detected = ref(false)
 
   http.get('').then((res) => {
-    if (res.headers['cluster-ready-node-id']) {
+    if (res.headers['powered-by'] === 'Cluster Ready!') {
       detected.value = true
     }
   })
