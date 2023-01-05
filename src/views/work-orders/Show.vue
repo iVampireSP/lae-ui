@@ -32,7 +32,10 @@
                 <span v-if="reply.name"> 的 {{ reply.name }} </span>
               </span>
               <span v-else-if="reply.role === 'admin'">
-                <span class="text-primary">莱云</span>
+                <span class="text-primary"
+                  >莱云
+                  <span v-show="reply.name"> 的 {{ reply.name }}</span>
+                </span>
               </span>
               <span v-else>
                 <span>
