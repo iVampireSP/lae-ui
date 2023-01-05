@@ -114,9 +114,11 @@
                 <i class="bi bi-nut"></i>
                 从
               </span>
-              <span v-else-if="value.type == 'edge'" class="text-danger">
-                <i class="bi bi-plugin"></i>
-                边缘
+              <span v-else-if="value.type == 'edge'">
+                 <span style="color: #ff7e15">
+                  <i class="bi bi-lightning-fill"></i>
+                  &nbsp; 边缘
+                </span>
               </span>
             </td>
             <td>{{ value.id }}</td>
@@ -127,11 +129,16 @@
             <td>
               <span v-if="value.id === current_node_id">
                 <span class="text-success">
-                  <i class="bi bi-check-circle"></i>
-                  &nbsp; 是
+                  <i class="bi bi-code-slash"></i>
+                  &nbsp; 计算
                 </span>
               </span>
-              <span v-else>&nbsp;</span>
+              <span v-else-if="value.id === current_edge_node_id">
+                <span style="color: #ff7e15">
+                  <i class="bi bi-lightning-fill"></i>
+                  &nbsp; Cluster Ready!
+                </span>
+              </span>
             </td>
           </tr>
         </tbody>
@@ -202,6 +209,7 @@
   })
 
   const current_node_id = ref('')
+  const current_edge_node_id = ref('')
 
   const meta = ref([])
 
@@ -217,6 +225,11 @@
     http.get('/nodes').then((res) => {
       nodes.value = res.data['nodes']
       current_node_id.value = res.data['current_node_id']
+
+      //  read header
+      const headers = res.headers
+
+      current_edge_node_id.value = headers['cluster-ready-node-id']
     })
   }
 
@@ -228,7 +241,7 @@
 
   const inter = setInterval(() => {
     refresh()
-  }, 5000)
+  }, 8000)
 
   onMounted(() => {
     refresh()

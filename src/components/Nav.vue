@@ -4,6 +4,8 @@
       <div class="container">
         <router-link class="navbar-brand text-auto lae-logo" to="/">
         </router-link>
+        
+        <ClusterReady />
 
         <button
           class="navbar-toggler"
@@ -177,6 +179,7 @@
   import api from '../config/api'
 
   import MenuVue from './Menu.vue'
+import ClusterReady from './ClusterReady.vue'
 
   const show = ref(true)
   if (store.state.token == null) {
