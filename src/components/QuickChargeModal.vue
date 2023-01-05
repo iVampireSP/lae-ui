@@ -60,7 +60,12 @@
           >
             关闭
           </button>
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="charge()">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+            @click="charge()"
+          >
             充值
           </button>
         </div>
@@ -80,8 +85,12 @@
 
   function charge() {
     http.post('/balances', balance.value).then((res) => {
-        let winRef = window.open("url","_blank");
-        winRef.location = res.data.url;
+      let a = document.createElement('a')
+      a.setAttribute('href', res.data.url)
+      a.setAttribute('target', '_blank')
+      document.body.appendChild(a)
+      a.click()
+      a.remove()
     })
   }
 </script>
