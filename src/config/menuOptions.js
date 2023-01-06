@@ -47,8 +47,9 @@ const addMenuOptions = (route_name, text, icon = null) => {
 const addMultiMenuOptions = (options) => {
     options.forEach((option) => {
         // if it has children, add children
+        option.route_name = undefined;
         if (option.children) {
-            // add
+            addMenuOptions(option.route_name, option.text, option.icon)
         }
     })
 }
