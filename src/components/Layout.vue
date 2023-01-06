@@ -19,14 +19,15 @@
         </n-layout-sider>
         <n-layout content-style="padding: 24px;" :native-scrollbar="false">
 
-          <router-view v-slot="{ Component }">
-            <transition name="fade" mode="out-in">
-              <keep-alive>
-                <component :is="Component"/>
-              </keep-alive>
-            </transition>
-          </router-view>
+<!--          <router-view v-slot="{ Component }">-->
+<!--            <transition name="fade" mode="out-in">-->
+<!--              <keep-alive>-->
+<!--                <component :is="Component"/>-->
+<!--              </keep-alive>-->
+<!--            </transition>-->
+<!--          </router-view>-->
 
+          <router-view />
         </n-layout>
       </n-layout>
     </n-layout>

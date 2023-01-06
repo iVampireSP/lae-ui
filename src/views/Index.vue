@@ -1,101 +1,37 @@
 <template>
   <div>
-    Index
+    <NH1>欢迎, {{ user.state.user.name }}。</NH1>
 
-    <transition name="fade">
-      <div v-if="true">
-        <div class="item-box">
-          2
-          2123123
-        </div>
-      </div>
-      <div v-else>
-        <span>暂无更多</span>
-      </div>
-    </transition>
-
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
-    <p>index</p>
+    {{ data }}
   </div>
 </template>
 
 <script setup>
+import {NH1} from 'naive-ui'
+
 import {addMenuOptions} from "../config/menuOptions.js";
+
+import user from "../plugins/stores/user";
+
+import http from "../plugins/http";
+
+// import {message} from "../utils/layout.js";
+import {ref} from "vue";
+
+const data = ref({})
+
+http.get('/users').then((res) => {
+  // message.create('success',)
+
+  data.value = res.data
+
+})
+
 
 addMenuOptions('left', 'index', 'Index',)
 addMenuOptions('left', 'index', 'Index',)
 addMenuOptions('left', 'errors.404', '404',)
+
 </script>
 
 <style scoped>
