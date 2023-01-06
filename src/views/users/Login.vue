@@ -1,14 +1,15 @@
 <template>
-  <div class="w-full text-center justify-center align-middle">
-    <div id="lae-logo-container" class="w-100" style="height: 500px">
-      <div id="lottie"></div>
+  <div>
+    <div id="lae-logo-container">
+      <div id="lottie" style="height: 500px"></div>
     </div>
 
-    <p class="text-center mt-10 ">
+    <p class="text-center">
       莱云 iVampireSP.com 作品, 动画 Fofray
       <br/>
       <span>苏ICP备2022042268号-1</span>
     </p>
+
   </div>
 </template>
 
