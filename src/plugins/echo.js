@@ -1,7 +1,7 @@
 import PusherJS from 'pusher-js';
 import LaravelEcho from 'laravel-echo';
 
-import { useUserStore } from "./stores/user.js";
+import {useUserStore} from "./stores/user.js";
 
 import router from './router.js';
 

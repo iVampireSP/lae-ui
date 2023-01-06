@@ -79,6 +79,9 @@
 </template>
 
 <script setup>
+import {addMenuOptions} from "../config/menuOptions.js";
+
+addMenuOptions('index', 'Index', )
 </script>
 
 <style scoped>

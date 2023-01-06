@@ -6,14 +6,13 @@
       <n-layout position="absolute" has-sider>
         <n-layout-sider
             :show-collapsed-content="false"
-            content-style="padding-left: 15px;padding-right: 15px;"
+            content-style="padding-left: 10px;padding-right: 10px;"
             :native-scrollbar="false"
             bordered
             collapse-mode="width"
             :collapsed-width="20"
             :width="240"
             show-trigger="arrow-circle"
-
         >
           <Menu/>
         </n-layout-sider>
@@ -29,13 +28,15 @@
   </div>
 </template>
 
-<!--            v-show="$router.currentRoute.value.name !== 'Login'"-->
-
-
 <script setup>
 
 import HeaderVue from './Header.vue'
 import Menu from './Menu.vue'
 
 
-import {NLayout, NLayoutSider} from 'naive-ui'</script>
+import {NLayout, NLayoutSider} from 'naive-ui'
+
+//
+
+
+</script>

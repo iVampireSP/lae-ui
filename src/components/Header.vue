@@ -62,7 +62,7 @@
 </style>
 
 <script setup>
-import {NButton, NGrid, NGridItem, NIcon, NLayoutHeader, NMenu, NPopover, NText, NLayout} from 'naive-ui'
+import {NButton, NGrid, NGridItem, NIcon, NLayout, NLayoutHeader, NMenu, NPopover, NText} from 'naive-ui'
 
 import {useIsMobile, useIsTablet} from "../utils/composables.js";
 

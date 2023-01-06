@@ -4,8 +4,8 @@ import api from '../config/api.js';
 import router from 'router.js';
 
 
-import { useUserStore } from "./stores/user.js";
-import { useHttpStore } from "./stores/http.js";
+import {useUserStore} from "./stores/user.js";
+import {useHttpStore} from "./stores/http.js";
 
 const baseURL = api.api;
 const user = useUserStore();
