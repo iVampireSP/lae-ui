@@ -20,11 +20,23 @@ router.afterEach((to) => {
 })
 
 
-const menuOptions = ref([])
+const menuOptions = ref({
+    top: [],
+    left: [],
+})
 
-const addMenuOptions = (route_name, text, icon = null) => {
-    // 检测 key 是否重复
-    if (menuOptions.value.find((option) => option.key === route_name)) {
+const validateIfDuplicate = (type, route_name) => {
+    if (type === "top") {
+        return menuOptions.value.top.find((option) => option.key === route_name);
+    } else if (type === "left") {
+        return menuOptions.value.left.find((option) => option.key === route_name);
+    }
+}
+
+const addMenuOptions = (type, route_name, text, icon = null) => {
+
+    if (validateIfDuplicate(type, route_name)) {
+        console.warn(`[menuOptions] ${type} 菜单项目注册失败，因为有重复的名称: ${route_name}`);
         return;
     }
 
@@ -45,15 +57,21 @@ const addMenuOptions = (route_name, text, icon = null) => {
         data.icon = renderIcon(icon)
     }
 
-    menuOptions.value.push(data)
+    if (type === "top") {
+        menuOptions.value.top.push(data)
+    } else if (type === "left") {
+        menuOptions.value.left.push(data)
+    }
 }
 
-const addMultiMenuOptions = (options) => {
+const addMultiMenuOptions = (type, options) => {
     options.forEach((option) => {
         // if it has children, add children
-        option.route_name = undefined;
         if (option.children) {
-            addMenuOptions(option.route_name, option.text, option.icon)
+            // add multi
+            addMultiMenuOptions(type, option.children);
+        } else {
+            addMenuOptions(type, option.route_name, option.text, option.icon)
         }
     })
 }
@@ -63,5 +81,6 @@ export {
     selectAndExpand,
     selectedKey,
     menuInst,
-    addMenuOptions
+    addMenuOptions,
+    addMultiMenuOptions
 }

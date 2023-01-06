@@ -2,8 +2,8 @@
   <n-menu
       :collapsed-width="64"
       :collapsed-icon-size="22"
-      :options="menuOptions"
-      v-model:value="selectedKey"
+      :options="menuOptions.left"
+      :value="selectedKey"
       ref="menuInst"
   />
 </template>

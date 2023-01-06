@@ -1,57 +1,56 @@
 <template>
+  <n-layout v-show="menuOptions.top.length">
+    <n-layout-header bordered class="layout-header">
 
-    <n-layout>
-      <n-layout-header bordered class="layout-header">
+      <n-grid cols="2">
+        <n-grid-item style="text-align: left">
+          <n-menu mode="horizontal" :value="selectedKey" :options="menuOptions.top"/>
+        </n-grid-item>
 
-        <n-grid cols="2" >
-          <n-grid-item style="text-align: left">
-            <n-menu mode="horizontal" :options="menuOptions"/>
-          </n-grid-item>
+        <n-grid-item class="text-right flex items-center justify-end">
+          <n-popover
+              v-if="isMobile || isTablet"
+              ref="mobilePopoverRef"
+              style="padding: 0; width: 288px"
+              placement="bottom-end"
+              display-directive="show"
+              trigger="click"
+          >
+            <template #trigger>
+              <n-icon size="20" style="margin-left: 12px">
+                <menu-outline/>
+              </n-icon>
+            </template>
+            <div style="overflow: auto; max-height: 79vh">
+              <n-menu
+                  :value="selectedKey"
+                  :options="menuOptions.top"
+                  :indent="18"
 
-          <n-grid-item class="text-right flex items-center justify-end">
-            <n-popover
-                v-if="isMobile || isTablet"
-                ref="mobilePopoverRef"
-                style="padding: 0; width: 288px"
-                placement="bottom-end"
-                display-directive="show"
-                trigger="click"
-            >
-              <template #trigger>
-                <n-icon size="20" style="margin-left: 12px">
-                  <menu-outline/>
-                </n-icon>
-              </template>
-              <div style="overflow: auto; max-height: 79vh">
-                <n-menu
-                    :value="mobileMenuValue"
-                    :options="mobileMenuOptions"
-                    :indent="18"
-
-                />
-              </div>
-            </n-popover>
-            <div v-else>
-
-              <n-button
-                  size="small"
-                  tag="a"
-                  quaternary
-                  class="nav-picker"
-                  href="#"
-                  target="_blank"
-              >
-                GitHub
-              </n-button>
-              <n-text class="nav-picker padded">
-                version
-              </n-text>
+              />
             </div>
-          </n-grid-item>
+          </n-popover>
+          <div v-else>
 
-        </n-grid>
-      </n-layout-header>
-    </n-layout>
+            <n-button
+                size="small"
+                tag="a"
+                quaternary
+                class="nav-picker"
+                href="#"
+                target="_blank"
+            >
+              GitHub
+            </n-button>
+            <n-text class="nav-picker padded">
+              version
+            </n-text>
+          </div>
+        </n-grid-item>
+
+      </n-grid>
+    </n-layout-header>
+  </n-layout>
 
 </template>
 
@@ -66,11 +65,9 @@ import {NButton, NGrid, NGridItem, NIcon, NLayout, NLayoutHeader, NMenu, NPopove
 
 import {useIsMobile, useIsTablet} from "../utils/composables.js";
 
-import {computed, h} from "vue"
-import {useRoute} from 'vue-router'
+import {h} from "vue"
 
-import {findMenuValue} from "../utils/route.js";
-
+import {addMultiMenuOptions, menuOptions, selectedKey} from "../config/menuOptions.js"
 
 import {
   BookOutline as BookIcon,
@@ -83,28 +80,20 @@ function renderIcon(icon) {
   return () => h(NIcon, null, {default: () => h(icon)})
 }
 
-const route = useRoute()
-// const routers = computed(() => routers.value)
-
 const isMobile = useIsMobile()
 const isTablet = useIsTablet()
 
-const mobileMenuOptions = computed(() => {
-  return [
-    {
-      key: 'github',
-      label: 'GitHub'
-    }
-  ]
-})
+addMultiMenuOptions('top', [{
+  route_name: 'index',
+  text: '首页',
+  icon: BookIcon
+}
+])
+
+// addMenuOptions('left', 'index', 'Index',)
 
 
-const mobileMenuValue = computed(() => {
-  if (route.name === 'index') return 'index'
-  return findMenuValue(mobileMenuOptions.value, route.path)
-})
-
-const menuOptions = [
+const menuOptions1 = [
   {
     label: "且听风吟",
     key: "hear-the-wind-sing",

@@ -93,8 +93,9 @@
 <script setup>
 import {addMenuOptions} from "../config/menuOptions.js";
 
-addMenuOptions('index', 'Index',)
-addMenuOptions('errors.404', '404',)
+addMenuOptions('left', 'index', 'Index',)
+addMenuOptions('left', 'index', 'Index',)
+addMenuOptions('left', 'errors.404', '404',)
 </script>
 
 <style scoped>
