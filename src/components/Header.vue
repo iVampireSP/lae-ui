@@ -1,55 +1,58 @@
 <template>
-  <n-layout-header bordered class="layout-header">
 
-    <n-grid cols="2">
-      <n-grid-item style="text-align: left">
-        <n-menu mode="horizontal" :options="menuOptions"/>
-      </n-grid-item>
+    <n-layout>
+      <n-layout-header bordered class="layout-header">
 
-      <n-grid-item style="text-align: right; align-items: center">
-        <n-popover
-            v-if="isMobile || isTablet"
-            ref="mobilePopoverRef"
-            style="padding: 0; width: 288px"
-            placement="bottom-end"
-            display-directive="show"
-            trigger="click"
+        <n-grid cols="2" >
+          <n-grid-item style="text-align: left">
+            <n-menu mode="horizontal" :options="menuOptions"/>
+          </n-grid-item>
 
-        >
-          <template #trigger>
-            <n-icon size="20" style="margin-left: 12px">
-              <menu-outline/>
-            </n-icon>
-          </template>
-          <div style="overflow: auto; max-height: 79vh">
-            <n-menu
-                :value="mobileMenuValue"
-                :options="mobileMenuOptions"
-                :indent="18"
+          <n-grid-item class="text-right flex items-center justify-end">
+            <n-popover
+                v-if="isMobile || isTablet"
+                ref="mobilePopoverRef"
+                style="padding: 0; width: 288px"
+                placement="bottom-end"
+                display-directive="show"
+                trigger="click"
+            >
+              <template #trigger>
+                <n-icon size="20" style="margin-left: 12px">
+                  <menu-outline/>
+                </n-icon>
+              </template>
+              <div style="overflow: auto; max-height: 79vh">
+                <n-menu
+                    :value="mobileMenuValue"
+                    :options="mobileMenuOptions"
+                    :indent="18"
 
-            />
-          </div>
-        </n-popover>
-        <div v-else>
+                />
+              </div>
+            </n-popover>
+            <div v-else>
 
-          <n-button
-              size="small"
-              tag="a"
-              quaternary
-              class="nav-picker"
-              href="#"
-              target="_blank"
-          >
-            GitHub
-          </n-button>
-          <n-text class="nav-picker padded">
-            version
-          </n-text>
-        </div>
-      </n-grid-item>
+              <n-button
+                  size="small"
+                  tag="a"
+                  quaternary
+                  class="nav-picker"
+                  href="#"
+                  target="_blank"
+              >
+                GitHub
+              </n-button>
+              <n-text class="nav-picker padded">
+                version
+              </n-text>
+            </div>
+          </n-grid-item>
 
-    </n-grid>
-  </n-layout-header>
+        </n-grid>
+      </n-layout-header>
+    </n-layout>
+
 </template>
 
 <style scoped>
@@ -59,7 +62,7 @@
 </style>
 
 <script setup>
-import {NButton, NGrid, NGridItem, NIcon, NLayoutHeader, NMenu, NPopover, NText} from 'naive-ui'
+import {NButton, NGrid, NGridItem, NIcon, NLayoutHeader, NMenu, NPopover, NText, NLayout} from 'naive-ui'
 
 import {useIsMobile, useIsTablet} from "../utils/composables.js";
 
