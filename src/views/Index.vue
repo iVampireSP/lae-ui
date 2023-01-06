@@ -1,87 +1,100 @@
 <template>
-<div>
-  Index
+  <div>
+    Index
 
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-  <p>index</p>
-</div>
+    <transition name="fade">
+      <div v-if="true">
+        <div class="item-box">
+          2
+          2123123
+        </div>
+      </div>
+      <div v-else>
+        <span>暂无更多</span>
+      </div>
+    </transition>
+
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+    <p>index</p>
+  </div>
 </template>
 
 <script setup>
 import {addMenuOptions} from "../config/menuOptions.js";
 
-addMenuOptions('index', 'Index', )
+addMenuOptions('index', 'Index',)
+addMenuOptions('errors.404', '404',)
 </script>
 
 <style scoped>

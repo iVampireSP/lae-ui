@@ -23,6 +23,11 @@ router.afterEach((to) => {
 const menuOptions = ref([])
 
 const addMenuOptions = (route_name, text, icon = null) => {
+    // 检测 key 是否重复
+    if (menuOptions.value.find((option) => option.key === route_name)) {
+        return;
+    }
+
     let data = {
         label: () => h(
             RouterLink,
@@ -36,7 +41,6 @@ const addMenuOptions = (route_name, text, icon = null) => {
         key: route_name,
     }
 
-    // if icon is not null, add icon
     if (icon !== null) {
         data.icon = renderIcon(icon)
     }

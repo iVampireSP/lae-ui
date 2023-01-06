@@ -3,7 +3,8 @@ import {createApp} from 'vue'
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 
-import store from './plugins/store'
+import UserStore from './plugins/stores/user'
+import HttpStore from './plugins/stores/user'
 import router from './plugins/router';
 
 import App from './App.vue'
@@ -23,7 +24,7 @@ document.head.appendChild(meta)
 
 const app = createApp(App)
 
-app.use(store)
+app.use(UserStore, HttpStore)
 app.use(router, axios, VueAxios)
 
 

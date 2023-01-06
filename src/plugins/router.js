@@ -1,8 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router';
 
-import {useUserStore} from "./stores/user.js";
-
-const user = useUserStore();
+import user from './stores/user';
+import app from '../config/app';
 
 const routes = [
     {
@@ -35,16 +34,16 @@ const routes = [
     //     title: '关于',
     //   },
     // },
-    // {
-    //   path: '/login',
-    //   name: 'login',
-    //   meta: {
-    //     keepalive: false,
-    //     auth: false,
-    //     title: '登录',
-    //   },
-    //   component: () => import('../../../../Downloads/lae-ui-main/src/views/auth/Login.vue'),
-    // },
+    {
+      path: '/auth/login',
+      name: 'auth.login',
+      meta: {
+        keepalive: false,
+        auth: false,
+        title: '登录',
+      },
+      component: () => import('../views/users/Login.vue'),
+    },
     // ,
     // {
     //   path: '/status',
@@ -244,45 +243,45 @@ const router = createRouter({
     history: createWebHistory(),
     routes,
 });
-//
-// router.beforeEach((to, from) => {
-//   if (to.matched.length === 0) {
-//     return router.push({ name: 'errors.404' });
-//   }
-//
-//   if (to.meta.title) {
-//     document.title = to.meta.title + ' - ' + app.name;
-//   } else {
-//     document.title = app.name;
-//   }
-//
-//   if (to.meta.auth ?? true) {
-//     // validate login state
-//     if (user.token == null) {
-//       if (to.name === 'Login') {
-//         return true;
-//       } else {
-//         let query = {};
-//         if (from.query.token != null) {
-//           query = { token: from.query.token };
-//         }
-//         router.push({ name: 'login', query: query });
-//       }
-//       return false;
-//     } else {
-//       return true;
-//     }
-//   } else {
-//     // 无需登录
-//     // if (to.name === "Login") {
-//     //     window.$message.warning('已经进去了啦！');
-//     //     return false;
-//     // }
-//
-//     document.title = app.name;
-//
-//     return true;
-//   }
-// });
+
+router.beforeEach((to, from) => {
+  if (to.matched.length === 0) {
+    return router.push({ name: 'errors.404' });
+  }
+
+  if (to.meta.title) {
+    document.title = to.meta.title + ' - ' + app.name;
+  } else {
+    document.title = app.name;
+  }
+
+  if (to.meta.auth ?? true) {
+    // validate login state
+    if (user.state.token == null) {
+      if (to.name === 'auth.login') {
+        return true;
+      } else {
+        let query = {};
+        if (from.query.token != null) {
+          query = { token: from.query.token };
+        }
+        router.push({ name: 'auth.login', query: query });
+      }
+      return false;
+    } else {
+      return true;
+    }
+  } else {
+    // 无需登录
+    // if (to.name === "Login") {
+    //     window.$message.warning('已经进去了啦！');
+    //     return false;
+    // }
+
+    document.title = app.name;
+
+    return true;
+  }
+});
 
 export default router;

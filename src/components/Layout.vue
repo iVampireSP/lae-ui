@@ -1,5 +1,5 @@
 <template>
-  <HeaderVue/>
+  <HeaderVue v-if="user.state.token"/>
 
   <div>
     <n-layout style="height: 100vh">
@@ -13,15 +13,20 @@
             :collapsed-width="20"
             :width="240"
             show-trigger="arrow-circle"
+            v-if="user.state.token"
         >
           <Menu/>
         </n-layout-sider>
         <n-layout content-style="padding: 24px;" :native-scrollbar="false">
+
           <router-view v-slot="{ Component }">
-            <keep-alive>
-              <component :is="Component"/>
-            </keep-alive>
+            <transition name="fade" mode="out-in">
+              <keep-alive>
+                <component :is="Component"/>
+              </keep-alive>
+            </transition>
           </router-view>
+
         </n-layout>
       </n-layout>
     </n-layout>
@@ -29,14 +34,9 @@
 </template>
 
 <script setup>
-
+import {NLayout, NLayoutSider} from 'naive-ui'
 import HeaderVue from './Header.vue'
 import Menu from './Menu.vue'
 
-
-import {NLayout, NLayoutSider} from 'naive-ui'
-
-//
-
-
-</script>
+// import user from "../plugins/stores/user.js";
+import user from "../plugins/stores/user.js";</script>

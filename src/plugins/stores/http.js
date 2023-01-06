@@ -1,7 +1,9 @@
-import {defineStore} from 'pinia'
+import {createStore} from "vuex";
+import createPersistedstate from "../persistedstate";
 
-export const useHttpStore = defineStore('http', {
-    state: () => ({
+export default createStore({
+    plugins: [createPersistedstate()],
+    state: {
         isAlertedToken: false,
-    })
-})
+    }
+});

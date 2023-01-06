@@ -1,16 +1,13 @@
 import axios from 'axios';
 
 import api from '../config/api.js';
-import router from 'router.js';
+import router from './router.js';
 
 
-import {useUserStore} from "./stores/user.js";
-import {useHttpStore} from "./stores/http.js";
+import user from "./stores/user.js";
+import http from "./stores/http.js";
 
 const baseURL = api.api;
-const user = useUserStore();
-const http = useHttpStore();
-
 // axios.defaults.withCredentials = true;
 
 // 实例
@@ -26,7 +23,7 @@ instance.interceptors.request.use(
     }
 
     config.headers['Accept'] = 'application/json';
-    config.headers['Authorization'] = 'Bearer ' + user.token;
+    config.headers['Authorization'] = 'Bearer ' + user.state.token;
 
     return config;
   },
