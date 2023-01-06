@@ -148,12 +148,12 @@ function cake() {
     camera = new THREE.PerspectiveCamera(60, ratio, 0.1, 1000);
 
     const dracoLoader = new DRACOLoader()
-    dracoLoader.setDecoderPath('public/decoder/');
+    dracoLoader.setDecoderPath('/decoder/');
     dracoLoader.preload();
 
     const loader = new GLTFLoader();
     loader.setDRACOLoader(dracoLoader);
-    loader.load('public/assets/models/model.gltf', function (gltf) {
+    loader.load('/assets/models/model.gltf', function (gltf) {
       cake = gltf.scene;
       cake.position.set(0, -0.5, 0);
       scene.add(cake);
