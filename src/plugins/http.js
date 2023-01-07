@@ -5,7 +5,7 @@ import router from './router.js';
 import user from "./stores/user.js";
 import http from "./stores/http.js";
 
-import {dialog, loadingBar} from '../utils/layout'
+import {dialog} from '../utils/layout'
 
 const baseURL = api.api;
 // axios.defaults.withCredentials = true;
@@ -25,14 +25,14 @@ instance.interceptors.request.use(
         config.headers['Accept'] = 'application/json';
         config.headers['Authorization'] = 'Bearer ' + user.state.token;
 
-        loadingBar.start();
+        // loadingBar.start();
 
         return config;
     },
     (error) => {
         console.error(error);
 
-        loadingBar.error();
+        // loadingBar.error();
 
         return Promise.reject(error);
     }
@@ -43,20 +43,20 @@ instance.interceptors.response.use(
 
 
         // if 20x
-        if (res.status >= 200 && res.status < 300) {
-            loadingBar.finish();
-        } else if (res.status >= 400 && res.status < 600) {
-            loadingBar.error();
-
-
-
-        }
+        // if (res.status >= 200 && res.status < 300) {
+        //     loadingBar.finish();
+        // } else if (res.status >= 400 && res.status < 600) {
+        //     loadingBar.error();
+        //
+        //
+        //
+        // }
 
         return Promise.resolve(res);
     },
     (error) => {
 
-        loadingBar.error();
+        // loadingBar.error();
 
         console.error('axios error', error);
 
