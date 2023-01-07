@@ -15,11 +15,7 @@ const selectAndExpand = (route) => {
     } else {
         selectedKey.value = route.name;
     }
-
-    // console.log('读取 key', selectedKey.value)
-
     menuInst.value?.showOption(selectedKey.value);
-
 };
 
 // listen to route change
@@ -30,7 +26,7 @@ router.afterEach((to) => {
 
 const menuOptions = ref({
     top: [],
-    left: [],
+    left: []
 })
 
 const validateIfDuplicate = (type, route_name) => {
@@ -97,7 +93,7 @@ const addMultiMenuOptions = (type, options) => {
     })
 }
 
-const addMenuDivider =  (type) => {
+const addMenuDivider = (type) => {
     menuOptions.value[type].push({
         type: 'divider',
     })
@@ -106,6 +102,18 @@ const addMenuDivider =  (type) => {
 const removeAllMenuOptions = (type) => {
     menuOptions.value[type] = [];
 }
+
+menuOptions.value['top'].push({
+    label: () => h(
+        RouterLink,
+        {
+            to: {name: 'index'},
+        },
+        {default: () => h('span', {class: 'lae-logo', width: 40, height: 25})},
+    ),
+    key: 'index',
+});
+
 
 export {
     menuOptions,

@@ -1,13 +1,17 @@
 <template>
-  <n-layout v-show="menuOptions.top.length">
+  <n-layout v-if="menuOptions.top.length">
     <n-layout-header bordered class="layout-header">
 
       <n-grid cols="2">
-        <n-grid-item style="text-align: left">
-          <n-menu mode="horizontal" :value="selectedKey" :options="menuOptions.top"/>
+        <n-grid-item>
+          <n-menu mode="horizontal" :value="selectedKey" :options="menuOptions.top" v-if="(!isMobile)"/>
+          <router-link :to="{name: 'index'}" class="lae-logo ml-2" v-if="isMobile"></router-link>
         </n-grid-item>
 
-        <n-grid-item class="text-right flex items-center justify-end">
+        <n-grid-item class="text-right flex items-center justify-end mr-1.5">
+
+          <ClusterReady />
+
           <n-popover
               v-if="isMobile || isTablet"
               ref="mobilePopoverRef"
@@ -66,14 +70,10 @@ import {useIsMobile, useIsTablet} from "../utils/composables.js";
 
 import {h} from "vue"
 
-import {addMultiMenuOptions, menuOptions, selectedKey} from "../config/menuOptions.js"
+import {menuOptions, selectedKey} from "../config/menuOptions.js"
 
-import {
-  BookOutline as BookIcon,
-  MenuOutline,
-  PersonOutline as PersonIcon,
-  WineOutline as WineIcon
-} from "@vicons/ionicons5"
+import {MenuOutline} from "@vicons/ionicons5"
+import ClusterReady from "./ClusterReady.vue";
 
 function renderIcon(icon) {
   return () => h(NIcon, null, {default: () => h(icon)})
@@ -81,73 +81,6 @@ function renderIcon(icon) {
 
 const isMobile = useIsMobile()
 const isTablet = useIsTablet()
-
-addMultiMenuOptions('top', [{
-  route_name: 'index',
-  text: '首页',
-  icon: BookIcon
-}
-])
-
-// addMenuOptions('left', 'index', 'Index',)
-
-
-const menuOptions1 = [
-  {
-    label: "且听风吟",
-    key: "hear-the-wind-sing",
-    icon: renderIcon(BookIcon)
-  },
-  {
-    label: "舞，舞，舞",
-    key: "dance-dance-dance",
-    icon: renderIcon(BookIcon),
-    children: [
-      {
-        type: "group",
-        label: "人物",
-        key: "people",
-        children: [
-          {
-            label: "叙事者",
-            key: "narrator",
-            icon: renderIcon(PersonIcon)
-          },
-          {
-            label: "羊男",
-            key: "sheep-man",
-            icon: renderIcon(PersonIcon)
-          }
-        ]
-      },
-      {
-        label: "饮品",
-        key: "beverage",
-        icon: renderIcon(WineIcon),
-        children: [
-          {
-            label: "威士忌",
-            key: "whisky"
-          }
-        ]
-      },
-      {
-        label: "食物",
-        key: "food",
-        children: [
-          {
-            label: "三明治",
-            key: "sandwich"
-          }
-        ]
-      },
-      {
-        label: "过去增多，未来减少",
-        key: "the-past-increases-the-future-recedes"
-      }
-    ]
-  }
-];
 
 
 </script>

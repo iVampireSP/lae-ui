@@ -9,7 +9,7 @@
 <script setup>
 import {NH1} from 'naive-ui'
 
-import {addMenuOptions} from "../config/menuOptions.js";
+import {addMenuOptions, removeAllMenuOptions} from "../config/menuOptions.js";
 
 import user from "../plugins/stores/user";
 
@@ -24,9 +24,9 @@ http.get('/users').then((res) => {
   // message.create('success',)
 
   data.value = res.data
-
 })
 
+removeAllMenuOptions('left')
 
 addMenuOptions('left', 'index', 'Index',)
 addMenuOptions('left', 'errors.404', '404',)
