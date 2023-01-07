@@ -35,14 +35,14 @@ const routes = [
     //   },
     // },
     {
-      path: '/auth/login',
-      name: 'auth.login',
-      meta: {
-        keepalive: false,
-        auth: false,
-        title: '登录',
-      },
-      component: () => import('../views/users/Login.vue'),
+        path: '/auth/login',
+        name: 'auth.login',
+        meta: {
+            keepalive: false,
+            auth: false,
+            title: '登录',
+        },
+        component: () => import('../views/users/Login.vue'),
     },
     // ,
     // {
@@ -115,111 +115,110 @@ const routes = [
     //
 
 
-    // // Modules
-    // {
-    //   path: '/modules',
-    //   name: 'modules',
-    //   props: true,
-    //   keepalive: false,
-    //   meta: {
-    //     auth: true,
-    //   },
-    //   children: [
-    //     {
-    //       path: 'tunnels',
-    //       name: 'modules.tunnels',
-    //       component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/tunnels/Index.vue'),
-    //       meta: {
-    //         title: '隧道列表',
-    //       },
-    //     },
-    //     {
-    //       path: 'tunnels/compact',
-    //       name: 'modules.tunnels.compact',
-    //       component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/tunnels/Compact.vue'),
-    //       meta: {
-    //         title: '整合配置文件',
-    //       },
-    //     },
-    //     {
-    //       path: 'tunnels/downloads',
-    //       name: 'modules.tunnels.download',
-    //       component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/tunnels/Download.vue'),
-    //       meta: {
-    //         title: '下载客户端',
-    //       },
-    //     },
-    //     {
-    //       path: 'tunnels/:id',
-    //       name: 'modules.tunnels.show',
-    //       props: true,
-    //       component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/tunnels/Show.vue'),
-    //       meta: {
-    //         title: '隧道详情',
-    //       },
-    //     },
-    //     {
-    //       path: 'gct',
-    //       name: 'modules.gct',
-    //       component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/gct/Index.vue'),
-    //       meta: {
-    //         title: '游戏容器',
-    //       },
-    //     },
-    //     {
-    //       path: 'gct/create',
-    //       name: 'modules.gct.create',
-    //       props: true,
-    //       component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/gct/Create.vue'),
-    //       meta: {
-    //         title: '创建容器',
-    //       },
-    //     },
-    //     {
-    //       path: 'gct/intro',
-    //       name: 'modules.gct.intro',
-    //       props: true,
-    //       component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/gct/Intro.vue'),
-    //       meta: {
-    //         title: '引导创建',
-    //       },
-    //     },
-    //     {
-    //       path: 'gct/:id',
-    //       name: 'modules.gct.show',
-    //       props: true,
-    //       component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/gct/Show.vue'),
-    //       meta: {
-    //         title: '显示游戏容器',
-    //       },
-    //     },
-    //     {
-    //       path: 'cdn',
-    //       name: 'modules.cdn',
-    //       component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/cdn/Index.vue'),
-    //     },
-    //     {
-    //       path: 'cdn/create',
-    //       name: 'modules.cdn.create',
-    //       props: true,
-    //       component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/cdn/Create.vue'),
-    //     },
-    //     {
-    //       path: 'cdn/:id',
-    //       name: 'modules.cdn.show',
-    //       props: true,
-    //       component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/cdn/Show.vue'),
-    //     },
-    //     {
-    //       path: 'user-mqtt',
-    //       name: 'modules.user-mqtt',
-    //       component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/user-mqtt/Index.vue'),
-    //       meta: {
-    //         title: '用户消息队列',
-    //       },
-    //     },
-    //   ],
-    // },
+    // Modules
+    {
+        path: '/modules',
+        name: 'modules',
+        props: true,
+        component: () => import('../views/modules/Base.vue'),
+
+        meta: {
+            auth: true,
+        },
+        children: [
+            {
+                path: 'tunnels',
+                // name: 'modules.tunnels',
+                component: () => import('../views/modules/tunnels/Base.vue'),
+                meta: {
+                    title: 'ME Frp',
+                },
+                children: [
+                    {
+                        path: '',
+                        name: 'modules.tunnels.index',
+                        component: () => import('../views/modules/tunnels/Index.vue'),
+                    },
+                    {
+                        path: 'create',
+                        name: 'modules.tunnels.create',
+                        component: () => import('../views/modules/tunnels/Create.vue'),
+                    },
+                    {
+                        path: 'compact',
+                        name: 'modules.tunnels.compact',
+                        component: () => import('../views/modules/tunnels/Compact.vue'),
+                    },
+                    {
+                        path: ':id',
+                        name: 'modules.tunnels.show',
+                        component: () => import('../views/modules/tunnels/Show.vue'),
+                    }
+                ]
+            },
+            //
+            // {
+            //     path: 'gct',
+            //     name: 'modules.gct',
+            //     component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/gct/Index.vue'),
+            //     meta: {
+            //         title: '游戏容器',
+            //     },
+            // },
+            // {
+            //     path: 'gct/create',
+            //     name: 'modules.gct.create',
+            //     props: true,
+            //     component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/gct/Create.vue'),
+            //     meta: {
+            //         title: '创建容器',
+            //     },
+            // },
+            // {
+            //     path: 'gct/intro',
+            //     name: 'modules.gct.intro',
+            //     props: true,
+            //     component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/gct/Intro.vue'),
+            //     meta: {
+            //         title: '引导创建',
+            //     },
+            // },
+            // {
+            //     path: 'gct/:id',
+            //     name: 'modules.gct.show',
+            //     props: true,
+            //     component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/gct/Show.vue'),
+            //     meta: {
+            //         title: '显示游戏容器',
+            //     },
+            // },
+            // {
+            //   path: 'cdn',
+            //   name: 'modules.cdn',
+            //   component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/cdn/Index.vue'),
+            // },
+            // {
+            //   path: 'cdn/create',
+            //   name: 'modules.cdn.create',
+            //   props: true,
+            //   component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/cdn/Create.vue'),
+            // },
+            // {
+            //   path: 'cdn/:id',
+            //   name: 'modules.cdn.show',
+            //   props: true,
+            //   component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/cdn/Show.vue'),
+            // },
+            // {
+            //   path: 'user-mqtt',
+            //   name: 'modules.user-mqtt',
+            //   component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/user-mqtt/Index.vue'),
+            //   meta: {
+            //     title: '用户消息队列',
+            //   },
+            // },
+        ],
+    },
 
     // Errors routes
     {
@@ -245,43 +244,43 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from) => {
-  if (to.matched.length === 0) {
-    return router.push({ name: 'errors.404' });
-  }
-
-  if (to.meta.title) {
-    document.title = to.meta.title + ' - ' + app.name;
-  } else {
-    document.title = app.name;
-  }
-
-  if (to.meta.auth ?? true) {
-    // validate login state
-    if (user.state.token == null) {
-      if (to.name === 'auth.login') {
-        return true;
-      } else {
-        let query = {};
-        if (from.query.token != null) {
-          query = { token: from.query.token };
-        }
-        router.push({ name: 'auth.login', query: query });
-      }
-      return false;
-    } else {
-      return true;
+    if (to.matched.length === 0) {
+        return router.push({name: 'errors.404'});
     }
-  } else {
-    // 无需登录
-    // if (to.name === "Login") {
-    //     window.$message.warning('已经进去了啦！');
-    //     return false;
-    // }
 
-    document.title = app.name;
+    if (to.meta.title) {
+        document.title = to.meta.title + ' - ' + app.name;
+    } else {
+        document.title = app.name;
+    }
 
-    return true;
-  }
+    if (to.meta.auth ?? true) {
+        // validate login state
+        if (user.state.token == null) {
+            if (to.name === 'auth.login') {
+                return true;
+            } else {
+                let query = {};
+                if (from.query.token != null) {
+                    query = {token: from.query.token};
+                }
+                router.push({name: 'auth.login', query: query});
+            }
+            return false;
+        } else {
+            return true;
+        }
+    } else {
+        // 无需登录
+        // if (to.name === "Login") {
+        //     window.$message.warning('已经进去了啦！');
+        //     return false;
+        // }
+
+        document.title = app.name;
+
+        return true;
+    }
 });
 
 export default router;

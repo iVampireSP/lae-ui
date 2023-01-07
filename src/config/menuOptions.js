@@ -76,11 +76,16 @@ const addMultiMenuOptions = (type, options) => {
     })
 }
 
+const removeAllMenuOptions = (type) => {
+    menuOptions.value[type] = [];
+}
+
 export {
     menuOptions,
     selectAndExpand,
     selectedKey,
     menuInst,
     addMenuOptions,
-    addMultiMenuOptions
+    addMultiMenuOptions,
+    removeAllMenuOptions
 }

@@ -24,9 +24,8 @@
             <div style="overflow: auto; max-height: 79vh">
               <n-menu
                   :value="selectedKey"
-                  :options="menuOptions.top"
+                  :options="menuOptions.left"
                   :indent="18"
-
               />
             </div>
           </n-popover>

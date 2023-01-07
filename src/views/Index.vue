@@ -29,7 +29,6 @@ http.get('/users').then((res) => {
 
 
 addMenuOptions('left', 'index', 'Index',)
-addMenuOptions('left', 'index', 'Index',)
 addMenuOptions('left', 'errors.404', '404',)
 
 </script>

@@ -2,10 +2,25 @@ import {createStore} from "vuex";
 import createPersistedstate from "../persistedstate";
 
 export default createStore({
-    plugins: [createPersistedstate()],
+    plugins: [createPersistedstate({
+        key: 'user'
+    })],
     state: {
         token: null,
-        user: {},
+        user: {
+            uuid: '',
+            name: '',
+            email: '',
+            email_md5: '',
+            real_name: '',
+            birthday_at: '',
+            balance: 0,
+            banned_reason: '',
+            user_group_id: '',
+            user_group: {},
+            created_at: '',
+            updated_at: ''
+        },
     },
     actions: {
         updateToken({commit}, token) {

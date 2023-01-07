@@ -16,8 +16,12 @@ import 'vfonts/Lato.css'
 // 等宽字体
 import 'vfonts/FiraCode.css'
 
+// 注册菜单项目
+import './config/menus'
 
-// 解决央视冲突
+
+
+// 解决样式冲突
 const meta = document.createElement('meta')
 meta.name = 'naive-ui-style'
 document.head.appendChild(meta)
