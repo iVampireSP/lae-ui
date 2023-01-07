@@ -31,7 +31,10 @@
 
           <router-view/>
 
-          <div style="margin-top: 100px"></div>
+          <div style="margin-top: 10rem" v-if="(isMobile)"></div>
+          <div style="margin-top: 8rem" v-if="(!isMobile && !isTablet)"></div>
+
+
         </n-layout>
       </n-layout>
     </n-layout>
