@@ -65,10 +65,14 @@
 
                   <n-form-item path="remote_port" label="远程端口"
                                v-if="create_tunnel.protocol === 'tcp' || create_tunnel.protocol === 'udp'">
-                    <n-input v-model:value="create_tunnel.remote_port"
-                             :placeholder="'需要输入一个在 ' + port_range.min_port + ' 和 ' + port_range.max_port + ' 之间的端口'"/>
+                    <n-input-group>
+                      <n-input v-model:value="create_tunnel.remote_port"
+                               :placeholder="'需要输入一个在 ' + port_range.min_port + ' 和 ' + port_range.max_port + ' 之间的端口'"/>
+                      <n-button type="primary" ghost @click="randomPort">
+                        {{ isMobile ? '随机' : '随机生成' }}
+                      </n-button>
+                    </n-input-group>
                   </n-form-item>
-
                 </n-gi>
 
 
@@ -215,7 +219,7 @@ const filterServer = () => {
     return server[allow_protocol]
   })
 
-  // 在根据隧道数量过滤
+  // 再根据隧道数量过滤
   filter_servers = filter_servers.filter(server => server.tunnels < server.max_tunnels)
 
   // 返回过滤后的服务器
@@ -316,6 +320,15 @@ const rules = {
 };
 
 const message = useMessage()
+
+function random(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function randomPort() {
+  // 随机生成一个端口，在 min_port - max_port 范围内
+  create_tunnel.value.remote_port = random(port_range.value.min_port, port_range.value.max_port).toString()
+}
 
 function handleCreate() {
   form.value?.validate().then((errors) => {

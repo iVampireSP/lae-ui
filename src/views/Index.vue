@@ -1,13 +1,26 @@
 <template>
   <div>
-    <NH1>欢迎, {{ user.state.user.name }}。</NH1>
+    <n-card title="用户信息" size="small">
+      <n-list>
+      <n-list-item>
+      <n-avatar :src="avatar" />
+      <NH3>{{ user.state.user.name }} # {{ id }}</NH3></n-list-item>
+      </n-list>
+      <n-tag>{{ user_group }}</n-tag>
+    </n-card>
+    <n-card title="财务" size="small">
+      <NH3>余额: {{ data.balance }}</NH3>
+    </n-card>
+
+    <router-link :to="{name: 'auth.login'}">更换账号</router-link>
+    <br />
 
     {{ data }}
   </div>
 </template>
 
 <script setup>
-import {NH1} from 'naive-ui'
+import {NList , NListItem, NAvatar, NH3 , NCard , NTag} from 'naive-ui'
 
 import {addMenuOptions, removeAllMenuOptions} from "../config/menuOptions.js";
 
@@ -19,10 +32,15 @@ import http from "../plugins/http";
 import {ref} from "vue";
 
 const data = ref({})
+const id = ref()
+const balance = ref()
+const user_group_name = ref()
+const avatar = conf.avatar + user.state.user.email_md5 + '?s=64'
 
 http.get('/users').then((res) => {
   // message.create('success',)
-
+  id.value = res.data["id"]
+  balance.value = res.data["balances"]
   data.value = res.data
 })
 
