@@ -28,9 +28,10 @@ import user from "../plugins/stores/user";
 
 import http from "../plugins/http";
 
+import conf from "../config/api"
+
 // import {message} from "../utils/layout.js";
 import {ref} from "vue";
-
 const data = ref({})
 const id = ref()
 const balance = ref()
@@ -42,13 +43,21 @@ http.get('/users').then((res) => {
   id.value = res.data["id"]
   balance.value = res.data["balances"]
   data.value = res.data
+  user_group_name.value = res.data.user_group["name"]
 })
+// 用户组别判断
+let user_group
+console.log(user_group_name)
+if (user_group_name == null) {
+  user_group = '普通用户'
+} else {
+  user_group = user_group_name
+}
 
 removeAllMenuOptions('left')
 
 addMenuOptions('left', 'index', 'Index',)
 addMenuOptions('left', 'errors.404', '404',)
-
 </script>
 
 <style scoped>

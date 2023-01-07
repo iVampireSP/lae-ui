@@ -17,9 +17,11 @@ export default createStore({
             balance: 0,
             banned_reason: '',
             user_group_id: '',
-            user_group: {},
+            user_group: {
+                name: '',
+            },
             created_at: '',
-            updated_at: ''
+            updated_at: '',
         },
     },
     actions: {
