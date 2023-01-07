@@ -7,13 +7,11 @@
           <n-notification-provider>
             <n-dialog-provider>
               <LayoutVue/>
-
             </n-dialog-provider>
           </n-notification-provider>
         </n-message-provider>
       </n-loading-bar-provider>
     </n-config-provider>
-
 </template>
 
 <script setup>

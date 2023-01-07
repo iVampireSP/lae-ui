@@ -31,19 +31,19 @@
           </n-popover>
           <div v-else>
 
-            <n-button
-                size="small"
-                tag="a"
-                quaternary
-                class="nav-picker"
-                href="#"
-                target="_blank"
-            >
-              GitHub
-            </n-button>
-            <n-text class="nav-picker padded">
-              version
-            </n-text>
+            <!--            <n-button-->
+            <!--                size="small"-->
+            <!--                tag="a"-->
+            <!--                quaternary-->
+            <!--                class="nav-picker"-->
+            <!--                href="#"-->
+            <!--                target="_blank"-->
+            <!--            >-->
+            <!--              GitHub-->
+            <!--            </n-button>-->
+            <!--            <n-text class="nav-picker padded">-->
+            <!--              version-->
+            <!--            </n-text>-->
           </div>
         </n-grid-item>
 
@@ -60,7 +60,7 @@
 </style>
 
 <script setup>
-import {NButton, NGrid, NGridItem, NIcon, NLayout, NLayoutHeader, NMenu, NPopover, NText} from 'naive-ui'
+import {NGrid, NGridItem, NIcon, NLayout, NLayoutHeader, NMenu, NPopover} from 'naive-ui'
 
 import {useIsMobile, useIsTablet} from "../utils/composables.js";
 
