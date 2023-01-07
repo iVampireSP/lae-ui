@@ -14,26 +14,33 @@
         v-model:value="tab"
     >
       <n-tab-pane name="clone" tab="克隆">
+        <n-spin :show="creating">
+          <n-list hoverable clickable v-if="tunnels.length > 0">
+            <!--  for tunnel in tunnels, key is array index   -->
+            <template v-for="($tunnel, index) in tunnels" :key="index">
+              <n-list-item @click="clone($tunnel)">
+                <n-thing :title="$tunnel.name" content-style="margin-top: 10px;">
+                  <template #description>
+                    <n-space size="small" style="margin-top: 4px">
+                      <n-tag :bordered="false" type="info" size="small">
+                        {{ $tunnel.protocol.toUpperCase() }}:{{ $tunnel.remote_port }}
+                      </n-tag>
+                      <n-tag :bordered="false" type="info" size="small" v-if="$tunnel.custom_domain">
+                        {{ $tunnel.custom_domain }}
+                      </n-tag>
+                    </n-space>
+                  </template>
+                </n-thing>
+              </n-list-item>
+            </template>
+          </n-list>
 
-        <n-list hoverable clickable>
-          <!--  for tunnel in tunnels, key is array index   -->
-          <template v-for="($tunnel, index) in tunnels" :key="index">
-            <n-list-item @click="clone($tunnel)">
-              <n-thing :title="$tunnel.name" content-style="margin-top: 10px;">
-                <template #description>
-                  <n-space size="small" style="margin-top: 4px">
-                    <n-tag :bordered="false" type="info" size="small">
-                      {{ $tunnel.protocol.toUpperCase() }}:{{ $tunnel.remote_port }}
-                    </n-tag>
-                    <n-tag :bordered="false" type="info" size="small" v-if="$tunnel.custom_domain">
-                      {{ $tunnel.custom_domain }}
-                    </n-tag>
-                  </n-space>
-                </template>
-              </n-thing>
-            </n-list-item>
-          </template>
-        </n-list>
+          <div v-else>
+            <n-empty description="您还没有创建任何隧道。"/>
+          </div>
+        </n-spin>
+
+
       </n-tab-pane>
       <n-tab-pane name="create" tab="创建">
         <n-spin :show="creating">
@@ -116,6 +123,7 @@ import {ref, watch} from 'vue'
 import {
   NButton,
   NCard,
+  NEmpty,
   NForm,
   NFormItem,
   NGi,
@@ -135,16 +143,15 @@ import {
   NTag,
   NText,
   NThing,
-    useMessage
+  useMessage
 } from 'naive-ui'
 
 import http from "../../../plugins/http";
 
 const tab = ref('clone')
 
-// tab.value = 'create'
-
 const tunnels = ref([])
+
 
 const create_tunnel = ref({
   name: '',
@@ -208,7 +215,15 @@ const filterServer = () => {
 
 
 http.get('/modules/frp/hosts').then((res) => {
+  creating.value = true
+
   tunnels.value = res.data
+
+  if (tunnels.value.length === 0) {
+    tab.value = 'create'
+  }
+}).finally(() => {
+  creating.value = false
 })
 
 http.get('/modules/frp/servers').then((res) => {

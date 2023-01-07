@@ -9,14 +9,22 @@ function renderIcon(icon) {
 
 const selectedKey = ref("");
 const menuInst = ref(null);
-const selectAndExpand = (key) => {
-    selectedKey.value = key;
-    menuInst.value?.showOption(key);
+const selectAndExpand = (route) => {
+    if (route.params) {
+        selectedKey.value = route.name + JSON.stringify(route.params);
+    } else {
+        selectedKey.value = route.name;
+    }
+
+    // console.log('读取 key', selectedKey.value)
+
+    menuInst.value?.showOption(selectedKey.value);
+
 };
 
 // listen to route change
 router.afterEach((to) => {
-    selectAndExpand(to.name);
+    selectAndExpand(to);
 })
 
 
@@ -26,17 +34,18 @@ const menuOptions = ref({
 })
 
 const validateIfDuplicate = (type, route_name) => {
-    if (type === "top") {
-        return menuOptions.value.top.find((option) => option.key === route_name);
-    } else if (type === "left") {
-        return menuOptions.value.left.find((option) => option.key === route_name);
-    }
+    return menuOptions.value[type].find((option) => option.key === route_name);
 }
 
-const addMenuOptions = (type, route_name, text, icon = null) => {
+const addMenuOptions = (type, route_options, text, icon = null) => {
 
-    if (validateIfDuplicate(type, route_name)) {
-        console.warn(`[menuOptions] ${type} 菜单项目注册失败，因为有重复的名称: ${route_name}`);
+    // if it is a string, convert it to object
+    if (typeof route_options === 'string') {
+        route_options = {name: route_options}
+    }
+
+    if (validateIfDuplicate(type, route_options.name)) {
+        console.warn(`[menuOptions] 忽略 ${type} 菜单项目，因为有重复的名称: ${route_options.name}`);
         return;
     }
 
@@ -44,24 +53,36 @@ const addMenuOptions = (type, route_name, text, icon = null) => {
         label: () => h(
             RouterLink,
             {
-                to: {
-                    name: route_name
-                }
+                to: route_options
             },
             {default: () => text}
         ),
-        key: route_name,
+    }
+
+    if (route_options.params) {
+
+        let params = route_options.params;
+
+        // 如果有数字，就转换成字符串
+        for (let key in params) {
+            if (typeof params[key] === 'number') {
+                params[key] = params[key].toString();
+            }
+        }
+
+        data.key = route_options.name + JSON.stringify(params);
+
+        // console.log('注册 key', data.key)
+
+    } else {
+        data.key = route_options.name + "{}";
     }
 
     if (icon !== null) {
         data.icon = renderIcon(icon)
     }
 
-    if (type === "top") {
-        menuOptions.value.top.push(data)
-    } else if (type === "left") {
-        menuOptions.value.left.push(data)
-    }
+    menuOptions.value[type].push(data);
 }
 
 const addMultiMenuOptions = (type, options) => {
@@ -76,6 +97,12 @@ const addMultiMenuOptions = (type, options) => {
     })
 }
 
+const addMenuDivider =  (type) => {
+    menuOptions.value[type].push({
+        type: 'divider',
+    })
+}
+
 const removeAllMenuOptions = (type) => {
     menuOptions.value[type] = [];
 }
@@ -87,5 +114,6 @@ export {
     menuInst,
     addMenuOptions,
     addMultiMenuOptions,
-    removeAllMenuOptions
+    removeAllMenuOptions,
+    addMenuDivider
 }

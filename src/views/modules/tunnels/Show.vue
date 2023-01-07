@@ -2,10 +2,9 @@
 
 </template>
 
-<script>
-export default {
-  name: "Show"
-}
+<script setup>
+
+
 </script>
 
 <style scoped>
