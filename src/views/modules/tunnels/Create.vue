@@ -1,120 +1,122 @@
 <template>
-  <NH1>欢迎使用 ME Frp</NH1>
+  <div>
+    <NH1>欢迎使用 ME Frp</NH1>
 
-  <NP>我们将引导您创建隧道。</NP>
+    <NP>我们将引导您创建隧道。</NP>
 
-  <n-card>
-    <n-tabs
-        class="card-tabs"
-        default-value="clone"
-        size="large"
-        animated
-        style="margin: 0 -4px"
-        pane-style="padding-left: 4px; padding-right: 4px; box-sizing: border-box;"
-        v-model:value="tab"
-    >
-      <n-tab-pane name="clone" tab="克隆">
-        <n-spin :show="creating">
-          <n-list hoverable clickable v-if="tunnels.length > 0">
-            <!--  for tunnel in tunnels, key is array index   -->
-            <template v-for="($tunnel, index) in tunnels" :key="index">
-              <n-list-item @click="clone($tunnel)">
-                <n-thing :title="$tunnel.name" content-style="margin-top: 10px;">
-                  <template #description>
-                    <n-space size="small" style="margin-top: 4px">
-                      <n-tag :bordered="false" type="info" size="small">
-                        {{ $tunnel.protocol.toUpperCase() }}:{{ $tunnel.remote_port }}
-                      </n-tag>
-                      <n-tag :bordered="false" type="info" size="small" v-if="$tunnel.custom_domain">
-                        {{ $tunnel.custom_domain }}
-                      </n-tag>
-                    </n-space>
-                  </template>
-                </n-thing>
-              </n-list-item>
-            </template>
-          </n-list>
+    <n-card>
+      <n-tabs
+          class="card-tabs"
+          default-value="clone"
+          size="large"
+          animated
+          style="margin: 0 -4px"
+          pane-style="padding-left: 4px; padding-right: 4px; box-sizing: border-box;"
+          v-model:value="tab"
+      >
+        <n-tab-pane name="clone" tab="克隆">
+          <n-spin :show="creating">
+            <n-list hoverable clickable v-if="tunnels.length > 0">
+              <!--  for tunnel in tunnels, key is array index   -->
+              <template v-for="($tunnel, index) in tunnels" :key="index">
+                <n-list-item @click="clone($tunnel)">
+                  <n-thing :title="$tunnel.name" content-style="margin-top: 10px;">
+                    <template #description>
+                      <n-space size="small" style="margin-top: 4px">
+                        <n-tag :bordered="false" type="info" size="small">
+                          {{ $tunnel.protocol.toUpperCase() }}:{{ $tunnel.remote_port }}
+                        </n-tag>
+                        <n-tag :bordered="false" type="info" size="small" v-if="$tunnel.custom_domain">
+                          {{ $tunnel.custom_domain }}
+                        </n-tag>
+                      </n-space>
+                    </template>
+                  </n-thing>
+                </n-list-item>
+              </template>
+            </n-list>
 
-          <div v-else>
-            <n-empty description="您还没有创建任何隧道。"/>
-          </div>
-        </n-spin>
+            <div v-else>
+              <n-empty description="您还没有创建任何隧道。"/>
+            </div>
+          </n-spin>
 
 
-      </n-tab-pane>
-      <n-tab-pane name="create" tab="创建">
-        <n-spin :show="creating">
-          <n-form :rules="rules" ref="form" :model="create_tunnel">
-            <n-grid x-gap="12" :cols="2">
-              <n-gi>
-                <n-form-item label="隧道名称" path="name">
-                  <n-input v-model:value="create_tunnel.name" @keydown.enter.prevent/>
-                </n-form-item>
+        </n-tab-pane>
+        <n-tab-pane name="create" tab="创建">
+          <n-spin :show="creating">
+            <n-form :rules="rules" ref="form" :model="create_tunnel">
+              <n-grid x-gap="12" :cols="2">
+                <n-gi>
+                  <n-form-item label="隧道名称" path="name">
+                    <n-input v-model:value="create_tunnel.name" @keydown.enter.prevent/>
+                  </n-form-item>
 
-                <n-form-item label="本机地址" path="local_address">
-                  <n-input v-model:value="create_tunnel.local_address"/>
-                </n-form-item>
+                  <n-form-item label="本机地址" path="local_address">
+                    <n-input v-model:value="create_tunnel.local_address"/>
+                  </n-form-item>
 
-                <n-form-item label="绑定域名" path="custom_domain"
-                             v-if="create_tunnel.protocol === 'http' || create_tunnel.protocol === 'https'">
-                  <n-input v-model:value="create_tunnel.custom_domain" placeholder="输入一个存在的域名"/>
-                </n-form-item>
+                  <n-form-item label="绑定域名" path="custom_domain"
+                               v-if="create_tunnel.protocol === 'http' || create_tunnel.protocol === 'https'">
+                    <n-input v-model:value="create_tunnel.custom_domain" placeholder="输入一个存在的域名"/>
+                  </n-form-item>
 
-                <n-form-item path="remote_port" label="远程端口"
-                             v-if="create_tunnel.protocol === 'tcp' || create_tunnel.protocol === 'udp'">
-                  <n-input v-model:value="create_tunnel.remote_port"
-                           :placeholder="'需要输入一个在 ' + port_range.min_port + ' 和 ' + port_range.max_port + ' 之间的端口'"/>
-                </n-form-item>
+                  <n-form-item path="remote_port" label="远程端口"
+                               v-if="create_tunnel.protocol === 'tcp' || create_tunnel.protocol === 'udp'">
+                    <n-input v-model:value="create_tunnel.remote_port"
+                             :placeholder="'需要输入一个在 ' + port_range.min_port + ' 和 ' + port_range.max_port + ' 之间的端口'"/>
+                  </n-form-item>
 
-              </n-gi>
-              <n-gi>
-                <n-form-item label="传输协议" path="protocol">
-                  <n-radio-group v-model:value="create_tunnel.protocol" name="protocol">
-                    <n-radio-button
-                        value="tcp"
-                        label="TCP"
+                </n-gi>
+                <n-gi>
+                  <n-form-item label="传输协议" path="protocol">
+                    <n-radio-group v-model:value="create_tunnel.protocol" name="protocol">
+                      <n-radio-button
+                          value="tcp"
+                          label="TCP"
+                      />
+                      <n-radio-button
+                          value="udp"
+                          label="UDP"
+                      />
+                      <n-radio-button
+                          value="http"
+                          label="HTTP"
+                      />
+                      <n-radio-button
+                          value="https"
+                          label="HTTPS"
+                      />
+                    </n-radio-group>
+                  </n-form-item>
+
+                  <n-form-item label="选择服务器" path="server_id">
+                    <n-select
+                        v-model:value="create_tunnel.server_id"
+                        placeholder="Select"
+                        :options="filterServer()"
+                        v-if="filterServer().length > 0"
                     />
-                    <n-radio-button
-                        value="udp"
-                        label="UDP"
-                    />
-                    <n-radio-button
-                        value="http"
-                        label="HTTP"
-                    />
-                    <n-radio-button
-                        value="https"
-                        label="HTTPS"
-                    />
-                  </n-radio-group>
-                </n-form-item>
-
-                <n-form-item label="选择服务器" path="server_id">
-                  <n-select
-                      v-model:value="create_tunnel.server_id"
-                      placeholder="Select"
-                      :options="filterServer()"
-                      v-if="filterServer().length > 0"
-                  />
-                  <n-text v-else>没有可用的服务器</n-text>
-                </n-form-item>
+                    <n-text v-else>没有可用的服务器</n-text>
+                  </n-form-item>
 
 
-              </n-gi>
+                </n-gi>
 
-            </n-grid>
+              </n-grid>
 
-            <n-button type="primary" block secondary strong @click="handleCreate">
-              新建
-            </n-button>
-          </n-form>
-        </n-spin>
+              <n-button type="primary" block secondary strong @click="handleCreate">
+                新建
+              </n-button>
+            </n-form>
+          </n-spin>
 
 
-      </n-tab-pane>
-    </n-tabs>
-  </n-card>
+        </n-tab-pane>
+      </n-tabs>
+    </n-card>
 
+  </div>
 
 </template>
 

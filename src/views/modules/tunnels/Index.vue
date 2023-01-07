@@ -1,5 +1,7 @@
 <template>
-  tunnel index
+  <div>
+    tunnel index
+  </div>
 </template>
 
 <script setup>

@@ -20,10 +20,9 @@ http.get('/modules/frp/hosts').then((res) => {
     for (let i = 0; i < res.data.length; i++) {
       const tunnel = res.data[i]
 
-      console.log(tunnel.id)
       addMenuOptions('left', {
 
-        name: 'modules.tunnels.show', params: {id: tunnel.id}
+        name: 'modules.tunnels.show', params: {id: tunnel.host_id}
       }, tunnel.name)
     }
 
