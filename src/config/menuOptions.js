@@ -104,6 +104,12 @@ const removeAllMenuOptions = (type) => {
     menuOptions.value[type] = [];
 }
 
+const removeMenuOption = (type, route_name) => {
+    // 删除指定 key 的菜单项
+    menuOptions.value[type] = menuOptions.value[type].filter((option) => option.key !== route_name + "{}");
+}
+
+
 menuOptions.value['menu'].push({
     label: () => h(
         RouterLink,
@@ -124,5 +130,6 @@ export {
     addMenuOptions,
     addMultiMenuOptions,
     removeAllMenuOptions,
-    addMenuDivider
+    addMenuDivider,
+    removeMenuOption
 }

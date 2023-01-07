@@ -126,7 +126,7 @@
 </template>
 
 <script setup>
-import {ref, watch} from 'vue'
+import {computed, ref, watch} from 'vue'
 import {
   NButton,
   NCard,
@@ -157,13 +157,15 @@ import {
 import http from "../../../plugins/http";
 
 import {useIsMobile} from "../../../utils/composables.js";
+import tunnelsStore from "../../../plugins/stores/tunnels";
 
 const tab = ref('clone')
 
-const tunnels = ref([])
+const tunnels = computed(() => {
+  return tunnelsStore.state.tunnels
+})
 
 const isMobile = useIsMobile()
-
 
 const create_tunnel = ref({
   name: '',
@@ -225,18 +227,6 @@ const filterServer = () => {
   })
 }
 
-
-http.get('/modules/frp/hosts').then((res) => {
-  creating.value = true
-
-  tunnels.value = res.data
-
-  if (tunnels.value.length === 0) {
-    tab.value = 'create'
-  }
-}).finally(() => {
-  creating.value = false
-})
 
 http.get('/modules/frp/servers').then((res) => {
   servers.value = res.data
@@ -334,11 +324,12 @@ function handleCreate() {
       creating.value = true
 
       http.post('/modules/frp/hosts', create_tunnel.value).then((res) => {
-        tunnels.value.push(res.data)
+
+        tunnelsStore.commit('addTunnel', res.data)
+
         message.success('隧道已创建，欢迎使用 ME Frp。')
       }).finally(() => {
         creating.value = false
-
       })
     }
   })
