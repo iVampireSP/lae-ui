@@ -12,7 +12,6 @@ import {ref} from 'vue'
 
 import tunnelsStore from "../../../plugins/stores/tunnels";
 
-
 const tunnels = ref([])
 
 http.get('/modules/frp/hosts').then((res) => {

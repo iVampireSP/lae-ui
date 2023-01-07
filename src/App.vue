@@ -1,5 +1,4 @@
 <template>
-
     <n-config-provider :date-locale="dateZhCN" :locale="zhCN" :theme="theme" preflight-style-disabled>
       <n-global-style/>
       <n-loading-bar-provider>
