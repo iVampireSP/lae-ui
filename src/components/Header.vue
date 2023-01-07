@@ -4,8 +4,11 @@
 
       <n-grid cols="2">
         <n-grid-item>
+<!--          <router-link :to="{name: 'index'}" class="lae-logo ml-2" v-if="isMobile"></router-link>-->
+
+          <n-menu mode="horizontal" :value="selectedKey" :options="menuOptions.menu" />
+
           <n-menu mode="horizontal" :value="selectedKey" :options="menuOptions.top" v-if="(!isMobile)"/>
-          <router-link :to="{name: 'index'}" class="lae-logo ml-2" v-if="isMobile"></router-link>
         </n-grid-item>
 
         <n-grid-item class="text-right flex items-center justify-end mr-1.5">
@@ -26,6 +29,11 @@
               </n-icon>
             </template>
             <div style="overflow: auto; max-height: 79vh">
+              <n-menu
+                  :value="selectedKey"
+                  :options="menuOptions.top"
+                  :indent="18"
+              />
               <n-menu
                   :value="selectedKey"
                   :options="menuOptions.left"

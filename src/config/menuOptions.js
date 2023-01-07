@@ -26,7 +26,8 @@ router.afterEach((to) => {
 
 const menuOptions = ref({
     top: [],
-    left: []
+    left: [],
+    menu: []
 })
 
 const validateIfDuplicate = (type, route_name) => {
@@ -103,7 +104,7 @@ const removeAllMenuOptions = (type) => {
     menuOptions.value[type] = [];
 }
 
-menuOptions.value['top'].push({
+menuOptions.value['menu'].push({
     label: () => h(
         RouterLink,
         {
