@@ -46,7 +46,9 @@
         <n-tab-pane name="create" tab="创建">
           <n-spin :show="creating">
             <n-form :rules="rules" ref="form" :model="create_tunnel">
-              <n-grid x-gap="12" :cols="2">
+              <n-grid x-gap="12" cols="1 s:2" responsive="screen">
+
+
                 <n-gi>
                   <n-form-item label="隧道名称" path="name">
                     <n-input v-model:value="create_tunnel.name" @keydown.enter.prevent/>
@@ -68,8 +70,11 @@
                   </n-form-item>
 
                 </n-gi>
+
+
                 <n-gi>
-                  <n-form-item label="传输协议" path="protocol">
+                  <n-form-item :label="'传输协议' + (isMobile ? '(可滑动)' : '')" path="protocol"
+                               class="overflow-x-auto">
                     <n-radio-group v-model:value="create_tunnel.protocol" name="protocol">
                       <n-radio-button
                           value="tcp"
@@ -132,6 +137,7 @@ import {
   NGrid,
   NH1,
   NInput,
+  NInputGroup,
   NList,
   NListItem,
   NP,
@@ -150,9 +156,13 @@ import {
 
 import http from "../../../plugins/http";
 
+import {useIsMobile} from "../../../utils/composables.js";
+
 const tab = ref('clone')
 
 const tunnels = ref([])
+
+const isMobile = useIsMobile()
 
 
 const create_tunnel = ref({
