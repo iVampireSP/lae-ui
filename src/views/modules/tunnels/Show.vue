@@ -5,6 +5,76 @@
     </div>
 
     <div id="chart" style="height: 500px"></div>
+
+    <n-tabs animated type="line">
+      <n-tab-pane name="status" tab="隧道状态">
+        <NH2>连接信息</NH2>
+        <NH3 v-if="tunnel.protocol === 'http' || tunnel.protocol === 'https'">域名解析到:
+          {{ tunnel.server.server_address }}
+        </NH3>
+        <NH3 v-else>使用 {{ tunnel.server.server_address }}:{{ tunnel.remote_port }} 来连接到服务器</NH3>
+      </n-tab-pane>
+      <n-tab-pane name="config_all" tab="全部配置">
+        <n-popover trigger="hover">
+          <template #trigger>
+            <n-input
+                :autosize="{
+              minRows: 10
+            }"
+                :value="tunnel.config.server + '\n\n' + tunnel.config.client"
+                placeholder=""
+                readonly
+                type="textarea"
+                @click="copy(tunnel.config.server + '\n\n' + tunnel.config.client)"
+            />
+          </template>
+          <span>点击复制</span>
+        </n-popover>
+      </n-tab-pane>
+      <n-tab-pane name="server" tab="服务端">
+        <n-popover trigger="hover">
+          <template #trigger>
+            <n-input
+                :autosize="{
+                  minRows: 4
+                }"
+                :value="tunnel.config.server"
+                placeholder=""
+                readonly
+                type="textarea"
+                @click="copy(tunnel.config.server)"
+            />
+          </template>
+          <span>点击复制</span>
+        </n-popover>
+      </n-tab-pane>
+      <n-tab-pane name="client" tab="客户端">
+        <n-popover trigger="hover">
+          <template #trigger>
+            <n-input
+                :autosize="{
+                  minRows: 4
+                }"
+                :value="tunnel.config.client"
+                placeholder=""
+                readonly
+                type="textarea"
+                @click="copy(tunnel.config.client)"
+            />
+          </template>
+          <span>点击复制</span>
+        </n-popover>
+      </n-tab-pane>
+      <n-tab-pane name="post_config" tab="传入配置">
+        <n-data-table
+            :bordered="true"
+            :columns="columns"
+            :data="data"
+        />
+      </n-tab-pane>
+    </n-tabs>
+
+    <div class="mt-80"></div>
   </div>
 
 
@@ -13,7 +83,7 @@
 <script setup>
 
 import {onMounted, onUnmounted, ref} from 'vue'
-import {NH1} from 'naive-ui'
+import {NDataTable, NH1, NH2, NH3, NInput, NPopover, NTabPane, NTabs} from 'naive-ui'
 import {useRoute} from "vue-router";
 
 import Humanize from 'humanize-plus'
@@ -21,6 +91,7 @@ import Humanize from 'humanize-plus'
 import http from "../../../plugins/http";
 
 import * as echarts from 'echarts'
+import {message} from "../../../utils/layout.js";
 
 
 const router = useRoute()
@@ -109,6 +180,29 @@ let chartOptions = {
 
 }
 
+const createColumns = () => {
+  return [
+    {
+      title: "配置键名称",
+      key: "key"
+    },
+    {
+      title: "配置键值",
+      key: "value"
+    }
+  ];
+};
+
+const columns = createColumns()
+// TODO: 使用 key, value 来填充 data
+
+let data = []
+
+function copy(content) {
+  navigator.clipboard.writeText(content);
+  message.success("复制成功");
+}
+
 function initChart() {
   let chartDom = document.getElementById('chart')
   chart = echarts.init(chartDom, {
@@ -194,5 +288,4 @@ onUnmounted(() => {
   })
 
 })
-
 </script>

@@ -28,10 +28,8 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { NCard, NH1, NP, NDivider } from 'naive-ui'
-
-// import http from "../../../plugins/http";
+import {computed} from 'vue'
+import {NCard, NDivider, NH1, NP, NSpin,} from 'naive-ui'
 
 import tunnelsStore from "../../../plugins/stores/tunnels";
 
