@@ -1,11 +1,14 @@
 <template>
-  <n-result description="生活总归带点荒谬" status="404" title="资源不存在">
+  <n-result
+      status="500"
+      title="服务器错误"
+      description="应该多雇点程序员了"
+  >
     <template #icon>
-      <Lottie name="Thinking-face" :height="250" />
+      <Lottie name="Scrunched-mouth" :height="250" />
     </template>
-
     <template #footer>
-      <n-button @click="goTo('index')">回到首页</n-button>
+      <n-button>散财消灾</n-button>
     </template>
   </n-result>
 </template>
@@ -16,9 +19,11 @@ import {NButton, NResult} from 'naive-ui'
 import router from '../../plugins/router'
 import Lottie from "../../components/Lottie.vue";
 
-
 function goTo(route_name) {
   router.push({name: route_name})
 }
-
 </script>
+
+<style scoped>
+
+</style>

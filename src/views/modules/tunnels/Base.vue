@@ -3,16 +3,26 @@
 </template>
 
 <script setup>
-import {addMenuDivider, addMenuOptions, removeAllMenuOptionsThen} from "../../../config/menuOptions.js";
+import {
+  addMenuDivider,
+  addMenuOptions,
+  removeAllMenuOptions,
+  removeAllMenuOptionsThen
+} from "../../../config/menuOptions.js";
 
-import {AddOutline, ListOutline} from "@vicons/ionicons5";
+import {AddOutline, ClipboardOutline, ListOutline} from "@vicons/ionicons5";
 import http from "../../../plugins/http.js";
 
 import {ref} from 'vue'
 
 import tunnelsStore from "../../../plugins/stores/tunnels";
+import TextAvatar from "../../../components/icons/TextAvatar.vue";
 
 const tunnels = ref([])
+
+
+removeAllMenuOptions()
+// reRegisterMenu()
 
 http.get('/modules/frp/hosts').then((res) => {
   tunnels.value = res.data
@@ -33,21 +43,50 @@ function reRegisterMenu() {
       for (let i = 0; i < tunnels.value.length; i++) {
         const tunnel = tunnels.value[i]
 
+
+        // menuOptions.value.left.push({
+        //   label: () => h(
+        //       RouterLink,
+        //       {
+        //         to: {name: 'index'},
+        //       },
+        //       {default: () => h('span', {class: 'lae-logo mt-1', width: 40, height: 25})},
+        //   ),
+        //   key: 'index',
+        // })
+        // default: () => h(NAvatar, {
+        //     style: {
+        //       'background-color': 'red',
+        //     }
+        //   },)
+        //
+
+
         addMenuOptions('left', {
           name: 'modules.tunnels.show', params: {id: tunnel.host_id}
-        }, tunnel.name)
+        }, tunnel.name, TextAvatar, {
+          text: tunnel.name[0],
+          color: 'yellow',
+          backgroundColor: 'red',
+        })
+        //
+        // addMenuOptions('left', {
+        //   name: 'modules.tunnels.show', params: {id: tunnel.host_id}
+        // }, tunnel.name)
+
       }
     }
   })
 }
 
+//
 // subscribe
 tunnelsStore.subscribe((mutation, state) => {
   if (mutation.type === 'setTunnels') {
     tunnels.value = state.tunnels
   }
 
-  reRegisterMenu()
+  // reRegisterMenu()
 })
 
 </script>

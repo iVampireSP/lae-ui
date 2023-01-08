@@ -7,6 +7,12 @@ body {
     --header-height: 64px;
 }
 
+.menu-item {
+    display: inline;
+    position: relative;
+    top: 3px
+}
+
 @media only screen and (max-width: 639px) {
     body {
         overflow: visible;

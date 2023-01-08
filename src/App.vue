@@ -1,5 +1,5 @@
 <template>
-  <n-config-provider :date-locale="dateZhCN" :locale="zhCN" :theme="theme" preflight-style-disabled>
+  <n-config-provider :date-locale="dateZhCN" :locale="zhCN" :theme="theme" :hljs="hljs" preflight-style-disabled>
     <n-global-style/>
     <n-loading-bar-provider>
       <n-message-provider>
@@ -15,7 +15,10 @@
 
 <script setup>
 import {computed} from 'vue'
+import hljs from 'highlight.js/lib/core';
+import ini from 'highlight.js/lib/languages/ini'
 
+hljs.registerLanguage('ini', ini)
 import LayoutVue from './components/Layout.vue'
 
 import {

@@ -1,41 +1,36 @@
 <template>
   <div>
-    <NH1>欢迎使用 ME Frp</NH1>
+    <n-h1 prefix="bar">
+      <n-text type="primary">
+        镜缘映射
+      </n-text>
+    </n-h1>
 
-    <div v-if="!tunnels.length" class="text-center mt-10">
-      <NP>您还没有创建隧道</NP>
-      <n-spin size="large"/>
-
-    </div>
-    <n-Card v-if="tunnels.length">
-      <NP>以下是您的隧道</NP>
-      <div v-for="tunnel in tunnels" v-if="tunnels.length">
-        <n-card :title="tunnel.name" size="small">
-          <a v-if="tunnel.protocol === ('http' || 'https')" :href="tunnel.protocol + '://' + tunnel.custom_domain"
-             style="color: #2080f0" target="_blank">
-            {{ tunnel.protocol + "://" + tunnel.custom_domain }}
-          </a>
-          <span v-else>
-          <span v-if="tunnel.server">
-            {{ tunnel.protocol + '://' + tunnel.server.server_address + ':' + tunnel.remote_port }}
-          </span>
-        </span>
-        </n-card>
-        <n-divider dashed></n-divider>
-      </div>
-    </n-Card>
+    <Tunnels :tunnels="tunnels" :next="go"/>
   </div>
 </template>
 
 <script setup>
 import {computed} from 'vue'
-import {NCard, NDivider, NH1, NP, NSpin,} from 'naive-ui'
+import {NH1, NText} from 'naive-ui'
+
+import router from '../../../plugins/router'
 
 import tunnelsStore from "../../../plugins/stores/tunnels";
+import Tunnels from "./components/Tunnels.vue";
 
 const tunnels = computed(() => {
   return tunnelsStore.state.tunnels
 })
+
+const go = (tunnel) => {
+  router.push({
+    name: 'modules.tunnels.show',
+    params: {
+      id: tunnel.host_id
+    }
+  })
+}
 
 </script>
 

@@ -1,13 +1,17 @@
 <template>
-  <!--  <div>addddddddddddddddddd</div>-->
   <n-layout v-if="menuOptions.top.length" style="">
     <n-layout-header bordered class="layout-header">
       <n-grid cols="2">
         <n-grid-item>
-          <!--          <router-link :to="{name: 'index'}" class="lae-logo ml-2" v-if="isMobile"></router-link>-->
+          <div class="menu-item">
+            <n-menu  :options="menuOptions.menu" :value="selectedKey"
+                    mode="horizontal"/>
 
-          <n-menu :options="menuOptions.menu" :value="selectedKey" mode="horizontal"/>
+          </div>
 
+          <!--            <router-link :to="{name: 'index'}" class="lae-logo ml-2" v-if="isMobile"></router-link>-->
+
+          <!--            <router-link :to="{name: 'index'}" class="lae-logo" style="margin: 0"></router-link>-->
           <n-menu v-if="(!isMobile)" :options="menuOptions.top" :value="selectedKey" mode="horizontal"/>
         </n-grid-item>
 
@@ -46,19 +50,19 @@
           </n-popover>
           <div v-else>
 
-            <!--            <n-button-->
-            <!--                size="small"-->
-            <!--                tag="a"-->
-            <!--                quaternary-->
-            <!--                class="nav-picker"-->
-            <!--                href="#"-->
-            <!--                target="_blank"-->
-            <!--            >-->
-            <!--              GitHub-->
-            <!--            </n-button>-->
-            <!--            <n-text class="nav-picker padded">-->
-            <!--              version-->
-            <!--            </n-text>-->
+<!--            <n-button-->
+<!--                size="small"-->
+<!--                tag="a"-->
+<!--                quaternary-->
+<!--                class="nav-picker"-->
+<!--                href="#"-->
+<!--                target="_blank"-->
+<!--            >-->
+<!--              GitHub-->
+<!--            </n-button>-->
+<!--            <n-text class="nav-picker padded">-->
+<!--              version-->
+<!--            </n-text>-->
           </div>
         </n-grid-item>
 

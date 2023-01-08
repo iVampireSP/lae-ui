@@ -1,5 +1,7 @@
 <template>
-  <router-view :key="route.fullPath"></router-view>
+  <div>
+    <router-view :key="route.fullPath"></router-view>
+  </div>
 </template>
 
 <script setup>
@@ -15,3 +17,4 @@ removeAllMenuOptions('left')
 
 
 </script>
+

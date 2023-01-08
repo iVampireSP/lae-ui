@@ -11,6 +11,7 @@
         <span v-if="user.user_group">
           {{ user.user_group.name }}
         </span>
+
         <span v-else>
           普通用户
         </span>
@@ -31,7 +32,7 @@
 
 import {computed} from "vue";
 
-import {NAvatar, NCard, NH3, NList, NListItem, NTag} from 'naive-ui'
+import {NAvatar, NButton, NButtonGroup, NCard, NH3, NH4, NList, NListItem, NTag} from 'naive-ui'
 
 import {addMenuOptions, removeAllMenuOptions} from "../config/menuOptions.js";
 
@@ -59,4 +60,5 @@ removeAllMenuOptions('left')
 // 注册菜单
 addMenuOptions('left', 'index', 'Index',)
 addMenuOptions('left', 'errors.404', '404',)
+addMenuOptions('left', 'errors.500', '500',)
 </script>

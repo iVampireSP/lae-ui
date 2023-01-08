@@ -5,10 +5,13 @@
 <script setup>
 import {NAvatar} from "naive-ui";
 import {computed} from "vue";
-import conf from "../../config/api.js";
+
+import config from "../../config/api.js";
+import userStore from "../../plugins/stores/user.js";
+
 
 const avatar = computed(() => {
-  return conf.avatar + user.value.email_md5 + '?s=256';
+  return config.avatar + userStore.state.user.email_md5 + '?s=50';
 })
 
 

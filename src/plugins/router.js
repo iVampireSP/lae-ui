@@ -40,6 +40,8 @@ const routes = [
         meta: {
             auth: false,
             title: '登录',
+            collapses: ['left'],
+
         },
         component: () => import('../views/users/Login.vue'),
     },
@@ -47,7 +49,7 @@ const routes = [
         path: '/user',
         name: 'user',
         meta: {
-            hides: ['left'],
+            collapses: ['left'],
             title: '用户中心',
         },
         component: () => import('../views/users/User.vue'),
@@ -119,7 +121,6 @@ const routes = [
         name: 'modules',
         props: true,
         component: () => import('../views/modules/Base.vue'),
-
         meta: {
             auth: true,
         },
@@ -136,6 +137,9 @@ const routes = [
                         path: '',
                         name: 'modules.tunnels.index',
                         component: () => import('../views/modules/tunnels/Index.vue'),
+                        meta: {
+                            title: '隧道列表',
+                        }
                     },
                     {
                         path: 'create',
@@ -143,14 +147,18 @@ const routes = [
                         component: () => import('../views/modules/tunnels/Create.vue'),
                     },
                     {
-                        path: 'compact',
-                        name: 'modules.tunnels.compact',
-                        component: () => import('../views/modules/tunnels/Compact.vue'),
+                        path: 'concat',
+                        name: 'modules.tunnels.concat',
+                        component: () => import('../views/modules/tunnels/Concat.vue'),
                     },
                     {
                         path: ':id',
                         name: 'modules.tunnels.show',
                         component: () => import('../views/modules/tunnels/Show.vue'),
+                        meta: {
+                            collapses: ['left'],
+                            title: '隧道详情',
+                        }
                     }
                 ]
             },
@@ -218,14 +226,25 @@ const routes = [
         ],
     },
 
+
     // Errors routes
     {
-        path: '/errors/404',
-        name: 'errors.404',
-        component: () => import('../views/errors/404.vue'),
-        meta: {
-            auth: false,
-        },
+        path: '/errors',
+        name: 'errors',
+        props: true,
+        component: () => import('../views/errors/Base.vue'),
+        children: [
+            {
+                path: '404',
+                name: 'errors.404',
+                component: () => import('../views/errors/404.vue'),
+            },
+            {
+                path: '500',
+                name: 'errors.500',
+                component: () => import('../views/errors/500.vue'),
+            }
+        ]
     },
     {
         path: '/:catchAll(.*)',

@@ -5,7 +5,7 @@ import router from './router.js';
 import user from "./stores/user.js";
 import http from "./stores/http.js";
 
-import {dialog} from '../utils/layout'
+import {dialog, loadingBar} from '../utils/layout'
 
 const baseURL = api.api;
 // axios.defaults.withCredentials = true;
@@ -27,7 +27,7 @@ instance.interceptors.request.use(
 
         // loadingBar.start();
 
-        return config;
+        return Promise.resolve(config);
     },
     (error) => {
         console.error(error);
@@ -40,17 +40,12 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
     (res) => {
-
-
         // if 20x
-        // if (res.status >= 200 && res.status < 300) {
-        //     loadingBar.finish();
-        // } else if (res.status >= 400 && res.status < 600) {
-        //     loadingBar.error();
-        //
-        //
-        //
-        // }
+        if (res.status >= 200 && res.status < 300) {
+            loadingBar.finish();
+        } else if (res.status >= 400 && res.status < 600) {
+            loadingBar.error();
+        }
 
         return Promise.resolve(res);
     },
@@ -75,7 +70,11 @@ instance.interceptors.response.use(
         }
 
         if (error.response.status === 429) {
-            alert('请求次数过多');
+            dialog.warning({
+                title: '请求次数过多',
+                content: '歇一会儿，不急。',
+                positiveText: '好吧',
+            })
         } else if (error.response.status === 401) {
             if (router.currentRoute.value.name !== 'login') {
                 if (!http.isAlertedToken) {
@@ -103,6 +102,8 @@ instance.interceptors.response.use(
                 });
             }
         }
+
+        return Promise.reject(error);
     }
 );
 

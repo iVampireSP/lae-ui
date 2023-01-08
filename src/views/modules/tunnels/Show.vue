@@ -1,19 +1,23 @@
 <template>
   <div>
     <div>
-      <NH1>{{ tunnel.name }}</NH1>
+      <n-h1 prefix="bar">{{ tunnel.name }}</n-h1>
     </div>
     <div>
+      <div id="chart" style="height: 400px"></div>
     </div>
-    <div id="chart" style="height: 500px"></div>
 
     <n-tabs animated type="line">
       <n-tab-pane name="status" tab="隧道状态">
         <NH2>连接信息</NH2>
         <NH3 v-if="tunnel.protocol === 'http' || tunnel.protocol === 'https'">域名解析到:
           {{ tunnel.server.server_address }}
-        </NH3>
-        <NH3 v-else>使用 {{ tunnel.server.server_address }}:{{ tunnel.remote_port }} 来连接到服务器</NH3>
+        </n-h3>
+        <n-h3 prefix="bar" v-else>
+          <span v-if="tunnel.server.server_address !== ''">使用 {{ tunnel.server.server_address }}:{{
+              tunnel.remote_port
+            }} 来连接到服务器</span>
+        </n-h3>
       </n-tab-pane>
       <n-tab-pane name="config_all" tab="全部配置">
         <n-popover trigger="hover">
@@ -69,9 +73,11 @@
       <n-tab-pane name="post_config" tab="传入配置">
         <n-data-table
             :bordered="true"
-            :columns="columns"
-            :data="data"
+            :columns="tunnelColumns"
+            :data="tunnelData"
         />
+        <template #trigger>
+        </template>
       </n-tab-pane>
     </n-tabs>
 
@@ -83,8 +89,8 @@
 
 <script setup>
 
-import {onMounted, onUnmounted, ref} from 'vue'
-import {NDataTable, NH1, NH2, NH3, NInput, NPopover, NTabPane, NTabs} from 'naive-ui'
+import {computed, onMounted, onUnmounted, ref} from 'vue'
+import {NCode, NDataTable, NH1, NH2, NH3, NPopover, NTabPane, NTabs} from 'naive-ui'
 import {useRoute} from "vue-router";
 
 import Humanize from 'humanize-plus'
@@ -98,6 +104,7 @@ import {message} from "../../../utils/layout.js";
 const router = useRoute()
 const showChart = ref(false)
 
+// const tunnel = ref({});
 const tunnel = ref({
   name: '',
   traffic: {
@@ -113,7 +120,6 @@ const tunnel = ref({
 })
 
 let chart = undefined
-let chartTimer = undefined
 let chartOptions = {
   tooltip: {
     trigger: 'axis',
@@ -181,24 +187,6 @@ let chartOptions = {
 
 }
 
-const createColumns = () => {
-  return [
-    {
-      title: "配置键名称",
-      key: "key"
-    },
-    {
-      title: "配置键值",
-      key: "value"
-    }
-  ];
-};
-
-const columns = createColumns()
-// TODO: 使用 key, value 来填充 data
-
-let data = []
-
 function copy(content) {
   navigator.clipboard.writeText(content);
   message.success("复制成功");
@@ -217,6 +205,11 @@ function initChart() {
 function refresh() {
   http.get('/modules/frp/hosts/' + router.params.id).then((res) => {
     tunnel.value = res.data
+
+    // tunnel.value.tunnel = res.data.tunnel
+    // console.log(tunnel.value.tunnel.conf)
+    // console.log(tunnel,tunnel.value,res.data);
+    // console.log(res.data);
 
     if (res.data.traffic) {
 
@@ -263,30 +256,59 @@ function refresh() {
 
 refresh()
 
+let resizeInterval = setInterval(() => {
+  chart && chart.resize()
+},)
 onMounted(() => {
   initChart()
 
   window.addEventListener('resize', () => {
+
     chart && chart.resize()
   })
 })
 
-// 10 秒钟刷新一次
-const timer = setInterval(refresh, 2000)
+const timer = setInterval(refresh, 10000)
 
 // 销毁时清除定时器
 onUnmounted(() => {
   clearInterval(timer)
 
-  if (chartTimer) {
-    clearInterval(chartTimer)
+  if (resizeInterval) {
+    clearInterval(resizeInterval)
   }
 
   // remove listener
   window.removeEventListener('resize', () => {
+    resizeInterval = setInterval(() => {
+      chart && chart.resize()
+    }, 1000)
     initChart()
     chart && chart.resize()
   })
 
 })
+const tunnelColumns = [
+  {
+    title: "键名",
+    key: "key"
+  },
+  {
+    title: "值",
+    key: "value"
+  }
+];
+
+let tunnelData = computed(() => {
+  let data = [];
+  const conf = tunnel.value.tunnel.conf;
+  for (const key in conf) {
+    if (conf[key] !== null)
+        // if(conf[key] !== null || conf[key] !== '')
+      data.push({'key': key, value: conf[key].toString()});
+    // console.log(key,conf[key],typeof(conf[key]))
+  }
+  return data;
+})
+
 </script>

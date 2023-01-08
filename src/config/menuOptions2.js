@@ -3,15 +3,18 @@ import {RouterLink} from "vue-router";
 import {NIcon} from 'naive-ui'
 import router from "../plugins/router.js";
 
-function renderIcon(icon) {
-    return () => h(NIcon, null, {default: () => h(icon)});
-}
-
 const selectedKey = ref("");
 const menuInst = ref(null);
 const selectAndExpand = (route) => {
     if (route.params) {
         selectedKey.value = route.name + JSON.stringify(route.params);
+
+        console.log("selectAndExpand", selectedKey.value);
+
+        // 检测 route key 里面是否有 selectedKey，如果有，就打印出来
+        if (selectedKey.value.includes("selectedKey")) {
+            console.warn("has selectedKey", selectedKey.value);
+        }
     } else {
         selectedKey.value = route.name;
     }
@@ -37,16 +40,15 @@ router.afterEach((to) => {
 })
 
 
-const menuCollapsed = ref({
-    top: false,
-    left: false,
-})
-
-
 const menuOptions = ref({
     top: [],
     left: [],
     menu: []
+})
+
+const menuCollapsed = ref({
+    top: false,
+    left: false,
 })
 
 const validateIfDuplicate = (type, route_name) => {
@@ -75,36 +77,48 @@ const addMenuOptions = (type, route_options, text, icon = null, icon_props = {})
         ),
     }
 
+    // data.key = routeOptionsStringify(route_options);
+
     if (route_options.params) {
-
-        let params = route_options.params;
-
-        // 如果有数字，就转换成字符串
-        for (let key in params) {
-            if (typeof params[key] === 'number') {
-                params[key] = params[key].toString();
-            }
-        }
-
-        data.key = route_options.name + JSON.stringify(params);
-
-        // console.log('注册 key', data.key)
-
+        data.key = route_options.name + JSON.stringify(route_options.params);
     } else {
         data.key = route_options.name + "{}";
     }
+
+    console.log("addMenuOptions", data.key);
 
     if (icon !== null) {
         data.icon = () => {
             return h(NIcon, icon_props, {default: () => h(icon, icon_props)});
         }
     }
-    // }
-    // if (icon !== null) {
-    //     data.icon = renderIcon(icon)
-    // }
 
     menuOptions.value[type].push(data);
+}
+
+
+// rubbish code for register menu
+const addOptions = (type, route_options = {}, element, props, children) => {
+    let data = {
+        label: () => h(
+            element,
+            props,
+            children
+        ),
+    }
+
+    data.key = routeOptionsStringify(route_options);
+
+
+    menuOptions.value[type].push(data);
+}
+
+function routeOptionsStringify(route_options) {
+    if (route_options.params) {
+        return route_options.name + JSON.stringify(route_options.params);
+    } else {
+        return route_options.name + "{}";
+    }
 }
 
 
@@ -130,16 +144,15 @@ const removeAllMenuOptions = (type) => {
     menuOptions.value[type] = [];
 }
 
-function removeAllMenuOptionsThen(type, func) {
-    removeAllMenuOptions(type);
-    func();
-}
-
 const removeMenuOption = (type, route_name) => {
     // 删除指定 key 的菜单项
     menuOptions.value[type] = menuOptions.value[type].filter((option) => option.key !== route_name + "{}");
 }
 
+function removeAllMenuOptionsThen(type, func) {
+    removeAllMenuOptions(type);
+    func();
+}
 
 menuOptions.value['menu'].push({
     label: () => h(
@@ -147,7 +160,7 @@ menuOptions.value['menu'].push({
         {
             to: {name: 'index'},
         },
-        {default: () => h('span', {class: 'lae-logo', width: 40, height: 25})},
+        {default: () => h('span', {class: 'lae-logo mt-1', width: 40, height: 25})},
     ),
     key: 'index',
 });
@@ -162,6 +175,8 @@ export {
     addMultiMenuOptions,
     removeAllMenuOptions,
     addMenuDivider,
-    removeMenuOption, menuCollapsed, removeAllMenuOptionsThen
-
+    removeMenuOption,
+    menuCollapsed,
+    removeAllMenuOptionsThen,
+    addOptions
 }

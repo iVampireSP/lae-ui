@@ -5,48 +5,33 @@
             :style="{top: isMobile ? '' : 'var(--header-height)'}"
             has-sider
   >
+
     <n-layout-sider
-        v-if="user.state.token && (!isMobile && !isTablet) && !menuHide.left"
-        :collapsed-width="0"
+        v-if="user.state.token && (!isMobile && !isTablet)"
+        :collapsed="menuCollapsed.left"
+        :collapsed-width="64"
         :native-scrollbar="false"
         :show-collapsed-content="false"
         :width="240"
         bordered
-        collapse-mode="transform"
+        collapse-mode="width"
         show-trigger="arrow-circle"
+        @collapse="menuCollapsed.left = true"
+        @expand="menuCollapsed.left = false"
     >
       <Menu/>
-
     </n-layout-sider>
+
     <n-layout
         :native-scrollbar="false"
         content-style="padding: 24px"
-
     >
 
-      <!--          <router-view v-slot="{ Component }">-->
-      <!--            <transition name="fade" mode="out-in">-->
-      <!--              <keep-alive>-->
-      <!--                <component :is="Component"/>-->
-      <!--              </keep-alive>-->
-      <!--            </transition>-->
-      <!--          </router-view>-->
-
-      <router-view/>
-
-      <!--          <div style="height: 10rem" v-if="(isMobile)"></div>-->
-      <!--          <div style="height: 8rem" v-if="(!isMobile && !isTablet)"></div>-->
-
-      <!--      <n-layout-footer bordered>-->
-      <!--        Footer Footer Footer-->
-      <!--        <br/>-->
-      <!--        Footer Footer Footer-->
-      <!--        <br/>Footer Footer Footer-->
-      <!--        <br/>Footer Footer Footer-->
-      <!--        <br/>Footer Footer Footer-->
-      <!--        <br/>-->
-      <!--      </n-layout-footer>-->
-
+      <router-view v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+          <component :is="Component"/>
+        </transition>
+      </router-view>
     </n-layout>
   </n-layout>
 </template>
@@ -60,10 +45,21 @@ import user from "../plugins/stores/user.js";
 import HeaderVue from './headers/Header.vue'
 import Menu from './Menu.vue'
 
-import {menuHide} from "../config/menuOptions.js";
-
+import {menuCollapsed} from "../config/menuOptions.js";
 
 const isMobile = useIsMobile()
 const isTablet = useIsTablet()
 
 </script>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.1s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

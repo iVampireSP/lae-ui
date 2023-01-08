@@ -1,11 +1,9 @@
 <template>
 
+  <router-view></router-view>
 </template>
 
-<script>
-export default {
-  name: "Satus.vue"
-}
+<script setup>
 </script>
 
 <style scoped>

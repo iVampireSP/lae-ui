@@ -1,8 +1,11 @@
 <template>
   <div>
-    <NH1>欢迎使用 ME Frp</NH1>
-
-    <NP>我们将引导您创建隧道。</NP>
+    <n-h1 prefix="bar">
+      <n-text type="primary">
+        欢迎使用 ME Frp
+      </n-text>
+    </n-h1>
+    <n-p>我们将引导您创建隧道。</n-p>
 
     <n-card>
       <n-tabs
@@ -29,12 +32,14 @@
                     <n-input v-model:value="create_tunnel.local_address"/>
                   </n-form-item>
 
-                  <n-form-item v-if="create_tunnel.protocol === 'http' || create_tunnel.protocol === 'https'" label="绑定域名"
+                  <n-form-item v-if="create_tunnel.protocol === 'http' || create_tunnel.protocol === 'https'"
+                               label="绑定域名"
                                path="custom_domain">
                     <n-input v-model:value="create_tunnel.custom_domain" placeholder="输入一个存在的域名"/>
                   </n-form-item>
 
-                  <n-form-item v-if="create_tunnel.protocol === 'tcp' || create_tunnel.protocol === 'udp'" label="远程端口"
+                  <n-form-item v-if="create_tunnel.protocol === 'tcp' || create_tunnel.protocol === 'udp'"
+                               label="远程端口"
                                path="remote_port">
                     <n-input-group>
                       <n-input v-model:value="create_tunnel.remote_port"
@@ -91,33 +96,11 @@
             </n-form>
           </n-spin>
 
-
         </n-tab-pane>
         <n-tab-pane name="clone" tab="克隆">
-          <n-spin :show="creating">
-            <n-list v-if="tunnels.length > 0" clickable hoverable>
-              <!--  for tunnel in tunnels, key is array index   -->
-              <template v-for="($tunnel, index) in tunnels" :key="index">
-                <n-list-item @click="clone($tunnel)">
-                  <n-thing :title="$tunnel.name" content-style="margin-top: 10px;">
-                    <template #description>
-                      <n-space size="small" style="margin-top: 4px">
-                        <n-tag :bordered="false" size="small" type="info">
-                          {{ $tunnel.protocol.toUpperCase() }}:{{ $tunnel.remote_port }}
-                        </n-tag>
-                        <n-tag v-if="$tunnel.custom_domain" :bordered="false" size="small" type="info">
-                          {{ $tunnel.custom_domain }}
-                        </n-tag>
-                      </n-space>
-                    </template>
-                  </n-thing>
-                </n-list-item>
-              </template>
-            </n-list>
 
-            <div v-else>
-              <n-empty description="您还没有创建任何隧道。"/>
-            </div>
+          <n-spin :show="creating">
+            <Tunnels :tunnels="tunnels" :next="clone"/>
           </n-spin>
 
 
@@ -163,6 +146,7 @@ import http from "../../../plugins/http";
 
 import {useIsMobile} from "../../../utils/composables.js";
 import tunnelsStore from "../../../plugins/stores/tunnels";
+import Tunnels from "./components/Tunnels.vue";
 
 const tab = ref('create')
 
