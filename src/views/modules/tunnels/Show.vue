@@ -3,7 +3,8 @@
     <div>
       <NH1>{{ tunnel.name }}</NH1>
     </div>
-
+    <div>
+    </div>
     <div id="chart" style="height: 500px"></div>
 
     <n-tabs animated type="line">

@@ -14,6 +14,85 @@
           size="large"
           style="margin: 0 -4px"
       >
+        <n-tab-pane name="create" tab="创建">
+          <n-spin :show="creating">
+            <n-form ref="form" :model="create_tunnel" :rules="rules">
+              <n-grid cols="1 s:2" responsive="screen" x-gap="12">
+
+
+                <n-gi>
+                  <n-form-item label="隧道名称" path="name">
+                    <n-input v-model:value="create_tunnel.name" @keydown.enter.prevent/>
+                  </n-form-item>
+
+                  <n-form-item label="本机地址" path="local_address">
+                    <n-input v-model:value="create_tunnel.local_address"/>
+                  </n-form-item>
+
+                  <n-form-item v-if="create_tunnel.protocol === 'http' || create_tunnel.protocol === 'https'" label="绑定域名"
+                               path="custom_domain">
+                    <n-input v-model:value="create_tunnel.custom_domain" placeholder="输入一个存在的域名"/>
+                  </n-form-item>
+
+                  <n-form-item v-if="create_tunnel.protocol === 'tcp' || create_tunnel.protocol === 'udp'" label="远程端口"
+                               path="remote_port">
+                    <n-input-group>
+                      <n-input v-model:value="create_tunnel.remote_port"
+                               :placeholder="'需要输入一个在 ' + port_range.min_port + ' 和 ' + port_range.max_port + ' 之间的端口'"/>
+                      <n-button ghost type="primary" @click="randomPort">
+                        {{ isMobile ? '随机' : '随机生成' }}
+                      </n-button>
+                    </n-input-group>
+                  </n-form-item>
+                </n-gi>
+
+
+                <n-gi>
+                  <n-form-item :label="'传输协议' + (isMobile ? '(可滑动)' : '')" class="overflow-x-auto"
+                               path="protocol">
+                    <n-radio-group v-model:value="create_tunnel.protocol" name="protocol">
+                      <n-radio-button
+                          label="TCP"
+                          value="tcp"
+                      />
+                      <n-radio-button
+                          label="UDP"
+                          value="udp"
+                      />
+                      <n-radio-button
+                          label="HTTP"
+                          value="http"
+                      />
+                      <n-radio-button
+                          label="HTTPS"
+                          value="https"
+                      />
+                    </n-radio-group>
+                  </n-form-item>
+
+                  <n-form-item label="选择服务器" path="server_id">
+                    <n-select
+                        v-if="filterServer().length > 0"
+                        v-model:value="create_tunnel.server_id"
+                        :options="filterServer()"
+                        placeholder="Select"
+                    />
+                    <n-text v-else>没有可用的服务器</n-text>
+                  </n-form-item>
+
+
+                </n-gi>
+
+              </n-grid>
+
+              <n-button block secondary strong type="primary" @click="handleCreate">
+                新建
+              </n-button>
+            </n-form>
+          </n-spin>
+
+
+        </n-tab-pane>
         <n-tab-pane name="clone" tab="克隆">
           <n-spin :show="creating">
             <n-list v-if="tunnels.length > 0" clickable hoverable>
@@ -43,85 +122,7 @@
 
 
         </n-tab-pane>
-        <n-tab-pane name="create" tab="创建">
-          <n-spin :show="creating">
-            <n-form :rules="rules" ref="form" :model="create_tunnel">
-              <n-grid x-gap="12" cols="1 s:2" responsive="screen">
 
-
-                <n-gi>
-                  <n-form-item label="隧道名称" path="name">
-                    <n-input v-model:value="create_tunnel.name" @keydown.enter.prevent/>
-                  </n-form-item>
-
-                  <n-form-item label="本机地址" path="local_address">
-                    <n-input v-model:value="create_tunnel.local_address"/>
-                  </n-form-item>
-
-                  <n-form-item label="绑定域名" path="custom_domain"
-                               v-if="create_tunnel.protocol === 'http' || create_tunnel.protocol === 'https'">
-                    <n-input v-model:value="create_tunnel.custom_domain" placeholder="输入一个存在的域名"/>
-                  </n-form-item>
-
-                  <n-form-item path="remote_port" label="远程端口"
-                               v-if="create_tunnel.protocol === 'tcp' || create_tunnel.protocol === 'udp'">
-                    <n-input-group>
-                      <n-input v-model:value="create_tunnel.remote_port"
-                               :placeholder="'需要输入一个在 ' + port_range.min_port + ' 和 ' + port_range.max_port + ' 之间的端口'"/>
-                      <n-button type="primary" ghost @click="randomPort">
-                        {{ isMobile ? '随机' : '随机生成' }}
-                      </n-button>
-                    </n-input-group>
-                  </n-form-item>
-                </n-gi>
-
-
-                <n-gi>
-                  <n-form-item :label="'传输协议' + (isMobile ? '(可滑动)' : '')" path="protocol"
-                               class="overflow-x-auto">
-                    <n-radio-group v-model:value="create_tunnel.protocol" name="protocol">
-                      <n-radio-button
-                          value="tcp"
-                          label="TCP"
-                      />
-                      <n-radio-button
-                          value="udp"
-                          label="UDP"
-                      />
-                      <n-radio-button
-                          value="http"
-                          label="HTTP"
-                      />
-                      <n-radio-button
-                          value="https"
-                          label="HTTPS"
-                      />
-                    </n-radio-group>
-                  </n-form-item>
-
-                  <n-form-item label="选择服务器" path="server_id">
-                    <n-select
-                        v-model:value="create_tunnel.server_id"
-                        placeholder="Select"
-                        :options="filterServer()"
-                        v-if="filterServer().length > 0"
-                    />
-                    <n-text v-else>没有可用的服务器</n-text>
-                  </n-form-item>
-
-
-                </n-gi>
-
-              </n-grid>
-
-              <n-button type="primary" block secondary strong @click="handleCreate">
-                新建
-              </n-button>
-            </n-form>
-          </n-spin>
-
-
-        </n-tab-pane>
       </n-tabs>
     </n-card>
 
@@ -163,7 +164,7 @@ import http from "../../../plugins/http";
 import {useIsMobile} from "../../../utils/composables.js";
 import tunnelsStore from "../../../plugins/stores/tunnels";
 
-const tab = ref('clone')
+const tab = ref('create')
 
 const tunnels = computed(() => {
   return tunnelsStore.state.tunnels
@@ -356,8 +357,7 @@ const clone = ($tunnel) => {
   create_tunnel.value.local_address = $tunnel.local_address?.toString()
 
   if ($tunnel.remote_port) {
-    // +1 作为副本
-    create_tunnel.value.remote_port = ($tunnel.remote_port + 1).toString()
+    create_tunnel.value.remote_port = $tunnel.remote_port?.toString()
   }
 
   create_tunnel.value.server_id = $tunnel.server_id
