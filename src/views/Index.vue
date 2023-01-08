@@ -4,10 +4,14 @@
       <n-list>
         <n-list-item>
           <n-avatar :src="avatar"/>
-          <NH3>{{ user.name }} # {{ user.id }}</NH3>
+
+          <br/>
+
+          <n-h3 prefix="bar">{{ user.name }} # {{ user.id }}</n-h3>
         </n-list-item>
       </n-list>
-      <n-tag>
+
+      <n-tag type="info">
         <span v-if="user.user_group">
           {{ user.user_group.name }}
         </span>
@@ -17,14 +21,23 @@
         </span>
       </n-tag>
     </n-card>
-    <n-card size="small" title="财务">
-      <NH3>余额: {{ user.balance }}</NH3>
+
+    <n-card size="small" title="财务" class="mt-3">
+      <n-h4 prefix="bar">余额: {{ user.balance }} 元</n-h4>
     </n-card>
 
-    <router-link :to="{name: 'auth.login'}">更换账号</router-link>
-    <br/>
-    <router-link :to="{name: 'user'}">user</router-link>
+    <n-card size="small" title="用户" class="mt-3">
+      <n-button-group>
+        <n-button ghost type="info">
+          <router-link :to="{name: 'auth.login'}">更换账号</router-link>
+        </n-button>
 
+        <n-button ghost type="info">
+          <router-link :to="{name: 'user'}">用户中心</router-link>
+        </n-button>
+
+      </n-button-group>
+    </n-card>
   </div>
 </template>
 

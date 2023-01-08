@@ -36,6 +36,7 @@ function reRegisterMenu() {
   removeAllMenuOptionsThen('left', () => {
     addMenuOptions('left', 'modules.tunnels.index', '所有隧道', ListOutline)
     addMenuOptions('left', 'modules.tunnels.create', '新建隧道', AddOutline)
+    addMenuOptions('left', 'modules.tunnels.concat', '整合配置', ClipboardOutline)
 
     if (tunnels.value.length > 0) {
       addMenuDivider('left')
