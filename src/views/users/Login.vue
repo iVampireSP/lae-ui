@@ -44,10 +44,10 @@
       <span>登录动画由 Fofray 制作。</span>
     </p>
 
-    <p class="text-center">
-      莱云 iVampireSP.com 作品, 动画 Fofray
+    <p class="text-center bottom" v-if="state === 'redirect'">
+      莱云 iVampireSP.com 作品
       <br/>
-      <span>苏ICP备2022042268号-1</span>
+      <a href="https://beian.miit.gov.cn/">苏ICP备2022042268号-1</a>
     </p>
 
   </div>

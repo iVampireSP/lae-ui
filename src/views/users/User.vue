@@ -1,6 +1,12 @@
 <template>
-  <n-avatar :size="isMobile ? 64 : 256" :src="avatar" lazy round/>
-  <NH1>{{ user.name }} # {{ user.id }}</NH1>
+  <div class="text-center">
+    <n-avatar :size="isMobile ? 64 : 128" :src="avatar" lazy round/>
+    <n-h1>{{ user.name }}  #{{ user.id }}</n-h1>
+    {{user}}
+<!--    TODO: 钱 email 注册时间 任务列表-->
+<!--    TODO: 彩蛋：生日彩蛋-->
+  </div>
+
 </template>
 
 <script setup>
@@ -21,7 +27,7 @@ const user = computed(() => {
 const isMobile = useIsMobile()
 
 const avatar = computed(() => {
-  return conf.avatar + user.value.email_md5 + '?s=256';
+  return conf.avatar + user.value.email_md5 + '?s=128';
 })
 
 </script>

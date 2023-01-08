@@ -9,8 +9,8 @@
 
     <n-tabs animated type="line">
       <n-tab-pane name="status" tab="隧道状态">
-        <NH2>连接信息</NH2>
-        <NH3 v-if="tunnel.protocol === 'http' || tunnel.protocol === 'https'">域名解析到:
+        <n-h2 prefix="bar">连接信息</n-h2>
+        <n-h3 prefix="bar" v-if="tunnel.protocol === 'http' || tunnel.protocol === 'https'">域名解析到:
           {{ tunnel.server.server_address }}
         </n-h3>
         <n-h3 prefix="bar" v-else>
@@ -20,18 +20,26 @@
         </n-h3>
       </n-tab-pane>
       <n-tab-pane name="config_all" tab="全部配置">
+
         <n-popover trigger="hover">
           <template #trigger>
-            <n-input
-                :autosize="{
-              minRows: 10
-            }"
-                :value="tunnel.config.server + '\n\n' + tunnel.config.client"
-                placeholder=""
-                readonly
-                type="textarea"
-                @click="copy(tunnel.config.server + '\n\n' + tunnel.config.client)"
+            <n-code
+                :code="tunnel.config.server + '\n\n' + tunnel.config.client"
+                @click="copy(tunnel.config.client)"
+                language="ini"
+                trim
+                show-line-numbers
             />
+            <!--            <n-input-->
+            <!--                :autosize="{-->
+            <!--              minRows: 10-->
+            <!--            }"-->
+            <!--                :value="tunnel.config.server + '\n\n' + tunnel.config.client"-->
+            <!--                placeholder=""-->
+            <!--                readonly-->
+            <!--                type="textarea"-->
+            <!--                @click="copy(tunnel.config.server + '\n\n' + tunnel.config.client)"-->
+            <!--            />-->
           </template>
           <span>点击复制</span>
         </n-popover>
@@ -39,16 +47,23 @@
       <n-tab-pane name="server" tab="服务端">
         <n-popover trigger="hover">
           <template #trigger>
-            <n-input
-                :autosize="{
-                  minRows: 4
-                }"
-                :value="tunnel.config.server"
-                placeholder=""
-                readonly
-                type="textarea"
-                @click="copy(tunnel.config.server)"
+            <n-code
+                :code="tunnel.config.server"
+                @click="copy(tunnel.config.client)"
+                language="ini"
+                trim
+                show-line-numbers
             />
+            <!--            <n-input-->
+            <!--                :autosize="{-->
+            <!--                  minRows: 4-->
+            <!--                }"-->
+            <!--                :value="tunnel.config.server"-->
+            <!--                placeholder=""-->
+            <!--                readonly-->
+            <!--                type="textarea"-->
+            <!--                @click="copy(tunnel.config.server)"-->
+            <!--            />-->
           </template>
           <span>点击复制</span>
         </n-popover>
@@ -56,16 +71,23 @@
       <n-tab-pane name="client" tab="客户端">
         <n-popover trigger="hover">
           <template #trigger>
-            <n-input
-                :autosize="{
-                  minRows: 4
-                }"
-                :value="tunnel.config.client"
-                placeholder=""
-                readonly
-                type="textarea"
+            <n-code
+                :code="tunnel.config.client"
                 @click="copy(tunnel.config.client)"
+                language="ini"
+                trim
+                show-line-numbers
             />
+            <!--            <n-input-->
+            <!--                :autosize="{-->
+            <!--                  minRows: 4-->
+            <!--                }"-->
+            <!--                :value="tunnel.config.client"-->
+            <!--                placeholder=""-->
+            <!--                readonly-->
+            <!--                type="textarea"-->
+            <!--                @click="copy(tunnel.config.client)"-->
+            <!--            />-->
           </template>
           <span>点击复制</span>
         </n-popover>

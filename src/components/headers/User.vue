@@ -1,5 +1,10 @@
 <template>
-  <NAvatar :size="large" round src=""></NAvatar>
+  <div class="menu-item">
+    <router-link :to="{name:'user'}" >
+      <n-avatar round size="large" :src="avatar"/>
+    </router-link>
+  </div>
+
 </template>
 
 <script setup>
