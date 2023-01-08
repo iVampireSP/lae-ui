@@ -38,23 +38,21 @@ const routes = [
         path: '/auth/login',
         name: 'auth.login',
         meta: {
-            keepalive: false,
             auth: false,
             title: '登录',
         },
         component: () => import('../views/users/Login.vue'),
     },
-    // ,
-    // {
-    //   path: '/status',
-    //   name: 'status',
-    //   meta: {
-    //     keepalive: false,
-    //     auth: false,
-    //     title: '状态',
-    //   },
-    //   component: () => import('../../../../Downloads/lae-ui-main/src/views/Status.vue'),
-    // },
+    {
+        path: '/user',
+        name: 'user',
+        meta: {
+            hides: ['left'],
+            title: '用户中心',
+        },
+        component: () => import('../views/users/User.vue'),
+
+    },
     // {
     //   path: '/servers',
     //   name: 'servers',

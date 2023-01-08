@@ -21,6 +21,16 @@ const selectAndExpand = (route) => {
 // listen to route change
 router.afterEach((to) => {
     selectAndExpand(to);
+
+    if (to.meta) {
+        if (to.meta['hides']) {
+            menuHide.value[to.meta['hide_menu']] = true;
+        } else {
+            menuHide.value[to.meta['hide_menu']] = false;
+
+            console.log('show menu', to.meta['hide_menu'])
+        }
+    }
 })
 
 
@@ -28,6 +38,11 @@ const menuOptions = ref({
     top: [],
     left: [],
     menu: []
+})
+
+const menuHide = ref({
+    top: false,
+    left: false,
 })
 
 const validateIfDuplicate = (type, route_name) => {
@@ -109,6 +124,10 @@ const removeMenuOption = (type, route_name) => {
     menuOptions.value[type] = menuOptions.value[type].filter((option) => option.key !== route_name + "{}");
 }
 
+function removeAllMenuOptionsThen(type, func) {
+    removeAllMenuOptions(type);
+    func();
+}
 
 menuOptions.value['menu'].push({
     label: () => h(
@@ -131,5 +150,7 @@ export {
     addMultiMenuOptions,
     removeAllMenuOptions,
     addMenuDivider,
-    removeMenuOption
+    removeMenuOption,
+    menuHide,
+    removeAllMenuOptionsThen
 }

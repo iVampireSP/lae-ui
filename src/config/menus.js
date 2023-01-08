@@ -1,4 +1,4 @@
-import { HomeOutline } from "@vicons/ionicons5";
+import {HomeOutline} from "@vicons/ionicons5";
 
 import {addMenuOptions} from "./menuOptions.js";
 

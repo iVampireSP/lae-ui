@@ -45,7 +45,7 @@ const connect = () => {
   console.log('new Token is:', token.value)
 
   http
-      .get('/users')
+      .get('/user')
       .then((res) => {
 
         user.commit('updateToken', token.value)

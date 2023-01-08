@@ -1,65 +1,62 @@
 <template>
   <div>
-    <n-card title="用户信息" size="small">
+    <n-card size="small" title="用户信息">
       <n-list>
-      <n-list-item>
-      <n-avatar :src="avatar" />
-      <NH3>{{ user.state.user.name }} # {{ id }}</NH3></n-list-item>
+        <n-list-item>
+          <n-avatar :src="avatar"/>
+          <NH3>{{ user.name }} # {{ user.id }}</NH3>
+        </n-list-item>
       </n-list>
-      <n-tag>{{ user_group }}</n-tag>
+      <n-tag>
+        <span v-if="user.user_group">
+          {{ user.user_group.name }}
+        </span>
+        <span v-else>
+          普通用户
+        </span>
+      </n-tag>
     </n-card>
-    <n-card title="财务" size="small">
-      <NH3>余额: {{ data.balance }}</NH3>
+    <n-card size="small" title="财务">
+      <NH3>余额: {{ user.balance }}</NH3>
     </n-card>
 
     <router-link :to="{name: 'auth.login'}">更换账号</router-link>
-    <br />
+    <br/>
+    <router-link :to="{name: 'user'}">user</router-link>
 
-    {{ data }}
   </div>
 </template>
 
 <script setup>
-import {NList , NListItem, NAvatar, NH3 , NCard , NTag} from 'naive-ui'
+
+import {computed} from "vue";
+
+import {NAvatar, NCard, NH3, NList, NListItem, NTag} from 'naive-ui'
 
 import {addMenuOptions, removeAllMenuOptions} from "../config/menuOptions.js";
 
-import user from "../plugins/stores/user";
-
-import http from "../plugins/http";
-
+import userStore from "../plugins/stores/user"; // 存储用户信息，供任意页面和 JS 调用，在 Vue 文件里，配合 computed 可以实现 ref 的效果
+import http from "../plugins/http"; // http 客户端
 import conf from "../config/api"
 
+// 就像下面这样
+const user = computed(() => {
+  return userStore.state.user
+})
+
 // import {message} from "../utils/layout.js";
-import {ref} from "vue";
-const data = ref({})
-const id = ref()
-const balance = ref()
-const user_group_name = ref()
-const avatar = conf.avatar + user.state.user.email_md5 + '?s=64'
+
+const avatar = conf.avatar + user.value.email_md5 + '?s=64'
 
 http.get('/users').then((res) => {
-  // message.create('success',)
-  id.value = res.data["id"]
-  balance.value = res.data["balances"]
-  data.value = res.data
-  user_group_name.value = res.data.user_group["name"]
+  userStore.commit('updateUser', res.data)
 })
-// 用户组别判断
-let user_group
-console.log(user_group_name)
-if (user_group_name == null) {
-  user_group = '普通用户'
-} else {
-  user_group = user_group_name
-}
 
+
+// 移除 left 菜单所有项目
 removeAllMenuOptions('left')
 
+// 注册菜单
 addMenuOptions('left', 'index', 'Index',)
 addMenuOptions('left', 'errors.404', '404',)
 </script>
-
-<style scoped>
-
-</style>

@@ -1,16 +1,16 @@
 <template>
-    <n-config-provider :date-locale="dateZhCN" :locale="zhCN" :theme="theme" preflight-style-disabled>
-      <n-global-style/>
-      <n-loading-bar-provider>
-        <n-message-provider>
-          <n-notification-provider>
-            <n-dialog-provider>
-              <LayoutVue/>
-            </n-dialog-provider>
-          </n-notification-provider>
-        </n-message-provider>
-      </n-loading-bar-provider>
-    </n-config-provider>
+  <n-config-provider :date-locale="dateZhCN" :locale="zhCN" :theme="theme" preflight-style-disabled>
+    <n-global-style/>
+    <n-loading-bar-provider>
+      <n-message-provider>
+        <n-notification-provider>
+          <n-dialog-provider>
+            <LayoutVue/>
+          </n-dialog-provider>
+        </n-notification-provider>
+      </n-message-provider>
+    </n-loading-bar-provider>
+  </n-config-provider>
 </template>
 
 <script setup>

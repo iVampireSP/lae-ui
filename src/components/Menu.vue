@@ -1,10 +1,11 @@
 <template>
   <n-menu
-      :collapsed-width="64"
+      v-if="!menuHide.top"
+      ref="menuInst"
       :collapsed-icon-size="22"
+      :collapsed-width="64"
       :options="menuOptions.left"
       :value="selectedKey"
-      ref="menuInst"
   />
 </template>
 
@@ -12,7 +13,7 @@
 
 import {NMenu} from 'naive-ui'
 
-import {menuInst, menuOptions, selectedKey} from "../config/menuOptions.js"
+import {menuHide, menuInst, menuOptions, selectedKey} from "../config/menuOptions.js"
 
 //
 </script>

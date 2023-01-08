@@ -2,7 +2,7 @@
   <div v-if="detected" class="mt-1">
     <n-popover trigger="hover">
       <template #trigger>
-        <n-icon size="30" class=" text-orange-400">
+        <n-icon class=" text-orange-400" size="30">
           <BoltFilled/>
         </n-icon>
       </template>
@@ -17,7 +17,7 @@ import {ref} from 'vue'
 import {BoltFilled} from "@vicons/material"
 import {NIcon, NPopover} from "naive-ui";
 
-import http from '../plugins/http'
+import http from '../../plugins/http.js'
 
 const detected = ref(false)
 

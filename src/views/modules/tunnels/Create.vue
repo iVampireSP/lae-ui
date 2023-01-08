@@ -6,27 +6,27 @@
 
     <n-card>
       <n-tabs
+          v-model:value="tab"
+          animated
           class="card-tabs"
           default-value="clone"
-          size="large"
-          animated
-          style="margin: 0 -4px"
           pane-style="padding-left: 4px; padding-right: 4px; box-sizing: border-box;"
-          v-model:value="tab"
+          size="large"
+          style="margin: 0 -4px"
       >
         <n-tab-pane name="clone" tab="克隆">
           <n-spin :show="creating">
-            <n-list hoverable clickable v-if="tunnels.length > 0">
+            <n-list v-if="tunnels.length > 0" clickable hoverable>
               <!--  for tunnel in tunnels, key is array index   -->
               <template v-for="($tunnel, index) in tunnels" :key="index">
                 <n-list-item @click="clone($tunnel)">
                   <n-thing :title="$tunnel.name" content-style="margin-top: 10px;">
                     <template #description>
                       <n-space size="small" style="margin-top: 4px">
-                        <n-tag :bordered="false" type="info" size="small">
+                        <n-tag :bordered="false" size="small" type="info">
                           {{ $tunnel.protocol.toUpperCase() }}:{{ $tunnel.remote_port }}
                         </n-tag>
-                        <n-tag :bordered="false" type="info" size="small" v-if="$tunnel.custom_domain">
+                        <n-tag v-if="$tunnel.custom_domain" :bordered="false" size="small" type="info">
                           {{ $tunnel.custom_domain }}
                         </n-tag>
                       </n-space>

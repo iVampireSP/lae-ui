@@ -31,6 +31,12 @@ const tunnel = ref({
   traffic: {
     traffic_in: [],
     traffic_out: []
+  },
+  server: {
+    server_address: ''
+  },
+  tunnel: {
+    conf: {}
   }
 })
 
@@ -120,7 +126,7 @@ function refresh() {
     if (res.data.traffic) {
 
       if (!showChart.value) {
-        initChart()
+        // initChart()
         showChart.value = true
       }
 
@@ -163,8 +169,9 @@ function refresh() {
 refresh()
 
 onMounted(() => {
+  initChart()
+
   window.addEventListener('resize', () => {
-    initChart()
     chart && chart.resize()
   })
 })

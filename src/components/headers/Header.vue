@@ -1,26 +1,29 @@
 <template>
-  <n-layout v-if="menuOptions.top.length">
+  <!--  <div>addddddddddddddddddd</div>-->
+  <n-layout v-if="menuOptions.top.length" style="">
     <n-layout-header bordered class="layout-header">
-
       <n-grid cols="2">
         <n-grid-item>
-<!--          <router-link :to="{name: 'index'}" class="lae-logo ml-2" v-if="isMobile"></router-link>-->
+          <!--          <router-link :to="{name: 'index'}" class="lae-logo ml-2" v-if="isMobile"></router-link>-->
 
-          <n-menu mode="horizontal" :value="selectedKey" :options="menuOptions.menu" />
+          <n-menu :options="menuOptions.menu" :value="selectedKey" mode="horizontal"/>
 
-          <n-menu mode="horizontal" :value="selectedKey" :options="menuOptions.top" v-if="(!isMobile)"/>
+          <n-menu v-if="(!isMobile)" :options="menuOptions.top" :value="selectedKey" mode="horizontal"/>
         </n-grid-item>
 
         <n-grid-item class="text-right flex items-center justify-end mr-1.5">
+          <!--  右侧菜单   -->
 
-          <ClusterReady />
+          <ClusterReady/>
+          <User/>
+
 
           <n-popover
               v-if="isMobile || isTablet"
               ref="mobilePopoverRef"
-              style="padding: 0; width: 288px"
-              placement="bottom-end"
               display-directive="show"
+              placement="bottom-end"
+              style="padding: 0; width: 288px"
               trigger="click"
           >
             <template #trigger>
@@ -30,14 +33,14 @@
             </template>
             <div style="overflow: auto; max-height: 79vh">
               <n-menu
-                  :value="selectedKey"
-                  :options="menuOptions.top"
                   :indent="18"
+                  :options="menuOptions.top"
+                  :value="selectedKey"
               />
               <n-menu
-                  :value="selectedKey"
-                  :options="menuOptions.left"
                   :indent="18"
+                  :options="menuOptions.left"
+                  :value="selectedKey"
               />
             </div>
           </n-popover>
@@ -74,14 +77,15 @@
 <script setup>
 import {NGrid, NGridItem, NIcon, NLayout, NLayoutHeader, NMenu, NPopover} from 'naive-ui'
 
-import {useIsMobile, useIsTablet} from "../utils/composables.js";
+import {useIsMobile, useIsTablet} from "../../utils/composables.js";
 
 import {h} from "vue"
 
-import {menuOptions, selectedKey} from "../config/menuOptions.js"
+import {menuOptions, selectedKey} from "../../config/menuOptions.js"
 
 import {MenuOutline} from "@vicons/ionicons5"
 import ClusterReady from "./ClusterReady.vue";
+import User from "./User.vue";
 
 function renderIcon(icon) {
   return () => h(NIcon, null, {default: () => h(icon)})
