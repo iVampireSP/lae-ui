@@ -2,8 +2,6 @@
   <div>
     <NH1>欢迎使用 ME Frp</NH1>
 
-    <NP>以下是您的隧道</NP>
-
     <div v-if="!tunnels.length" class="text-center mt-10">
       <NP>您还没有创建隧道</NP>
       <n-spin size="large"/>
