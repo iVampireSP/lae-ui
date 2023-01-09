@@ -10,33 +10,26 @@ import {
   removeAllMenuOptionsThen
 } from "../../../config/menuOptions.js";
 
-import {AddOutline, ClipboardOutline, ListOutline} from "@vicons/ionicons5";
-import http from "../../../plugins/http.js";
+import {AddOutline, ClipboardOutline, ListOutline, ServerOutline} from "@vicons/ionicons5";
 
 import {ref} from 'vue'
 
 import tunnelsStore from "../../../plugins/stores/tunnels";
-import TextAvatar from "../../../components/icons/TextAvatar.vue";
+import MenuIcon from "./components/MenuIcon.vue";
 
 const tunnels = ref([])
 
 
 removeAllMenuOptions()
-// reRegisterMenu()
 
-http.get('/modules/frp/hosts').then((res) => {
-  tunnels.value = res.data
-  tunnelsStore.state.tunnels = tunnels.value
-
-  reRegisterMenu()
-})
-
+tunnelsStore.dispatch('fetchTunnels')
 
 function reRegisterMenu() {
   removeAllMenuOptionsThen('left', () => {
     addMenuOptions('left', 'modules.tunnels.index', '所有隧道', ListOutline)
     addMenuOptions('left', 'modules.tunnels.create', '新建隧道', AddOutline)
     addMenuOptions('left', 'modules.tunnels.concat', '整合配置', ClipboardOutline)
+    addMenuOptions('left', 'modules.tunnels.status', '服务器', ServerOutline)
 
     if (tunnels.value.length > 0) {
       addMenuDivider('left')
@@ -44,37 +37,11 @@ function reRegisterMenu() {
       for (let i = 0; i < tunnels.value.length; i++) {
         const tunnel = tunnels.value[i]
 
-
-        // menuOptions.value.left.push({
-        //   label: () => h(
-        //       RouterLink,
-        //       {
-        //         to: {name: 'index'},
-        //       },
-        //       {default: () => h('span', {class: 'lae-logo mt-1', width: 40, height: 25})},
-        //   ),
-        //   key: 'index',
-        // })
-        // default: () => h(NAvatar, {
-        //     style: {
-        //       'background-color': 'red',
-        //     }
-        //   },)
-        //
-
-
         addMenuOptions('left', {
           name: 'modules.tunnels.show', params: {id: tunnel.host_id}
-        }, tunnel.name, TextAvatar, {
-          text: tunnel.name[0],
-          color: 'yellow',
-          backgroundColor: 'red',
+        }, tunnel.name, MenuIcon, {
+          tunnel: tunnel
         })
-        //
-        // addMenuOptions('left', {
-        //   name: 'modules.tunnels.show', params: {id: tunnel.host_id}
-        // }, tunnel.name)
-
       }
     }
   })
@@ -87,7 +54,8 @@ tunnelsStore.subscribe((mutation, state) => {
     tunnels.value = state.tunnels
   }
 
-  // reRegisterMenu()
+
+  reRegisterMenu()
 })
 
 </script>

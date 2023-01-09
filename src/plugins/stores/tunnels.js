@@ -1,10 +1,17 @@
 import {createStore} from "vuex";
+import http from "../http.js";
 
 export default createStore({
     state: {
         tunnels: [],
     },
-
+    actions: {
+        fetchTunnels({commit}) {
+            http.get('/modules/frp/hosts').then(response => {
+                commit('setTunnels', response.data);
+            });
+        },
+    },
     mutations: {
         addTunnel(state, tunnel) {
             state.tunnels.push(tunnel);

@@ -6,6 +6,10 @@ import user from "./stores/user.js";
 import http from "./stores/http.js";
 
 import {dialog, loadingBar} from '../utils/layout'
+import {h} from "vue";
+
+import error500 from '../views/errors/500.vue'
+import error404 from '../views/errors/404.vue'
 
 const baseURL = api.api;
 // axios.defaults.withCredentials = true;
@@ -25,14 +29,14 @@ instance.interceptors.request.use(
         config.headers['Accept'] = 'application/json';
         config.headers['Authorization'] = 'Bearer ' + user.state.token;
 
-        // loadingBar.start();
+        loadingBar.start();
 
         return Promise.resolve(config);
     },
     (error) => {
         console.error(error);
 
-        // loadingBar.error();
+        loadingBar.error();
 
         return Promise.reject(error);
     }
@@ -40,18 +44,21 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
     (res) => {
+
         // if 20x
         if (res.status >= 200 && res.status < 300) {
             loadingBar.finish();
         } else if (res.status >= 400 && res.status < 600) {
             loadingBar.error();
+
+
         }
 
         return Promise.resolve(res);
     },
     (error) => {
 
-        // loadingBar.error();
+        loadingBar.error();
 
         console.error('axios error', error);
 
@@ -93,7 +100,21 @@ instance.interceptors.response.use(
                 }
             }
         } else if (error.response.status === 404) {
-            router.push({name: 'index'});
+            dialog.error({
+                title: '404',
+                content: () => {
+                    return h(error404, {
+                        show_footer: false
+                    })
+                },
+            });
+        } else if (error.response.status === 500) {
+            dialog.error({
+                title: '服务器错误',
+                content: () => {
+                    return h(error500)
+                },
+            });
         } else {
             if (data.length !== 0) {
                 dialog.error({

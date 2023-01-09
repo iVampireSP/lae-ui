@@ -28,14 +28,26 @@
 
     <n-card size="small" title="用户" class="mt-3">
       <n-button-group>
-        <n-button ghost type="info">
-          <router-link :to="{name: 'auth.login'}">更换账号</router-link>
+        <n-button ghost type="info" @click="go('auth.login')">
+         更换账号
         </n-button>
 
-        <n-button ghost type="info">
-          <router-link :to="{name: 'user'}">用户中心</router-link>
+        <n-button ghost type="info" @click="go('user')">
+         用户中心
         </n-button>
 
+      </n-button-group>
+    </n-card>
+
+    <n-card size="small" title="测试" class="mt-3">
+      <n-button-group>
+        <n-button ghost type="info" @click="test404">
+          404 错误
+        </n-button>
+
+        <n-button ghost type="info" @click="test500">
+          500 错误
+        </n-button>
       </n-button-group>
     </n-card>
   </div>
@@ -52,6 +64,7 @@ import {addMenuOptions, removeAllMenuOptions} from "../config/menuOptions.js";
 import userStore from "../plugins/stores/user"; // 存储用户信息，供任意页面和 JS 调用，在 Vue 文件里，配合 computed 可以实现 ref 的效果
 import http from "../plugins/http"; // http 客户端
 import conf from "../config/api"
+import router from "../plugins/router.js";
 
 // 就像下面这样
 const user = computed(() => {
@@ -66,6 +79,19 @@ http.get('/users').then((res) => {
   userStore.commit('updateUser', res.data)
 })
 
+const test404 = () => {
+  http.get('modules/frp/404')
+}
+
+const test500 = () => {
+  http.get('modules/frp/500')
+}
+
+const go = (route_name) => {
+  router.push({
+    name: route_name
+  })
+}
 
 // 移除 left 菜单所有项目
 removeAllMenuOptions('left')

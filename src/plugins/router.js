@@ -145,11 +145,25 @@ const routes = [
                         path: 'create',
                         name: 'modules.tunnels.create',
                         component: () => import('../views/modules/tunnels/Create.vue'),
+                        meta: {
+                            title: '创建隧道',
+                        }
                     },
                     {
                         path: 'concat',
                         name: 'modules.tunnels.concat',
                         component: () => import('../views/modules/tunnels/Concat.vue'),
+                        meta: {
+                            title: '整合配置',
+                        }
+                    },
+                    {
+                        path: 'status',
+                        name: 'modules.tunnels.status',
+                        component: () => import('../views/modules/tunnels/Status.vue'),
+                        meta: {
+                            title: '服务器状态',
+                        }
                     },
                     {
                         path: ':id',
@@ -233,6 +247,9 @@ const routes = [
         name: 'errors',
         props: true,
         component: () => import('../views/errors/Base.vue'),
+        meta: {
+            collapses: ['left'],
+        },
         children: [
             {
                 path: '404',

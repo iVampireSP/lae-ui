@@ -1,8 +1,11 @@
 <template>
   <div>
-    <div>
-      <n-h1 prefix="bar">{{ tunnel.name }}</n-h1>
-    </div>
+    <n-h1 prefix="bar" align-text :type="tunnel.status === 'running' ? 'success' : 'error'">
+      <n-gradient-text :type="tunnel.status === 'running' ? 'success' : 'error'">
+        {{ tunnel.name }}
+      </n-gradient-text>
+    </n-h1>
+
     <div>
       <div id="chart" style="height: 400px"></div>
     </div>
@@ -112,7 +115,7 @@
 <script setup>
 
 import {computed, onMounted, onUnmounted, ref} from 'vue'
-import {NCode, NDataTable, NH1, NH2, NH3, NPopover, NTabPane, NTabs} from 'naive-ui'
+import {NCode, NDataTable, NGradientText, NH1, NH2, NH3, NPopover, NTabPane, NTabs} from 'naive-ui'
 import {useRoute} from "vue-router";
 
 import Humanize from 'humanize-plus'
@@ -129,6 +132,7 @@ const showChart = ref(false)
 // const tunnel = ref({});
 const tunnel = ref({
   name: '',
+  status: 'running',
   traffic: {
     traffic_in: [],
     traffic_out: []
