@@ -65,16 +65,39 @@
   <div v-else>
     <n-empty description="您还没有创建任何隧道。"/>
   </div>
+
+  <n-modal v-model:show="showModal" preset="dialog" title="修改名称"
+           @positive-click="submitCallback"
+           positive-text="确认"
+           negative-text="算了"
+  >
+    <n-input v-model:value="selectedTunnel.name" @keydown.enter.prevent/>
+  </n-modal>
 </template>
 
 <script setup>
 import {defineProps, ref} from 'vue'
+
+import {
+  NAvatar,
+  NButton,
+  NButtonGroup,
+  NEmpty,
+  NInput,
+  NList,
+  NListItem,
+  NModal,
+  NPopselect,
+  NSpace,
+  NTag,
+  NThing
+} from 'naive-ui'
+
 import {useIsMobile} from '../../../../utils/composables.js'
 import router from "../../../../plugins/router.js";
-
-import {NAvatar, NButton, NButtonGroup, NEmpty, NList, NListItem, NPopselect, NSpace, NTag, NThing} from 'naive-ui'
 import http from "../../../../plugins/http.js";
 import tunnelStore from "../../../../plugins/stores/tunnels.js";
+import {dialog} from "../../../../utils/layout.js";
 
 const isMobile = useIsMobile()
 
@@ -98,21 +121,71 @@ function showDetail(host_id) {
   })
 }
 
+const selectedTunnel = ref({
+  host_id: 0,
+  name: ''
+})
+
+const showModal = ref(false)
+
 function updateStatus($tunnel) {
 
+  selectedTunnel.value = $tunnel
+
   if ($tunnel.status === 'delete') {
-    http.delete(`/modules/frp/hosts/${$tunnel.host_id}`).finally(() => {
-      tunnelStore.dispatch('fetchTunnels')
+    dialog.warning({
+      title: '注意！',
+      content: '你正在删除一个隧道！',
+      positiveText: '删除!',
+      negativeText: '不对',
+      onPositiveClick: () => {
+        http.delete('/modules/frp/hosts/' + $tunnel.host_id)
+            .then(() => {
+              tunnelStore.dispatch('fetchTunnels')
+            })
+      },
+      onNegativeClick: () => {
+        $tunnel.status = 'running'
+      }
     })
+  } else if ($tunnel.status === 'stopped') {
+    dialog.warning({
+      title: '你正在断开连接！',
+      content: '停止一个隧道，将断开 frpc 客户端连接！',
+      positiveText: '关闭!',
+      negativeText: '不对',
+      onPositiveClick: () => {
+        patch({
+          status: $tunnel.status
+        })
+      },
+      onNegativeClick: () => {
+        $tunnel.status = 'running'
+      }
+    })
+  } else if ($tunnel.status === 'rename') {
+    showModal.value = true
   } else {
-    http.patch(`/modules/frp/hosts/${$tunnel.host_id}`, {
+    patch({
       status: $tunnel.status
-    }).finally(() => {
-      tunnelStore.dispatch('fetchTunnels')
     })
   }
 
 
+}
+
+const submitCallback = () => {
+  showModal.value = false
+
+  patch({
+    name: selectedTunnel.value.name
+  })
+}
+
+function patch(data = {}) {
+  http.patch(`/modules/frp/hosts/${selectedTunnel.value.host_id}`, data).finally(() => {
+    tunnelStore.dispatch('fetchTunnels')
+  })
 }
 
 const options = ref([
@@ -127,6 +200,10 @@ const options = ref([
   {
     label: '删除',
     value: 'delete'
+  },
+  {
+    label: '改名',
+    value: 'rename'
   }
 ])
 

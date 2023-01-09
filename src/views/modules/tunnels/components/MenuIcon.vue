@@ -17,7 +17,7 @@ import {NText} from 'naive-ui'
 defineProps({
   tunnel: {
     required: true,
-    type: Array,
+    type: Object,
   }
 })
 </script>

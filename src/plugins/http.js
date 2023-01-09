@@ -77,14 +77,20 @@ instance.interceptors.response.use(
         }
 
         if (error.response.status === 429) {
-            dialog.warning({
-                title: '请求次数过多',
-                content: '歇一会儿，不急。',
-                positiveText: '好吧',
-            })
+            if (!http.state.isAlertedTooManyRequests) {
+                dialog.warning({
+                    title: '太频繁啦',
+                    content: '休息一会吧，服务器也累了。',
+                    positiveText: '好吧',
+                    onPositiveClick: () => {
+                        http.state.isAlertedTooManyRequests = false;
+                    },
+                })
+                http.isAlertedTooManyRequests = true;
+            }
         } else if (error.response.status === 401) {
             if (router.currentRoute.value.name !== 'login') {
-                if (!http.isAlertedToken) {
+                if (!http.state.isAlertedToken) {
 
                     dialog.error({
                         title: '提示',
@@ -96,7 +102,7 @@ instance.interceptors.response.use(
 
                     })
 
-                    http.isAlertedToken = true;
+                    http.state.isAlertedToken = true;
                 }
             }
         } else if (error.response.status === 404) {
