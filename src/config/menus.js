@@ -1,4 +1,4 @@
-import {CloudOutline} from "@vicons/ionicons5";
+import {CloudOutline, GameControllerOutline} from "@vicons/ionicons5";
 
 import {addMenuOptions} from "./menuOptions.js";
 
@@ -13,7 +13,8 @@ const modules = [
     // {
     //     id: "gct",
     //     name: "游戏容器",
-    //     route: "modules.gct"
+    //     route: "modules.gct.index",
+    //     icon: GameControllerOutline
     // },
     // {
     //     id: "user-mqtt",
