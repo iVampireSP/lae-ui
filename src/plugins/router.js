@@ -173,6 +173,15 @@ const routes = [
                             collapses: ['left'],
                             title: '隧道详情',
                         }
+                    },
+                    {
+                        path: 'downloads',
+                        name: 'modules.tunnels.downloads',
+                        component: () => import('../views/modules/tunnels/Downloads.vue'),
+                        meta: {
+                            collapses: ['left'],
+                            title: '下载客户端',
+                        }
                     }
                 ]
             },
