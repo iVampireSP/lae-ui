@@ -25,9 +25,9 @@ router.afterEach((to) => {
     selectAndExpand(to);
 
     // 将所有 menuCollapsed.value 置为 false
-    for (let key in menuCollapsed.value) {
-        menuCollapsed.value[key] = false;
-    }
+    // for (let key in menuCollapsed.value) {
+    //     menuCollapsed.value[key] = false;
+    // }
 
     if (to.meta) {
         if (to.meta['collapses']) {
