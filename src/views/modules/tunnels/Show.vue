@@ -13,7 +13,7 @@
     <n-tabs animated type="line">
       <n-tab-pane name="status" tab="隧道状态">
         <n-h2 prefix="bar">连接信息</n-h2>
-        <n-h3 prefix="bar" v-if="tunnel.protocol === 'http' || tunnel.protocol === 'https'">域名解析到:
+        <n-h3 prefix="bar" v-if="tunnel.protocol === 'http' || tunnel.protocol === 'https'" >域名解析到:
           {{ tunnel.server.server_address }}
         </n-h3>
         <n-h3 prefix="bar" v-else>
