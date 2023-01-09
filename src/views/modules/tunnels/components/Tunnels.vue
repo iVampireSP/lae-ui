@@ -165,13 +165,12 @@ function updateStatus($tunnel) {
     })
   } else if ($tunnel.status === 'rename') {
     showModal.value = true
+    $tunnel.status = 'running'
   } else {
     patch({
       status: $tunnel.status
     })
   }
-
-
 }
 
 const submitCallback = () => {
