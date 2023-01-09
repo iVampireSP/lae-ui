@@ -32,12 +32,15 @@
           <component :is="Component"/>
         </transition>
       </router-view>
+
+      <n-back-top />
+
     </n-layout>
   </n-layout>
 </template>
 
 <script setup>
-import {NLayout, NLayoutSider} from 'naive-ui'
+import {NLayout, NLayoutSider, NBackTop} from 'naive-ui'
 
 import {useIsMobile, useIsTablet} from "../utils/composables.js";
 import user from "../plugins/stores/user.js";
