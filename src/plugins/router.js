@@ -53,7 +53,22 @@ const routes = [
             title: '用户中心',
         },
         component: () => import('../views/users/User.vue'),
-
+    },
+    {
+        path: '/announcements',
+        name: 'announcements',
+        meta: {
+            title: '公告',
+        },
+        component: () => import('../views/forum/Announcements.vue'),
+    },
+    {
+        path: '/pinned',
+        name: 'pinned',
+        meta: {
+            title: '固钉',
+        },
+        component: () => import('../views/forum/Pinned.vue'),
     },
     // {
     //   path: '/servers',
@@ -75,46 +90,43 @@ const routes = [
     //     title: '任务队列',
     //   },
     // },
-    // {
-    //   path: '/hosts',
-    //   name: 'hosts',
-    //   component: () => import('../../../../Downloads/lae-ui-main/src/views/Hosts.vue'),
-    //   meta: {
-    //     auth: true,
-    //     keepalive: true,
-    //     title: '主机 - 计费项目列表',
-    //   },
-    // },
-    // {
-    //   path: '/work-orders',
-    //   name: 'work-orders',
-    //   component: () => import('../../../../Downloads/lae-ui-main/src/views/work-orders/Index.vue'),
-    //   meta: {
-    //     auth: true,
-    //     title: '工单',
-    //   },
-    // },
-    // {
-    //   path: '/work-orders/create',
-    //   name: 'work-orders.create',
-    //   component: () => import('../../../../Downloads/lae-ui-main/src/views/work-orders/Create.vue'),
-    //   meta: {
-    //     title: '创建工单',
-    //     auth: false,
-    //   },
-    // },
-    // {
-    //   path: '/work-orders/:id',
-    //   name: 'work-orders.show',
-    //   component: () => import('../../../../Downloads/lae-ui-main/src/views/work-orders/Show.vue'),
-    //   meta: {
-    //     title: '跟进工单',
-    //     auth: false,
-    //   },
-    // },
-    //
-
-
+    {
+        path: '/hosts',
+        name: 'hosts',
+        component: () => import('../views/Hosts.vue'),
+        meta: {
+            auth: true,
+            keepalive: true,
+            title: '主机 - 计费项目列表',
+        },
+    },
+    {
+        path: '/work-orders',
+        name: 'work-orders',
+        component: () => import('../views/work-orders/Index.vue'),
+        meta: {
+            auth: true,
+            title: '工单',
+        },
+    },
+    {
+        path: '/work-orders/create',
+        name: 'work-orders.create',
+        component: () => import('../views/work-orders/Create.vue'),
+        meta: {
+            title: '创建工单',
+            auth: false,
+        },
+    },
+    {
+        path: '/work-orders/:id',
+        name: 'work-orders.show',
+        component: () => import('../views/work-orders/Show.vue'),
+        meta: {
+            title: '跟进工单',
+            auth: false,
+        },
+    },
     // Modules
     {
         path: '/modules',

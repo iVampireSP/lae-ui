@@ -1,9 +1,15 @@
 <template>
-  <div class="not-italic" v-show="menuCollapsed[side]">
-    <n-text>
-      {{ title[0] }}
-    </n-text>
-  </div>
+  <transition name="fade">
+    <div class="not-italic" v-show="menuCollapsed[side]">
+      <n-avatar
+          :style="{backgroundColor:'transparent'}"
+      >
+        <span class="relative top-1.5">{{ title[0].toString().toUpperCase() }}</span>
+      </n-avatar>
+    </div>
+  </transition>
+
+
 </template>
 
 <script setup>
@@ -23,8 +29,10 @@ defineProps({
     default: 'left',
   },
 })
+
 </script>
 
 <style scoped>
+
 
 </style>

@@ -1,7 +1,6 @@
 <template>
-  <div>
 
-    <!--    <Lottie name="jump" />-->
+  <IndexLayout>
 
     <n-card size="small" title="用户信息">
       <n-list>
@@ -53,7 +52,7 @@
         </n-button>
       </n-button-group>
     </n-card>
-  </div>
+  </IndexLayout>
 </template>
 
 <script setup>
@@ -62,12 +61,11 @@ import {computed} from "vue";
 
 import {NAvatar, NButton, NButtonGroup, NCard, NH3, NH4, NList, NListItem, NTag} from 'naive-ui'
 
-import {addMenuOptions, removeAllMenuOptionsThen} from "../config/menuOptions.js";
-
 import userStore from "../plugins/stores/user"; // 存储用户信息，供任意页面和 JS 调用，在 Vue 文件里，配合 computed 可以实现 ref 的效果
 import http from "../plugins/http"; // http 客户端
 import conf from "../config/api"
 import router from "../plugins/router.js";
+import IndexLayout from "../components/menus/IndexLayout.vue";
 
 // 就像下面这样
 const user = computed(() => {
@@ -96,12 +94,5 @@ const go = (route_name) => {
   })
 }
 
-removeAllMenuOptionsThen('left', () => {
-
-// 注册菜单
-  addMenuOptions('left', 'index', 'Index',)
-  addMenuOptions('left', 'errors.404', '404',)
-  addMenuOptions('left', 'errors.500', '500',)
-})
 
 </script>

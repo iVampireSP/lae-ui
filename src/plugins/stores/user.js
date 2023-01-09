@@ -19,6 +19,8 @@ export default createStore({
             user_group_id: '',
             user_group: {
                 name: '',
+                exempt: false,
+                discount: 0
             },
             created_at: '',
             updated_at: '',

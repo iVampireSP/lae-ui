@@ -122,7 +122,6 @@ import tunnelStore from "../../../../plugins/stores/tunnels.js";
 import {dialog} from "../../../../utils/layout.js";
 
 
-
 const isMobile = useIsMobile()
 
 defineProps({

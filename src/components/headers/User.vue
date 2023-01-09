@@ -28,7 +28,31 @@
           充值余额:
           <n-a target="_blank" :href="api.auth + '/balances'">充值</n-a>
         </div>
+      </div>
 
+      <div class="mt-5" v-if="user.user_group_id">
+        <n-h2 class="all-zero">{{ user.user_group.name }}</n-h2>
+        <p>
+          享受 {{ user.user_group.discount }}% 的折扣
+          <br/>
+          <span v-if="user.user_group.exempt"> 并且豁免计费 </span>
+        </p>
+      </div>
+
+      <div class="mt-5">
+        <n-h2 class="all-zero">计费项目列表</n-h2>
+        <n-a>
+          <router-link class="link" :to="{ name: 'hosts' }">主机</router-link>
+        </n-a>
+      </div>
+
+      <div class="mt-5">
+        <n-h2 class="all-zero">服务与支持</n-h2>
+        <n-a>
+          <router-link class="link" :to="{ name: 'work-orders' }">
+            工单列表
+          </router-link>
+        </n-a>
       </div>
 
     </n-drawer-content>
