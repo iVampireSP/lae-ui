@@ -2,7 +2,7 @@
   <div>
     <n-h1 prefix="bar" >
       <n-text type="primary">
-        整合配置
+    配置文件
       </n-text>
     </n-h1>
 

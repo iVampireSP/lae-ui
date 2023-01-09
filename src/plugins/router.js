@@ -154,7 +154,7 @@ const routes = [
                         name: 'modules.tunnels.concat',
                         component: () => import('../views/modules/tunnels/Concat.vue'),
                         meta: {
-                            title: '整合配置',
+                            title: '配置文件',
                         }
                     },
                     {

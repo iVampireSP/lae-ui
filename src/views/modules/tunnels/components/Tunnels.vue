@@ -70,7 +70,7 @@
               <n-popselect v-model:value="$tunnel.status" :options="options" size="large"
                            @update:value="updateStatus($tunnel)">
                 <!-- button 显示选中的 options 的 label  -->
-                <n-button ghost slot="trigger">
+                <n-button ghost type="success" slot="trigger">
                   <!--                  {{ options.find((option) => option.value === $tunnel.status)?.label || '操作' }}-->
                   操作
                 </n-button>

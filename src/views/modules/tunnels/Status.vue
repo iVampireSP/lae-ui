@@ -5,7 +5,7 @@
         服务器状态
       </n-text>
     </n-h1>
-    <n-table :single-line="false" striped style="vertical-align: middle">
+    <n-table :single-line="false" striped>
       <thead>
       <tr class="text-center">
         <th>名称</th>
@@ -41,6 +41,19 @@
                   暂无
                 </span>
               </span>
+          </td>
+          <td v-if="server.status === 'up'">
+            <n-icon size="large" color="#0e7a0d" >
+              <checkmark-circle-outline style="margin-top: 4px"/>
+              <!--              太优雅了-->
+            </n-icon>
+            正常
+          </td>
+          <td v-else >
+            <n-icon size="medium" color="#d03050">
+              <close-circle-outline style="margin-top: 4px"/>
+            </n-icon>
+            异常
           </td>
         </tr>
       </tbody>
