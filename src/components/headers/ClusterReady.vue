@@ -17,7 +17,7 @@ import {NPopover} from "naive-ui";
 import http from '../../plugins/http.js'
 import Lottie from "../Lottie.vue";
 
-const detected = ref(true)
+const detected = ref(false)
 
 http.get('').then((res) => {
   if (res.headers['powered-by'] === 'Cluster Ready!') {
