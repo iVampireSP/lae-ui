@@ -9,7 +9,7 @@
 <script setup>
 import {defineProps} from 'vue'
 
-import {NText} from 'naive-ui'
+import {NAvatar} from 'naive-ui'
 
 import {menuCollapsed} from "../config/menuOptions.js";
 
