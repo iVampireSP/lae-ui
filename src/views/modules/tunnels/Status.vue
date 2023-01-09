@@ -5,11 +5,11 @@
         服务器状态
       </n-text>
     </n-h1>
-    <n-table :single-line="false">
+    <n-table :single-line="false" striped style="vertical-align: middle">
       <thead>
         <tr>
-          <th>服务器名称</th>
-          <th>服务器状态</th>
+          <th>名称</th>
+          <th>状态</th>
         </tr>
       </thead>
       <tbody>

@@ -1,4 +1,4 @@
-import {HomeOutline} from "@vicons/ionicons5";
+import {CloudOutline} from "@vicons/ionicons5";
 
 import {addMenuOptions} from "./menuOptions.js";
 
@@ -8,7 +8,7 @@ const modules = [
         id: "tunnels",
         name: "镜缘映射",
         route: "modules.tunnels.index",
-        icon: HomeOutline
+        icon: CloudOutline
     },
     // {
     //     id: "gct",
