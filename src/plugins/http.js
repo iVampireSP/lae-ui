@@ -89,7 +89,7 @@ instance.interceptors.response.use(
                 http.isAlertedTooManyRequests = true;
             }
         } else if (error.response.status === 401) {
-            if (router.currentRoute.value.name !== 'login') {
+            if (router.currentRoute.value.name !== 'auth.login') {
                 if (!http.state.isAlertedToken) {
 
                     dialog.error({

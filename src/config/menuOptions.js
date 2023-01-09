@@ -2,10 +2,11 @@ import {h, ref} from "vue";
 import {RouterLink} from "vue-router";
 import {NIcon} from 'naive-ui'
 import router from "../plugins/router.js";
+import LaeLogo from "../components/LaeLogo.vue";
 
-function renderIcon(icon) {
-    return () => h(NIcon, null, {default: () => h(icon)});
-}
+// function renderIcon(icon) {
+//     return () => h(NIcon, null, {default: () => h(icon)});
+// }
 
 const selectedKey = ref("");
 const menuInst = ref(null);
@@ -147,7 +148,7 @@ menuOptions.value['menu'].push({
         {
             to: {name: 'index'},
         },
-        {default: () => h('span', {class: 'lae-logo', width: 40, height: 25})},
+        {default: () => h(LaeLogo, {class: 'lae-logo', width: 40, height: 25})},
     ),
     key: 'index',
 });

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <n-h1 prefix="bar" align-text :type="tunnel.status === 'running' ? 'success' : 'error'">
-      <n-gradient-text :type="tunnel.status === 'running' ? 'success' : 'error'">
+    <n-h1 prefix="bar" align-text :type="status">
+      <n-gradient-text :type="status">
         {{ tunnel.name }}
       </n-gradient-text>
     </n-h1>
@@ -228,9 +228,21 @@ function initChart() {
   chartOptions && chart.setOption(chartOptions)
 }
 
+const status = ref('success')
+
 function refresh() {
   http.get('/modules/frp/hosts/' + router.params.id).then((res) => {
     tunnel.value = res.data
+
+    if (tunnel.value.status === 'running') {
+      status.value = 'success'
+    } else if (tunnel.value.status === 'stopped') {
+      status.value = 'error'
+    } else if (tunnel.value.status === 'suspended') {
+      status.value = 'warning'
+    } else {
+      status.value = 'info'
+    }
 
     // tunnel.value.tunnel = res.data.tunnel
     // console.log(tunnel.value.tunnel.conf)

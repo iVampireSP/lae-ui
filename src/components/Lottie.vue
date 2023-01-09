@@ -1,5 +1,5 @@
 <template>
-  <div :id="id" style="margin-top:20px; margin-bottom: 20px"></div>
+  <div :id="id" :style="style"></div>
 </template>
 
 <script setup>
@@ -28,9 +28,19 @@ const props = defineProps({
     type: Number,
     default: 128
   },
+  width: {
+    type: Number,
+    default: 0
+  },
   center: {
     type: Boolean,
     default: true
+  },
+  style: {
+    type: Object,
+    default: () => {
+      return {}
+    }
   }
 })
 
@@ -44,12 +54,17 @@ let options = {}
 const src = '/assets/lottie/' + props.name + '.json'
 
 onMounted(() => {
-
   // get dom
   container.value = document.getElementById(id.value)
 
   // set height
   container.value.style.height = props.height + 'px'
+
+  // if width
+  if (props.width) {
+    container.value.style.width = props.width + 'px'
+
+  }
 
   // set center(text center)
   if (props.center) {
@@ -61,7 +76,7 @@ onMounted(() => {
     renderer: 'svg',
     loop: props.loop,
     autoplay: props.autoplay,
-    path: src
+    path: src,
   }
 
   animation.value = lottie.loadAnimation(options)

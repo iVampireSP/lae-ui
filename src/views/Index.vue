@@ -1,5 +1,8 @@
 <template>
   <div>
+
+    <!--    <Lottie name="jump" />-->
+
     <n-card size="small" title="用户信息">
       <n-list>
         <n-list-item>
@@ -29,11 +32,11 @@
     <n-card size="small" title="用户" class="mt-3">
       <n-button-group>
         <n-button ghost type="info" @click="go('auth.login')">
-         更换账号
+          更换账号
         </n-button>
 
         <n-button ghost type="info" @click="go('user')">
-         用户中心
+          用户中心
         </n-button>
 
       </n-button-group>
@@ -59,7 +62,7 @@ import {computed} from "vue";
 
 import {NAvatar, NButton, NButtonGroup, NCard, NH3, NH4, NList, NListItem, NTag} from 'naive-ui'
 
-import {addMenuOptions, removeAllMenuOptions} from "../config/menuOptions.js";
+import {addMenuOptions, removeAllMenuOptionsThen} from "../config/menuOptions.js";
 
 import userStore from "../plugins/stores/user"; // 存储用户信息，供任意页面和 JS 调用，在 Vue 文件里，配合 computed 可以实现 ref 的效果
 import http from "../plugins/http"; // http 客户端
@@ -93,11 +96,12 @@ const go = (route_name) => {
   })
 }
 
-// 移除 left 菜单所有项目
-removeAllMenuOptions('left')
+removeAllMenuOptionsThen('left', () => {
 
 // 注册菜单
-addMenuOptions('left', 'index', 'Index',)
-addMenuOptions('left', 'errors.404', '404',)
-addMenuOptions('left', 'errors.500', '500',)
+  addMenuOptions('left', 'index', 'Index',)
+  addMenuOptions('left', 'errors.404', '404',)
+  addMenuOptions('left', 'errors.500', '500',)
+})
+
 </script>

@@ -2,7 +2,7 @@
   <div>
     <div v-if="state === 'redirect'">
       <Lottie name="Wave"
-              style="text-align: center"
+              :style="style"
               :height="256"
       />
 
@@ -17,13 +17,13 @@
     </div>
     <div v-else-if="state === 'logging'">
       <Lottie :name="logo"
-              style="text-align: center"
+              :style="style"
               :height="256"
       />
     </div>
     <div v-else-if="state === 'error'">
       <Lottie name="Ghost"
-              style="text-align: center"
+              :style="style"
               :height="256"
       />
 
@@ -62,6 +62,13 @@ import api from '../../config/api'
 import user from "../../plugins/stores/user.js";
 import Lottie from "../../components/Lottie.vue";
 
+
+const style = {
+  textAlign: 'center',
+  marginTop: '20px',
+  marginBottom: '20px'
+}
+
 const origin = api.auth
 
 console.log('auth server: ' + origin)
@@ -86,7 +93,7 @@ const connect = () => {
         }, 1000)
 
       })
-      .catch((err) => {
+      .catch(() => {
         state.value = 'error'
 
         user.commit('updateToken', '')
@@ -107,8 +114,12 @@ if (query.token != null) {
 // }
 
 function toLogin() {
+
+  // protocol + domain + pathname
+  const redirect = location.origin + location.pathname
+
   window.location.href =
-      origin + '/?callback=' + encodeURIComponent(window.location.href)
+      origin + '/?callback=' + encodeURIComponent(redirect)
 }
 
 const logo = ref('Logo-dark')

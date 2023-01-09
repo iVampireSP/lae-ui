@@ -1,10 +1,8 @@
 <template>
-  <div v-if="detected" class="mt-1">
+  <div v-if="detected">
     <n-popover trigger="hover">
       <template #trigger>
-        <n-icon class=" text-orange-400" size="30">
-          <BoltFilled/>
-        </n-icon>
+        <Lottie name="cluster-ready" :loop="false" :height="50"/>
       </template>
       <span>Cluster Ready! 就绪</span>
     </n-popover>
@@ -14,12 +12,12 @@
 
 <script setup>
 import {ref} from 'vue'
-import {BoltFilled} from "@vicons/material"
-import {NIcon, NPopover} from "naive-ui";
+import {NPopover} from "naive-ui";
 
 import http from '../../plugins/http.js'
+import Lottie from "../Lottie.vue";
 
-const detected = ref(false)
+const detected = ref(true)
 
 http.get('').then((res) => {
   if (res.headers['powered-by'] === 'Cluster Ready!') {

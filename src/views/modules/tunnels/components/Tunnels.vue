@@ -8,9 +8,31 @@
         >
           <template #description>
             <n-space size="small" style="margin-top: 4px">
-              <n-tag :bordered="false" size="small" :type="$tunnel.status==='running'?'success':'error'">
-                {{ $tunnel.status === 'running' ? '正常' : '停止' }}
+
+              <!-- running: success, stopped: error, suspended: warning -->
+              <n-tag v-if="$tunnel.status === 'running'"
+                     :bordered="false"
+                     type="success"
+                     size="small"
+              >
+                正常
               </n-tag>
+              <n-tag v-else-if="$tunnel.status === 'stopped'"
+                     :bordered="false"
+                     type="error"
+                     size="small"
+
+              >
+                停止
+              </n-tag>
+              <n-tag v-else-if="$tunnel.status === 'suspended'"
+                     :bordered="false"
+                     type="warning"
+                     size="small"
+              >
+                暂停
+              </n-tag>
+
               <n-tag :bordered="false" size="small" type="info">
                 {{ $tunnel.protocol.toUpperCase() }}
               </n-tag>
@@ -98,6 +120,8 @@ import router from "../../../../plugins/router.js";
 import http from "../../../../plugins/http.js";
 import tunnelStore from "../../../../plugins/stores/tunnels.js";
 import {dialog} from "../../../../utils/layout.js";
+
+
 
 const isMobile = useIsMobile()
 

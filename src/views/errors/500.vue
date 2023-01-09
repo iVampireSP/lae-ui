@@ -2,7 +2,7 @@
   <n-result
       status="500"
       title="服务器错误"
-      description="我们的逻辑可能出了点问题。"
+      description="我们的锅。"
   >
     <template #icon>
       <Lottie name="Scrunched-mouth" :height="250"/>

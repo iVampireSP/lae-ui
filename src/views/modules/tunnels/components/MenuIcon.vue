@@ -6,6 +6,9 @@
     <n-text type="error" v-if="tunnel['status'] === 'stopped'">
       {{ tunnel['name'][0] }}
     </n-text>
+    <n-text type="warning" v-if="tunnel['status'] === 'suspended'">
+      {{ tunnel['name'][0] }}
+    </n-text>
   </div>
 </template>
 
