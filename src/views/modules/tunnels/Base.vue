@@ -10,7 +10,13 @@ import {
   removeAllMenuOptionsThen
 } from "../../../config/menuOptions.js";
 
-import {AddOutline, ClipboardOutline, ListOutline, ServerOutline} from "@vicons/ionicons5";
+import {
+  AddOutline,
+  ClipboardOutline,
+  ListOutline,
+  ServerOutline,
+  CloudDownloadOutline
+} from "@vicons/ionicons5";
 
 import {ref} from 'vue'
 
@@ -30,6 +36,7 @@ function reRegisterMenu() {
     addMenuOptions('left', 'modules.tunnels.create', '新建隧道', AddOutline)
     addMenuOptions('left', 'modules.tunnels.concat', '整合配置', ClipboardOutline)
     addMenuOptions('left', 'modules.tunnels.status', '服务器', ServerOutline)
+    addMenuOptions('left', 'modules.tunnels.downloads', '客户端下载', CloudDownloadOutline)
 
     if (tunnels.value.length > 0) {
       addMenuDivider('left')

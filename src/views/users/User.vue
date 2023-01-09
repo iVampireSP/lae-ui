@@ -1,8 +1,8 @@
 <template>
   <div class="text-center">
     <n-avatar :size="isMobile ? 64 : 128" :src="avatar" lazy round/>
-    <n-h1>{{ user.name }}  #{{ user.id }}</n-h1>
-    {{user}}
+    <n-h1>{{ user.name }} # {{ user.id }}</n-h1>
+    {{ user }}
 <!--    TODO: 钱 email 注册时间 任务列表-->
 <!--    TODO: 彩蛋：生日彩蛋-->
   </div>

@@ -160,7 +160,7 @@ function updateStatus($tunnel) {
     dialog.warning({
       title: '注意！',
       content: '你正在删除一个隧道！',
-      positiveText: '删除!',
+      positiveText: '删除',
       negativeText: '不对',
       onPositiveClick: () => {
         http.delete('/modules/frp/hosts/' + $tunnel.host_id)
@@ -176,7 +176,7 @@ function updateStatus($tunnel) {
     dialog.warning({
       title: '你正在断开连接！',
       content: '停止一个隧道，将断开 frpc 客户端连接！',
-      positiveText: '关闭!',
+      positiveText: '关闭',
       negativeText: '不对',
       onPositiveClick: () => {
         patch({
