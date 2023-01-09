@@ -26,11 +26,10 @@
             </n-radio>
           </n-space>
         </n-radio-group>
-
       </n-input-group>
       <n-input-group>
         <n-input-group-label>金额</n-input-group-label>
-        <n-input v-model:value="balance.amount" @keydown.enter.prevent/>
+        <n-input v-model:value="balance.amount" @keydown.enter.prevent placeholder="给你随机个～"/>
         <n-input-group-label>元</n-input-group-label>
       </n-input-group>
     </n-space>
@@ -49,18 +48,31 @@ import http from "../../plugins/http";
 
 const show = ref(false)
 
+const random = () => {
+  // 返回 1 到 100 之间的随机整数
+  return (Math.floor(Math.random() * 100) + 1).toString()
+}
+
 const balance = ref({
   payment: 'wechat',
-  amount: "10",
+  amount: '10',
 })
 const link = ref('')
 
+
 function charge() {
+
+  if (balance.value.amount === '') {
+    balance.value.amount = random()
+  }
+
   http.post('/balances', balance.value).then((res) => {
     link.value = res.data.url
 
     //   新标签打开，针对解决 Safari 问题
     setTimeout(() => window.open(link.value, '_blank'))
+  }).finally(() => {
+    balance.value.amount = ''
   })
 }
 
