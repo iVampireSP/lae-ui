@@ -4,7 +4,7 @@
       <n-grid cols="2">
         <n-grid-item>
           <div class="menu-item">
-            <n-menu  :options="menuOptions.menu" :value="selectedKey"
+            <n-menu :options="menuOptions.menu" :value="selectedKey"
                     mode="horizontal"/>
 
           </div>
@@ -17,8 +17,10 @@
 
         <n-grid-item class="text-right flex items-center justify-end mr-1.5">
           <!--  右侧菜单   -->
-
           <ClusterReady/>
+
+          <Charge/>
+
           <User/>
 
 
@@ -51,18 +53,18 @@
           <div v-else>
 
 <!--            <n-button-->
-<!--                size="small"-->
-<!--                tag="a"-->
-<!--                quaternary-->
-<!--                class="nav-picker"-->
-<!--                href="#"-->
-<!--                target="_blank"-->
-<!--            >-->
-<!--              GitHub-->
-<!--            </n-button>-->
-<!--            <n-text class="nav-picker padded">-->
-<!--              version-->
-<!--            </n-text>-->
+            <!--                size="small"-->
+            <!--                tag="a"-->
+            <!--                quaternary-->
+            <!--                class="nav-picker"-->
+            <!--                href="#"-->
+            <!--                target="_blank"-->
+            <!--            >-->
+            <!--              GitHub-->
+            <!--            </n-button>-->
+            <!--            <n-text class="nav-picker padded">-->
+            <!--              version-->
+            <!--            </n-text>-->
           </div>
         </n-grid-item>
 
@@ -79,21 +81,19 @@
 </style>
 
 <script setup>
+
 import {NGrid, NGridItem, NIcon, NLayout, NLayoutHeader, NMenu, NPopover} from 'naive-ui'
 
 import {useIsMobile, useIsTablet} from "../../utils/composables.js";
-
-import {h} from "vue"
-
 import {menuOptions, selectedKey} from "../../config/menuOptions.js"
 
 import {MenuOutline} from "@vicons/ionicons5"
+
+
 import ClusterReady from "./ClusterReady.vue";
 import User from "./User.vue";
+import Charge from "./Charge.vue";
 
-function renderIcon(icon) {
-  return () => h(NIcon, null, {default: () => h(icon)})
-}
 
 const isMobile = useIsMobile()
 const isTablet = useIsTablet()

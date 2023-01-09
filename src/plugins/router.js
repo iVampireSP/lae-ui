@@ -179,7 +179,6 @@ const routes = [
                         name: 'modules.tunnels.downloads',
                         component: () => import('../views/modules/tunnels/Downloads.vue'),
                         meta: {
-                            collapses: ['left'],
                             title: '下载客户端',
                         }
                     }

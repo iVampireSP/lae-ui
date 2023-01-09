@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import {NH1, NTable, NText} from 'naive-ui'
+import {NA, NH1, NTable, NText} from 'naive-ui'
 import {ref} from 'vue'
 
 const items = ref([

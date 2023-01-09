@@ -3,6 +3,7 @@ import {RouterLink} from "vue-router";
 import {NIcon} from 'naive-ui'
 import router from "../plugins/router.js";
 import LaeLogo from "../components/LaeLogo.vue";
+import SimpleMenuIcon from "../components/SimpleMenuIcon.vue";
 
 // function renderIcon(icon) {
 //     return () => h(NIcon, null, {default: () => h(icon)});
@@ -95,15 +96,17 @@ const addMenuOptions = (type, route_options, text, icon = null, icon_props = {})
         data.key = route_options.name + "{}";
     }
 
-    if (icon !== null) {
+    if (!icon) {
+        data.icon = () => {
+            return h(SimpleMenuIcon, {
+                title: text,
+            })
+        }
+    } else {
         data.icon = () => {
             return h(NIcon, icon_props, {default: () => h(icon, icon_props)});
         }
     }
-    // }
-    // if (icon !== null) {
-    //     data.icon = renderIcon(icon)
-    // }
 
     menuOptions.value[type].push(data);
 }

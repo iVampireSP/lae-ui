@@ -21,7 +21,7 @@ import {
 import {ref} from 'vue'
 
 import tunnelsStore from "../../../plugins/stores/tunnels";
-import MenuIcon from "./components/MenuIcon.vue";
+// import MenuIcon from "./components/MenuIcon.vue";
 
 const tunnels = ref([])
 
@@ -46,9 +46,7 @@ function reRegisterMenu() {
 
         addMenuOptions('left', {
           name: 'modules.tunnels.show', params: {id: tunnel.host_id}
-        }, tunnel.name, MenuIcon, {
-          tunnel: tunnel
-        })
+        }, tunnel.name)
       }
     }
   })

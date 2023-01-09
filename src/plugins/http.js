@@ -10,6 +10,7 @@ import {h} from "vue";
 
 import error500 from '../views/errors/500.vue'
 import error404 from '../views/errors/404.vue'
+import error401 from '../views/errors/401.vue'
 
 const baseURL = api.api;
 // axios.defaults.withCredentials = true;
@@ -91,16 +92,23 @@ instance.interceptors.response.use(
         } else if (error.response.status === 401) {
             if (router.currentRoute.value.name !== 'auth.login') {
                 if (!http.state.isAlertedToken) {
+                    //
+                    // dialog.error({
+                    //     title: '提示',
+                    //     content: 'Token 鉴权失败，请重新登录。',
+                    //     positiveText: '好',
+                    //     onPositiveClick: () => {
+                    //         router.push({name: 'auth.login'});
+                    //     },
+                    //
+                    // })
 
                     dialog.error({
-                        title: '提示',
-                        content: 'Token 鉴权失败，请重新登录。',
-                        positiveText: '好',
-                        onPositiveClick: () => {
-                            router.push({name: 'auth.login'});
+                        title: '访问被禁止',
+                        content: () => {
+                            return h(error401)
                         },
-
-                    })
+                    });
 
                     http.state.isAlertedToken = true;
                 }
