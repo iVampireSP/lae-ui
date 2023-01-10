@@ -2,33 +2,42 @@
   <n-list v-if="tunnels.length > 0" clickable hoverable>
     <template v-for="($tunnel, index) in tunnels" :key="index">
       <n-list-item @click="next($tunnel)">
-
-        <n-thing :title="'#'+ $tunnel.host_id + ' '+$tunnel.name "
-                 content-style="margin-top: 10px;"
+        <n-thing
+          :title="'#' + $tunnel.host_id + ' ' + $tunnel.name"
+          content-style="margin-top: 10px;"
         >
           <template #description>
             <n-space size="small" style="margin-top: 4px">
-
               <!-- running: success, stopped: error, suspended: warning -->
-              <n-tag v-if="$tunnel.status === 'running'"
-                     :bordered="false"
-                     type="success"
-                     size="small"
+              <n-tag
+                v-if="$tunnel.status === 'running'"
+                :bordered="false"
+                type="success"
+                size="small"
               >
                 正常
               </n-tag>
-              <n-tag v-else-if="$tunnel.status === 'stopped'"
-                     :bordered="false"
-                     type="error"
-                     size="small"
-
+              <n-tag
+                v-else-if="$tunnel.status === 'delete'"
+                :bordered="false"
+                type="error"
+                size="small"
+              >
+                删除中
+              </n-tag>
+              <n-tag
+                v-else-if="$tunnel.status === 'stopped'"
+                :bordered="false"
+                type="error"
+                size="small"
               >
                 停止
               </n-tag>
-              <n-tag v-else-if="$tunnel.status === 'suspended'"
-                     :bordered="false"
-                     type="warning"
-                     size="small"
+              <n-tag
+                v-else-if="$tunnel.status === 'suspended'"
+                :bordered="false"
+                type="warning"
+                size="small"
               >
                 暂停
               </n-tag>
@@ -36,7 +45,12 @@
               <n-tag :bordered="false" size="small" type="info">
                 {{ $tunnel.protocol.toUpperCase() }}
               </n-tag>
-              <n-tag v-if="$tunnel.custom_domain" :bordered="false" size="small" type="info">
+              <n-tag
+                v-if="$tunnel.custom_domain"
+                :bordered="false"
+                size="small"
+                type="info"
+              >
                 {{ $tunnel.custom_domain }}
               </n-tag>
               <n-tag v-else :bordered="false" size="small" type="info">
@@ -62,43 +76,51 @@
             <!--            </n-button>-->
 
             <!--    按钮，忽略事件  -->
-            <n-button-group @click.stop="() => {}">
-              <n-button ghost type="info" @click.stop="showDetail($tunnel.host_id)">
-                {{ isMobile ? "信息" : "详细信息" }}
+            <n-button-group @click.stop="() => { }">
+              <n-button
+                ghost
+                type="info"
+                @click.stop="showDetail($tunnel.host_id)"
+              >
+                {{ isMobile? '信息': '详细信息' }}
               </n-button>
 
-              <n-popselect v-model:value="$tunnel.status" :options="options" size="large"
-                           @update:value="updateStatus($tunnel)">
+              <n-popselect
+                v-model:value="$tunnel.status"
+                :options="options"
+                size="large"
+                @update:value="updateStatus($tunnel)"
+              >
                 <!-- button 显示选中的 options 的 label  -->
                 <n-button ghost type="success" slot="trigger">
                   <!--                  {{ options.find((option) => option.value === $tunnel.status)?.label || '操作' }}-->
                   操作
                 </n-button>
-
               </n-popselect>
             </n-button-group>
-
           </template>
         </n-thing>
-
       </n-list-item>
     </template>
   </n-list>
   <div v-else>
-    <n-empty description="您还没有创建任何隧道。"/>
+    <n-empty description="您还没有创建任何隧道。" />
   </div>
 
-  <n-modal v-model:show="showModal" preset="dialog" title="修改名称"
-           @positive-click="submitCallback"
-           positive-text="确认"
-           negative-text="算了"
+  <n-modal
+    v-model:show="showModal"
+    preset="dialog"
+    title="修改名称"
+    @positive-click="submitCallback"
+    positive-text="确认"
+    negative-text="算了"
   >
-    <n-input v-model:value="selectedTunnel.name" @keydown.enter.prevent/>
+    <n-input v-model:value="selectedTunnel.name" @keydown.enter.prevent />
   </n-modal>
 </template>
 
 <script setup>
-import {defineProps, ref} from 'vue'
+import { defineProps, ref } from 'vue'
 
 import {
   NAvatar,
@@ -112,47 +134,45 @@ import {
   NPopselect,
   NSpace,
   NTag,
-  NThing
+  NThing,
 } from 'naive-ui'
 
-import {useIsMobile} from '../../../../utils/composables.js'
-import router from "../../../../plugins/router.js";
-import http from "../../../../plugins/http.js";
-import tunnelStore from "../../../../plugins/stores/tunnels.js";
-import {dialog} from "../../../../utils/layout.js";
-
+import { useIsMobile } from '../../../../utils/composables.js'
+import router from '../../../../plugins/router.js'
+import http from '../../../../plugins/http.js'
+import tunnelStore from '../../../../plugins/stores/tunnels.js'
+import { dialog } from '../../../../utils/layout.js'
 
 const isMobile = useIsMobile()
 
 defineProps({
   tunnels: {
     type: Array,
-    required: true
+    required: true,
   },
   next: {
     type: Function,
-    required: false
-  }
+    required: false,
+  },
 })
 
 function showDetail(host_id) {
   router.push({
     name: 'modules.tunnels.show',
     params: {
-      id: host_id
-    }
+      id: host_id,
+    },
   })
 }
 
 const selectedTunnel = ref({
   host_id: 0,
-  name: ''
+  name: '',
 })
 
 const showModal = ref(false)
 
 function updateStatus($tunnel) {
-
   selectedTunnel.value = $tunnel
 
   if ($tunnel.status === 'delete') {
@@ -162,14 +182,13 @@ function updateStatus($tunnel) {
       positiveText: '删除',
       negativeText: '不对',
       onPositiveClick: () => {
-        http.delete('/modules/frp/hosts/' + $tunnel.host_id)
-            .then(() => {
-              tunnelStore.dispatch('fetchTunnels')
-            })
+        http.delete('/modules/frp/hosts/' + $tunnel.host_id).then(() => {
+          tunnelStore.dispatch('fetchTunnels')
+        })
       },
       onNegativeClick: () => {
         $tunnel.status = 'running'
-      }
+      },
     })
   } else if ($tunnel.status === 'stopped') {
     dialog.warning({
@@ -179,19 +198,19 @@ function updateStatus($tunnel) {
       negativeText: '不对',
       onPositiveClick: () => {
         patch({
-          status: $tunnel.status
+          status: $tunnel.status,
         })
       },
       onNegativeClick: () => {
         $tunnel.status = 'running'
-      }
+      },
     })
   } else if ($tunnel.status === 'rename') {
     showModal.value = true
     $tunnel.status = 'running'
   } else {
     patch({
-      status: $tunnel.status
+      status: $tunnel.status,
     })
   }
 }
@@ -200,35 +219,36 @@ const submitCallback = () => {
   showModal.value = false
 
   patch({
-    name: selectedTunnel.value.name
+    name: selectedTunnel.value.name,
   })
 }
 
 function patch(data = {}) {
-  http.patch(`/modules/frp/hosts/${selectedTunnel.value.host_id}`, data).finally(() => {
-    tunnelStore.dispatch('fetchTunnels')
-  })
+  http
+    .patch(`/modules/frp/hosts/${selectedTunnel.value.host_id}`, data)
+    .finally(() => {
+      tunnelStore.dispatch('fetchTunnels')
+    })
 }
 
 const options = ref([
   {
     label: '停用',
-    value: 'stopped'
+    value: 'stopped',
   },
   {
     label: '启用',
-    value: 'running'
+    value: 'running',
   },
   {
     label: '删除',
-    value: 'delete'
+    value: 'delete',
   },
   {
     label: '改名',
-    value: 'rename'
-  }
+    value: 'rename',
+  },
 ])
-
 </script>
 
 <style scoped>
