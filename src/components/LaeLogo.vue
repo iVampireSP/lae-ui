@@ -8,7 +8,7 @@
 
 <script setup>
 
-import {defineProps} from "vue";
+// import { defineProps } from "vue";
 // import Lottie from "./Lottie.vue";
 
 const props = defineProps({

@@ -10,12 +10,12 @@ const modules = [
         route: "modules.tunnels.index",
         icon: CloudOutline
     },
-    // {
-    //     id: "gct",
-    //     name: "游戏容器",
-    //     route: "modules.gct.index",
-    //     icon: GameControllerOutline
-    // },
+    {
+        id: "gct",
+        name: "游戏容器",
+        route: "modules.gct.index",
+        icon: GameControllerOutline
+    },
     // {
     //     id: "user-mqtt",
     //     name: "消息队列",

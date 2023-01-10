@@ -20,7 +20,7 @@
   import router from '../../plugins/router'
   import Lottie from '../../components/Lottie.vue'
 
-  import { defineProps } from 'vue'
+  // import { defineProps } from 'vue'
 
   defineProps({
     show_footer: {

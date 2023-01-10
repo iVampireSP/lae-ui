@@ -1,11 +1,17 @@
 <template>
   <div>
     <n-h1 prefix="bar">
-      <n-text type="primary">
-        客户端下载
-      </n-text>
+      <n-text type="primary"> 客户端下载 </n-text>
     </n-h1>
-    <n-table :single-line="false" >
+    <n-data-table
+      :columns="headers"
+      :data="items"
+      :render-cell="render"
+      :filterOptions="filter_options"
+    />
+    <!-- TODO: 完成表格筛选 -->
+    <!-- @update:filters="archFilter" -->
+    <!-- <n-table :single-line="false" >
       <thead>
         <tr class="text-center">
           <th>名称</th>
@@ -22,44 +28,81 @@
           </td>
         </tr>
       </tbody>
-    </n-table>
+    </n-table> -->
   </div>
 </template>
 
 <script setup>
-import {NA, NH1, NTable, NText} from 'naive-ui'
-import {ref} from 'vue'
+import { NA, NH1, NTable, NDataTable, NText } from 'naive-ui'
+import { ref, computed, h } from 'vue'
 
-const items = ref([
-      {
-        "name": "Windows Frpc",
-        "arch": "amd64",
-        "url": "https://download.mefrp.com/d/release/MirrorEdgeFrp_0.46.0_beta_windows_amd64.zip"
-      },
-      {
-        "name": "Windows Python 图形化启动器",
-        "arch": "amd64",
-        "url": "https://download.mefrp.com/d/alidrive/Mirror_Edge_Frp_Python_Win.zip"
-      },
-      {
-        "name": "Windows C# .NET 图形化启动器",
-        "arch": "amd64",
-        "url": "http://124.223.35.239/download/mefrp/"
-      },
-      {
-        "name": "Linux Frpc",
-        "arch": "amd64",
-        "url": "https://download.mefrp.com/d/release/MirrorEdgeFrp_0.46.0_beta_linux_amd64.tar.gz"
-      },
-      {
-        "name": "更多版本 Frpc",
-        "arch": "any",
-        "url": "https://download.mefrp.com/release/"
-      }
+const headers = [
+  {
+    title: '名称',
+    key: 'name',
+  },
+  {
+    title: '架构',
+    key: 'arch',
+    filter() { },
+  },
+  {
+    title: '下载',
+    key: 'url',
+  },
+]
 
-    ]
-)
+const version = [
+  {
+    name: 'Windows Frpc',
+    arch: 'amd64',
+    url: 'https://download.mefrp.com/d/release/MirrorEdgeFrp_0.46.0_beta_windows_amd64.zip',
+  },
+  {
+    name: 'Windows Python 图形化启动器',
+    arch: 'amd64',
+    url: 'https://download.mefrp.com/d/alidrive/Mirror_Edge_Frp_Python_Win.zip',
+  },
+  {
+    name: 'Windows C# .NET 图形化启动器',
+    arch: 'amd64',
+    url: 'http://124.223.35.239/download/mefrp/',
+  },
+  {
+    name: 'Linux Frpc',
+    arch: 'amd64',
+    url: 'https://download.mefrp.com/d/release/MirrorEdgeFrp_0.46.0_beta_linux_amd64.tar.gz',
+  },
+  {
+    name: '更多版本 Frpc',
+    arch: 'any',
+    url: 'https://download.mefrp.com/release/',
+  },
+]
 
+const items = ref(version)
+
+const render = (value) => {
+  // console.log(value, typeof (value))
+  if (value && value.startsWith('http'))
+    return h(NA, { href: value, target: '_blank' }, () => {
+      return '下载'
+    })
+  else return value
+}
+
+const filter_options = [
+  {
+    label: 'amd64',
+    value: 'amd64',
+  },
+  {
+    label: 'any',
+    value: 'any',
+  },
+]
+
+  // const archFilter = ref(['amd64':'amd64'])
 </script>
 
 <style scoped>

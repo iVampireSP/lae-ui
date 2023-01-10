@@ -16,7 +16,7 @@ import {NButton, NResult} from 'naive-ui'
 import router from '../../plugins/router'
 import Lottie from "../../components/Lottie.vue";
 
-import {computed, defineProps} from "vue";
+import {computed} from "vue";
 
 import userStore from '../../plugins/stores/user'
 
