@@ -1,5 +1,5 @@
 <template>
-  <div class="not-italic">
+  <div class="not-italic text-base">
     <n-text v-if="tunnel['status'] === 'running'">
       {{ tunnel['name'][0] }}
     </n-text>
@@ -24,7 +24,3 @@ defineProps({
   }
 })
 </script>
-
-<style scoped>
-
-</style>

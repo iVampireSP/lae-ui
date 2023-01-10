@@ -21,7 +21,7 @@ import {
 import {ref} from 'vue'
 
 import tunnelsStore from "../../../plugins/stores/tunnels";
-// import MenuIcon from "./components/MenuIcon.vue";
+import MenuIcon from "./components/MenuIcon.vue";
 
 const tunnels = ref([])
 
@@ -44,9 +44,15 @@ function reRegisterMenu() {
       for (let i = 0; i < tunnels.value.length; i++) {
         const tunnel = tunnels.value[i]
 
+        // addMenuOptions('left', {
+        //   name: 'modules.tunnels.show', params: {id: tunnel.host_id}
+        // }, tunnel.name)
+
         addMenuOptions('left', {
           name: 'modules.tunnels.show', params: {id: tunnel.host_id}
-        }, tunnel.name)
+        }, tunnel.name, MenuIcon, {
+          tunnel: tunnel
+        })
       }
     }
   })
@@ -59,12 +65,7 @@ tunnelsStore.subscribe((mutation, state) => {
     tunnels.value = state.tunnels
   }
 
-
   reRegisterMenu()
 })
 
 </script>
-
-<style scoped>
-
-</style>
