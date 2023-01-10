@@ -1,7 +1,11 @@
 <template>
-  <n-result description="我们知道你很急，但是我们确实找不到。" status="404" title="资源不存在">
+  <n-result
+    description="我们知道你很急，但是我们确实找不到。"
+    status="404"
+    title="资源不存在"
+  >
     <template #icon>
-      <Lottie name="Thinking-face" :height="250"/>
+      <Lottie name="Thinking-face" :height="250" />
     </template>
 
     <template #footer v-if="show_footer">
@@ -11,23 +15,21 @@
 </template>
 
 <script setup>
-import {NButton, NResult} from 'naive-ui'
+  import { NButton, NResult } from 'naive-ui'
 
-import router from '../../plugins/router'
-import Lottie from "../../components/Lottie.vue";
+  import router from '../../plugins/router'
+  import Lottie from '../../components/Lottie.vue'
 
-import {defineProps} from "vue";
+  import { defineProps } from 'vue'
 
-defineProps({
-  show_footer: {
-    type: Boolean,
-    default: true
+  defineProps({
+    show_footer: {
+      type: Boolean,
+      default: true,
+    },
+  })
+
+  function goTo(route_name) {
+    router.push({ name: route_name })
   }
-})
-
-
-function goTo(route_name) {
-  router.push({name: route_name})
-}
-
 </script>

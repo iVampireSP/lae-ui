@@ -115,7 +115,7 @@ instance.interceptors.response.use(
             }
         } else if (error.response.status === 404) {
             dialog.error({
-                title: '404',
+                title: '404 Not Found',
                 content: () => {
                     return h(error404, {
                         show_footer: false
@@ -124,7 +124,7 @@ instance.interceptors.response.use(
             });
         } else if (error.response.status === 500) {
             dialog.error({
-                title: '服务器错误',
+                title: '500 Internal Server Error',
                 content: () => {
                     return h(error500)
                 },

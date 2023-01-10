@@ -3,9 +3,7 @@
 </template>
 
 <script setup>
-import {
-  NH1
-} from 'naive-ui'
+import {NH1} from 'naive-ui'
 import {ref} from 'vue'
 </script>
 

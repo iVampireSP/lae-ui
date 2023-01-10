@@ -15,8 +15,8 @@ removeAllMenuOptionsThen('left', () => {
 
 // 注册菜单
   addMenuOptions('left', 'index', '首页', HomeOutline)
-  addMenuOptions('left', 'announcements', '公告', MessageOutlined)
   addMenuOptions('left', 'pinned', '固钉', PinOutline)
+  addMenuOptions('left', 'announcements', '公告', MessageOutlined)
 })
 
 
