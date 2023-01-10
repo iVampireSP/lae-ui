@@ -3,7 +3,7 @@
     <n-global-style/>
     <n-loading-bar-provider>
       <n-message-provider>
-        <n-notification-provider>
+        <n-notification-provider :max="3">
           <n-dialog-provider>
             <LayoutVue/>
           </n-dialog-provider>
@@ -18,7 +18,6 @@ import {computed} from 'vue'
 import hljs from 'highlight.js/lib/core';
 import ini from 'highlight.js/lib/languages/ini'
 
-hljs.registerLanguage('ini', ini)
 import LayoutVue from './components/Layout.vue'
 
 import {
@@ -33,6 +32,7 @@ import {
   useOsTheme,
   zhCN
 } from 'naive-ui'
+
 
 
 const osThemeRef = useOsTheme();
@@ -50,5 +50,8 @@ const theme = computed(() => osThemeRef.value === "dark" ? darkTheme : null)
 //     return siteSetup()
 //   }
 // })
+
+hljs.registerLanguage('ini', ini)
+
 
 </script>

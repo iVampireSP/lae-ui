@@ -7,7 +7,7 @@
 
   import userStore from '../plugins/stores/user'
 
-  import { useNotification } from 'naive-ui'
+  import { useNotification, NButton } from 'naive-ui'
 
   import { computed } from 'vue'
 
@@ -20,20 +20,26 @@
     echo.private(`users.${user.value.id}`).listen('.common', (e) => {
       console.log(e)
 
-      let title = '新消息'
+      let title = ''
 
-      let content = e.data.message
+      if (e.data.name) {
+        title = e.data.name
+      } else if (e.data.title) {
+        title = e.data.title
+      }
+
+      let content = e.data.message ?? e.data.content ?? ''
 
       if (e.module) {
         title = e.module.name + ' - ' + title
-        content = e.data.message
       }
 
       let data = {
-        content: title,
-        meta: content,
-        duration: 2500,
+        title: title,
+        content: content,
+        duration: 5000,
         keepAliveOnHover: true,
+        meta: new Date(e.sent_at).toLocaleString()
       }
 
       switch (e.type) {

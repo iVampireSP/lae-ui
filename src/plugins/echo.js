@@ -39,6 +39,5 @@ function init() {
     }
   }
 }
-
 init()
 export default echo
