@@ -40,11 +40,11 @@
       </div>
     </div>
 
-    <p v-show="state === 'logging'" class="text-center bottom">
-      <span>登录动画由 Fofray 制作。</span>
+    <p v-show="state === 'logging'" class="text-center mt-5">
+      <span>莱云的 logo 动画由 Fofray 制作。</span>
     </p>
 
-    <p v-if="state === 'redirect'" class="text-center bottom">
+    <p v-if="state === 'redirect'" class="text-center mt-5">
       莱云 iVampireSP.com 作品
       <br/>
       <a href="https://beian.miit.gov.cn/">苏ICP备2022042268号-1</a>
@@ -127,12 +127,3 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
   logo.value = 'Logo-white'
 }
 </script>
-
-<style scoped>
-.bottom {
-  bottom: 30px;
-  left: 0;
-  width: 100%;
-  position: absolute;
-}
-</style>

@@ -29,10 +29,24 @@
 
   </div>
 
+  <n-watermark
+      v-if="true"
+      content="别泄漏隧道名和 Token"
+      cross
+      fullscreen
+      :font-size="16"
+      :line-height="16"
+      :width="384"
+      :height="384"
+      :x-offset="12"
+      :y-offset="60"
+      :rotate="-15"
+  />
+
 </template>
 
 <script setup>
-import {NButton, NCode, NH1, NSelect, NText} from 'naive-ui'
+import {NButton, NCode, NH1, NSelect, NText, NWatermark} from 'naive-ui'
 import http from '../../../plugins/http'
 import {ref} from "vue";
 import {message} from "../../../utils/layout.js";

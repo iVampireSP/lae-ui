@@ -3,20 +3,14 @@
     <template #icon>
       <Lottie :height="250" name="Dizzy-face"/>
     </template>
-
-    <template v-if="show_footer" #footer>
-      <n-button @click="goTo('auth.login')">重新登录</n-button>
-    </template>
   </n-result>
 </template>
 
 <script setup>
-import {NButton, NResult} from 'naive-ui'
+import {NResult} from 'naive-ui'
+import Lottie from '../../components/Lottie.vue'
 
-import router from '../../plugins/router'
-import Lottie from "../../components/Lottie.vue";
-
-import {computed} from "vue";
+import {computed} from 'vue'
 
 import userStore from '../../plugins/stores/user'
 
@@ -31,17 +25,4 @@ const title = computed(() => {
     return '这不是你的账号'
   }
 })
-
-defineProps({
-  show_footer: {
-    type: Boolean,
-    default: true
-  }
-})
-
-
-function goTo(route_name) {
-  router.push({name: route_name})
-}
-
 </script>
