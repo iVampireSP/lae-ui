@@ -107,6 +107,19 @@
     <div class="mt-80"></div>
   </div>
 
+  <n-watermark
+      v-if="true"
+      content="别泄漏隧道名和 Token"
+      cross
+      fullscreen
+      :font-size="16"
+      :line-height="16"
+      :width="384"
+      :height="384"
+      :x-offset="12"
+      :y-offset="60"
+      :rotate="-15"
+  />
 
 </template>
 
@@ -114,7 +127,7 @@
 <script setup>
 
 import {computed, onMounted, onUnmounted, ref} from 'vue'
-import {NCode, NDataTable, NGradientText, NH1, NH2, NH3, NPopover, NTabPane, NTabs} from 'naive-ui'
+import {NCode, NDataTable, NGradientText, NH1, NH2, NH3, NPopover, NTabPane, NTabs, NWatermark} from 'naive-ui'
 import {useRoute} from "vue-router";
 
 import Humanize from 'humanize-plus'
