@@ -31,7 +31,7 @@
                 language="ini"
                 show-line-numbers
                 trim
-                @click="copy(tunnel.config.client)"
+                @click="copy(tunnel.config.server + '\n\n' + tunnel.config.client)"
             />
             <!--            <n-input-->
             <!--                :autosize="{-->
