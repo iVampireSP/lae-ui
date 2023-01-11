@@ -80,8 +80,6 @@ import {NAvatar,} from 'naive-ui'
 
 import Lottie from '../../components/Lottie.vue'
 
-import {useIsMobile} from '../../utils/composables.js'
-
 const user = computed(() => {
   return userStore.state.user
 })

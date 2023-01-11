@@ -109,16 +109,16 @@
 
   <n-watermark
       v-if="true"
-      content="别泄漏隧道名和 Token"
-      cross
-      fullscreen
       :font-size="16"
-      :line-height="16"
-      :width="384"
       :height="384"
+      :line-height="16"
+      :rotate="-15"
+      :width="384"
       :x-offset="12"
       :y-offset="60"
-      :rotate="-15"
+      content="请不要泄露隧道名和 Token"
+      cross
+      fullscreen
   />
 
 </template>
