@@ -35,7 +35,7 @@ import {ref} from "vue";
 import {message} from "../../../utils/layout.js";
 
 const servers = ref([])
-const selectedServer = ref(null)
+const selectedServer = ref('')
 const tunnels = ref([])
 
 function copy(content) {

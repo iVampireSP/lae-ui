@@ -101,8 +101,6 @@
             :columns="tunnelColumns"
             :data="tunnelData"
         />
-        <template #trigger>
-        </template>
       </n-tab-pane>
     </n-tabs>
 
@@ -112,6 +110,7 @@
 
 </template>
 
+<!--suppress JSUnresolvedFunction -->
 <script setup>
 
 import {computed, onMounted, onUnmounted, ref} from 'vue'
@@ -146,6 +145,7 @@ const tunnel = ref({
 })
 
 let chart = undefined
+
 let chartOptions = {
   tooltip: {
     trigger: 'axis',
@@ -164,11 +164,8 @@ let chartOptions = {
             v.color +
             '"></span>'
         html +=
-            colorEl +
-            v.seriesName +
-            ': ' +
-            Humanize.fileSize(v.value) +
-            '<br/>'
+            `${colorEl +
+            v.seriesName}: ${Humanize.fileSize(v.value)}<br/>`
       }
       return html
     },
@@ -228,7 +225,7 @@ function initChart() {
   chartOptions && chart.setOption(chartOptions)
 }
 
-const status = ref('success')
+const status = ref("success")
 
 function refresh() {
   http.get('/modules/frp/hosts/' + router.params.id).then((res) => {

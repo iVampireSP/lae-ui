@@ -86,7 +86,7 @@ const user = computed(() => {
   return userStore.state.user
 })
 
-const isMobile = useIsMobile()
+// const isMobile = useIsMobile()
 
 const avatar = computed(() => {
   return conf.avatar + user.value.email_md5 + '?s=256'
