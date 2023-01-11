@@ -1,10 +1,8 @@
 <template>
-
+  <n-h1>仍在开发</n-h1>
 </template>
 
 <script setup>
-</script>
+import {NH1} from 'naive-ui'</script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
