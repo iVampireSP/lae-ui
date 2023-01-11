@@ -8,9 +8,9 @@
 
   <n-modal v-model:show="show"
            negative-text="等等"
-           positive-text="开冲"
+           :positive-text="todayIsThursday ? ' V 给你' : '开冲'"
            preset="dialog"
-           title="快速充值"
+           :title="todayIsThursday ? '请我吃疯狂星期四' : '快速充值'"
            @positive-click="charge"
   >
     <div class="mt-3"></div>
@@ -20,7 +20,8 @@
           <n-space>
             <n-radio value="wechat">
               <n-icon :component="LogoWechat" class="relative top-0.5"/>
-              微信支付
+
+              <span v-text="todayIsThursday ? ' V 信支付' : '微信支付'"></span>
             </n-radio>
             <n-radio value="alipay">
               <n-icon :component="LogoAlipay" class="relative top-0.5"/>
@@ -31,8 +32,20 @@
       </n-input-group>
       <n-input-group>
         <n-input-group-label>金额</n-input-group-label>
-        <n-input v-model:value="balance.amount" placeholder="给你随机个～" @keydown.enter.prevent/>
+        <n-input v-model:value="balance.amount" :placeholder="placeholder" @keydown.enter.prevent/>
         <n-input-group-label>元</n-input-group-label>
+      </n-input-group>
+      <n-input-group v-if="todayIsThursday">
+        <span v-if="parseInt(balance.amount) >= 1000">
+          撑了撑了～
+        </span>
+        <span v-else-if="parseInt(balance.amount) >= 50">
+          能吃 <span v-text="(parseInt(balance.amount) / 50).toFixed(0)"></span> 份疯狂星期四
+        </span>
+        <span v-else>
+          吃不起疯狂星期四
+        </span>
+
       </n-input-group>
     </n-space>
   </n-modal>
@@ -44,21 +57,36 @@ import {NIcon, NInput, NInputGroup, NInputGroupLabel, NModal, NPopover, NRadio, 
 
 import {LogoAlipay, LogoWechat} from "@vicons/ionicons5"
 import {AttachMoneyRound} from "@vicons/material"
-import {ref} from "vue";
+import {computed, ref} from "vue";
 
 import http from "../../plugins/http";
 
 const show = ref(false)
 
+const placeholder = ref('给你随机个～')
+
+const todayIsThursday = computed(() => new Date().getDay() === 4)
+
 const random = () => {
-  // 返回 1 到 100 之间的随机整数
-  return (Math.floor(Math.random() * 100) + 1).toString()
+  if (todayIsThursday.value) {
+    return "50"
+  } else {
+    // 返回 1 到 100 之间的随机整数
+    return (Math.floor(Math.random() * 100) + 1).toString()
+  }
+
 }
 
 const balance = ref({
   payment: 'wechat',
   amount: '10',
 })
+
+if (todayIsThursday.value) {
+  balance.value.amount = ""
+  placeholder.value = 'V 我 50'
+}
+
 const link = ref('')
 
 
