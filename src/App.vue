@@ -1,5 +1,5 @@
 <template>
-  <n-config-provider :date-locale="dateZhCN" :locale="zhCN" :theme="theme" :hljs="hljs" preflight-style-disabled>
+  <n-config-provider :date-locale="dateZhCN" :hljs="hljs" :locale="zhCN" :theme="theme" preflight-style-disabled>
     <n-global-style/>
     <n-loading-bar-provider>
       <n-message-provider>
@@ -32,7 +32,6 @@ import {
   useOsTheme,
   zhCN
 } from 'naive-ui'
-
 
 
 const osThemeRef = useOsTheme();

@@ -9,9 +9,7 @@
 </template>
 
 <script setup>
-import {NH1, NText} from 'naive-ui'
-import {ref} from 'vue'
-</script>
+import {NH1, NText} from 'naive-ui'</script>
 
 <style scoped>
 

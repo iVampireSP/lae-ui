@@ -1,8 +1,8 @@
 <template>
   <div>
-    <n-h1 prefix="bar" >
+    <n-h1 prefix="bar">
       <n-text type="primary">
-    配置文件
+        配置文件
       </n-text>
     </n-h1>
 

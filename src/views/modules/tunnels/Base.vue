@@ -10,13 +10,7 @@ import {
   removeAllMenuOptionsThen
 } from "../../../config/menuOptions.js";
 
-import {
-  AddOutline,
-  ClipboardOutline,
-  ListOutline,
-  ServerOutline,
-  CloudDownloadOutline
-} from "@vicons/ionicons5";
+import {AddOutline, ClipboardOutline, CloudDownloadOutline, ListOutline, ServerOutline} from "@vicons/ionicons5";
 
 import {ref} from 'vue'
 

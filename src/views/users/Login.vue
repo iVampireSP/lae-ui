@@ -1,35 +1,35 @@
 <template>
   <div>
     <div v-if="state === 'redirect'">
-      <Lottie name="Wave"
+      <Lottie :height="256"
               :style="style"
-              :height="256"
+              name="Wave"
       />
 
       <div class="text-center">
         <n-h1>欢迎！要一起加入莱云吗？</n-h1>
 
-        <n-button type="info" class="text-center" @click="toLogin">
+        <n-button class="text-center" type="info" @click="toLogin">
           现在登录！
         </n-button>
       </div>
 
     </div>
     <div v-else-if="state === 'logging'">
-      <Lottie :name="logo"
+      <Lottie :height="256"
+              :name="logo"
               :style="style"
-              :height="256"
       />
     </div>
     <div v-else-if="state === 'error'">
-      <Lottie name="Ghost"
+      <Lottie :height="256"
               :style="style"
-              :height="256"
+              name="Ghost"
       />
 
       <div class="text-center">
         <n-h1 class="mt-5">
-          <n-text type="error" class="text-center">
+          <n-text class="text-center" type="error">
             你的 Token 无效
           </n-text>
         </n-h1>
@@ -40,11 +40,11 @@
       </div>
     </div>
 
-    <p class="text-center bottom" v-show="state === 'logging'">
+    <p v-show="state === 'logging'" class="text-center bottom">
       <span>登录动画由 Fofray 制作。</span>
     </p>
 
-    <p class="text-center bottom" v-if="state === 'redirect'">
+    <p v-if="state === 'redirect'" class="text-center bottom">
       莱云 iVampireSP.com 作品
       <br/>
       <a href="https://beian.miit.gov.cn/">苏ICP备2022042268号-1</a>

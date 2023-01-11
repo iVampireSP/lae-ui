@@ -1,11 +1,11 @@
 <template>
   <n-result
+      description="我们的锅。"
       status="500"
       title="服务器错误"
-      description="我们的锅。"
   >
     <template #icon>
-      <Lottie name="Scrunched-mouth" :height="250"/>
+      <Lottie :height="250" name="Scrunched-mouth"/>
     </template>
     <template #footer>
       <!--      <n-button>散财消灾</n-button>-->

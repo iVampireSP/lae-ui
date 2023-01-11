@@ -3,12 +3,7 @@
 </template>
 
 <script setup>
-import {
-  addMenuDivider,
-  addMenuOptions,
-  removeAllMenuOptions,
-  removeAllMenuOptionsThen,
-} from '../../../config/menuOptions.js'
+import {removeAllMenuOptions,} from '../../../config/menuOptions.js'
 
 // import {
 //   AddOutline,
@@ -17,10 +12,7 @@ import {
 //   ServerOutline,
 //   CloudDownloadOutline
 // } from "@vicons/ionicons5";
-
-import { ref } from 'vue'
-
-import gctStore from '../../../plugins/stores/gct'
+import {ref} from 'vue'
 // import MenuIcon from './components/MenuIcon.vue'
 
 // const tunnels = ref([])
@@ -28,43 +20,43 @@ const gct = ref([])
 
 removeAllMenuOptions()
 
-  // tunnelsStore.dispatch('fetchTunnels')
+// tunnelsStore.dispatch('fetchTunnels')
 
-  // function reRegisterMenu() {
-  //   removeAllMenuOptionsThen('left', () => {
-  //     addMenuOptions('left', 'modules.tunnels.index', '所有隧道', ListOutline)
-  //     addMenuOptions('left', 'modules.tunnels.create', '新建隧道', AddOutline)
-  //     addMenuOptions('left', 'modules.tunnels.concat', '配置文件', ClipboardOutline)
-  //     addMenuOptions('left', 'modules.tunnels.status', '服务器', ServerOutline)
-  //     addMenuOptions('left', 'modules.tunnels.downloads', '客户端下载', CloudDownloadOutline)
+// function reRegisterMenu() {
+//   removeAllMenuOptionsThen('left', () => {
+//     addMenuOptions('left', 'modules.tunnels.index', '所有隧道', ListOutline)
+//     addMenuOptions('left', 'modules.tunnels.create', '新建隧道', AddOutline)
+//     addMenuOptions('left', 'modules.tunnels.concat', '配置文件', ClipboardOutline)
+//     addMenuOptions('left', 'modules.tunnels.status', '服务器', ServerOutline)
+//     addMenuOptions('left', 'modules.tunnels.downloads', '客户端下载', CloudDownloadOutline)
 
-  //     if (tunnels.value.length > 0) {
-  //       addMenuDivider('left')
+//     if (tunnels.value.length > 0) {
+//       addMenuDivider('left')
 
-  //       for (let i = 0; i < tunnels.value.length; i++) {
-  //         const tunnel = tunnels.value[i]
+//       for (let i = 0; i < tunnels.value.length; i++) {
+//         const tunnel = tunnels.value[i]
 
-  //         // addMenuOptions('left', {
-  //         //   name: 'modules.tunnels.show', params: {id: tunnel.host_id}
-  //         // }, tunnel.name)
+//         // addMenuOptions('left', {
+//         //   name: 'modules.tunnels.show', params: {id: tunnel.host_id}
+//         // }, tunnel.name)
 
-  //         addMenuOptions('left', {
-  //           name: 'modules.tunnels.show', params: { id: tunnel.host_id }
-  //         }, tunnel.name, MenuIcon, {
-  //           tunnel: tunnel
-  //         })
-  //       }
-  //     }
-  //   })
-  // }
+//         addMenuOptions('left', {
+//           name: 'modules.tunnels.show', params: { id: tunnel.host_id }
+//         }, tunnel.name, MenuIcon, {
+//           tunnel: tunnel
+//         })
+//       }
+//     }
+//   })
+// }
 
-  // //
-  // // subscribe
-  // tunnelsStore.subscribe((mutation, state) => {
-  //   if (mutation.type === 'setTunnels') {
-  //     tunnels.value = state.tunnels
-  //   }
+// //
+// // subscribe
+// tunnelsStore.subscribe((mutation, state) => {
+//   if (mutation.type === 'setTunnels') {
+//     tunnels.value = state.tunnels
+//   }
 
-  //   reRegisterMenu()
-  // })
+//   reRegisterMenu()
+// })
 </script>

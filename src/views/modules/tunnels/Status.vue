@@ -16,23 +16,23 @@
       </tr>
       </thead>
       <tbody>
-        <tr v-for="server in servers" class="text-center">
-          <td>{{ server.name }}</td>
-          <td>
+      <tr v-for="server in servers" class="text-center">
+        <td>{{ server.name }}</td>
+        <td>
               <span v-if="server.meta">
                 <span>
                     {{ Humanize.fileSize(server.meta['total_traffic_in']) ?? 0 }}
                 </span>
               </span>
-          </td>
-          <td>
+        </td>
+        <td>
             <span v-if="server.meta">
                 <span>
                     {{ Humanize.fileSize(server.meta['total_traffic_out']) ?? 0 }}
                 </span>
               </span>
-          </td>
-          <td>
+        </td>
+        <td>
             <span v-if="server.meta">
                 <span v-if="server.meta['client_counts']">
                     {{ server.meta['client_counts'] }} 个
@@ -41,21 +41,21 @@
                   暂无
                 </span>
               </span>
-          </td>
-          <td v-if="server.status === 'up'">
-            <n-icon size="large" color="#0e7a0d" >
-              <checkmark-circle-outline style="margin-top: 4px"/>
-              <!--              太优雅了-->
-            </n-icon>
-            正常
-          </td>
-          <td v-else >
-            <n-icon size="medium" color="#d03050">
-              <close-circle-outline style="margin-top: 4px"/>
-            </n-icon>
-            异常
-          </td>
-        </tr>
+        </td>
+        <td v-if="server.status === 'up'">
+          <n-icon color="#0e7a0d" size="large">
+            <checkmark-circle-outline style="margin-top: 4px"/>
+            <!--              太优雅了-->
+          </n-icon>
+          正常
+        </td>
+        <td v-else>
+          <n-icon color="#d03050" size="medium">
+            <close-circle-outline style="margin-top: 4px"/>
+          </n-icon>
+          异常
+        </td>
+      </tr>
       </tbody>
     </n-table>
   </div>

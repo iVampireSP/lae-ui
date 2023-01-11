@@ -1,10 +1,10 @@
 <template>
-  <n-result description="我们不能验证你的身份。" :title="title">
+  <n-result :title="title" description="我们不能验证你的身份。">
     <template #icon>
-      <Lottie name="Dizzy-face" :height="250"/>
+      <Lottie :height="250" name="Dizzy-face"/>
     </template>
 
-    <template #footer v-if="show_footer">
+    <template v-if="show_footer" #footer>
       <n-button @click="goTo('auth.login')">重新登录</n-button>
     </template>
   </n-result>

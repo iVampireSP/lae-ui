@@ -30,6 +30,7 @@ body {
 }
 
 
+/*noinspection ALL*/
 .lae-logo {
     background-image: url('/assets/lae-dark.png');
     background-size: 40px;
@@ -44,6 +45,7 @@ body {
       background: url('/assets/images/bg-dark.jpg');
       filter: brightness(0.6);
     } */
+    /*noinspection ALL*/
     .lae-logo {
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0s;
         background-image: url('/assets/lae-white.png');

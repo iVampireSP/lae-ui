@@ -3,7 +3,6 @@
 </template>
 
 <script setup>
-  import { NH1, NH2 } from 'naive-ui'
-</script>
+import {NH1} from 'naive-ui'</script>
 
 <style scoped></style>

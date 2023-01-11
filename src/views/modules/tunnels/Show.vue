@@ -1,6 +1,6 @@
 <template>
   <div>
-    <n-h1 prefix="bar" align-text :type="status">
+    <n-h1 :type="status" align-text prefix="bar">
       <n-gradient-text :type="status">
         {{ tunnel.name }}
       </n-gradient-text>
@@ -13,10 +13,10 @@
     <n-tabs animated type="line">
       <n-tab-pane name="status" tab="隧道状态">
         <n-h2 prefix="bar">连接信息</n-h2>
-        <n-h3 prefix="bar" v-if="tunnel.protocol === 'http' || tunnel.protocol === 'https'" >域名解析到:
+        <n-h3 v-if="tunnel.protocol === 'http' || tunnel.protocol === 'https'" prefix="bar">域名解析到:
           {{ tunnel.server.server_address }}
         </n-h3>
-        <n-h3 prefix="bar" v-else>
+        <n-h3 v-else prefix="bar">
           <span v-if="tunnel.server.server_address !== ''">使用 {{ tunnel.server.server_address }}:{{
               tunnel.remote_port
             }} 来连接到服务器</span>
@@ -28,10 +28,10 @@
           <template #trigger>
             <n-code
                 :code="tunnel.config.server + '\n\n' + tunnel.config.client"
-                @click="copy(tunnel.config.client)"
                 language="ini"
-                trim
                 show-line-numbers
+                trim
+                @click="copy(tunnel.config.client)"
             />
             <!--            <n-input-->
             <!--                :autosize="{-->
@@ -52,10 +52,10 @@
           <template #trigger>
             <n-code
                 :code="tunnel.config.server"
-                @click="copy(tunnel.config.client)"
                 language="ini"
-                trim
                 show-line-numbers
+                trim
+                @click="copy(tunnel.config.client)"
             />
             <!--            <n-input-->
             <!--                :autosize="{-->
@@ -76,10 +76,10 @@
           <template #trigger>
             <n-code
                 :code="tunnel.config.client"
-                @click="copy(tunnel.config.client)"
                 language="ini"
-                trim
                 show-line-numbers
+                trim
+                @click="copy(tunnel.config.client)"
             />
             <!--            <n-input-->
             <!--                :autosize="{-->

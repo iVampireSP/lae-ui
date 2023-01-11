@@ -1,13 +1,13 @@
 <template>
   <div>
     <n-h1 prefix="bar">
-      <n-text type="primary"> 客户端下载 </n-text>
+      <n-text type="primary"> 客户端下载</n-text>
     </n-h1>
     <n-data-table
-      :columns="headers"
-      :data="items"
-      :render-cell="render"
-      :filterOptions="filter_options"
+        :columns="headers"
+        :data="items"
+        :filterOptions="filter_options"
+        :render-cell="render"
     />
     <!-- TODO: 完成表格筛选 -->
     <!-- @update:filters="archFilter" -->
@@ -33,8 +33,8 @@
 </template>
 
 <script setup>
-import { NA, NH1, NTable, NDataTable, NText } from 'naive-ui'
-import { ref, computed, h } from 'vue'
+import {NA, NDataTable, NH1, NText} from 'naive-ui'
+import {h, ref} from 'vue'
 
 const headers = [
   {
@@ -44,7 +44,8 @@ const headers = [
   {
     title: '架构',
     key: 'arch',
-    filter() { },
+    filter() {
+    },
   },
   {
     title: '下载',
@@ -85,7 +86,7 @@ const items = ref(version)
 const render = (value) => {
   // console.log(value, typeof (value))
   if (value && value.startsWith('http'))
-    return h(NA, { href: value, target: '_blank' }, () => {
+    return h(NA, {href: value, target: '_blank'}, () => {
       return '下载'
     })
   else return value
@@ -102,7 +103,7 @@ const filter_options = [
   },
 ]
 
-  // const archFilter = ref(['amd64':'amd64'])
+// const archFilter = ref(['amd64':'amd64'])
 </script>
 
 <style scoped>
