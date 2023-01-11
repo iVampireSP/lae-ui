@@ -28,6 +28,7 @@
           <template #trigger>
             <n-code
                 :code="tunnel.config.server + '\n\n' + tunnel.config.client"
+                class="select-none"
                 language="ini"
                 show-line-numbers
                 trim
@@ -52,10 +53,11 @@
           <template #trigger>
             <n-code
                 :code="tunnel.config.server"
+                class="select-none"
                 language="ini"
                 show-line-numbers
                 trim
-                @click="copy(tunnel.config.client)"
+                @click="copy(tunnel.config.server)"
             />
             <!--            <n-input-->
             <!--                :autosize="{-->
@@ -76,6 +78,7 @@
           <template #trigger>
             <n-code
                 :code="tunnel.config.client"
+                class="select-none"
                 language="ini"
                 show-line-numbers
                 trim
@@ -223,6 +226,7 @@ let chartOptions = {
 
 }
 
+
 function copy(content) {
   navigator.clipboard.writeText(content);
   message.success("复制成功");
@@ -243,7 +247,7 @@ const status = ref("success")
 function refresh() {
   http.get('/modules/frp/hosts/' + router.params.id).then((res) => {
     tunnel.value = res.data
-
+    console.log(res.data)
     if (tunnel.value.status === 'running') {
       status.value = 'success'
     } else if (tunnel.value.status === 'stopped') {
@@ -346,6 +350,26 @@ const tunnelColumns = [
     key: "value"
   }
 ];
+
+// console.log(tunnel.value)
+
+// const real_client = tunnel.value.config.client
+
+// const fake_client = computed(() => {
+//   let client = tunnel.value.config.client
+//   // let conf = tunnel.value.tunnel
+//   // console.log(conf)
+//   // conf.toString().split('\n').forEach((line) => {
+//   //   if (line.startsWith('[') && line.endsWith(']')) {
+//   //     client.value += '\n'.concat(line.substring(0, line.length - 10), '*'.repeat(10), ']')
+//   //   } else {
+//   //     client.value += '\n' + line
+//   //   }
+//   // })
+//   // console.log(client)
+//   return client
+// })
+
 
 let tunnelData = computed(() => {
   let data = [];
