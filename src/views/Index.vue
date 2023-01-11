@@ -1,11 +1,13 @@
 <template>
   <IndexLayout>
-    <n-alert title="注意" type="warning" closable class="mb-3">
+    <n-alert class="mb-3" closable title="注意" type="warning">
       非常感谢您体验 莱云 新的仪表盘，我们并没有做完但是我们迫不及待想让您体验。
-      <br />
+      <br/>
       如果在体验中有任何问题，是正常的。请到我们的社区反馈。
-      <br />
-      如果您想使用游戏容器，工单等服务，请<n-a href="https://web.laecloud.com">点击这里回到旧版仪表盘</n-a>。
+      <br/>
+      如果您想使用游戏容器，工单等服务，请
+      <n-a href="https://web.laecloud.com">点击这里回到旧版仪表盘</n-a>
+      。
     </n-alert>
 
     <n-card size="small" title="用户信息">
@@ -49,7 +51,7 @@
 <script setup>
 import {computed} from 'vue'
 
-import {NAvatar, NButton, NButtonGroup, NCard, NH3, NH4, NList, NListItem, NTag, NAlert, NA} from 'naive-ui'
+import {NA, NAlert, NAvatar, NButton, NButtonGroup, NCard, NH3, NH4, NList, NListItem, NTag} from 'naive-ui'
 
 import userStore from '../plugins/stores/user' // 存储用户信息，供任意页面和 JS 调用，在 Vue 文件里，配合 computed 可以实现 ref 的效果
 import http from '../plugins/http' // http 客户端
