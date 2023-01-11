@@ -73,7 +73,7 @@ onMounted(() => {
 
   options = {
     container: container.value,
-    renderer: 'svg',
+    renderer: 'canvas',
     loop: props.loop,
     autoplay: props.autoplay,
     path: src,
