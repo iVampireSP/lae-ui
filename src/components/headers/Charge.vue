@@ -20,8 +20,7 @@
           <n-space>
             <n-radio value="wechat">
               <n-icon :component="LogoWechat" class="relative top-0.5"/>
-
-              <span v-text="todayIsThursday ? ' V 信支付' : '微信支付'"></span>
+              <span v-text="' ' + (todayIsThursday ? 'V 信支付' : '微信支付')"></span>
             </n-radio>
             <n-radio value="alipay">
               <n-icon :component="LogoAlipay" class="relative top-0.5"/>
