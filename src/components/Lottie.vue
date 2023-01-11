@@ -5,7 +5,7 @@
 <script setup>
 import lottie from 'lottie-web'
 
-import { onMounted, onUnmounted, ref} from 'vue'
+import {onMounted, onUnmounted, ref} from 'vue'
 
 //
 const id = ref('lottie-' + Math.random().toString(36).substring(3, 13))

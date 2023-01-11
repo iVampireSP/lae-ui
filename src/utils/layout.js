@@ -4,7 +4,7 @@ import {computed} from "vue";
 
 const osTheme = useOsTheme();
 const configProviderProps = computed(() => ({
-  theme: osTheme.value === 'light' ? lightTheme : darkTheme,
+    theme: osTheme.value === 'light' ? lightTheme : darkTheme,
 }))
 
 const {message, notification, dialog, loadingBar} = createDiscreteApi(
@@ -13,4 +13,4 @@ const {message, notification, dialog, loadingBar} = createDiscreteApi(
     }
 );
 
-export { message, notification, dialog, loadingBar, osTheme }
+export {message, notification, dialog, loadingBar, osTheme}

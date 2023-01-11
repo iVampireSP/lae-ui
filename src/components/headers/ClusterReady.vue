@@ -2,7 +2,7 @@
   <div v-if="detected">
     <n-popover trigger="hover">
       <template #trigger>
-        <Lottie name="cluster-ready" :loop="false" :height="50"/>
+        <Lottie :height="50" :loop="false" name="cluster-ready"/>
       </template>
       <span>Cluster Ready! 就绪</span>
     </n-popover>

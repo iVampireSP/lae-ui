@@ -3,10 +3,10 @@
     <n-text v-if="tunnel['status'] === 'running'">
       {{ tunnel['name'][0] }}
     </n-text>
-    <n-text type="error" v-if="tunnel['status'] === 'stopped'">
+    <n-text v-if="tunnel['status'] === 'stopped'" type="error">
       {{ tunnel['name'][0] }}
     </n-text>
-    <n-text type="warning" v-if="tunnel['status'] === 'suspended'">
+    <n-text v-if="tunnel['status'] === 'suspended'" type="warning">
       {{ tunnel['name'][0] }}
     </n-text>
   </div>

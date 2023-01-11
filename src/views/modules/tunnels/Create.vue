@@ -100,7 +100,7 @@
         <n-tab-pane name="clone" tab="克隆">
 
           <n-spin :show="creating">
-            <Tunnels :tunnels="tunnels" :next="clone"/>
+            <Tunnels :next="clone" :tunnels="tunnels"/>
           </n-spin>
 
 
@@ -118,7 +118,6 @@ import {computed, ref, watch} from 'vue'
 import {
   NButton,
   NCard,
-  NEmpty,
   NForm,
   NFormItem,
   NGi,
@@ -126,19 +125,14 @@ import {
   NH1,
   NInput,
   NInputGroup,
-  NList,
-  NListItem,
   NP,
   NRadioButton,
   NRadioGroup,
   NSelect,
-  NSpace,
   NSpin,
   NTabPane,
   NTabs,
-  NTag,
   NText,
-  NThing,
   useMessage
 } from 'naive-ui'
 

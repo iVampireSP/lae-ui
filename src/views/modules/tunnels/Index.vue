@@ -6,7 +6,7 @@
       </n-text>
     </n-h1>
 
-    <Tunnels :tunnels="tunnels" :next="go"/>
+    <Tunnels :next="go" :tunnels="tunnels"/>
   </div>
 </template>
 

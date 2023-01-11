@@ -1,15 +1,17 @@
 <template>
   <n-popover trigger="hover">
     <template #trigger>
-      <n-icon @click="show = true" :component="AttachMoneyRound" size="30px" class="mr-3 cursor-pointer"/>
+      <n-icon :component="AttachMoneyRound" class="mr-3 cursor-pointer" size="30px" @click="show = true"/>
     </template>
     <span>快速充值</span>
   </n-popover>
 
-  <n-modal v-model:show="show" preset="dialog" title="快速充值"
-           @positive-click="charge"
-           positive-text="开冲"
+  <n-modal v-model:show="show"
            negative-text="等等"
+           positive-text="开冲"
+           preset="dialog"
+           title="快速充值"
+           @positive-click="charge"
   >
     <div class="mt-3"></div>
     <n-space vertical>
@@ -29,7 +31,7 @@
       </n-input-group>
       <n-input-group>
         <n-input-group-label>金额</n-input-group-label>
-        <n-input v-model:value="balance.amount" @keydown.enter.prevent placeholder="给你随机个～"/>
+        <n-input v-model:value="balance.amount" placeholder="给你随机个～" @keydown.enter.prevent/>
         <n-input-group-label>元</n-input-group-label>
       </n-input-group>
     </n-space>

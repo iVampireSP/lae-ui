@@ -1,23 +1,23 @@
 <template>
   <div v-show="base_url">
-    <n-list hoverable clickable>
+    <n-list clickable hoverable>
       <n-list-item v-for="item in items">
         <span v-if="item.attributes">
           <n-a
-            class="list-group-item list-group-item-action shadow-sm rounded"
-            target="_blank"
-            :href="base_url + '/d/' + item.attributes['slug']"
+              :href="base_url + '/d/' + item.attributes['slug']"
+              class="list-group-item list-group-item-action shadow-sm rounded"
+              target="_blank"
           >
             <n-thing
-              :title="item.attributes['title']"
-              content-style="margin-top: 10px;"
+                :title="item.attributes['title']"
+                content-style="margin-top: 10px;"
             >
               <template #description>
                 <n-space size="small" style="margin-top: 4px">
-                <n-tag :bordered="false" type="success" size="small">发布于 {{
+                <n-tag :bordered="false" size="small" type="success">发布于 {{
                     new Date(item.attributes['lastPostedAt']).toLocaleString()
                   }} </n-tag>
-                <!-- <n-tag :bordered="false" type="info" size="small"> 晚春 </n-tag> -->
+                  <!-- <n-tag :bordered="false" type="info" size="small"> 晚春 </n-tag> -->
                  
               </n-space>
               </template>
@@ -33,25 +33,18 @@
 </template>
 
 <script setup>
-  // import { defineProps } from 'vue'
+// import { defineProps } from 'vue'
 
-  import {
-    NA,
-    NList,
-    NListItem,
-    NSpace,
-    NTag,
-    NThing,
-  } from 'naive-ui'
+import {NA, NList, NListItem, NSpace, NTag, NThing,} from 'naive-ui'
 
-  const props = defineProps({
-    items: {
-      type: Object,
-      required: true,
-    },
-    base_url: {
-      type: String,
-      required: true,
-    },
-  })
+const props = defineProps({
+  items: {
+    type: Object,
+    required: true,
+  },
+  base_url: {
+    type: String,
+    required: true,
+  },
+})
 </script>
