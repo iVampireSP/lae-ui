@@ -325,6 +325,8 @@ router.beforeEach((to, from) => {
                     query = {token: from.query.token}
                 }
                 router.push({name: 'auth.login', query: query})
+                    .then()
+                    .catch((r) => console.error(r))
             }
             return false
         } else {

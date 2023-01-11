@@ -1,9 +1,9 @@
 import {createStore} from 'vuex'
-import createPersistedstate from '../persistedstate'
+import createPersistedState from '../persistedstate'
 
 export default createStore({
     plugins: [
-        createPersistedstate({
+        createPersistedState({
             key: 'user',
         }),
     ],
