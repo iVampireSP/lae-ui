@@ -1,9 +1,9 @@
 <template>
   <n-popover trigger="hover">
     <template #trigger>
-      <n-icon :component="AttachMoneyRound" class="mr-3 cursor-pointer" size="30px" @click="show = true"/>
+      <n-icon :component="todayIsThursday ? FastFoodOutline : AttachMoneyRound" class="mr-3 cursor-pointer" size="30px" @click="show = true"/>
     </template>
-    <span>快速充值</span>
+    <span v-text="todayIsThursday ? '请我吃疯狂星期四' : '快速充值'"></span>
   </n-popover>
 
   <n-modal v-model:show="show"
@@ -54,7 +54,7 @@
 <script setup>
 import {NIcon, NInput, NInputGroup, NInputGroupLabel, NModal, NPopover, NRadio, NRadioGroup, NSpace} from 'naive-ui'
 
-import {LogoAlipay, LogoWechat} from "@vicons/ionicons5"
+import {LogoAlipay, LogoWechat, FastFoodOutline} from "@vicons/ionicons5"
 import {AttachMoneyRound} from "@vicons/material"
 import {computed, ref} from "vue";
 
