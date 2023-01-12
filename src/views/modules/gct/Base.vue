@@ -3,60 +3,52 @@
 </template>
 
 <script setup>
-import {removeAllMenuOptions,} from '../../../config/menuOptions.js'
+import {
+  addMenuDivider,
+  addMenuOptions,
+  removeAllMenuOptions,
+  removeAllMenuOptionsThen
+} from '../../../config/menuOptions.js'
 
-// import {
-//   AddOutline,
-//   ClipboardOutline,
-//   ListOutline,
-//   ServerOutline,
-//   CloudDownloadOutline
-// } from "@vicons/ionicons5";
+import {AddOutline, ListOutline} from "@vicons/ionicons5";
 import {ref} from 'vue'
-// import MenuIcon from './components/MenuIcon.vue'
+import gctStore from '../../../plugins/stores/gct'
+import MenuIcon from "../tunnels/components/MenuIcon.vue";
 
-// const tunnels = ref([])
+const containers = ref([])
 const gct = ref([])
 
 removeAllMenuOptions()
 
-// tunnelsStore.dispatch('fetchTunnels')
+gctStore.dispatch('fetchGct')
 
-// function reRegisterMenu() {
-//   removeAllMenuOptionsThen('left', () => {
-//     addMenuOptions('left', 'modules.tunnels.index', '所有隧道', ListOutline)
-//     addMenuOptions('left', 'modules.tunnels.create', '新建隧道', AddOutline)
-//     addMenuOptions('left', 'modules.tunnels.concat', '配置文件', ClipboardOutline)
-//     addMenuOptions('left', 'modules.tunnels.status', '服务器', ServerOutline)
-//     addMenuOptions('left', 'modules.tunnels.downloads', '客户端下载', CloudDownloadOutline)
+function reRegisterMenu() {
+  removeAllMenuOptionsThen('left', () => {
+    addMenuOptions('left', 'modules.gct.index', '所有容器', ListOutline)
+    addMenuOptions('left', 'modules.gct.create', '新建容器', AddOutline)
 
-//     if (tunnels.value.length > 0) {
-//       addMenuDivider('left')
+    if (containers.value.length > 0) {
+      addMenuDivider('left')
 
-//       for (let i = 0; i < tunnels.value.length; i++) {
-//         const tunnel = tunnels.value[i]
+      for (let i = 0; i < containers.value.length; i++) {
+        const container = containers.value[i]
 
-//         // addMenuOptions('left', {
-//         //   name: 'modules.tunnels.show', params: {id: tunnel.host_id}
-//         // }, tunnel.name)
+        addMenuOptions('left', {
+          name: 'modules.gct.show', params: {id: container.host_id}
+        }, container.name, MenuIcon, {
+          container: container
+        })
+      }
+    }
+  })
+}
 
-//         addMenuOptions('left', {
-//           name: 'modules.tunnels.show', params: { id: tunnel.host_id }
-//         }, tunnel.name, MenuIcon, {
-//           tunnel: tunnel
-//         })
-//       }
-//     }
-//   })
-// }
+// subscribe
+gctStore.subscribe((mutation, state) => {
+  if (mutation.type === 'setGct') {
+    containers.value = state.containers
+  }
 
-// //
-// // subscribe
-// tunnelsStore.subscribe((mutation, state) => {
-//   if (mutation.type === 'setTunnels') {
-//     tunnels.value = state.tunnels
-//   }
-
-//   reRegisterMenu()
-// })
+  reRegisterMenu()
+})
 </script>

@@ -211,15 +211,15 @@ const routes = [
                             title: '游戏容器',
                         },
                     },
-                    // {
-                    //     path: 'gct/create',
-                    //     name: 'modules.gct.create',
-                    //     props: true,
-                    //     component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/gct/Create.vue'),
-                    //     meta: {
-                    //         title: '创建容器',
-                    //     },
-                    // },
+                    {
+                        path: 'gct/create',
+                        name: 'modules.gct.create',
+                        props: true,
+                        component: () => import('../views/modules/gct/Create.vue'),
+                        meta: {
+                            title: '创建容器',
+                        },
+                    },
                     // {
                     //     path: 'gct/intro',
                     //     name: 'modules.gct.intro',
@@ -229,15 +229,15 @@ const routes = [
                     //         title: '引导创建',
                     //     },
                     // },
-                    // {
-                    //     path: 'gct/:id',
-                    //     name: 'modules.gct.show',
-                    //     props: true,
-                    //     component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/gct/Show.vue'),
-                    //     meta: {
-                    //         title: '显示游戏容器',
-                    //     },
-                    // },
+                    {
+                        path: 'gct/:id',
+                        name: 'modules.gct.show',
+                        props: true,
+                        component: () => import('../views/modules/gct/Show.vue'),
+                        meta: {
+                            title: '显示游戏容器',
+                        },
+                    },
                 ],
             },
             // {

@@ -3,26 +3,26 @@ import http from '../http.js'
 
 export default createStore({
     state: {
-        gct: [],
+        containers: [],
     },
     actions: {
-        fetchGCT({commit}) {
+        fetchGct({commit}) {
             http.get('/modules/gct/hosts').then((response) => {
                 commit('setGct', response.data)
             })
         },
     },
     mutations: {
-        addGCT(state, gct) {
+        addGct(state, gct) {
             state.gct.push(gct)
         },
-        removeGCT(state, gct) {
+        removeGct(state, gct) {
             state.gct.splice(state.gct.indexOf(gct), 1)
         },
-        setGCT(state, gct) {
+        setGct(state, gct) {
             state.gct = gct
         },
-        updateGCT(state, gct) {
+        updateGct(state, gct) {
             let index = state.gct.findIndex((item) => item.id === gct.id)
             state.gct.splice(index, 1, gct)
         },
