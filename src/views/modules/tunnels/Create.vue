@@ -94,6 +94,11 @@
                 新建
               </n-button>
             </n-form>
+
+            <template #description>
+              <n-p v-text="lyric()">
+              </n-p>
+            </template>
           </n-spin>
 
         </n-tab-pane>
@@ -101,6 +106,10 @@
 
           <n-spin :show="creating">
             <Tunnels :next="clone" :tunnels="tunnels"/>
+            <template #description>
+              <n-p v-text="lyric()">
+              </n-p>
+            </template>
           </n-spin>
 
 
@@ -141,6 +150,7 @@ import http from "../../../plugins/http";
 import {useIsMobile} from "../../../utils/composables.js";
 import tunnelsStore from "../../../plugins/stores/tunnels";
 import Tunnels from "./components/Tunnels.vue";
+import lyric from "../../../plugins/lyric.js";
 
 const tab = ref('create')
 

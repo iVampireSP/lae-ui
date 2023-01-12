@@ -107,6 +107,11 @@
           </n-grid>
 
         </n-form>
+
+        <template #description>
+          <n-p v-text="lyric()">
+          </n-p>
+        </template>
       </n-spin>
     </n-card>
   </div>
@@ -135,6 +140,7 @@ import {
 import http from '../../../plugins/http'
 
 import {useIsMobile} from "../../../utils/composables.js";
+import lyric from "../../../plugins/lyric.js";
 
 const creating = ref(false)
 
@@ -234,11 +240,15 @@ http.get('/modules/gct/nests').then((res) => {
 
 
 const deploy = () => {
+  creating.value = true
   http
       .post('/modules/gct/hosts', create_gct.value)
       .then((res) => {
-
-      })
+        //
+        console.log(res)
+      }).finally(() => {
+    creating.value = false
+  })
 }
 
 
