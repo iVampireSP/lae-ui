@@ -22,6 +22,7 @@
                       v-model:value="create_gct.location_id"
                       :options="returnLocation()"
                       :render-option="locationSelectRenderOption"
+                      @update:value="selectedLocation = locations.find((location) => location.id === create_gct.location_id)"
                       placeholder="请选择地区"
                   />
                   <n-text v-else>暂时不能提供地区</n-text>
@@ -51,8 +52,8 @@
                           :show-tooltip="create_gct.cpu_limit > 400" :format-tooltip="formatCpuLimitTooltip"/>
               </n-form-item>
               <n-form-item label="存储大小">
-                <n-slider v-model:value="create_gct.disk" :default-value="100" :step="50" :max="10240" :min="100"
-                          :show-tooltip="create_gct.disk > 300" :format-tooltip="formatDiskTooltip"/>
+                <n-slider v-model:value="create_gct.disk" :default-value="512" :step="512" :max="10240" :min="512"
+                          :show-tooltip="create_gct.disk > 4096" :format-tooltip="formatDiskTooltip"/>
               </n-form-item>
               <n-form-item label="备份数量">
                 <n-slider v-model:value="create_gct.backups" :default-value="1" :step="1" :max="8" :min="1"
@@ -60,6 +61,51 @@
               </n-form-item>
             </n-gi>
           </n-grid>
+
+          <n-grid cols="1 s:2" responsive="screen" x-gap="12">
+            <n-gi class="text-left">
+              <n-grid cols="1 s:2" responsive="screen" x-gap="12">
+                <n-gi>
+                  节点: <span v-text="selectedLocation.price.toFixed(2)"></span> 元
+                </n-gi>
+                <n-gi>
+                  核心: <span v-text="((create_gct.cpu_limit / 100) * selectedLocation.cpu_price).toFixed(2)"></span> 元
+                </n-gi>
+                <n-gi>
+                  内存: <span v-text="((create_gct.memory / 1024) * selectedLocation.memory_price).toFixed(2)"></span> 元
+
+                </n-gi>
+                <n-gi>
+                  存储: <span v-text="((create_gct.disk / 1024) * selectedLocation.disk_price).toFixed(2)"></span> 元
+
+                </n-gi>
+
+                <n-gi>
+                  端口: <span v-text="(create_gct.allocations * selectedLocation.allocation_price).toFixed(2)"></span> 元
+
+                </n-gi>
+
+                <n-gi>
+                  备份: <span v-text="(create_gct.backups * selectedLocation.backup_price).toFixed(2)"></span> 元
+
+                </n-gi>
+              </n-grid>
+
+            </n-gi>
+
+            <n-gi class="text-right">
+              <n-p>
+                大约: <span v-text="(
+                (create_gct.disk / 1024) * selectedLocation.disk_price +
+                (create_gct.memory / 1024) * selectedLocation.memory_price +
+                (create_gct.cpu_limit / 100) * selectedLocation.cpu_price +
+                selectedLocation.price
+              ).toFixed(2)"></span> 元 / 月
+              </n-p>
+              <n-button type="primary" @click="deploy">部署我的服务器</n-button>
+            </n-gi>
+          </n-grid>
+
         </n-form>
       </n-spin>
     </n-card>
@@ -69,6 +115,7 @@
 <script setup>
 import {h, ref} from 'vue'
 import {
+  NButton,
   NCard,
   NForm,
   NFormItem,
@@ -114,6 +161,9 @@ http.get('/modules/gct/locations').then((res) => {
   locations.value = res.data
   // 先预先选择
   create_gct.value.location_id = locations.value[0].id
+  selectedLocation.value = locations.value[0]
+
+  console.log(selectedLocation.value)
 })
 
 const returnLocation = () => {
@@ -137,10 +187,23 @@ const locationSelectRenderOption = ({node, option}) => h(NTooltip, null, {
   }
 })
 
+
+const selectedLocation = ref({
+  id: '',
+  name: '',
+  description: '',
+  price: 0,
+  cpu_price: 0,
+  memory_price: 0,
+  disk_price: 0,
+  allocation_price: 0.01,
+  backup_price: 0.01,
+})
+
+
 const nests = ref([])
 
 const options = ref([])
-
 
 http.get('/modules/gct/nests').then((res) => {
   nests.value = res.data
@@ -168,6 +231,15 @@ http.get('/modules/gct/nests').then((res) => {
   // 先预先选择
   create_gct.value.egg_id = options.value[1].value
 })
+
+
+const deploy = () => {
+  http
+      .post('/modules/gct/hosts', create_gct.value)
+      .then((res) => {
+
+      })
+}
 
 
 const formatTooltip = (value) => `${value / 1024} GB`
