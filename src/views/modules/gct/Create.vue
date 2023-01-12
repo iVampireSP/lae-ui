@@ -222,7 +222,7 @@ http.get('/modules/gct/nests').then((res) => {
 
       options.value.push({
         label: egg.name,
-        value: egg.id,
+        value: egg.egg_id,
         disabled: false
       })
     }
