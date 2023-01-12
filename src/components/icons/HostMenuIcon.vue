@@ -1,5 +1,5 @@
 <template>
-  <div class="not-italic text-base">
+  <div :class="'not-italic text-base relative ' + extendClass">
     <n-text v-if="host['status'] === 'running'">
       {{ host['name'][0] }}
     </n-text>
@@ -13,7 +13,11 @@
 </template>
 
 <script setup>
-// import {defineProps} from 'vue'
+import {ref, watchEffect} from 'vue'
+
+import {menuCollapsed} from '../../config/menuOptions.js'
+
+import {useIsMobile, useIsTablet} from "../../utils/composables.js";
 
 import {NText} from 'naive-ui'
 
@@ -23,4 +27,29 @@ defineProps({
     type: Object,
   }
 })
+
+const extendClass = ref('')
+
+// const menuCollapsedRef = computed(() => menuCollapsed.value)
+//
+// if (menuCollapsedRef.value['left'] === false) {
+//   extendClass.value = 'bottom-0.5'
+// }
+
+const isMobile = useIsMobile()
+const isTablet = useIsTablet()
+
+function change() {
+  if (isMobile.value || isTablet.value) {
+    extendClass.value = 'bottom-0.5'
+  } else if (menuCollapsed.value['left'] === false) {
+    extendClass.value = 'bottom-0.5'
+  } else {
+    extendClass.value = ''
+  }
+}
+
+watchEffect(() => change())
+
+
 </script>
