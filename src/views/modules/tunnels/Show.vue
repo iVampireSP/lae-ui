@@ -21,6 +21,12 @@
               tunnel.remote_port
             }} 来连接到服务器</span>
         </n-h3>
+        <n-h2 prefix="bar">
+          隧道启动
+        </n-h2>
+        <n-h3>1. 在 客户端下载 页面下载对应架构的 Frpc ，将其中的 frpc 可执行文件解压到任意位置</n-h3>
+        <n-h3>2. 在解压位置( frpc 可执行文件所在目录)打开终端，键入启动命令，回车即可</n-h3>
+        <n-button type="primary" @click="copy(copycommond)">复制启动命令</n-button>
       </n-tab-pane>
       <n-tab-pane name="config_all" tab="全部配置">
 
@@ -130,7 +136,7 @@
 <script setup>
 
 import {computed, onMounted, onUnmounted, ref} from 'vue'
-import {NCode, NDataTable, NGradientText, NH1, NH2, NH3, NPopover, NTabPane, NTabs, NWatermark} from 'naive-ui'
+import {NButton, NCode, NDataTable, NGradientText, NH1, NH2, NH3, NPopover, NTabPane, NTabs, NWatermark} from 'naive-ui'
 import {useRoute} from "vue-router";
 
 import Humanize from 'humanize-plus'
@@ -139,11 +145,12 @@ import http from "../../../plugins/http";
 
 import * as echarts from 'echarts'
 import {message} from "../../../utils/layout.js";
+import user from "../../../plugins/stores/user.js";
 
 
 const router = useRoute()
 const showChart = ref(false)
-
+const copycommond = "frpc " + "-t " + "\"" + user.state.token  + "\" " + "-i " + router.params.id
 // const tunnel = ref({});
 const tunnel = ref({
   name: '',
