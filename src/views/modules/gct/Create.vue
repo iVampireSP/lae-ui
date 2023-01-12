@@ -144,7 +144,7 @@ const create_gct = ref({
   price: '',
   egg_id: '',
   memory: 1024,
-  disk: 100,
+  disk: 1024,
   cpu_limit: 100,
   allocations: 1,
   backups: 1,
