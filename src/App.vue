@@ -14,7 +14,7 @@
                 <div class="flex h-screen">
                   <div class="m-auto text-center">
                     <Lottie name="lae-jump" :loop="false" v-if="osThemeRef === 'dark'"/>
-                    <Lottie name="lae-mouse-leave-2" :loop="false" v-if="osThemeRef !== 'dark'"/>
+                    <Lottie name="lae-jump-black" :loop="false" v-else/>
                     <n-h3>莱云</n-h3>
                   </div>
                 </div>
@@ -70,7 +70,7 @@ window.onload = () => {
     setTimeout(() => {
       load_step.value = 2
     }, 500)
-  }, 150)
+  }, 250)
 }
 
 // import {initRouter, siteSetup} from './store'
