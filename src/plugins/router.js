@@ -221,7 +221,7 @@ const routes = [
                         },
                     },
                     // {
-                    //     path: 'gct/intro',
+                    //     path: 'intro',
                     //     name: 'modules.gct.intro',
                     //     props: true,
                     //     component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/gct/Intro.vue'),
@@ -230,7 +230,7 @@ const routes = [
                     //     },
                     // },
                     {
-                        path: 'gct/:id',
+                        path: ':id',
                         name: 'modules.gct.show',
                         props: true,
                         component: () => import('../views/modules/gct/Show.vue'),
