@@ -13,7 +13,7 @@ import {
 import {AddOutline, ListOutline} from "@vicons/ionicons5";
 import {ref} from 'vue'
 import gctStore from '../../../plugins/stores/gct'
-import MenuIcon from "../tunnels/components/MenuIcon.vue";
+import MenuIcon from "../../../components/icons/HostMenuIcon.vue";
 
 const containers = ref([])
 const gct = ref([])
@@ -36,7 +36,7 @@ function reRegisterMenu() {
         addMenuOptions('left', {
           name: 'modules.gct.show', params: {id: container.host_id}
         }, container.name, MenuIcon, {
-          container: container
+          host: container
         })
       }
     }

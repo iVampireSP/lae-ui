@@ -12,12 +12,25 @@
       <n-a href="https://web.laecloud.com">点击这里回到旧版仪表盘</n-a>
       。
     </n-alert>
+    
+    <ContainersList :containers="containers" />
   </div>
 </template>
 
 <script setup>
-import {NA, NAlert, NH1, NText} from 'naive-ui'</script>
+import {NA, NAlert, NH1, NText} from 'naive-ui'
 
-<style scoped>
+import {computed} from 'vue'
 
-</style>
+// import router from '../../../plugins/router'
+
+import containerStore from "../../../plugins/stores/gct";
+import ContainersList from "./components/Containers.vue";
+
+const containers = computed(() => {
+  return containerStore.state.containers
+})
+
+
+</script>
+

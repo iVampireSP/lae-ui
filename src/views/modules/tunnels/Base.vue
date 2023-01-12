@@ -1,5 +1,5 @@
 <template>
-  <router-view></router-view>
+  <router-view/>
 </template>
 
 <script setup>
@@ -15,7 +15,7 @@ import {AddOutline, ClipboardOutline, CloudDownloadOutline, ListOutline, ServerO
 import {ref} from 'vue'
 
 import tunnelsStore from "../../../plugins/stores/tunnels";
-import MenuIcon from "./components/MenuIcon.vue";
+import MenuIcon from "../../../components/icons/HostMenuIcon.vue";
 
 const tunnels = ref([])
 
@@ -45,7 +45,7 @@ function reRegisterMenu() {
         addMenuOptions('left', {
           name: 'modules.tunnels.show', params: {id: tunnel.host_id}
         }, tunnel.name, MenuIcon, {
-          tunnel: tunnel
+          host: tunnel
         })
       }
     }

@@ -1,8 +1,7 @@
 <template>
-    <span :class="props.class">
-    </span>
+    <span :class="props.class"></span>
 
-  <!--  <Lottie name="jump" :loop="false" :width="40" :height="25" />-->
+<!--    <Lottie name="lae-jump" :loop="true" :width="40" :height="25" />-->
 
 </template>
 

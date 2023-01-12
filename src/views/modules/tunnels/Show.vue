@@ -106,23 +106,24 @@
         />
       </n-tab-pane>
     </n-tabs>
+    <n-watermark
+        v-if="true"
+        :font-size="16"
+        :height="384"
+        :line-height="16"
+        :rotate="-15"
+        :width="384"
+        :x-offset="12"
+        :y-offset="60"
+        content="请不要泄露隧道名和 Token"
+        cross
+        fullscreen
+    />
+
 
     <div class="mt-80"></div>
   </div>
 
-  <n-watermark
-      v-if="true"
-      :font-size="16"
-      :height="384"
-      :line-height="16"
-      :rotate="-15"
-      :width="384"
-      :x-offset="12"
-      :y-offset="60"
-      content="请不要泄露隧道名和 Token"
-      cross
-      fullscreen
-  />
 
 </template>
 
