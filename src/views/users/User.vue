@@ -55,17 +55,19 @@
       <!--        &lt;!&ndash;    TODO: 钱 email 注册时间 任务列表&ndash;&gt;-->
       <!--        &lt;!&ndash;    TODO: 彩蛋：生日彩蛋&ndash;&gt;-->
       <!--      </div>-->
+
+
     </div>
 
     <!-- birthday easter egg -->
-    <div v-if="!isBirthDayToday">
-      <div class="absolute bottom-0 left-8">
-        <Lottie :height="200" name="Party-popper"/>
-      </div>
-      <div class="absolute bottom-0 right-8" style="transform: scale(-1, 1) ">
-        <Lottie :height="200" name="Party-popper"/>
-      </div>
-    </div>
+    <!--    <div v-if="isBirthDayToday">-->
+    <!--      <div class="absolute bottom-0 left-8">-->
+    <!--        <Lottie :height="200" name="Party-popper"/>-->
+    <!--      </div>-->
+    <!--      <div class="absolute bottom-0 right-8" style="transform: scale(-1, 1) ">-->
+    <!--        <Lottie :height="200" name="Party-popper"/>-->
+    <!--      </div>-->
+    <!--    </div>-->
   </div>
 </template>
 
@@ -76,11 +78,7 @@ import conf from '../../config/api.js'
 
 import {osTheme as osThemeRef} from '../../utils/layout.js'
 
-import {NAvatar,} from 'naive-ui'
-
-import Lottie from '../../components/Lottie.vue'
-
-import {useIsMobile} from '../../utils/composables.js'
+import {NAvatar} from 'naive-ui'
 
 const user = computed(() => {
   return userStore.state.user
