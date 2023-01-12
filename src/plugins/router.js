@@ -212,7 +212,7 @@ const routes = [
                         },
                     },
                     {
-                        path: 'gct/create',
+                        path: 'create',
                         name: 'modules.gct.create',
                         props: true,
                         component: () => import('../views/modules/gct/Create.vue'),
