@@ -141,8 +141,8 @@ import {useIsMobile} from '../../../../utils/composables.js'
 import router from '../../../../plugins/router.js'
 import http from '../../../../plugins/http.js'
 import tunnelStore from '../../../../plugins/stores/tunnels.js'
-import {dialog} from '../../../../utils/layout.js'
-
+import {dialog, message} from '../../../../utils/layout.js'
+import user from '../../../../plugins/stores/user.js'
 const isMobile = useIsMobile()
 
 defineProps({
@@ -171,9 +171,13 @@ const selectedTunnel = ref({
 })
 
 const showModal = ref(false)
-
+function copy(content) {
+  navigator.clipboard.writeText(content);
+  message.success("复制成功");
+}
 function updateStatus($tunnel) {
   selectedTunnel.value = $tunnel
+  const copycommond = "frpc " + "-t " + "\"" + user.state.token  + "\" " + "-i " + $tunnel.host_id
 
   if ($tunnel.status === 'delete') {
     dialog.warning({
@@ -208,7 +212,10 @@ function updateStatus($tunnel) {
   } else if ($tunnel.status === 'rename') {
     showModal.value = true
     $tunnel.status = 'running'
-  } else {
+  } else if ($tunnel.status === 'copy') {
+    copy(copycommond)
+  }
+  else {
     patch({
       status: $tunnel.status,
     })
@@ -247,6 +254,10 @@ const options = ref([
   {
     label: '改名',
     value: 'rename',
+  },
+  {
+    label: '复制启动命令',
+    value: 'copy',
   },
 ])
 </script>
