@@ -73,7 +73,7 @@ const user = computed(() => {
 
 const width = computed(() => {
   // return document.body.clientWidth > 768 ? 400 : '90%'
-  return 400
+  return 360
 })
 
 const avatar = computed(() => {
