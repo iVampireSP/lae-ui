@@ -27,10 +27,18 @@ listen('tasks.updated', (e) => {
   // 更新任务, 如果 e.data.status 为 failed,done,success,error, 则 10 秒后删除任务，否则就更新
   if (['failed', 'done', 'success', 'error'].includes(e.data.status)) {
 
-    notification.error({
-      title: e.module.name ?? '任务',
-      content:  e.data.title,
-    })
+    // if success or done
+    if (['success', 'done'].includes(e.data.status)) {
+      notification.success({
+        title: e.module.name ?? '任务',
+        content: e.data.title,
+      })
+    } else {
+      notification.error({
+        title: e.module.name ?? '任务',
+        content: e.data.title,
+      })
+    }
 
     setTimeout(() => {
       // 从 taskStore 中删除任务
