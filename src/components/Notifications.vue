@@ -82,8 +82,6 @@ listen('notifications', (e) => {
   let data = {
     title: title,
     content: content,
-    duration: 5000,
-    keepAliveOnHover: true,
     meta: new Date(e['sent_at']).toLocaleString(),
   }
 
