@@ -1,12 +1,14 @@
 <template>
-  <div v-if="detected">
-    <n-popover trigger="hover">
-      <template #trigger>
-        <Lottie :height="50" :loop="false" name="Cluster-Ready"/>
-      </template>
-      <span>Cluster Ready! 就绪</span>
-    </n-popover>
-  </div>
+ <div>
+   <div v-if="detected">
+     <n-popover trigger="hover">
+       <template #trigger>
+         <Lottie :height="50" :loop="false" name="Cluster-Ready"/>
+       </template>
+       <span>Cluster Ready! 就绪</span>
+     </n-popover>
+   </div>
+ </div>
 
 </template>
 

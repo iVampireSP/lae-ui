@@ -52,19 +52,19 @@
           </n-popover>
           <div v-else>
 
-            <!--            <n-button-->
-            <!--                size="small"-->
-            <!--                tag="a"-->
-            <!--                quaternary-->
-            <!--                class="nav-picker"-->
-            <!--                href="#"-->
-            <!--                target="_blank"-->
-            <!--            >-->
-            <!--              GitHub-->
-            <!--            </n-button>-->
-            <!--            <n-text class="nav-picker padded">-->
-            <!--              version-->
-            <!--            </n-text>-->
+            <!--                        <n-button-->
+            <!--                            size="small"-->
+            <!--                            tag="a"-->
+            <!--                            quaternary-->
+            <!--                            class="nav-picker"-->
+            <!--                            href="#"-->
+            <!--                            target="_blank"-->
+            <!--                        >-->
+            <!--                          GitHub-->
+            <!--                        </n-button>-->
+            <!--                        <n-text class="nav-picker padded">-->
+            <!--                          version-->
+            <!--                        </n-text>-->
           </div>
         </n-grid-item>
 
@@ -73,12 +73,6 @@
   </n-layout>
 
 </template>
-
-<style scoped>
-.layout-header {
-  padding: 8px
-}
-</style>
 
 <script setup>
 
@@ -102,8 +96,7 @@ const isTablet = useIsTablet()
 </script>
 
 <style scoped>
-/*.nav-end {*/
-/*  display: flex;*/
-/*  align-items: center;*/
-/*}*/
+.layout-header {
+  padding: 8px
+}
 </style>

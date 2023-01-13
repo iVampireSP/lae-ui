@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-item">
+  <div>
     <!--    <n-popover display-directive="show"-->
     <!--               placement="bottom-end"-->
     <!--               style="width: 288px"-->
@@ -91,7 +91,7 @@ const width = computed(() => {
 })
 
 const avatar = computed(() => {
-  return api.avatar + user.value.email_md5 + '?s=128';
+  return api.avatar + user.value.email_md5 + '?s=128?cache=0';
 })
 
 const show = ref(false)

@@ -71,7 +71,8 @@ const addMenuOptions = (type, route_options, text, icon = null, icon_props = {})
         label: () => h(
             RouterLink,
             {
-                to: route_options
+                to: route_options,
+                class: 'relative top-px'
             },
             {default: () => text}
         ),
@@ -155,6 +156,7 @@ menuOptions.value['menu'].push({
     ),
     key: 'index',
 });
+
 
 
 export {

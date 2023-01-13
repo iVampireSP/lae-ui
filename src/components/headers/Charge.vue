@@ -1,11 +1,13 @@
 <template>
-  <n-popover trigger="hover">
-    <template #trigger>
-      <n-icon :component="todayIsThursday ? FastFoodOutline : AttachMoneyRound" class="mr-3 cursor-pointer" size="30px"
-              @click="show = true"/>
-    </template>
-    <span v-text="todayIsThursday ? '请我吃疯狂星期四' : '快速充值'"></span>
-  </n-popover>
+  <div class="menu-item">
+    <n-popover trigger="hover">
+      <template #trigger>
+        <n-icon :component="todayIsThursday ? FastFoodOutline : AttachMoneyRound" class="mr-3 cursor-pointer" size="30px"
+                @click="show = true"/>
+      </template>
+      <span v-text="todayIsThursday ? '请我吃疯狂星期四' : '快速充值'"></span>
+    </n-popover>
+  </div>
 
   <n-modal v-model:show="show"
            :positive-text="todayIsThursday ? ' V 给你' : '开冲'"
