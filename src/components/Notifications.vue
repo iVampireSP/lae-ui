@@ -15,17 +15,23 @@ const notification = useNotification()
 
 /* Task */
 listen('tasks.created', (e) => {
+  notification.info({
+    title: e.module.name ?? '任务',
+    content: e.data.title,
+  })
+
   taskStore.commit('addTask', e.data)
 })
 
 listen('tasks.updated', (e) => {
-  notification.info({
-    title: '队列:' + e.data.title,
-    content: '任务更新',
-  })
-
   // 更新任务, 如果 e.data.status 为 failed,done,success,error, 则 10 秒后删除任务，否则就更新
   if (['failed', 'done', 'success', 'error'].includes(e.data.status)) {
+
+    notification.error({
+      title: e.module.name ?? '任务',
+      content:  e.data.title,
+    })
+
     setTimeout(() => {
       // 从 taskStore 中删除任务
       taskStore.commit('deleteTask', e.data.id)
