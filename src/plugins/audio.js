@@ -19,14 +19,16 @@ const play = (name, volume = 0.5) => {
 }
 
 window.addEventListener('click', () => {
-    let isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
-    if (!isSafari) {
-        if (!firstClick) {
-            firstClick = true
+    // let isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+    // if (!isSafari) {
+    //
+    // }
 
-            play('empty.mp3', 0)
-            play('Popcorn.ogg', 0)
-        }
+    if (!firstClick) {
+        firstClick = true
+
+        play('empty.mp3', 0)
+        play('Popcorn.ogg', 0)
     }
 })
 
