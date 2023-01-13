@@ -5,6 +5,71 @@
         {{ gct.name }}
       </n-gradient-text>
     </n-h1>
+    <n-grid cols="1 s:4" responsive="screen" x-gap="12" class="text-center">
+      <n-gi>
+        <n-h3>电源操作</n-h3>
+        <n-button-group>
+          <n-button strong secondary type="info" @click="powerAction('start')">
+            开机
+          </n-button>
+          <n-button strong secondary type="error" @click="powerAction('stop')" v-if="stopping === false">
+            停止
+          </n-button>
+          <n-button strong secondary type="error" @click="powerAction('kill')" v-else>
+            强制停止
+          </n-button>
+          <n-button strong secondary type="warning" @click="powerAction('restart')">
+            重启
+          </n-button>
+        </n-button-group>
+      </n-gi>
+      <n-gi>
+        <n-h3>性能调整</n-h3>
+        <n-spin :show="modifying">
+          <n-form ref="form" :model="gct">
+            <!-- :rules="rules" -->
+            <n-form-item label="CPU 限制">
+              <n-slider v-model:value="gct.cpu_limit" :default-value="gct.cpu_limit" :step="50" :max="800" :min="100"
+                        :show-tooltip="gct.cpu_limit > 400" :format-tooltip="formatCpuLimitTooltip"/>
+            </n-form-item>
+            <n-form-item label="内存">
+              <n-slider v-model:value="gct.memory" :default-value="gct.memory" :step="512" :max="10240" :min="512"
+                        :show-tooltip="gct.memory > 2048" :format-tooltip="formatTooltip"/>
+            </n-form-item>
+            <n-form-item label="存储大小">
+              <n-slider v-model:value="gct.disk" :default-value="gct.disk" :step="512" :max="10240" :min="512"
+                        :show-tooltip="gct.disk > 4096" :format-tooltip="formatDiskTooltip"/>
+            </n-form-item>
+            <n-button type="primary" ghost attr-type="submit" @click="update()">保存</n-button>
+          </n-form>
+        </n-spin>
+      </n-gi>
+      <n-gi>
+        <n-h3>高级设置</n-h3>
+        <n-spin :show="modifying">
+          <n-form ref="form" :model="gct">
+            <!-- :rules="rules" -->
+            <n-form-item label="备份数量">
+              <n-slider v-model:value="gct.backups" :default-value="gct.backups" :step="1" :max="8" :min="1"
+                        :show-tooltip="gct.backups > 3" :format-tooltip="formatCommonTooltip"/>
+            </n-form-item>
+            <n-form-item label="端口数量">
+              <n-slider v-model:value="gct.allocations" :default-value="gct.allocations" :step="1" :max="10" :min="1"
+                        :show-tooltip="gct.allocations > 3" :format-tooltip="formatCommonTooltip"/>
+            </n-form-item>
+            <n-form-item label="数据库数量">
+              <n-slider v-model:value="gct.databases" :default-value="gct.databases" :step="1" :max="5" :min="0"
+                        :show-tooltip="gct.databases > 0" :format-tooltip="formatCommonTooltip"/>
+            </n-form-item>
+            <n-button type="primary" ghost attr-type="submit" @click="update()">保存</n-button>
+          </n-form>
+        </n-spin>
+      </n-gi>
+      <n-gi>
+        <n-h3>重设模板</n-h3>
+      </n-gi>
+    </n-grid>
+    <div class="light-green mt-8"/>
   </div>
 </template>
 
