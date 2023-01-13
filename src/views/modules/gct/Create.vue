@@ -134,7 +134,8 @@ import {
   NSlider,
   NSpin,
   NText,
-  NTooltip
+  NTooltip,
+  useDialog
 } from 'naive-ui'
 
 import http from '../../../plugins/http'
@@ -238,14 +239,18 @@ http.get('/modules/gct/nests').then((res) => {
   create_gct.value.egg_id = options.value[1].value
 })
 
+const dialog = useDialog()
 
 const deploy = () => {
   creating.value = true
   http
       .post('/modules/gct/hosts', create_gct.value)
       .then((res) => {
-        //
-        console.log(res)
+        dialog.success({
+          title: '好~',
+          content: '已经开始排队部署容器了，稍等一下就好了。',
+          positiveText: '哇',
+        })
       }).finally(() => {
     creating.value = false
   })
