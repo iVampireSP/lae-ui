@@ -1,6 +1,19 @@
 <template>
-  <div class="menu-item cursor-pointer" @click="show = true">
-    <n-avatar :src="avatar" round size="large"/>
+  <div class="menu-item">
+    <!--    <n-popover display-directive="show"-->
+    <!--               placement="bottom-end"-->
+    <!--               style="width: 288px"-->
+    <!--               trigger="manual" :show="showPopover">-->
+    <!--      <template #trigger>-->
+    <n-badge :value="tasks.length" :type="taskStatus" :dot="taskProcessing" :processing="taskProcessing"
+             @click="showPopover = !showPopover">
+      <n-avatar :src="avatar" round size="large" class="cursor-pointer" @click.stop="show = true"/>
+    </n-badge>
+    <!--      </template>-->
+    <!--      <div>-->
+    <!--        <Tasks />-->
+    <!--      </div>-->
+    <!--    </n-popover>-->
   </div>
 
   <!--    <router-link :to="{name:'user'}" >-->
@@ -61,11 +74,12 @@
 </template>
 
 <script setup>
-import {NA, NAvatar, NDrawer, NDrawerContent, NH1, NH2, NH4} from "naive-ui";
+import {NA, NAvatar, NBadge, NDrawer, NDrawerContent, NH1, NH2, NH4} from "naive-ui";
 import {computed, ref} from "vue";
 
 import api from "../../config/api.js";
 import userStore from "../../plugins/stores/user.js";
+import taskStore from '../../plugins/stores/tasks'
 
 const user = computed(() => {
   return userStore.state.user
@@ -81,6 +95,16 @@ const avatar = computed(() => {
 })
 
 const show = ref(false)
+
+const showPopover = ref(false)
+
+
+const tasks = computed(() => taskStore.state.tasks)
+const taskStatus = computed(() => taskStore.state.last_status)
+const taskProcessing = computed(() => taskStore.state.processing)
+
+taskStore.dispatch('fetch')
+
 
 </script>
 
