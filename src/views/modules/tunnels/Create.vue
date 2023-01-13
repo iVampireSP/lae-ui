@@ -257,6 +257,12 @@ const rules = {
           return new Error('本地地址只能是 IPv4:Port 格式')
         }
 
+        // 需要定义端口
+        const port = value.split(':')[1]
+        if (!port) {
+          return new Error('需要指定端口')
+        }
+
         return true;
       },
       trigger: ["input", "blur"]

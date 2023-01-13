@@ -6,11 +6,11 @@
             :title="'#' + container.host_id + ' ' + container.name"
             content-style="margin-top: 10px;"
         >
-<!--          <template #description>-->
-<!--            <n-space size="small" style="margin-top: 4px">-->
+          <!--          <template #description>-->
+          <!--            <n-space size="small" style="margin-top: 4px">-->
 
-<!--            </n-space>-->
-<!--          </template>-->
+          <!--            </n-space>-->
+          <!--          </template>-->
           <template #avatar>
             <n-avatar>
               {{ container.name.toUpperCase().substring(0, 1) }}
@@ -25,6 +25,13 @@
               >
                 {{ isMobile ? '信息' : '详细信息' }}
               </n-button>
+              <n-button
+                  ghost
+                  type="info"
+                  @click.stop="showTerminal(container.host_id)"
+              >
+                控制台
+              </n-button>
             </n-button-group>
           </template>
         </n-thing>
@@ -38,7 +45,7 @@
 </template>
 
 <script setup>
-import {NAvatar, NButton, NButtonGroup, NEmpty, NList, NListItem, NSpace, NTag, NThing,} from 'naive-ui'
+import {NAvatar, NButton, NButtonGroup, NEmpty, NList, NListItem, NThing,} from 'naive-ui'
 
 import {useIsMobile} from '../../../../utils/composables.js'
 import router from '../../../../plugins/router.js'
@@ -59,6 +66,15 @@ defineProps({
 function showDetail(host_id) {
   router.push({
     name: 'modules.gct.show',
+    params: {
+      id: host_id,
+    },
+  })
+}
+
+function showTerminal(host_id) {
+  router.push({
+    name: 'modules.gct.terminal',
     params: {
       id: host_id,
     },

@@ -242,18 +242,26 @@ http.get('/modules/gct/nests').then((res) => {
 const dialog = useDialog()
 
 const deploy = () => {
-  creating.value = true
-  http
-      .post('/modules/gct/hosts', create_gct.value)
-      .then((res) => {
-        dialog.success({
-          title: '好~',
-          content: '已经开始排队部署容器了，稍等一下就好了。',
-          positiveText: '哇',
-        })
-      }).finally(() => {
-    creating.value = false
+  form.value?.validate().then((errors) => {
+    if (!errors) {
+
+      creating.value = true
+
+      http
+          .post('/modules/gct/hosts', create_gct.value)
+          .then((res) => {
+            dialog.success({
+              title: '好~',
+              content: '已经开始排队部署容器了，稍等一下就好了。',
+              positiveText: '哇',
+            })
+          }).finally(() => {
+        creating.value = false
+      })
+
+    }
   })
+
 }
 
 

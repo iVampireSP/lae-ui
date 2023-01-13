@@ -200,7 +200,7 @@ const routes = [
                 // name: 'modules.gct',
                 component: () => import('../views/modules/gct/Base.vue'),
                 meta: {
-                    title: 'ptero',
+                    title: 'GCT',
                 },
                 children: [
                     {
@@ -236,6 +236,16 @@ const routes = [
                         component: () => import('../views/modules/gct/Show.vue'),
                         meta: {
                             title: '显示游戏容器',
+                        },
+                    },
+                    {
+                        path: ':id/terminal',
+                        name: 'modules.gct.terminal',
+                        props: true,
+                        component: () => import('../views/modules/gct/Terminal.vue'),
+                        meta: {
+                            collapses: ['left'],
+                            title: '控制台',
                         },
                     },
                 ],

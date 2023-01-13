@@ -7,6 +7,8 @@ import UserStore from './plugins/stores/user'
 import HttpStore from './plugins/stores/user'
 import router from './plugins/router';
 
+import './plugins/audio';
+
 import App from './App.vue'
 
 /** Styles **/
