@@ -14,17 +14,17 @@ export default createStore({
     },
     mutations: {
         addGct(state, gct) {
-            state.gct.push(gct)
+            state.containers.push(gct)
         },
         removeGct(state, gct) {
-            state.gct.splice(state.gct.indexOf(gct), 1)
+            state.containers.splice(state.containers.indexOf(gct), 1)
         },
         setGct(state, gct) {
-            state.gct = gct
+            state.containers = gct
         },
         updateGct(state, gct) {
-            let index = state.gct.findIndex((item) => item.id === gct.id)
-            state.gct.splice(index, 1, gct)
+            let index = state.containers.findIndex((item) => item.id === gct.id)
+            state.containers.splice(index, 1, gct)
         },
     },
 })

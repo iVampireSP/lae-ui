@@ -6,36 +6,11 @@
             :title="'#' + container.host_id + ' ' + container.name"
             content-style="margin-top: 10px;"
         >
-          <template #description>
-            <n-space size="small" style="margin-top: 4px">
+<!--          <template #description>-->
+<!--            <n-space size="small" style="margin-top: 4px">-->
 
-              <n-tag
-                  v-if="container.status === 'running'"
-                  :bordered="false"
-                  size="small"
-                  type="success"
-              >
-                正常
-              </n-tag>
-              <n-tag
-                  v-else-if="container.status === 'stopped'"
-                  :bordered="false"
-                  size="small"
-                  type="error"
-              >
-                停止
-              </n-tag>
-              <n-tag
-                  v-else-if="container.status === 'suspended'"
-                  :bordered="false"
-                  size="small"
-                  type="warning"
-              >
-                暂停
-              </n-tag>
-
-            </n-space>
-          </template>
+<!--            </n-space>-->
+<!--          </template>-->
           <template #avatar>
             <n-avatar>
               {{ container.name.toUpperCase().substring(0, 1) }}

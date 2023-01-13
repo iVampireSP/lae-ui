@@ -33,7 +33,3 @@ const go = (tunnel) => {
 }
 
 </script>
-
-<style scoped>
-
-</style>
