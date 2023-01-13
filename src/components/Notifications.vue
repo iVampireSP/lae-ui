@@ -10,6 +10,8 @@ import {listen} from '../plugins/echo'
 
 import taskStore from '../plugins/stores/tasks'
 
+import play from '../plugins/audio'
+
 const notification = useNotification()
 const message = useMessage()
 
@@ -90,6 +92,8 @@ listen('notifications', (e) => {
   } else {
     notification.info(data)
   }
+
+  play('Popcorn.ogg')
 })
 
 /* End Notification */
