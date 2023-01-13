@@ -4,6 +4,9 @@
 
 <script setup>
 
+import {h} from "vue";
+
+
 import {useMessage, useNotification} from 'naive-ui'
 
 import {listen} from '../plugins/echo'
@@ -14,6 +17,19 @@ import play from '../plugins/audio'
 
 const notification = useNotification()
 const message = useMessage()
+
+// Markdown editor init
+import VMdPreview from '@kangc/v-md-editor/lib/preview';
+import '@kangc/v-md-editor/lib/style/base-editor.css';
+import githubTheme from '@kangc/v-md-editor/lib/theme/github.js'
+import '@kangc/v-md-editor/lib/theme/style/github.css'
+import Prism from 'prismjs';
+import 'prismjs/components/prism-json';
+
+VMdPreview.use(githubTheme, {
+  Prism,
+});
+
 
 /* Task */
 listen('tasks.created', (e) => {
@@ -81,7 +97,12 @@ listen('notifications', (e) => {
 
   let data = {
     title: title,
-    content: content,
+    content: () => {
+      return h(VMdPreview, {
+        text: content,
+        mode: 'preview',
+      })
+    },
     meta: new Date(e['sent_at']).toLocaleString(),
   }
 
@@ -153,3 +174,9 @@ listen('notifications', (e) => {
 //   })
 // }
 </script>
+
+<style>
+.github-markdown-body {
+  padding: 0;
+}
+</style>

@@ -23,6 +23,11 @@ body {
     opacity: 0;
 }
 
+.markdown-preview .github-markdown-body {
+    padding: 0;
+    background-color: black !important;
+}
+
 @media only screen and (max-width: 639px) {
     body {
         overflow: visible;
@@ -50,5 +55,32 @@ body {
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0s;
         background-image: url('/assets/lae-white.png');
     }
+
+
+    .v-md-editor {
+        background-color: #3b3b3b !important;
+    }
+    .v-md-editor__toolbar-item--active,
+    .v-md-editor__toolbar-item--active:hover {
+        background: #323232 !important;
+    }
+
+    .v-md-editor__toolbar {
+        border-bottom: 1px solid #606060 !important;
+    }
+
+    .v-md-editor__toolbar-divider::before {
+        border-left: 1px solid #606060 !important;
+    }
+
+    .v-md-editor--editable .v-md-editor__editor-wrapper {
+        border-right: 1px solid #606060 !important;
+    }
+
+    .v-md-textarea-editor pre,
+    .v-md-textarea-editor textarea {
+        color: #cacaca !important;
+    }
+
 
 }
