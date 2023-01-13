@@ -31,26 +31,28 @@ let echo = new LaravelEcho({
 let events = []
 
 echo.private(`users.${userStore.state.user.id}`).listen('.messages', (e) => {
-    // console.log(e)
+    console.log(e)
 
-    let type = e['type']
+    let event = e['event']
 
     for (let i = 0; i < events.length; i++) {
-        if (events[i].type === type) {
+        if (events[i].event === event) {
             events[i].callback(e)
         }
     }
 
+
 })
 
-const listen = (type, callback) => {
-    events.push({type, callback})
+const listen = (event, callback) => {
+    events.push({event, callback})
 }
 
 // 取消监听
-const leave = (type, callback) => {
-    events = events.filter((e) => {
-        return !(e.type === type && e.callback === callback)
+const leave = (event, callback) => {
+    // 根据事件名和回调函数删除
+    events = events.filter((item) => {
+        return item.event !== event && item.callback !== callback
     })
 }
 

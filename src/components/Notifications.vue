@@ -54,6 +54,47 @@ listen('tasks.updated', (e) => {
 
 /* End Task */
 
+
+/* Begin Notification */
+listen('notifications', (e) => {
+  let title = ''
+
+  if (e.data.name) {
+    title = e.data.name
+  } else if (e.data.title) {
+    title = e.data.title
+  }
+
+  let content = e.data.message ?? e.data.content ?? ''
+
+  if (e.module) {
+    let newTitle = e.module.name
+
+    if (title) {
+      title = newTitle + ' - ' + title
+    } else {
+      title = newTitle
+    }
+  }
+
+  let data = {
+    title: title,
+    content: content,
+    duration: 5000,
+    keepAliveOnHover: true,
+    meta: new Date(e['sent_at']).toLocaleString(),
+  }
+
+  if (notification[e.type]) {
+    notification[e.type](data)
+  } else {
+    notification.info(data)
+  }
+})
+
+/* End Notification */
+
+
 //
 // const token = computed(() => userStore.state.token)
 // const user = computed(() => userStore.state.user)
