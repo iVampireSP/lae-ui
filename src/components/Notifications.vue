@@ -4,21 +4,22 @@
 
 <script setup>
 
-import {useNotification} from 'naive-ui'
+import {useMessage, useNotification} from 'naive-ui'
 
 import {listen} from '../plugins/echo'
 
 import taskStore from '../plugins/stores/tasks'
 
 const notification = useNotification()
-
+const message = useMessage()
 
 /* Task */
 listen('tasks.created', (e) => {
-  notification.info({
-    title: e.module.name ?? '任务',
-    content: e.data.title,
-  })
+  // notification.info({
+  //   title: e.module.name ?? '任务',
+  //   content: e.data.title,
+  // })
+  message.info((e.module.name ?? '任务') + ': ' + e.data.title)
 
   taskStore.commit('addTask', e.data)
 })
@@ -29,15 +30,17 @@ listen('tasks.updated', (e) => {
 
     // if success or done
     if (['success', 'done'].includes(e.data.status)) {
-      notification.success({
-        title: e.module.name ?? '任务',
-        content: e.data.title,
-      })
+      // notification.success({
+      //   title: e.module.name ?? '任务',
+      //   content: e.data.title,
+      // })
+      message.success((e.module.name ?? '任务') + ': ' + e.data.title)
     } else {
-      notification.error({
-        title: e.module.name ?? '任务',
-        content: e.data.title,
-      })
+      // notification.error({
+      //   title: e.module.name ?? '任务',
+      //   content: e.data.title,
+      // })
+      message.error((e.module.name ?? '任务') + ': ' + e.data.title)
     }
 
     setTimeout(() => {
