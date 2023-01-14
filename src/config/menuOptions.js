@@ -72,9 +72,13 @@ const addMenuOptions = (type, route_options, text, icon = null, icon_props = {})
             RouterLink,
             {
                 to: route_options,
-                class: 'relative top-px'
             },
-            {default: () => text}
+            {default: () => h('span', {
+                    class: 'relative',
+                    style: {
+                        top: "1.2px"
+                    }
+                }, text)}
         ),
     }
 
