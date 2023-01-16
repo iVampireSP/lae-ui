@@ -150,6 +150,9 @@ const modifying = ref(false)
 
 const stopping = ref(false)
 
+const nests = ref([])
+const eggs = ref([])
+
 const message = useMessage()
 const dialog = useDialog()
 
@@ -181,6 +184,32 @@ http.get('/modules/gct/hosts/' + router.params.id).then((res) => {
   gct.value = res.data
 })
 
+http.get('/modules/gct/nests').then((res) => {
+  nests.value = res.data
+
+  for (let nest in nests.value) {
+    nest = nests.value[nest]
+
+    eggs.value.push({
+      label: nest.name,
+      disabled: true
+    })
+
+    // push eggs
+    for (let egg in nest['eggs']) {
+      egg = nest['eggs'][egg]
+
+      eggs.value.push({
+        label: egg.name,
+        value: egg.egg_id,
+        disabled: false
+      })
+    }
+  }
+}).then(() => {
+  // 先预先选择
+  gct.value.egg_id = eggs.value[1].value
+})
 
 function update() {
   modifying.value = true
