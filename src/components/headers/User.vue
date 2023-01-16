@@ -24,7 +24,7 @@
     <n-drawer-content :native-scrollbar="false" :title="user.name + ' # ' + user.id" closable @click="show = false">
 
       <div class="text-center">
-        <n-avatar :size="128" :src="avatar" round/>
+        <n-avatar :size="256" :src="avatar" round/>
         <br/>
         <n-h1 class="all-zero">{{ user.name }} # {{ user.id }}</n-h1>
       </div>
@@ -91,7 +91,7 @@ const width = computed(() => {
 })
 
 const avatar = computed(() => {
-  return api.avatar + user.value.email_md5 + '?s=128?cache=0';
+  return api.avatar + user.value.email_md5 + '?s=256?cache=0';
 })
 
 const show = ref(false)
