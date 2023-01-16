@@ -237,17 +237,7 @@ const routes = [
                         meta: {
                             title: '显示游戏容器',
                         },
-                    },
-                    {
-                        path: ':id/terminal',
-                        name: 'modules.gct.terminal',
-                        props: true,
-                        component: () => import('../views/modules/gct/Terminal.vue'),
-                        meta: {
-                            collapses: ['left'],
-                            title: '控制台',
-                        },
-                    },
+                    }
                 ],
             },
             // {
