@@ -57,21 +57,25 @@ import {
 } from 'naive-ui'
 import Lottie from "./components/Lottie.vue";
 
-
 const osThemeRef = useOsTheme();
 const theme = computed(() => osThemeRef.value === "dark" ? darkTheme : null)
 
 const load_step = ref(1)
 
-// 当页面加载完成后，设置 loaded 为 true
-window.onload = () => {
-  setTimeout(() => {
-    load_step.value = 1
+if (process.env.NODE_ENV === 'production') {
+  window.onload = () => {
     setTimeout(() => {
-      load_step.value = 2
-    }, 500)
-  }, 250)
+      load_step.value = 1
+      setTimeout(() => {
+        load_step.value = 2
+      }, 500)
+    }, 250)
+  }
+} else {
+  load_step.value = 2
 }
+
+
 
 // import {initRouter, siteSetup} from './store'
 
