@@ -139,8 +139,6 @@ import {
 } from 'naive-ui'
 
 import http from '../../../plugins/http'
-
-import {useIsMobile} from "../../../utils/composables.js";
 import lyric from "../../../plugins/lyric.js";
 
 const creating = ref(false)
@@ -161,8 +159,6 @@ const create_gct = ref({
 const locations = ref([])
 
 const form = ref(null)
-
-const isMobile = useIsMobile()
 
 http.get('/modules/gct/locations').then((res) => {
   locations.value = res.data
@@ -250,6 +246,7 @@ const deploy = () => {
       http
           .post('/modules/gct/hosts', create_gct.value)
           .then((res) => {
+            console.log(res)
             dialog.success({
               title: '好~',
               content: '已经开始排队部署容器了，稍等一下就好了。',
