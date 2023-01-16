@@ -10,6 +10,13 @@ const config = {
         avatar: 'https://cravatar.cn/avatar/',
 
         status: 'https://api.laecloud.com/ngx_status',
+
+        modules: {
+            gct: {
+                panel: 'http://192.168.81.107'
+
+            }
+        }
     },
     prod: {
         api: 'https://api.laecloud.com/api/',
@@ -22,6 +29,12 @@ const config = {
         avatar: 'https://cravatar.cn/avatar/',
 
         status: 'https://api.laecloud.com/ngx_status',
+
+        modules: {
+            gct: {
+                panel: 'https://ptero.laecloud.com'
+            }
+        }
     },
 }
 
