@@ -59,7 +59,7 @@
       <n-gi span="6">
         <n-tabs type="line" animated>
           <n-tab-pane name="console" tab="控制台">
-            <Terminal class="text-left" :height="90" :gct_id="gct.id" v-if="gct.id" ref="ct"/>
+            <Terminal class="text-left" :height="90" :gct_id="gct.host_id" v-if="gct.host_id" ref="ct"/>
           </n-tab-pane>
 
           <n-tab-pane name="advanced" tab="调整">
@@ -148,9 +148,14 @@ import {
   NSpin,
   NTabPane,
   NTabs,
+    NIcon,
   useDialog,
   useMessage
 } from 'naive-ui'
+
+import {OpenOutline} from "@vicons/ionicons5";
+
+
 import Terminal from './components/Terminal.vue'
 
 import http from '../../../plugins/http'
