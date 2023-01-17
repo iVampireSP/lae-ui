@@ -76,7 +76,7 @@ const addMenuOptions = (type, route_options, text, icon = null, icon_props = {})
             {default: () => h('span', {
                     class: 'relative',
                     style: {
-                        top: "1px"
+                        top: "0.5px"
                     }
                 }, text)}
         ),
