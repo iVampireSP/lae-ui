@@ -149,7 +149,7 @@ const routes = [
                         name: 'modules.tunnels.index',
                         component: () => import('../views/modules/tunnels/Index.vue'),
                         meta: {
-                            title: '隧道列表',
+                            title: '赞助列表',
                         },
                     },
                     {
