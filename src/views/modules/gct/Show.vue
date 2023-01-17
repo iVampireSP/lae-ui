@@ -7,13 +7,22 @@
     </n-h1>
     <n-grid cols="1 xl:7 " responsive="screen">
       <n-gi span="5 1">
-        <n-h3 class="!mb-0">控制面板</n-h3>
-        <n-a target="_blank" :href=" api.modules.gct.panel  + '/server/' + gct.server.identifier">
-          控制面板
-        </n-a>
+        <n-h3 class="!mb-0">
+          <n-a
+              type="primary"
+              tag="a"
+              :href=" api.modules.gct.panel  + '/server/' + gct.server.identifier"
+              target="_blank"
+          >
+            控制面板
+            <n-icon>
+              <OpenOutline />
+            </n-icon>
+          </n-a>
+        </n-h3>
 
         <div class="mt-5 mb-5">
-          <n-h3 class="!mb-0">电源控制</n-h3>
+          <n-h3 class="mb-1">电源控制</n-h3>
 
           <n-button-group v-if="ct">
             <n-button strong secondary type="info" @click="ct.setState('start')"
@@ -31,7 +40,11 @@
             <n-button strong secondary type="error" v-else disabled>
               停止
             </n-button>
-            <n-button strong secondary type="warning" @click="ct.setState('restart')">
+            <n-button strong secondary type="warning" @click="ct.setState('restart')"
+                      v-if="ct.state.current === 'running' || ct.state.current === 'starting' ">
+              重启
+            </n-button>
+            <n-button strong secondary type="warning" v-else disabled>
               重启
             </n-button>
           </n-button-group>
@@ -147,8 +160,6 @@ import api from '../../../config/api'
 const router = useRoute()
 
 const modifying = ref(false)
-
-const stopping = ref(false)
 
 const nests = ref([])
 const eggs = ref([])
