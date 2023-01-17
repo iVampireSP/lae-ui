@@ -57,12 +57,12 @@ const version = [
   {
     name: 'Windows Frpc',
     arch: 'amd64',
-    url: 'https://download.mefrp.com/d/release/MirrorEdgeFrp_0.46.0_beta_windows_amd64.zip',
+    url: 'https://io.ivampiresp.com/d/Software/MEFrpRelease/MirrorEdgeFrp_0.46.0_beta_windows_amd64.zip',
   },
   {
     name: 'Windows Python 图形化启动器',
     arch: 'amd64',
-    url: 'https://download.mefrp.com/d/alidrive/Mirror_Edge_Frp_Python_Win.zip',
+    url: 'https://io.ivampiresp.com/d/Software/MEFrpRelease/Mirror_Edge_Frp_Python_Win.zip',
   },
   {
     name: 'Windows C# .NET 图形化启动器',
@@ -72,12 +72,12 @@ const version = [
   {
     name: 'Linux Frpc',
     arch: 'amd64',
-    url: 'https://download.mefrp.com/d/release/MirrorEdgeFrp_0.46.0_beta_linux_amd64.tar.gz',
+    url: 'https://io.ivampiresp.com/d/Software/MEFrpRelease/MirrorEdgeFrp_0.46.0_beta_linux_amd64.tar.gz',
   },
   {
     name: '更多版本 Frpc',
     arch: 'any',
-    url: 'https://download.mefrp.com/release/',
+    url: 'https://io.ivampiresp.com/Software/MEFrpRelease',
   },
 ]
 
