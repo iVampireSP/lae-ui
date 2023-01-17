@@ -76,7 +76,7 @@ const sponsors = [
   },
   {
     "name": "akchiji888",
-    "comment": "祝 ME Frp 越来越好，越来越长久的运营下去",
+    "comment": "祝 ME Frp 越来越好，越来越长久地运营下去",
     "items": "10 RMB"
   },
   {
