@@ -149,6 +149,14 @@ const routes = [
                         name: 'modules.tunnels.index',
                         component: () => import('../views/modules/tunnels/Index.vue'),
                         meta: {
+                            title: '隧道列表',
+                        },
+                    },
+                    {
+                        path: 'sponsor',
+                        name: 'modules.tunnels.sponsor',
+                        component: () => import('../views/modules/tunnels/Sponsor.vue'),
+                        meta: {
                             title: '赞助列表',
                         },
                     },
