@@ -9,25 +9,34 @@
         资金 / 服务器节点 来支持我们，我们将不胜感激。
       </n-p>
       <n-button-group>
-        <n-button
-            ghost
-            type="info"
-            tag="a"
-            href="https://afdian.net/a/aehxy"
-            target="_blank"
-        >
-          爱发电（资金赞助）
-        </n-button>
-
-        <n-button
-            ghost
-            type="info"
-            tag="a"
-            href="https://qm.qq.com/cgi-bin/qm/qr?k=fFJ-xsZe-0YWPDJYgMLH-g9uT83rigkb&noverify=0&personal_qrcode_source=4"
-            target="_blank"
-        >
-          联系我们（服务器赞助）
-        </n-button>
+        <n-popover trigger="hover">
+          <template #trigger>
+            <n-button
+                ghost
+                type="info"
+                tag="a"
+                href="https://afdian.net/a/aehxy"
+                target="_blank"
+            >
+              爱发电
+            </n-button>
+          </template>
+          <span>资金赞助</span>
+        </n-popover>
+        <n-popover trigger="hover">
+          <template #trigger>
+            <n-button
+                ghost
+                type="info"
+                tag="a"
+                href="https://qm.qq.com/cgi-bin/qm/qr?k=fFJ-xsZe-0YWPDJYgMLH-g9uT83rigkb&noverify=0&personal_qrcode_source=4"
+                target="_blank"
+            >
+              联系我们
+            </n-button>
+          </template>
+          <span>服务器赞助</span>
+        </n-popover>
       </n-button-group>
     </n-card>
     <n-card title="赞助者列表" class="mt-3">
@@ -42,7 +51,7 @@
 
 <script setup>
 import {ref} from 'vue'
-import {NButton, NButtonGroup, NCard, NDataTable, NH1, NP, NText} from 'naive-ui';
+import {NButton, NButtonGroup, NCard, NDataTable, NH1, NP, NText, NPopover} from 'naive-ui';
 
 const sponsors = [
   {
