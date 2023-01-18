@@ -42,7 +42,7 @@
           更换账号
         </n-button>
 
-        <n-button ghost type="info" @click="go('user')"> 用户中心</n-button>
+        <n-button ghost type="info" @click="go('user')">用户中心</n-button>
       </n-button-group>
     </n-card>
   </IndexLayout>
