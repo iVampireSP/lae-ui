@@ -45,6 +45,15 @@
         <n-button ghost type="info" @click="go('user')">用户中心</n-button>
       </n-button-group>
     </n-card>
+
+    <n-card class="mt-3" size="small" title="测试" v-if="process.env.NODE_ENV !== 'production'">
+      <n-button-group>
+        <n-button ghost type="info" @click="test">测试新模块</n-button>
+
+      </n-button-group>
+    </n-card>
+
+
   </IndexLayout>
 </template>
 
@@ -59,6 +68,8 @@ import conf from '../config/api'
 import router from '../plugins/router.js'
 import IndexLayout from '../components/menus/IndexLayout.vue'
 
+import direct from "../plugins/direct.js";
+
 // 就像下面这样
 const user = computed(() => {
   return userStore.state.user
@@ -71,6 +82,12 @@ const avatar = conf.avatar + user.value.email_md5 + '?s=64'
 http.get('/users').then((res) => {
   userStore.commit('updateUser', res.data)
 })
+
+function test() {
+  direct.get('http://remote.test/api/hosts').then((res) => {
+    console.log(res.data)
+  })
+}
 
 const go = (route_name) => {
   router.push({
