@@ -41,11 +41,11 @@ const isTablet = useIsTablet()
 
 function change() {
   if (isMobile.value || isTablet.value) {
-    extendClass.value = 'bottom-0.5'
+    extendClass.value = '-top-1'
   } else if (menuCollapsed.value['left'] === false) {
     extendClass.value = 'bottom-0.5'
   } else {
-    extendClass.value = ''
+    extendClass.value = 'bottom-px2'
   }
 }
 
@@ -53,3 +53,9 @@ watchEffect(() => change())
 
 
 </script>
+
+<style scoped>
+.bottom-px2 {
+  bottom: 2px;
+}
+</style>
