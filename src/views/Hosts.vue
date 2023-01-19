@@ -17,7 +17,9 @@
 import {
   NH1,
   NText,
-  NP
+  NP,
+  NDataTable,
+  NButton
 } from 'naive-ui'
 import userStore from '../plugins/stores/user.js'
 import {computed} from "vue";
@@ -26,7 +28,50 @@ const user = computed(() => {
   return userStore.state.user
 })
 
-const columns = []
+const columns = [{
+    title: '服务',
+    key: 'service'
+  },
+  {
+    title: '名称',
+    key: 'name'
+  },
+  {
+    title: '元 / 月(大约)',
+    key: 'one_month_cost'
+  },
+  {
+    title: '本月消耗',
+    key: 'current_month_cost'
+  },
+  {
+    title: '状态',
+    key: 'status'
+  },
+  {
+    title: '几分扣费',
+    key: 'time'
+  },
+  {
+    title: '创建时间',
+    key: 'create_time'
+  },
+  {
+    title: '释放',
+    key: 'delete_host',
+    render (row) {
+      return h(
+          NButton,
+          {
+            strong: true,
+            tertiary: true,
+            size: 'small',
+            onClick: () => delete_host()
+          },
+      )
+    }
+  }
+]
 const data = []
 
 </script>
