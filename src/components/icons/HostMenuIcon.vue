@@ -54,7 +54,7 @@ watchEffect(() => change())
 
 </script>
 
-<style scoped>
+<style>
 .bottom-px2 {
   bottom: 2px;
 }
