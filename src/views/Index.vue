@@ -46,7 +46,7 @@
       </n-button-group>
     </n-card>
 
-    <n-card class="mt-3" size="small" title="测试" v-if="process.env.NODE_ENV !== 'production'">
+    <n-card class="mt-3" size="small" title="测试" v-if="isLocal">
       <n-button-group>
         <n-button ghost type="info" @click="test">测试新模块</n-button>
 
@@ -81,6 +81,11 @@ const avatar = conf.avatar + user.value.email_md5 + '?s=64'
 
 http.get('/users').then((res) => {
   userStore.commit('updateUser', res.data)
+})
+
+// is local
+const isLocal = computed(() => {
+  return process.env.NODE_ENV === 'development'
 })
 
 function test() {
