@@ -1,7 +1,8 @@
 <template>
-    <span :class="props.class"></span>
+  <!--    <span :class="props.class"></span>-->
+  <img src="/public/assets/images/logo-lae-2023.png" width="40" height="25" alt="莱云 兔年 Logo">
 
-<!--    <Lottie name="lae-jump" :loop="true" :width="40" :height="25" />-->
+  <!--    <Lottie name="lae-jump" :loop="true" :width="40" :height="25" />-->
 
 </template>
 
