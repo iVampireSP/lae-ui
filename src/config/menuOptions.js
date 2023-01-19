@@ -67,18 +67,29 @@ const addMenuOptions = (type, route_options, text, icon = null, icon_props = {})
         return;
     }
 
+    // let data = {
+    //     label: () => h(
+    //         RouterLink,
+    //         {
+    //             to: route_options,
+    //         },
+    //         {default: () => h('span', {
+    //                 class: 'relative',
+    //                 style: {
+    //                     top: "0.5px"
+    //                 }
+    //             }, text)}
+    //     ),
+    // }
+
+
     let data = {
         label: () => h(
             RouterLink,
             {
                 to: route_options,
             },
-            {default: () => h('span', {
-                    class: 'relative',
-                    style: {
-                        top: "0.5px"
-                    }
-                }, text)}
+            {default: () => h('span', {}, text)}
         ),
     }
 
@@ -160,7 +171,6 @@ menuOptions.value['menu'].push({
     ),
     key: 'index',
 });
-
 
 
 export {
