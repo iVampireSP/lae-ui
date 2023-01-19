@@ -14,10 +14,6 @@ import {listen} from '../plugins/echo'
 import taskStore from '../plugins/stores/tasks'
 
 import play from '../plugins/audio'
-
-const notification = useNotification()
-const message = useMessage()
-
 // Markdown editor init
 import VMdPreview from '@kangc/v-md-editor/lib/preview';
 import '@kangc/v-md-editor/lib/style/base-editor.css';
@@ -25,6 +21,9 @@ import githubTheme from '@kangc/v-md-editor/lib/theme/github.js'
 import '@kangc/v-md-editor/lib/theme/style/github.css'
 import Prism from 'prismjs';
 import 'prismjs/components/prism-json';
+
+const notification = useNotification()
+const message = useMessage()
 
 VMdPreview.use(githubTheme, {
   Prism,
@@ -117,62 +116,46 @@ listen('notifications', (e) => {
 
 /* End Notification */
 
+/* Begin WorkOrder */
 
-//
-// const token = computed(() => userStore.state.token)
-// const user = computed(() => userStore.state.user)
-//
-// if (token.value) {
-//   echo.private(`users.${user.value.id}`).listen('.messages', (e) => {
-//     console.log(e)
-//
-//     let title = ''
-//
-//     if (e.data.name) {
-//       title = e.data.name
-//     } else if (e.data.title) {
-//       title = e.data.title
-//     }
-//
-//     let content = e.data.message ?? e.data.content ?? ''
-//
-//     if (e.module) {
-//       let newTitle = e.module.name
-//
-//       if (title) {
-//         title = newTitle + ' - ' + title
-//       } else {
-//         title = newTitle
-//       }
-//     }
-//
-//     let data = {
-//       title: title,
-//       content: content,
-//       duration: 5000,
-//       keepAliveOnHover: true,
-//       meta: new Date(e['sent_at']).toLocaleString(),
-//     }
-//
-//     switch (e.type) {
-//       case 'success':
-//         notification.success(data)
-//         break
-//       case 'info':
-//         notification.info(data)
-//         break
-//       case 'warning':
-//         notification.warning(data)
-//         break
-//       case 'error':
-//         notification.error(data)
-//         break
-//       default:
-//         notification.info(data)
-//         break
-//     }
-//   })
-// }
+
+function sendWorkOrderNotification(e) {
+  let status = {
+    'pending': '待处理',
+    'in_progress': '处理中',
+    'closed': '结单',
+    'error': '错误',
+    'replied': '已回复',
+    'read': '已读',
+    'open': '已开启',
+  }
+
+  let title = e.data.title
+  let content = e.data.content
+  let meta = status[e.data.status] + ' - ' + new Date(e['sent_at']).toLocaleString()
+  notification.info({
+    title: title,
+    content: () => {
+      return h(VMdPreview, {
+        text: content,
+        mode: 'preview',
+      })
+    },
+    meta: meta,
+  })
+  play('success_1.wav')
+}
+
+listen('work-order.pending', (e) => sendWorkOrderNotification(e))
+listen('work-order.in_progress', (e) => sendWorkOrderNotification(e))
+listen('work-order.closed', (e) => sendWorkOrderNotification(e))
+listen('work-order.error', (e) => sendWorkOrderNotification(e))
+listen('work-order.replied', (e) => sendWorkOrderNotification(e))
+listen('work-order.read', (e) => sendWorkOrderNotification(e))
+listen('work-order.open', (e) => sendWorkOrderNotification(e))
+/* End WorkOrder */
+
+
 </script>
 
 <style>
