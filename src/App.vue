@@ -1,6 +1,6 @@
 <template>
 
-  <n-config-provider :date-locale="dateZhCN" :hljs="hljs" :locale="zhCN" :theme="theme" preflight-style-disabled
+  <n-config-provider :date-locale="dateZhCN" :hljs="hljs" :locale="zhCN" :theme="theme" :theme-overrides="themeOverrides" preflight-style-disabled
   >
     <n-global-style/>
     <n-loading-bar-provider>
@@ -75,22 +75,23 @@ if (process.env.NODE_ENV === 'production') {
   load_step.value = 2
 }
 
-
-
-// import {initRouter, siteSetup} from './store'
-
-// export default defineComponent({
-//   name: 'SiteProvider',
-//   components: {
-//     Site
-//   },
-//   setup() {
-//     initRouter(useRouter(), useRoute())
-//     return siteSetup()
-//   }
-// })
-
 hljs.registerLanguage('ini', ini)
+
+// 主题调整
+/**
+ * js 文件下使用这个做类型提示
+ * @type import('naive-ui').GlobalThemeOverrides
+ */
+const themeOverrides = {
+  common: {
+    primaryColor: '#ec4b2d',
+    primaryColorHover: '#ec4b2d',
+  },
+  Button: {
+    textColor: '#ec4b2d'
+  },
+
+}
 
 
 </script>
