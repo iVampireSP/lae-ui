@@ -71,13 +71,8 @@ import Humanize from "humanize-plus";
 
 const servers = ref([])
 
-http.get('/servers').then((res) => {
-  servers.value = res.data.map(server => {
-    // 只返回 frp 服务器
-    if (server['module']['id'] === 'frp') {
-      return server
-    }
-  })
+http.get('/modules/frp/servers').then((res) => {
+  servers.value = res.data
 
   // 过滤掉空值
   servers.value = servers.value.filter(server => {
