@@ -44,7 +44,7 @@
             <n-gi>
               <n-form-item label="内存">
                 <!--                <n-input v-model:value="create_gct.name" @keydown.enter.prevent/>-->
-                <n-slider v-model:value="create_gct.memory" :default-value="1024" :step="512" :max="10240" :min="512"
+                <n-slider v-model:value="create_gct.memory" :default-value="1024" :step="512" :max="10240" :min="1024"
                           :show-tooltip="create_gct.memory > 2048" :format-tooltip="formatTooltip"/>
               </n-form-item>
               <n-form-item label="CPU 限制">
@@ -52,7 +52,7 @@
                           :show-tooltip="create_gct.cpu_limit > 400" :format-tooltip="formatCpuLimitTooltip"/>
               </n-form-item>
               <n-form-item label="存储大小">
-                <n-slider v-model:value="create_gct.disk" :default-value="512" :step="512" :max="10240" :min="512"
+                <n-slider v-model:value="create_gct.disk" :default-value="1024" :step="512" :max="10240" :min="1024"
                           :show-tooltip="create_gct.disk > 4096" :format-tooltip="formatDiskTooltip"/>
               </n-form-item>
               <n-form-item label="备份数量">
