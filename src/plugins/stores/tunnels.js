@@ -1,5 +1,5 @@
 import {createStore} from "vuex";
-import http from "../http.js";
+import gateway from "../gateway.js";
 
 export default createStore({
     state: {
@@ -7,9 +7,13 @@ export default createStore({
     },
     actions: {
         fetchTunnels({commit}) {
-            http.get('/modules/frp/hosts').then(response => {
-                commit('setTunnels', response.data);
-            });
+            // http.get('/modules/frp/hosts').then(response => {
+            //     commit('setTunnels', response.data);
+            // });
+
+            gateway.get('frp', 'hosts', [], (res) => {
+                commit('setTunnels', res.data);
+            })
         },
     },
     mutations: {

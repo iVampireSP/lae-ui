@@ -3,7 +3,7 @@ const config = {
         api: 'http://www.lae.test/api/',
         auth: 'http://www.lae.test',
 
-        gateway: 'http://www.lae.test/api/',
+        ws_gateway: 'ws://127.0.0.1:8282',
 
         ws_host: 'www.lae.test',
         ws_port: 6001,
@@ -24,7 +24,7 @@ const config = {
         api: 'https://api.laecloud.com/api/',
         auth: 'https://api.laecloud.com',
 
-        gateway: 'https://api.laecloud.com/api/',
+        ws_gateway: 'wss://ws.gateway.laecloud.com',
 
         ws_host: 'socket.lae.yistars.net',
         ws_port: 443,

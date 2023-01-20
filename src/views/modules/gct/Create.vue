@@ -137,8 +137,7 @@ import {
   NTooltip,
   useDialog
 } from 'naive-ui'
-
-import http from '../../../plugins/http'
+import gateway from '../../../plugins/gateway'
 import lyric from "../../../plugins/lyric.js";
 
 const creating = ref(false)
@@ -160,7 +159,16 @@ const locations = ref([])
 
 const form = ref(null)
 
-http.get('/modules/gct/locations').then((res) => {
+// http.get('/modules/gct/locations').then((res) => {
+//   locations.value = res.data
+//   // 先预先选择
+//   create_gct.value.location_id = locations.value[0].id
+//   selectedLocation.value = locations.value[0]
+//
+//   console.log(selectedLocation.value)
+// })
+
+gateway.get('gct', 'locations', [], (res) => {
   locations.value = res.data
   // 先预先选择
   create_gct.value.location_id = locations.value[0].id
@@ -168,6 +176,7 @@ http.get('/modules/gct/locations').then((res) => {
 
   console.log(selectedLocation.value)
 })
+
 
 const returnLocation = () => {
   return locations.value.map(location => {
@@ -208,7 +217,35 @@ const nests = ref([])
 
 const options = ref([])
 
-http.get('/modules/gct/nests').then((res) => {
+// http.get('/modules/gct/nests').then((res) => {
+//   nests.value = res.data
+//
+//   for (let nest in nests.value) {
+//     nest = nests.value[nest]
+//
+//     options.value.push({
+//       label: nest.name,
+//       disabled: true
+//     })
+//
+//     // push eggs
+//     for (let egg in nest['eggs']) {
+//       egg = nest['eggs'][egg]
+//
+//       options.value.push({
+//         label: egg.name,
+//         value: egg.egg_id,
+//         disabled: false
+//       })
+//     }
+//   }
+// }).then(() => {
+//   // 先预先选择
+//   create_gct.value.egg_id = options.value[1].value
+// })
+
+gateway.get('gct', 'nests', [], (res) => {
+
   nests.value = res.data
 
   for (let nest in nests.value) {
@@ -230,10 +267,11 @@ http.get('/modules/gct/nests').then((res) => {
       })
     }
   }
-}).then(() => {
-  // 先预先选择
+
   create_gct.value.egg_id = options.value[1].value
+
 })
+
 
 const dialog = useDialog()
 
@@ -241,19 +279,32 @@ const deploy = () => {
   form.value?.validate().then((errors) => {
     if (!errors) {
 
-      creating.value = true
+      // creating.value = true
+      //
+      // http
+      //     .post('/modules/gct/hosts', create_gct.value)
+      //     .then((res) => {
+      //       console.log(res)
+      //       dialog.success({
+      //         title: '好~',
+      //         content: '已经开始排队部署容器了，稍等一下就好了。',
+      //         positiveText: '哇',
+      //       })
+      //     }).finally(() => {
+      //   creating.value = false
+      // })
 
-      http
-          .post('/modules/gct/hosts', create_gct.value)
-          .then((res) => {
-            console.log(res)
-            dialog.success({
-              title: '好~',
-              content: '已经开始排队部署容器了，稍等一下就好了。',
-              positiveText: '哇',
-            })
-          }).finally(() => {
-        creating.value = false
+
+      dialog.success({
+        title: '好~',
+        content: '已经开始排队部署容器了，稍等一下就好了。',
+        positiveText: '哇',
+      })
+
+      gateway.post('gct', 'hosts', create_gct.value, () => {
+        // console.log(res)
+        // creating.value = false
+
       })
 
     }

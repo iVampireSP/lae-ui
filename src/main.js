@@ -8,6 +8,7 @@ import HttpStore from './plugins/stores/user'
 import router from './plugins/router';
 
 import './plugins/audio';
+import './plugins/gateway';
 
 import App from './App.vue'
 
