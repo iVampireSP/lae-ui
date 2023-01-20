@@ -1,5 +1,5 @@
 import user from "./stores/user.js";
-import {dialog} from "../utils/layout.js";
+import {dialog, message} from "../utils/layout.js";
 import api from "../config/api.js";
 
 let requests = []
@@ -46,9 +46,14 @@ if (user.state.token) {
             if (data['request_id']) {
                 const request = requests.find(request => request.request_id === data['request_id'])
 
-                if (request) {
-                    request.callback(data)
+                if (data.status !== 200 && data.data.message) {
+                    message.error(data['data']['message'])
+                } else {
+                    if (request) {
+                        request.callback(data)
+                    }
                 }
+
             }
         }
     }

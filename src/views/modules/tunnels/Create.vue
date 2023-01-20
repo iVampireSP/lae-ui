@@ -336,14 +336,22 @@ function handleCreate() {
 
       creating.value = true
 
-      http.post('/modules/frp/hosts', create_tunnel.value).then((res) => {
+      // http.post('/modules/frp/hosts', create_tunnel.value).then((res) => {
+      //
+      //   tunnelsStore.commit('addTunnel', res.data)
+      //
+      //   message.success('隧道已创建，欢迎使用 ME Frp。')
+      // }).finally(() => {
+      //   creating.value = false
+      // })
 
+      gateway.post('frp', 'hosts', create_tunnel.value, (res) => {
         tunnelsStore.commit('addTunnel', res.data)
-
         message.success('隧道已创建，欢迎使用 ME Frp。')
-      }).finally(() => {
-        creating.value = false
       })
+
+      creating.value = false
+
     }
   })
 }

@@ -139,10 +139,11 @@ import {
 
 import {useIsMobile} from '../../../../utils/composables.js'
 import router from '../../../../plugins/router.js'
-import http from '../../../../plugins/http.js'
+import gateway from '../../../../plugins/gateway.js'
 import tunnelStore from '../../../../plugins/stores/tunnels.js'
 import {dialog, message} from '../../../../utils/layout.js'
 import user from '../../../../plugins/stores/user.js'
+
 const isMobile = useIsMobile()
 
 defineProps({
@@ -171,13 +172,15 @@ const selectedTunnel = ref({
 })
 
 const showModal = ref(false)
+
 function copy(content) {
   navigator.clipboard.writeText(content);
   message.success("复制成功");
 }
+
 function updateStatus($tunnel) {
   selectedTunnel.value = $tunnel
-  const copyCommand = "frpc " + "-t " + "\"" + user.state.token  + "\" " + "-i " + $tunnel.host_id
+  const copyCommand = "frpc " + "-t " + "\"" + user.state.token + "\" " + "-i " + $tunnel.host_id
 
   if ($tunnel.status === 'delete') {
     dialog.warning({
@@ -186,9 +189,13 @@ function updateStatus($tunnel) {
       positiveText: '删除',
       negativeText: '不对',
       onPositiveClick: () => {
-        http.delete('/modules/frp/hosts/' + $tunnel.host_id).then(() => {
+        // http.delete('/modules/frp/hosts/' + $tunnel.host_id).then(() => {
+        //   tunnelStore.dispatch('fetchTunnels')
+        // })
+        gateway.del('frp', 'hosts/' + $tunnel.host_id, [], () => {
           tunnelStore.dispatch('fetchTunnels')
         })
+
       },
       onNegativeClick: () => {
         $tunnel.status = 'running'
@@ -214,8 +221,7 @@ function updateStatus($tunnel) {
     $tunnel.status = 'running'
   } else if ($tunnel.status === 'copy') {
     copy(copyCommand)
-  }
-  else {
+  } else {
     patch({
       status: $tunnel.status,
     })
@@ -231,11 +237,15 @@ const submitCallback = () => {
 }
 
 function patch(data = {}) {
-  http
-      .patch(`/modules/frp/hosts/${selectedTunnel.value.host_id}`, data)
-      .finally(() => {
-        tunnelStore.dispatch('fetchTunnels')
-      })
+  // http
+  //     .patch(`/modules/frp/hosts/${selectedTunnel.value.host_id}`, data)
+  //     .finally(() => {
+  //       tunnelStore.dispatch('fetchTunnels')
+  //     })
+
+  gateway.patch('frp', `hosts/${selectedTunnel.value.host_id}`, data, () => {
+    tunnelStore.dispatch('fetchTunnels')
+  })
 }
 
 const options = ref([
@@ -261,7 +271,3 @@ const options = ref([
   },
 ])
 </script>
-
-<style scoped>
-
-</style>
