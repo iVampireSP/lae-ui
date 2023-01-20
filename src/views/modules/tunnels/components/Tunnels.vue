@@ -177,7 +177,7 @@ function copy(content) {
 }
 function updateStatus($tunnel) {
   selectedTunnel.value = $tunnel
-  const copycommond = "frpc " + "-t " + "\"" + user.state.token  + "\" " + "-i " + $tunnel.host_id
+  const copyCommand = "frpc " + "-t " + "\"" + user.state.token  + "\" " + "-i " + $tunnel.host_id
 
   if ($tunnel.status === 'delete') {
     dialog.warning({
@@ -213,7 +213,7 @@ function updateStatus($tunnel) {
     showModal.value = true
     $tunnel.status = 'running'
   } else if ($tunnel.status === 'copy') {
-    copy(copycommond)
+    copy(copyCommand)
   }
   else {
     patch({
