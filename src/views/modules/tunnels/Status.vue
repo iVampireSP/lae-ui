@@ -71,7 +71,7 @@ import Humanize from "humanize-plus";
 
 const servers = ref([])
 
-http.get('/modules/frp/servers').then((res) => {
+http.get('/servers/frp').then((res) => {
   servers.value = res.data
 
   // 过滤掉空值
