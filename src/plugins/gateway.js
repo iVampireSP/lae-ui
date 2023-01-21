@@ -1,5 +1,5 @@
 import user from "./stores/user.js";
-import {dialog, message} from "../utils/layout.js";
+import {dialog} from "../utils/layout.js";
 import api from "../config/api.js";
 
 let requests = []
@@ -50,13 +50,15 @@ if (user.state.token) {
                 const request = requests.find(request => request.request_id === data['request_id'])
 
                 if (data.status !== 200 && data.data.message) {
-                    message.error(data['data']['message'])
-                } else {
-                    if (request) {
-                        request.callback(data)
-                    }
+                    dialog.error({
+                        title: '错误',
+                        content: data['data']['message'],
+                    })
                 }
 
+                if (request) {
+                    request.callback(data)
+                }
             }
         }
     }
@@ -101,45 +103,61 @@ const wsSend = function (module_id, method, path, data = [], callback = null) {
 
 
 const get = function (module_id, url, data) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         wsSend(module_id, 'GET', url, data, (data) => {
-            resolve(data)
+            if (data.code >= 200 && data.code < 300) {
+                resolve(data)
+            } else {
+                reject(data)
+            }
         })
     })
 }
 
 const post = function (module_id, url, data) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         wsSend(module_id, 'POST', url, data, (data) => {
-            resolve(data)
-
+            if (data.code >= 200 && data.code < 300) {
+                resolve(data)
+            } else {
+                reject(data)
+            }
         })
     })
 }
 
 const put = function (module_id, url, data) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         wsSend(module_id, 'PUT', url, data, (data) => {
-            resolve(data)
-
+            if (data.code >= 200 && data.code < 300) {
+                resolve(data)
+            } else {
+                reject(data)
+            }
         })
     })
 }
 
 const patch = function (module_id, url, data) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         wsSend(module_id, 'PATCH', url, data, (data) => {
-            resolve(data)
-
+            if (data.code >= 200 && data.code < 300) {
+                resolve(data)
+            } else {
+                reject(data)
+            }
         })
     })
 }
 
 const del = function (module_id, url, data) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         wsSend(module_id, 'DELETE', url, data, (data) => {
-            resolve(data)
-
+            if (data.code >= 200 && data.code < 300) {
+                resolve(data)
+            } else {
+                reject(data)
+            }
         })
     })
 }

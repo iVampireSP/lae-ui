@@ -226,7 +226,7 @@ const filterServer = () => {
 //
 // })"
 
-gateway.get('frp', 'servers', []).then (res => {
+gateway.get('frp', 'servers', []).then(res => {
   servers.value = res.data
   // 先预先选择
   create_tunnel.value.server_id = filterServer()[0].value
@@ -346,11 +346,11 @@ function handleCreate() {
       // })
 
       gateway.post('frp', 'hosts', create_tunnel.value).then(res => {
-        creating.value = false
-
 
         tunnelsStore.commit('addTunnel', res.data)
         message.success('隧道已创建，欢迎使用 ME Frp。')
+      }).finally(() => {
+        creating.value = false
       })
 
 

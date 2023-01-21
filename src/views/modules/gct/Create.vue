@@ -301,10 +301,10 @@ const deploy = () => {
         positiveText: '哇',
       })
 
-      gateway.post('gct', 'hosts', create_gct.value).then(() => {
-        // console.log(res)
-        // creating.value = false
+      gateway.post('gct', 'hosts', create_gct.value).finally(() => {
+        creating.value = false
       })
+
 
     }
   })
