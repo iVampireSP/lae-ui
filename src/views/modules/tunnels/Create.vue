@@ -346,11 +346,13 @@ function handleCreate() {
       // })
 
       gateway.post('frp', 'hosts', create_tunnel.value).then(res => {
+        creating.value = false
+
+
         tunnelsStore.commit('addTunnel', res.data)
         message.success('隧道已创建，欢迎使用 ME Frp。')
       })
 
-      creating.value = false
 
     }
   })
