@@ -35,7 +35,7 @@ if (user.state.token) {
     ws.onmessage = function (event) {
         const data = JSON.parse(event.data)
 
-        if (data['status'] === 200 || data['msg'] === 'authed') {
+        if (data['code'] === 200 || data['msg'] === 'authed') {
             authed = true
         }
 
@@ -49,7 +49,7 @@ if (user.state.token) {
             if (data['request_id']) {
                 const request = requests.find(request => request.request_id === data['request_id'])
 
-                if (data.status !== 200 && data.data.message) {
+                if (data.code !== 200 && data.data.message) {
                     dialog.error({
                         title: '错误',
                         content: data['data']['message'],
