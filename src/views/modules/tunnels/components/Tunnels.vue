@@ -192,7 +192,7 @@ function updateStatus($tunnel) {
         // http.delete('/modules/frp/hosts/' + $tunnel.host_id).then(() => {
         //   tunnelStore.dispatch('fetchTunnels')
         // })
-        gateway.del('frp', 'hosts/' + $tunnel.host_id, [], () => {
+        gateway.del('frp', 'hosts/' + $tunnel.host_id, []).then(() => {
           tunnelStore.dispatch('fetchTunnels')
         })
 
@@ -243,7 +243,7 @@ function patch(data = {}) {
   //       tunnelStore.dispatch('fetchTunnels')
   //     })
 
-  gateway.patch('frp', `hosts/${selectedTunnel.value.host_id}`, data, () => {
+  gateway.patch('frp', `hosts/${selectedTunnel.value.host_id}`, data).then(() => {
     tunnelStore.dispatch('fetchTunnels')
   })
 }

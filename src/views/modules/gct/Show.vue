@@ -264,8 +264,8 @@ function update() {
   //   modifying.value = false
   // })
 
-  gateway.patch('gct', 'hosts/' + router.params.id, gct.value, () => {
-    modifying.value = false
+  gateway.patch('gct', 'hosts/' + router.params.id, gct.value).then(() => {
+    // modifying.value = false
   })
 }
 

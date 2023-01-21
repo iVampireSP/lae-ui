@@ -69,7 +69,7 @@ function copy(content) {
 //   })
 // })
 
-gateway.get('frp', 'servers', [], (res) => {
+gateway.get('frp', 'servers', []).then(res => {
   servers.value = res.data.map(server => {
     return {
       label: server.name,
@@ -87,8 +87,7 @@ function genConfig() {
   gateway.get('frp', 'hosts', {
     with_config: 1,
     server_id: selectedServer.value
-  }, (res) => {
-
+  }).then(res => {
     if (res.data.length > 0) {
       show_line_numbers.value = true
       tunnels.value = res.data

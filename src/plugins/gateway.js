@@ -97,26 +97,54 @@ const wsSend = function (module_id, method, path, data = [], callback = null) {
 }
 
 
-const get = function (module_id, url, data, callback) {
-    wsSend(module_id, 'GET', url, data, callback)
+const get = function (module_id, url, data) {
+    return new Promise((resolve) => {
+        wsSend(module_id, 'GET', url, data, (data) => {
+            resolve(data)
+        })
+    })
 }
 
-const post = function (module_id, url, data, callback) {
-    wsSend(module_id, 'POST', url, data, callback)
+const post = function (module_id, url, data) {
+    return new Promise((resolve) => {
+        wsSend(module_id, 'POST', url, data, (data) => {
+            resolve(data)
+
+        })
+    })
 }
 
-const put = function (module_id, url, data, callback) {
-    wsSend(module_id, 'PUT', url, data, callback)
+const put = function (module_id, url, data) {
+    return new Promise((resolve) => {
+        wsSend(module_id, 'PUT', url, data, (data) => {
+            resolve(data)
+
+        })
+    })
 }
 
-const patch = function (module_id, url, data, callback) {
-    wsSend(module_id, 'PATCH', url, data, callback)
+const patch = function (module_id, url, data) {
+    return new Promise((resolve) => {
+        wsSend(module_id, 'PATCH', url, data, (data) => {
+            resolve(data)
+
+        })
+    })
 }
 
-const del = function (module_id, url, data, callback) {
-    wsSend(module_id, 'DELETE', url, data, callback)
+const del = function (module_id, url, data) {
+    return new Promise((resolve) => {
+        wsSend(module_id, 'DELETE', url, data, (data) => {
+            resolve(data)
+
+        })
+    })
 }
 
 export default {
-    get, del, post, patch, put
+    get: get,
+    post: post,
+    put: put,
+    patch: patch,
+    delete: del
 }

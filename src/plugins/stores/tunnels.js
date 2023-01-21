@@ -11,7 +11,7 @@ export default createStore({
             //     commit('setTunnels', response.data);
             // });
 
-            gateway.get('frp', 'hosts', [], (res) => {
+            gateway.get('frp', 'hosts', []).then(res => {
                 commit('setTunnels', res.data);
             })
         },
