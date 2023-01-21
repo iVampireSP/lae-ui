@@ -31,7 +31,6 @@ function registerMenu() {
     // addMenuOptions('left', 'modules.red-packets.index', '您发的红包', ListOutline)
     addMenuOptions('left', 'modules.red-packets.index', '发红包', AddOutline)
 
-
     if (redPackets.value.length > 0) {
       addMenuDivider('left')
 
