@@ -3,7 +3,7 @@ const config = {
         api: 'http://www.lae.test/api/',
         auth: 'http://www.lae.test',
 
-        ws_gateway: 'ws://127.0.0.1:8282',
+        ws_gateway: 'ws://www.lae.test:8282',
 
         ws_host: 'www.lae.test',
         ws_port: 6001,
