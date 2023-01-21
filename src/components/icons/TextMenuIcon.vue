@@ -1,14 +1,6 @@
 <template>
   <div :class="'not-italic text-base relative ' + extendClass">
-    <n-text v-if="host['status'] === 'stopped'" type="error">
-      {{ host['name'][0] }}
-    </n-text>
-    <n-text v-else-if="host['status'] === 'suspended'" type="warning">
-      {{ host['name'][0] }}
-    </n-text>
-    <n-text v-else>
-      {{ host['name'][0] }}
-    </n-text>
+    {{ text[0] }}
   </div>
 </template>
 
@@ -19,12 +11,10 @@ import {menuCollapsed} from '../../config/menuOptions.js'
 
 import {useIsMobile, useIsTablet} from "../../utils/composables.js";
 
-import {NText} from 'naive-ui'
-
 defineProps({
-  host: {
+  text: {
     required: true,
-    type: Object,
+    type: String,
   }
 })
 
@@ -50,7 +40,6 @@ function change() {
 }
 
 watchEffect(() => change())
-
 
 </script>
 
