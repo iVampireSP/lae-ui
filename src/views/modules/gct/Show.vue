@@ -199,7 +199,7 @@ const formatCommonTooltip = (value) => `${value} 个`
 //   gct.value = res.data
 // })
 
-gateway.get('gct', 'hosts/' + router.params.id, [], (res) => {
+gateway.get('gct', 'hosts/' + router.params.id, []).then(res => {
   gct.value = res.data
 })
 //
@@ -265,7 +265,7 @@ function update() {
   // })
 
   gateway.patch('gct', 'hosts/' + router.params.id, gct.value).then(() => {
-    // modifying.value = false
+    modifying.value = false
   })
 }
 
