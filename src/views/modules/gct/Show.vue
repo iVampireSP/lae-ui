@@ -202,36 +202,14 @@ const formatCommonTooltip = (value) => `${value} 个`
 gateway.get('gct', 'hosts/' + router.params.id, []).then(res => {
   gct.value = res.data
 })
-//
+
 // http.get('/modules/gct/nests').then((res) => {
-//   nests.value = res.data
 //
-//   for (let nest in nests.value) {
-//     nest = nests.value[nest]
-//
-//     eggs.value.push({
-//       label: nest.name,
-//       disabled: true
-//     })
-//
-//     // push eggs
-//     for (let egg in nest['eggs']) {
-//       egg = nest['eggs'][egg]
-//
-//       eggs.value.push({
-//         label: egg.name,
-//         value: egg.egg_id,
-//         disabled: false
-//       })
-//     }
-//   }
 // }).then(() => {
 //   // 先预先选择
-//   gct.value.egg_id = eggs.value[1].value
 // })
 
-
-gateway.get('gct', 'nests', [], (res) => {
+gateway.get('gct', 'nests', []).then(res => {
   nests.value = res.data
 
   for (let nest in nests.value) {
@@ -255,6 +233,7 @@ gateway.get('gct', 'nests', [], (res) => {
   }
 
   gct.value.egg_id = eggs.value[1].value
+
 })
 
 
