@@ -168,7 +168,7 @@ const form = ref(null)
 //   console.log(selectedLocation.value)
 // })
 
-gateway.get('gct', 'locations', [], (res) => {
+gateway.get('gct', 'locations', []).then(res => {
   locations.value = res.data
   // 先预先选择
   create_gct.value.location_id = locations.value[0].id
@@ -244,7 +244,7 @@ const options = ref([])
 //   create_gct.value.egg_id = options.value[1].value
 // })
 
-gateway.get('gct', 'nests', [], (res) => {
+gateway.get('gct', 'nests', []).then(res => {
 
   nests.value = res.data
 
