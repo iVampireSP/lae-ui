@@ -192,7 +192,7 @@ function updateStatus($tunnel) {
         // http.delete('/modules/frp/hosts/' + $tunnel.host_id).then(() => {
         //   tunnelStore.dispatch('fetchTunnels')
         // })
-        gateway.del('frp', 'hosts/' + $tunnel.host_id, []).then(() => {
+        gateway.delete('frp', 'hosts/' + $tunnel.host_id, []).then(() => {
           tunnelStore.dispatch('fetchTunnels')
         })
 
