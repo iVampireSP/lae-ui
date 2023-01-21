@@ -39,7 +39,10 @@ if (user.state.token) {
             authed = true
         }
 
-        console.log(data)
+        // if dev, show message
+        if (process.env.NODE_ENV === 'development') {
+            console.log('gateway', data)
+        }
 
         if (data['data']) {
             // if it has request_id, then it's a response
