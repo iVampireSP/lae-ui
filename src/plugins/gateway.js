@@ -58,6 +58,9 @@ if (user.state.token) {
 
                 if (request) {
                     request.callback(data)
+
+                    // remove request
+                    requests = requests.filter(request => request.request_id !== data['request_id'])
                 }
             }
         }
