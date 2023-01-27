@@ -1,35 +1,36 @@
 import user from "./stores/user.js";
 import {dialog} from "../utils/layout.js";
 import api from "../config/api.js";
+import {ref} from "vue";
 
 let requests = []
 
 let ws
 
 let authed = false
-let close = false
+const closed = ref(false)
 
 // 创建 ws，增加 header
 if (user.state.token) {
     ws = new WebSocket(api.ws_gateway + '?token=' + user.state.token);
 
+    // ws.onclose = function () {
+    //     dialog.warning({
+    //         title: '网关连接关闭',
+    //         content: '请尝试刷新页面。',
+    //         positiveText: '好吧'
+    //     })
+    //
+    //     closed.value = true
+    // };
     ws.onclose = function () {
         dialog.warning({
-            title: '网关连接关闭',
-            content: '请尝试刷新页面。',
-            positiveText: '好吧'
-        })
-
-        close = true
-    };
-    ws.onerror = function () {
-        dialog.warning({
             title: '无法连接到网关',
-            content: '请联系我们获得帮助。',
+            content: '请联系我们获得帮助，或者尝试刷新页面。',
             positiveText: '好'
         })
 
-        close = true
+        closed.value = true
     };
 
     ws.onmessage = function (event) {
@@ -170,5 +171,6 @@ export default {
     post: post,
     put: put,
     patch: patch,
-    delete: del
+    delete: del,
+    closed: closed
 }
