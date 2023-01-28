@@ -1,5 +1,5 @@
 <template>
-  <n-alert class="mb-3" title="真的很抱歉！" type="warning">
+  <n-alert class="mb-3"  title="真的很抱歉！" type="warning">
     由于我们的 <b>完全免费</b> 以及 <b>不限制流量和带宽</b> 的性质和 <b>审查系统</b> 过于强势，触及到了部分个体的利益。
     <br />
     我们的大部分节点正在遭受 <b>DDoS</b> 攻击，导致内网穿透 <b>服务质量下降</b> 并且有时可能 <b>无法连接</b>。它在 <b>一段时间内可能不会停止</b>。
