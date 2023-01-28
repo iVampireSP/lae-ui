@@ -20,9 +20,9 @@
 
 <script setup>
 import {onBeforeUnmount, ref} from 'vue'
-import http from '../../../../plugins/http'
 
 import TerminalComponent from '../../../../components/Terminal.vue'
+import gateway from "../../../../plugins/gateway.js";
 
 const props = defineProps({
   gct_id: {
@@ -95,23 +95,34 @@ const handlePowerChangeEvent = ($state) => {
 }
 
 
-http
-    .get('/modules/gct/hosts/' + props.gct_id + '/server/websocket')
-    .then((res) => {
-      // pterodactyl wings login
-      gct_ws.value = res.data
+// http
+//     .get('/modules/gct/hosts/' + props.gct_id + '/server/websocket')
+//     .then((res) => {
+//       // pterodactyl wings login
+//       gct_ws.value = res.data
+//
+//       socket = new WebSocket(gct_ws.value.data.socket)
+//       socket.onopen = () => {
+//
+//         is_ready.value = true
+//         init(socket)
+//
+//
+//         // terminal.value.writeln(TERMINAL_PRELUDE + '连接成功。 \u001b[0m')
+//       }
+//
+//     })
 
-      socket = new WebSocket(gct_ws.value.data.socket)
-      socket.onopen = () => {
+gateway.get('gct', 'hosts/' + props.gct_id + '/server/websocket', []).then(res => {
+  gct_ws.value = res.data
 
-        is_ready.value = true
-        init(socket)
+  socket = new WebSocket(gct_ws.value.data.socket)
+  socket.onopen = () => {
 
-
-        // terminal.value.writeln(TERMINAL_PRELUDE + '连接成功。 \u001b[0m')
-      }
-
-    })
+    is_ready.value = true
+    init(socket)
+  }
+})
 
 
 const init = (socket) => {

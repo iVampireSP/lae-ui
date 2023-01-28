@@ -16,7 +16,7 @@
           >
             控制面板
             <n-icon>
-              <OpenOutline />
+              <OpenOutline/>
             </n-icon>
           </n-a>
         </n-h3>
@@ -142,13 +142,13 @@ import {
   NGrid,
   NH1,
   NH3,
+  NIcon,
   NInput,
   NSelect,
   NSlider,
   NSpin,
   NTabPane,
   NTabs,
-    NIcon,
   useDialog,
   useMessage
 } from 'naive-ui'
@@ -157,8 +157,7 @@ import {OpenOutline} from "@vicons/ionicons5";
 
 
 import Terminal from './components/Terminal.vue'
-
-import http from '../../../plugins/http'
+import gateway from '../../../plugins/gateway'
 import {useRoute} from "vue-router";
 import api from '../../../config/api'
 
@@ -196,11 +195,21 @@ const formatDiskTooltip = (value) => `${value} MB`
 const formatCommonTooltip = (value) => `${value} 个`
 
 
-http.get('/modules/gct/hosts/' + router.params.id).then((res) => {
+// http.get('/modules/gct/hosts/' + router.params.id).then((res) => {
+//   gct.value = res.data
+// })
+
+gateway.get('gct', 'hosts/' + router.params.id, []).then(res => {
   gct.value = res.data
 })
 
-http.get('/modules/gct/nests').then((res) => {
+// http.get('/modules/gct/nests').then((res) => {
+//
+// }).then(() => {
+//   // 先预先选择
+// })
+
+gateway.get('gct', 'nests', []).then(res => {
   nests.value = res.data
 
   for (let nest in nests.value) {
@@ -222,14 +231,19 @@ http.get('/modules/gct/nests').then((res) => {
       })
     }
   }
-}).then(() => {
-  // 先预先选择
+
   gct.value.egg_id = eggs.value[1].value
+
 })
+
 
 function update() {
   modifying.value = true
-  http.patch('/modules/gct/hosts/' + router.params.id, gct.value).finally(() => {
+  // http.patch('/modules/gct/hosts/' + router.params.id, gct.value).finally(() => {
+  //   modifying.value = false
+  // })
+
+  gateway.patch('gct', 'hosts/' + router.params.id, gct.value).then(() => {
     modifying.value = false
   })
 }

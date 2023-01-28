@@ -97,6 +97,6 @@ const isTablet = useIsTablet()
 
 <style scoped>
 .layout-header {
-  padding: 8px
+  padding: 10px
 }
 </style>

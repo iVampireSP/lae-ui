@@ -142,7 +142,7 @@ import {useRoute} from "vue-router";
 
 import Humanize from 'humanize-plus'
 
-import http from "../../../plugins/http";
+import gateway from "../../../plugins/gateway";
 
 import * as echarts from 'echarts'
 import {message} from "../../../utils/layout.js";
@@ -151,7 +151,7 @@ import user from "../../../plugins/stores/user.js";
 
 const router = useRoute()
 const showChart = ref(false)
-const copyCommand = "frpc " + "-t " + "\"" + user.state.token  + "\" " + "-i " + router.params.id
+const copyCommand = "frpc " + "-t " + "\"" + user.state.token + "\" " + "-i " + router.params.id
 // const tunnel = ref({});
 const tunnel = ref({
   name: '',
@@ -253,9 +253,9 @@ function initChart() {
 const status = ref("success")
 
 function refresh() {
-  http.get('/modules/frp/hosts/' + router.params.id).then((res) => {
+  gateway.get('frp', 'hosts/' + router.params.id, []).then(res => {
     tunnel.value = res.data
-    console.log(res.data)
+    // console.log(res.data)
     if (tunnel.value.status === 'running') {
       status.value = 'success'
     } else if (tunnel.value.status === 'stopped') {
@@ -310,7 +310,6 @@ function refresh() {
       }
 
     }
-
   })
 }
 

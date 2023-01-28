@@ -248,6 +248,42 @@ const routes = [
                     }
                 ],
             },
+            {
+                // 隐藏功能，不需要加入菜单
+                path: 'red-packets',
+                component: () => import('../views/modules/red-packets/Base.vue'),
+                meta: {
+                    title: '红包',
+                },
+                children: [
+                    // {
+                    //     path: '',
+                    //     name: 'modules.red-packets.index',
+                    //     component: () => import('../views/modules/red-packets/Index.vue'),
+                    //     meta: {
+                    //         title: '红包',
+                    //     },
+                    // },
+                    {
+                        path: '',
+                        name: 'modules.red-packets.index',
+                        props: true,
+                        component: () => import('../views/modules/red-packets/Create.vue'),
+                        meta: {
+                            title: '发红包',
+                        },
+                    },
+                    {
+                        path: ':id',
+                        name: 'modules.red-packets.show',
+                        props: true,
+                        component: () => import('../views/modules/red-packets/Show.vue'),
+                        meta: {
+                            title: '红包',
+                        },
+                    }
+                ],
+            },
             // {
             //   path: 'cdn',
             //   name: 'modules.cdn',

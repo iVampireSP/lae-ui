@@ -12,6 +12,17 @@
     <span>Aehxy 创建 / 策划 / 运营</span>
     <br/>
     <span>莱云 所有</span>
+    <br/>
+    <n-icon class="relative top-px">
+      <LogoGithub/>
+    </n-icon>
+    <n-a target="_blank" href="https://github.com/ahmr-bot/MirrorEdgeFrp">
+      MEFrp 服务端
+    </n-a>
+    &nbsp;|&nbsp;
+    <n-a target="_blank" href="https://github.com/ahmr-bot/frp_module">
+      MEFrp 控制器
+    </n-a>
   </n-text>
 
 </template>
@@ -24,7 +35,7 @@ import {
   removeAllMenuOptionsThen
 } from "../../../config/menuOptions.js";
 
-import {NText, NAlert,} from "naive-ui";
+import {NText, NA, NIcon, NAlert} from "naive-ui";
 
 import {
   AddOutline,
@@ -32,6 +43,7 @@ import {
   ClipboardOutline,
   CloudDownloadOutline,
   ListOutline,
+  LogoGithub,
   ServerOutline,
 } from "@vicons/ionicons5";
 
@@ -55,6 +67,7 @@ function reRegisterMenu() {
     addMenuOptions('left', 'modules.tunnels.status', '服务状态', ServerOutline)
     addMenuOptions('left', 'modules.tunnels.sponsor', '赞助我们', CashOutline)
     addMenuOptions('left', 'modules.tunnels.downloads', '客户端下载', CloudDownloadOutline)
+
 
 
     if (tunnels.value.length > 0) {

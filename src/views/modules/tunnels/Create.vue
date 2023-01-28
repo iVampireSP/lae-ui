@@ -151,6 +151,7 @@ import {useIsMobile} from "../../../utils/composables.js";
 import tunnelsStore from "../../../plugins/stores/tunnels";
 import Tunnels from "./components/Tunnels.vue";
 import lyric from "../../../plugins/lyric.js";
+import gateway from "../../../plugins/gateway.js";
 
 const tab = ref('create')
 
@@ -220,8 +221,12 @@ const filterServer = () => {
   })
 }
 
+// "
+// http.get('/modules/frp/servers').then((res) => {
+//
+// })"
 
-http.get('/modules/frp/servers').then((res) => {
+gateway.get('frp', 'servers', []).then(res => {
   servers.value = res.data
   // 先预先选择
   create_tunnel.value.server_id = filterServer()[0].value
@@ -331,14 +336,24 @@ function handleCreate() {
 
       creating.value = true
 
-      http.post('/modules/frp/hosts', create_tunnel.value).then((res) => {
+      // http.post('/modules/frp/hosts', create_tunnel.value).then((res) => {
+      //
+      //   tunnelsStore.commit('addTunnel', res.data)
+      //
+      //   message.success('隧道已创建，欢迎使用 ME Frp。')
+      // }).finally(() => {
+      //   creating.value = false
+      // })
+
+      gateway.post('frp', 'hosts', create_tunnel.value).then(res => {
 
         tunnelsStore.commit('addTunnel', res.data)
-
         message.success('隧道已创建，欢迎使用 ME Frp。')
       }).finally(() => {
         creating.value = false
       })
+
+
     }
   })
 }

@@ -1,5 +1,5 @@
 import {createStore} from 'vuex'
-import http from '../http.js'
+import gateway from "../gateway.js";
 
 export default createStore({
     state: {
@@ -7,8 +7,11 @@ export default createStore({
     },
     actions: {
         fetchGct({commit}) {
-            http.get('/modules/gct/hosts').then((response) => {
-                commit('setGct', response.data)
+            // http.get('/modules/gct/hosts').then((response) => {
+            //     commit('setGct', response.data)
+            // })
+            gateway.get('gct', 'hosts', []).then(res => {
+                commit('setGct', res.data);
             })
         },
     },
