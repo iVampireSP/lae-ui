@@ -253,7 +253,7 @@ function initChart() {
 const status = ref("success")
 
 function refresh() {
-  gateway.get('frp', 'hosts/' + router.params.id, []).then(res => {
+  gateway.get('frp/hosts/' + router.params.id).then(res => {
     tunnel.value = res.data
     // console.log(res.data)
     if (tunnel.value.status === 'running') {

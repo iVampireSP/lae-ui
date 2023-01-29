@@ -29,7 +29,7 @@
             </div>
           </div>
           <div v-else-if="step === 1">
-            <Lottie name="Glowing-star" />
+            <Lottie name="Glowing-star"/>
 
             <n-h1>恭喜你获得了 {{ amount }} 元！</n-h1>
 
@@ -74,14 +74,14 @@ const amount = ref('')
 
 const step = ref(0)
 
-gateway.get('red-packets', route.params.id).then((response) => {
+gateway.get('red-packets/' + route.params.id).then((response) => {
   packet.value = response.data
 })
 
 
 function refund() {
   loading.value = true
-  gateway.delete('red-packets', route.params.id).then((response) => {
+  gateway.delete('red-packets/' + route.params.id).then((response) => {
     packet.value = response.data
   }).finally(() => {
     loading.value = false
@@ -91,7 +91,7 @@ function refund() {
 
 function open() {
   loading.value = true
-  gateway.post('red-packets', route.params.id + '/grab', {
+  gateway.post('red-packets/' + route.params.id + '/grab', {
     password: password.value
   }).then((response) => {
     amount.value = response.data.amount

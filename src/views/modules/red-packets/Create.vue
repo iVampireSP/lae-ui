@@ -68,7 +68,7 @@ const creating = ref(false)
 
 function pack() {
   creating.value = true
-  gateway.post('red-packets', '/', packet.value).then((response) => {
+  gateway.post('red-packets', packet.value).then((response) => {
 
     router.push({
       name: 'modules.red-packets.show',

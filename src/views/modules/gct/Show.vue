@@ -199,7 +199,7 @@ const formatCommonTooltip = (value) => `${value} 个`
 //   gct.value = res.data
 // })
 
-gateway.get('gct', 'hosts/' + router.params.id, []).then(res => {
+gateway.get('gct/hosts/' + router.params.id).then(res => {
   gct.value = res.data
 })
 
@@ -209,7 +209,7 @@ gateway.get('gct', 'hosts/' + router.params.id, []).then(res => {
 //   // 先预先选择
 // })
 
-gateway.get('gct', 'nests', []).then(res => {
+gateway.get('gct/nests').then(res => {
   nests.value = res.data
 
   for (let nest in nests.value) {
@@ -243,7 +243,7 @@ function update() {
   //   modifying.value = false
   // })
 
-  gateway.patch('gct', 'hosts/' + router.params.id, gct.value).then(() => {
+  gateway.patch('gct/hosts/' + router.params.id, gct.value).then(() => {
     modifying.value = false
   })
 }

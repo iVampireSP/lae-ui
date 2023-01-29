@@ -8,26 +8,24 @@
     </n-popover>
   </div>
 
-  <div v-show="closed.value" class="menu-item mr-2">
-    <n-popover trigger="hover">
-      <template #trigger>
-        <n-icon size="25" color="#ff7575">
-          <CloudOfflineOutline/>
-        </n-icon>
-      </template>
-      <span>无法连接到网关，请尝试刷新页面。</span>
-    </n-popover>
-  </div>
+  <!--  <div v-show="closed.value" class="menu-item mr-2">-->
+  <!--    <n-popover trigger="hover">-->
+  <!--      <template #trigger>-->
+  <!--        <n-icon size="25" color="#ff7575">-->
+  <!--          <CloudOfflineOutline/>-->
+  <!--        </n-icon>-->
+  <!--      </template>-->
+  <!--      <span>无法连接到网关，请尝试刷新页面。</span>-->
+  <!--    </n-popover>-->
+  <!--  </div>-->
 
 </template>
 
 <script setup>
-import {computed, ref} from 'vue'
-import {NIcon, NPopover} from "naive-ui"
-import {CloudOfflineOutline} from "@vicons/ionicons5"
+import {ref} from 'vue'
+import {NPopover} from "naive-ui"
 
 import http from '../../plugins/http.js'
-import gateway from '../../plugins/gateway.js'
 import Lottie from "../Lottie.vue"
 
 const detected = ref(false)
@@ -38,8 +36,8 @@ http.get('').then((res) => {
   }
 })
 
-const closed = computed(() => {
-  return gateway.closed
-})
+// const closed = computed(() => {
+//   return gateway.closed
+// })
 
 </script>

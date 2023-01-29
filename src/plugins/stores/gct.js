@@ -10,7 +10,7 @@ export default createStore({
             // http.get('/modules/gct/hosts').then((response) => {
             //     commit('setGct', response.data)
             // })
-            gateway.get('gct', 'hosts', []).then(res => {
+            gateway.get('gct/hosts').then(res => {
                 commit('setGct', res.data);
             })
         },

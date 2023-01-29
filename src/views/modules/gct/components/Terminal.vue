@@ -113,7 +113,7 @@ const handlePowerChangeEvent = ($state) => {
 //
 //     })
 
-gateway.get('gct', 'hosts/' + props.gct_id + '/server/websocket', []).then(res => {
+gateway.get('gct/hosts/' + props.gct_id + '/server/websocket').then(res => {
   gct_ws.value = res.data
 
   socket = new WebSocket(gct_ws.value.data.socket)

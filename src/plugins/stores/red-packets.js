@@ -7,7 +7,7 @@ export default createStore({
     },
     actions: {
         fetch({commit}) {
-            gateway.get('red-packets', '/', []).then(res => {
+            gateway.get('red-packets').then(res => {
                 commit('set', res.data);
             })
         },
