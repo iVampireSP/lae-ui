@@ -10,12 +10,12 @@
     <n-form
         ref="formRef"
         :model="packet"
-        label-placement="left"
-        label-width="auto"
-        require-mark-placement="right-hanging"
         :style="{
       maxWidth: '640px'
     }"
+        label-placement="left"
+        label-width="auto"
+        require-mark-placement="right-hanging"
     >
       <n-form-item label="你要发多少元的红包？">
         <n-input v-model:value="packet.total_amount" placeholder="输入金额"/>
@@ -53,7 +53,7 @@
 
 <script setup>
 import {ref} from 'vue'
-import {NButton, NForm, NFormItem, NH1, NInput, NP, NText, NSpin} from 'naive-ui'
+import {NButton, NForm, NFormItem, NH1, NInput, NP, NSpin, NText} from 'naive-ui'
 import gateway from "../../../plugins/gateway.js";
 import router from "../../../plugins/router.js";
 

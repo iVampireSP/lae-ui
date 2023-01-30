@@ -13,10 +13,10 @@
           <template #trigger>
             <n-button
                 ghost
-                type="info"
-                tag="a"
                 href="https://afdian.net/a/aehxy"
+                tag="a"
                 target="_blank"
+                type="info"
             >
               爱发电
             </n-button>
@@ -27,10 +27,10 @@
           <template #trigger>
             <n-button
                 ghost
-                type="info"
-                tag="a"
                 href="https://qm.qq.com/cgi-bin/qm/qr?k=fFJ-xsZe-0YWPDJYgMLH-g9uT83rigkb&noverify=0&personal_qrcode_source=4"
+                tag="a"
                 target="_blank"
+                type="info"
             >
               联系我们
             </n-button>
@@ -39,7 +39,7 @@
         </n-popover>
       </n-button-group>
     </n-card>
-    <n-card title="赞助者列表" class="mt-3">
+    <n-card class="mt-3" title="赞助者列表">
       <n-p>赞助列表 可能存在缺失，请点击上方联系我们以补录。</n-p>
       <n-data-table
           :columns="headers"
@@ -51,7 +51,7 @@
 
 <script setup>
 import {ref} from 'vue'
-import {NButton, NButtonGroup, NCard, NDataTable, NH1, NP, NText, NPopover} from 'naive-ui';
+import {NButton, NButtonGroup, NCard, NDataTable, NH1, NP, NPopover, NText} from 'naive-ui';
 
 const sponsors = [
   {

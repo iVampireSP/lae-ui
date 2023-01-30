@@ -3,15 +3,15 @@
 
     <div>
       <div v-if="percentage">
-        <n-progress type="circle" :percentage="percentage" />
+        <n-progress :percentage="percentage" type="circle"/>
       </div>
       <div>
-        <n-spin size="small" />
+        <n-spin size="small"/>
       </div>
     </div>
 
     <div>
-      <n-text type="secondary" v-text="task" />
+      <n-text type="secondary" v-text="task"/>
     </div>
   </div>
   <div v-else>
@@ -42,8 +42,6 @@ const task = computed(() => {
 
   return firstTask
 })
-
-
 
 
 </script>

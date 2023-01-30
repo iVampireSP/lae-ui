@@ -9,10 +9,10 @@
       <n-gi span="5 1">
         <n-h3 class="!mb-0">
           <n-a
-              type="primary"
-              tag="a"
               :href=" api.modules.gct.panel  + '/server/' + gct.server.identifier"
+              tag="a"
               target="_blank"
+              type="primary"
           >
             控制面板
             <n-icon>
@@ -25,26 +25,29 @@
           <n-h3 class="mb-1">电源控制</n-h3>
 
           <n-button-group v-if="ct">
-            <n-button strong secondary type="info" @click="ct.setState('start')"
-                      :disabled="ct.state.current === 'running' || ct.state.current === 'starting'">
+            <n-button :disabled="ct.state.current === 'running' || ct.state.current === 'starting'" secondary strong
+                      type="info"
+                      @click="ct.setState('start')">
               开机
             </n-button>
-            <n-button strong secondary type="error" @click="ct.setState('stop')"
-                      v-if="ct.state.current === 'running' || ct.state.current === 'starting' ">
+            <n-button v-if="ct.state.current === 'running' || ct.state.current === 'starting' " secondary strong
+                      type="error"
+                      @click="ct.setState('stop')">
               停止
             </n-button>
-            <n-button strong secondary type="error" @click="ct.setState('kill')"
-                      v-else-if="ct.state.current === 'stopping'">
+            <n-button v-else-if="ct.state.current === 'stopping'" secondary strong type="error"
+                      @click="ct.setState('kill')">
               强制停止
             </n-button>
-            <n-button strong secondary type="error" v-else disabled>
+            <n-button v-else disabled secondary strong type="error">
               停止
             </n-button>
-            <n-button strong secondary type="warning" @click="ct.setState('restart')"
-                      v-if="ct.state.current === 'running' || ct.state.current === 'starting' ">
+            <n-button v-if="ct.state.current === 'running' || ct.state.current === 'starting' " secondary strong
+                      type="warning"
+                      @click="ct.setState('restart')">
               重启
             </n-button>
-            <n-button strong secondary type="warning" v-else disabled>
+            <n-button v-else disabled secondary strong type="warning">
               重启
             </n-button>
           </n-button-group>
@@ -57,9 +60,9 @@
         <n-h3 class="!mb-0 !mt-0">使用率</n-h3>
       </n-gi>
       <n-gi span="6">
-        <n-tabs type="line" animated>
+        <n-tabs animated type="line">
           <n-tab-pane name="console" tab="控制台">
-            <Terminal class="text-left" :height="90" :gct_id="gct.host_id" v-if="gct.host_id" ref="ct"/>
+            <Terminal v-if="gct.host_id" ref="ct" :gct_id="gct.host_id" :height="90" class="text-left"/>
           </n-tab-pane>
 
           <n-tab-pane name="advanced" tab="调整">
@@ -77,47 +80,53 @@
                   </n-form-item>
 
                   <n-form-item label="端口数量">
-                    <n-slider v-model:value="gct.allocations" :default-value="1" :step="1" :max="10" :min="1"
-                              :show-tooltip="gct.allocations > 3" :format-tooltip="formatCommonTooltip"/>
+                    <n-slider v-model:value="gct.allocations" :default-value="1" :format-tooltip="formatCommonTooltip"
+                              :max="10" :min="1"
+                              :show-tooltip="gct.allocations > 3" :step="1"/>
                   </n-form-item>
 
                   <n-form-item label="数据库数量">
-                    <n-slider v-model:value="gct.databases" :default-value="gct.databases" :step="1" :max="5" :min="0"
-                              :show-tooltip="gct.databases > 1" :format-tooltip="formatCommonTooltip"/>
+                    <n-slider v-model:value="gct.databases" :default-value="gct.databases"
+                              :format-tooltip="formatCommonTooltip" :max="5" :min="0"
+                              :show-tooltip="gct.databases > 1" :step="1"/>
                   </n-form-item>
 
                 </n-gi>
                 <n-gi>
                   <n-form-item label="内存">
-                    <n-slider v-model:value="gct.memory" :default-value="1024" :step="512" :max="10240" :min="512"
-                              :show-tooltip="gct.memory > 2048" :format-tooltip="formatTooltip"/>
+                    <n-slider v-model:value="gct.memory" :default-value="1024" :format-tooltip="formatTooltip"
+                              :max="10240" :min="512"
+                              :show-tooltip="gct.memory > 2048" :step="512"/>
                   </n-form-item>
                   <n-form-item label="CPU 限制">
-                    <n-slider v-model:value="gct.cpu_limit" :default-value="100" :step="50" :max="800" :min="100"
-                              :show-tooltip="gct.cpu_limit > 400" :format-tooltip="formatCpuLimitTooltip"/>
+                    <n-slider v-model:value="gct.cpu_limit" :default-value="100" :format-tooltip="formatCpuLimitTooltip"
+                              :max="800" :min="100"
+                              :show-tooltip="gct.cpu_limit > 400" :step="50"/>
                   </n-form-item>
                   <n-form-item label="存储大小">
-                    <n-slider v-model:value="gct.disk" :default-value="512" :step="512" :max="10240" :min="512"
-                              :show-tooltip="gct.disk > 4096" :format-tooltip="formatDiskTooltip"/>
+                    <n-slider v-model:value="gct.disk" :default-value="512" :format-tooltip="formatDiskTooltip"
+                              :max="10240" :min="512"
+                              :show-tooltip="gct.disk > 4096" :step="512"/>
                   </n-form-item>
                   <n-form-item label="备份数量">
-                    <n-slider v-model:value="gct.backups" :default-value="1" :step="1" :max="8" :min="1"
-                              :show-tooltip="gct.backups > 3" :format-tooltip="formatCommonTooltip"/>
+                    <n-slider v-model:value="gct.backups" :default-value="1" :format-tooltip="formatCommonTooltip"
+                              :max="8" :min="1"
+                              :show-tooltip="gct.backups > 3" :step="1"/>
                   </n-form-item>
                 </n-gi>
               </n-grid>
 
               <div class="text-right mt-3 mr-1 mb-1">
-                <n-button type="primary" ghost @click="update()">保存</n-button>
+                <n-button ghost type="primary" @click="update()">保存</n-button>
               </div>
             </n-spin>
           </n-tab-pane>
 
-          <n-tab-pane name="boot_template" tab="启动模板" class="mb-2">
+          <n-tab-pane class="mb-2" name="boot_template" tab="启动模板">
             <n-select v-model:value="gct.egg_id" :options="eggs"/>
 
             <div class="text-right mt-3">
-              <n-button type="primary" ghost @click="update({
+              <n-button ghost type="primary" @click="update({
                 egg_id: gct.egg_id
               })">保存
               </n-button>
