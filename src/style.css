@@ -60,6 +60,7 @@ body {
     .v-md-editor {
         background-color: #3b3b3b !important;
     }
+
     .v-md-editor__toolbar-item--active,
     .v-md-editor__toolbar-item--active:hover {
         background: #323232 !important;

@@ -4,11 +4,11 @@
 
     <div>
       <input
-          class="command w-full"
-          type="text"
           v-model="command"
+          class="command w-full"
           placeholder="在这里输入命令..."
           style="height: 20px"
+          type="text"
           @keyup.enter="sendCommand"
       />
     </div>

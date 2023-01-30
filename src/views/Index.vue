@@ -46,7 +46,7 @@
       </n-button-group>
     </n-card>
 
-    <n-card class="mt-3" size="small" title="测试" v-if="isLocal">
+    <n-card v-if="isLocal" class="mt-3" size="small" title="测试">
       <n-button-group>
         <n-button ghost type="info" @click="test">测试新模块</n-button>
 

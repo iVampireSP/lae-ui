@@ -1,6 +1,7 @@
 <template>
 
-  <n-config-provider :date-locale="dateZhCN" :hljs="hljs" :locale="zhCN" :theme="theme" :theme-overrides="themeOverrides" preflight-style-disabled
+  <n-config-provider :date-locale="dateZhCN" :hljs="hljs" :locale="zhCN" :theme="theme"
+                     :theme-overrides="themeOverrides" preflight-style-disabled
   >
     <n-global-style/>
     <n-loading-bar-provider>
@@ -13,8 +14,8 @@
               <div v-show="load_step === 1">
                 <div class="flex h-screen">
                   <div class="m-auto text-center">
-                    <Lottie name="lae-jump" :loop="false" v-if="osThemeRef === 'dark'"/>
-                    <Lottie name="lae-jump-black" :loop="false" v-else/>
+                    <Lottie v-if="osThemeRef === 'dark'" :loop="false" name="lae-jump"/>
+                    <Lottie v-else :loop="false" name="lae-jump-black"/>
                     <n-h3>莱云</n-h3>
                   </div>
                 </div>
@@ -48,12 +49,12 @@ import {
   NConfigProvider,
   NDialogProvider,
   NGlobalStyle,
+  NH3,
   NLoadingBarProvider,
   NMessageProvider,
   NNotificationProvider,
   useOsTheme,
-  zhCN,
-    NH3
+  zhCN
 } from 'naive-ui'
 import Lottie from "./components/Lottie.vue";
 
@@ -94,7 +95,6 @@ hljs.registerLanguage('ini', ini)
 // }
 
 const themeOverrides = {}
-
 
 
 </script>

@@ -22,8 +22,8 @@
                       v-model:value="create_gct.location_id"
                       :options="returnLocation()"
                       :render-option="locationSelectRenderOption"
-                      @update:value="selectedLocation = locations.find((location) => location.id === create_gct.location_id)"
                       placeholder="请选择地区"
+                      @update:value="selectedLocation = locations.find((location) => location.id === create_gct.location_id)"
                   />
                   <n-text v-else>暂时不能提供地区</n-text>
                   <!--                  <n-input-group-label>此节点基础价格 {{ create_gct.server_id }} 元</n-input-group-label>-->
@@ -36,28 +36,33 @@
               </n-form-item>
 
               <n-form-item label="端口数量">
-                <n-slider v-model:value="create_gct.allocations" :default-value="1" :step="1" :max="10" :min="1"
-                          :show-tooltip="create_gct.allocations > 3" :format-tooltip="formatCommonTooltip"/>
+                <n-slider v-model:value="create_gct.allocations" :default-value="1"
+                          :format-tooltip="formatCommonTooltip" :max="10" :min="1"
+                          :show-tooltip="create_gct.allocations > 3" :step="1"/>
               </n-form-item>
 
             </n-gi>
             <n-gi>
               <n-form-item label="内存">
                 <!--                <n-input v-model:value="create_gct.name" @keydown.enter.prevent/>-->
-                <n-slider v-model:value="create_gct.memory" :default-value="1024" :step="512" :max="10240" :min="1024"
-                          :show-tooltip="create_gct.memory > 2048" :format-tooltip="formatTooltip"/>
+                <n-slider v-model:value="create_gct.memory" :default-value="1024" :format-tooltip="formatTooltip"
+                          :max="10240" :min="1024"
+                          :show-tooltip="create_gct.memory > 2048" :step="512"/>
               </n-form-item>
               <n-form-item label="CPU 限制">
-                <n-slider v-model:value="create_gct.cpu_limit" :default-value="100" :step="50" :max="800" :min="100"
-                          :show-tooltip="create_gct.cpu_limit > 400" :format-tooltip="formatCpuLimitTooltip"/>
+                <n-slider v-model:value="create_gct.cpu_limit" :default-value="100"
+                          :format-tooltip="formatCpuLimitTooltip" :max="800" :min="100"
+                          :show-tooltip="create_gct.cpu_limit > 400" :step="50"/>
               </n-form-item>
               <n-form-item label="存储大小">
-                <n-slider v-model:value="create_gct.disk" :default-value="1024" :step="512" :max="10240" :min="1024"
-                          :show-tooltip="create_gct.disk > 4096" :format-tooltip="formatDiskTooltip"/>
+                <n-slider v-model:value="create_gct.disk" :default-value="1024" :format-tooltip="formatDiskTooltip"
+                          :max="10240" :min="1024"
+                          :show-tooltip="create_gct.disk > 4096" :step="512"/>
               </n-form-item>
               <n-form-item label="备份数量">
-                <n-slider v-model:value="create_gct.backups" :default-value="1" :step="1" :max="8" :min="1"
-                          :show-tooltip="create_gct.backups > 3" :format-tooltip="formatCommonTooltip"/>
+                <n-slider v-model:value="create_gct.backups" :default-value="1" :format-tooltip="formatCommonTooltip"
+                          :max="8" :min="1"
+                          :show-tooltip="create_gct.backups > 3" :step="1"/>
               </n-form-item>
             </n-gi>
           </n-grid>

@@ -3,7 +3,7 @@
     <div class="text-center">
       <div v-if="packet['remain'] ?? 0 > 0">
         <div v-if="packet.user_id === user.state.user.id">
-          <Lottie name="Party-popper" :loop="false"/>
+          <Lottie :loop="false" name="Party-popper"/>
           <n-h2>你的红包已准备好～</n-h2>
           <n-p>将此页面的 URL 告诉他们，让他们输入 {{ packet['password'] }} 来领取。</n-p>
 
@@ -15,11 +15,11 @@
         <div v-if="packet.user_id && packet.user_id !== user.state.user.id">
 
           <div v-if="step === 0">
-            <Lottie name="Partying-face" :loop="false"/>
+            <Lottie :loop="false" name="Partying-face"/>
             <n-h2>{{ packet.greeting ?? '你发现了一个红包！' }}</n-h2>
 
             <div class="mt-3 text-center">
-              <n-input class="w-fit" v-model:value="password" placeholder="输入红包密码。"/>
+              <n-input v-model:value="password" class="w-fit" placeholder="输入红包密码。"/>
             </div>
 
             <div class="mt-2">
@@ -42,7 +42,7 @@
         <Lottie name="Balloon"/>
         <n-h2>红包已经被领完了。</n-h2>
 
-        <n-button @click="refund" v-if="packet.user_id === user.state.user.id">
+        <n-button v-if="packet.user_id === user.state.user.id" @click="refund">
           删除记录
         </n-button>
       </div>

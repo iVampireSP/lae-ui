@@ -226,7 +226,7 @@ const filterServer = () => {
 //
 // })"
 
-gateway.get('frp/servers', ).then(res => {
+gateway.get('frp/servers',).then(res => {
   servers.value = res.data
   // 先预先选择
   create_tunnel.value.server_id = filterServer()[0].value

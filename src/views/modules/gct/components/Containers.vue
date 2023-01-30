@@ -9,10 +9,10 @@
           <template #description>
             <n-space size="small" style="margin-top: 4px">
               <n-tag
+                  v-if="container['egg']"
                   :bordered="false"
                   size="small"
                   type="success"
-                  v-if="container['egg']"
               >
                 {{ container['egg'].name }}
               </n-tag>
@@ -52,7 +52,7 @@
 </template>
 
 <script setup>
-import {NAvatar, NEmpty, NList, NListItem, NTag, NThing, NSpace} from 'naive-ui'
+import {NAvatar, NEmpty, NList, NListItem, NSpace, NTag, NThing} from 'naive-ui'
 import router from '../../../../plugins/router.js'
 
 

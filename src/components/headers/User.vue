@@ -5,9 +5,9 @@
     <!--               style="width: 288px"-->
     <!--               trigger="manual" :show="showPopover">-->
     <!--      <template #trigger>-->
-    <n-badge :value="tasks.length" :type="taskStatus" :processing="taskProcessing"
+    <n-badge :processing="taskProcessing" :type="taskStatus" :value="tasks.length"
              @click="showPopover = !showPopover">
-      <n-avatar :src="avatar" round size="large" class="cursor-pointer" @click.stop="show = true"/>
+      <n-avatar :src="avatar" class="cursor-pointer" round size="large" @click.stop="show = true"/>
     </n-badge>
     <!--      </template>-->
     <!--      <div>-->
