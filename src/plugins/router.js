@@ -14,16 +14,16 @@ const routes = [
             title: '欢迎',
         },
     },
-    // {
-    //   path: '/birthdays',
-    //   name: 'birthdays',
-    //   component: () => import('../../../../Downloads/lae-ui-main/src/views/Birthdays.vue'),
-    //   meta: {
-    //     auth: true,
-    //     keepalive: true,
-    //     title: '繁星',
-    //   },
-    // },
+    {
+        path: '/birthdays',
+        name: 'birthdays',
+        component: () => import('../views/Birthdays.vue'),
+        meta: {
+            auth: true,
+            keepalive: true,
+            title: '繁星',
+        },
+    },
     // {
     //   path: '/about',
     //   name: 'about',
