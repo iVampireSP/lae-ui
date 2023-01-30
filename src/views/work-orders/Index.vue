@@ -5,12 +5,12 @@
     </n-text>
   </n-h1>
   <n-alert title="抱歉" type="warning">
-      工单页面正在开发中，因此暂时无法使用，敬请期待。
+    工单页面正在开发中，因此暂时无法使用，敬请期待。
   </n-alert>
 </template>
 
 <script setup>
-import {NH1, NText, NAlert} from 'naive-ui'
+import {NAlert, NH1, NText} from 'naive-ui'
 import {addMenuOptions, removeAllMenuOptionsThen} from "../../config/menuOptions.js"
 import {MessageOutlined} from "@vicons/material"
 import {HomeOutline, PinOutline} from "@vicons/ionicons5"

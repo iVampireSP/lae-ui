@@ -41,7 +41,7 @@
     </div>
 
     <p v-show="state === 'logging'" class="text-center mt-5">
-      <span>莱云的 logo 动画由 Fofray 制作。</span>
+      <span>莱云的 Logo 动画由 Fofray 制作。</span>
     </p>
 
     <p v-if="state === 'redirect'" class="text-center mt-5">
