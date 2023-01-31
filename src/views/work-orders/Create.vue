@@ -1,13 +1,13 @@
 <template>
   <IndexLayout>
 
-    <div v-show="sending" class="flex justify-center h-screen text-center">
+    <div v-if="sending" class="flex justify-center h-screen text-center">
       <div class="flex items-center">
         <span class="loader"></span>
       </div>
     </div>
 
-    <div v-show="!sending">
+    <div v-if="!sending">
       <div v-show="!(workOrder.host_id !== null || workOrder.module_id !== null)">
         <n-h2 prefix="bar">
           <n-text type="success">

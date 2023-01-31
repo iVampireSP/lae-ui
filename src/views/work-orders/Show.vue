@@ -14,7 +14,7 @@
             <!-- 加载中 -->
             <div class="flex justify-center h-screen text-center">
               <div class="flex items-center">
-                <span class="loader"></span>
+                <span class="work_order_show_loader"></span>
               </div>
             </div>
           </div>
@@ -244,7 +244,7 @@ function closeWorkOrder() {
 </script>
 
 <style>
-.loader {
+.work_order_show_loader {
   position: relative;
   width: 100px;
   height: 130px;
@@ -252,7 +252,7 @@ function closeWorkOrder() {
   border-radius: 4px;
 }
 
-.loader:before {
+.work_order_show_loader:before {
   content: '';
   position: absolute;
   width: 54px;
@@ -268,7 +268,7 @@ function closeWorkOrder() {
   box-shadow: 0 -3px rgba(0, 0, 0, 0.25) inset;
 }
 
-.loader:after {
+.work_order_show_loader:after {
   content: '';
   position: absolute;
   left: 50%;
@@ -278,10 +278,10 @@ function closeWorkOrder() {
   height: 60%;
   background: linear-gradient(to bottom, #f79577 30%, #0000 31%);
   background-size: 100% 16px;
-  animation: writeDown 2s ease-out infinite;
+  animation: work_order_show_loader_write_down 2s ease-out infinite;
 }
 
-@keyframes writeDown {
+@keyframes work_order_show_loader_write_down {
   0% {
     height: 0;
     opacity: 0;
