@@ -47,7 +47,7 @@
                 <n-list hoverable clickable bordered v-if="index !== 0">
                   <n-list-item v-for="reply in item">
                     <n-thing
-                        :title="(reply.role === 'module' ? reply.module.name + (reply.name ? ' 的 ' + reply.name : '') : (reply.role === 'admin' ? '莱云 的' + reply.name : reply.name ?? '无')) "
+                        :title="(reply.role === 'module' ? reply.module.name + (reply.name ? ' 的 ' + reply.name : '') : (reply.role === 'admin' ? '莱云 的 ' + reply.name : reply.name ?? '无')) "
                         content-style="margin-top: 10px;">
                     </n-thing>
 
