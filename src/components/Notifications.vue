@@ -4,7 +4,8 @@
 
 <script setup>
 
-import {h} from "vue";
+import {h} from "vue"
+import Preview from "./Markdown/Preview.vue"
 
 
 import {useMessage, useNotification} from 'naive-ui'
@@ -14,20 +15,9 @@ import {listen} from '../plugins/echo'
 import taskStore from '../plugins/stores/tasks'
 
 import play from '../plugins/audio'
-// Markdown editor init
-import VMdPreview from '@kangc/v-md-editor/lib/preview';
-import '@kangc/v-md-editor/lib/style/base-editor.css';
-import githubTheme from '@kangc/v-md-editor/lib/theme/github.js'
-import '@kangc/v-md-editor/lib/theme/style/github.css'
-import Prism from 'prismjs';
-import 'prismjs/components/prism-json';
 
 const notification = useNotification()
 const message = useMessage()
-
-VMdPreview.use(githubTheme, {
-  Prism,
-});
 
 
 /* Task */
@@ -97,7 +87,7 @@ listen('notifications', (e) => {
   let data = {
     title: title,
     content: () => {
-      return h(VMdPreview, {
+      return h(Preview, {
         text: content,
         mode: 'preview',
       })
@@ -136,7 +126,7 @@ function sendWorkOrderNotification(e) {
   notification.info({
     title: title,
     content: () => {
-      return h(VMdPreview, {
+      return h(Preview, {
         text: content,
         mode: 'preview',
       })
@@ -157,9 +147,3 @@ listen('work-order.open', (e) => sendWorkOrderNotification(e))
 
 
 </script>
-
-<style>
-.github-markdown-body {
-  padding: 0;
-}
-</style>

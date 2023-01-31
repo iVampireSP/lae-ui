@@ -1,5 +1,5 @@
 <template>
-  <n-layout v-if="menuOptions.top.length" style="">
+  <n-layout v-if="menuOptions.top.length">
     <n-layout-header bordered class="layout-header">
       <n-grid cols="2">
         <n-grid-item>
