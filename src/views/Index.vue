@@ -1,15 +1,5 @@
 <template>
   <IndexLayout>
-    <n-alert class="mb-3" closable title="注意" type="warning">
-      非常感谢您体验 莱云 新的仪表盘，我们并没有做完但是我们迫不及待想让您体验。
-      <br/>
-      如果在体验中有任何问题，是正常的。请到我们的社区反馈。
-      <br/>
-      如果您想使用游戏容器，工单等服务，请
-      <n-a href="https://web.laecloud.com">点击这里回到旧版仪表盘</n-a>
-      。
-    </n-alert>
-
     <n-card size="small" title="用户信息">
       <n-list>
         <n-list-item>
@@ -42,16 +32,16 @@
           更换账号
         </n-button>
 
-        <n-button ghost type="info" @click="go('user')">用户中心</n-button>
+        <!--        <n-button ghost type="info" @click="go('user')">用户中心</n-button>-->
       </n-button-group>
     </n-card>
 
-    <n-card v-if="isLocal" class="mt-3" size="small" title="测试">
-      <n-button-group>
-        <n-button ghost type="info" @click="test">测试新模块</n-button>
+    <!--    <n-card v-if="isLocal" class="mt-3" size="small" title="测试">-->
+    <!--      <n-button-group>-->
+    <!--        <n-button ghost type="info" @click="test">测试新模块</n-button>-->
 
-      </n-button-group>
-    </n-card>
+    <!--      </n-button-group>-->
+    <!--    </n-card>-->
 
 
   </IndexLayout>
@@ -60,7 +50,7 @@
 <script setup>
 import {computed} from 'vue'
 
-import {NA, NAlert, NAvatar, NButton, NButtonGroup, NCard, NH3, NH4, NList, NListItem, NTag} from 'naive-ui'
+import {NAvatar, NButton, NButtonGroup, NCard, NH3, NH4, NList, NListItem, NTag} from 'naive-ui'
 
 import userStore from '../plugins/stores/user' // 存储用户信息，供任意页面和 JS 调用，在 Vue 文件里，配合 computed 可以实现 ref 的效果
 import http from '../plugins/http' // http 客户端
@@ -68,7 +58,7 @@ import conf from '../config/api'
 import router from '../plugins/router.js'
 import IndexLayout from '../components/menus/IndexLayout.vue'
 
-import direct from "../plugins/direct.js";
+// import direct from "../plugins/direct.js";
 
 // 就像下面这样
 const user = computed(() => {
@@ -84,15 +74,9 @@ http.get('/users').then((res) => {
 })
 
 // is local
-const isLocal = computed(() => {
-  return process.env.NODE_ENV === 'development'
-})
-
-function test() {
-  direct.get('http://remote.test/api/hosts').then((res) => {
-    console.log(res.data)
-  })
-}
+// const isLocal = computed(() => {
+//   return process.env.NODE_ENV === 'development'
+// })
 
 const go = (route_name) => {
   router.push({
