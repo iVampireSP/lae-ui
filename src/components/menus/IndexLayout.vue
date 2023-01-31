@@ -9,7 +9,7 @@
 import {addMenuOptions, removeAllMenuOptionsThen} from "../../config/menuOptions.js";
 
 import {HomeOutline, PinOutline, Server} from "@vicons/ionicons5";
-import {MessageOutlined, SupportAgentRound} from "@vicons/material"
+import {MessageOutlined, SupportAgentRound, CakeRound} from "@vicons/material"
 
 removeAllMenuOptionsThen('left', () => {
   // 注册菜单
@@ -18,6 +18,7 @@ removeAllMenuOptionsThen('left', () => {
   addMenuOptions('left', 'announcements', '公告', MessageOutlined)
   addMenuOptions('left', 'hosts', '主机', Server)
   addMenuOptions('left', 'work-orders', '工单', SupportAgentRound)
+  addMenuOptions('left', 'stars', '繁星', CakeRound)
 })
 
 

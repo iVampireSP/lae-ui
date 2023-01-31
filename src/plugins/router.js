@@ -15,9 +15,9 @@ const routes = [
         },
     },
     {
-        path: '/birthdays',
-        name: 'birthdays',
-        component: () => import('../views/Birthdays.vue'),
+        path: '/stars',
+        name: 'stars',
+        component: () => import('../views/Stars.vue'),
         meta: {
             auth: true,
             keepalive: true,
