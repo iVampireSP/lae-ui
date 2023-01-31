@@ -139,7 +139,7 @@ refresh_host()
 function processHost(host) {
   host.price = parseFloat(host.managed_price ?? host.price)
   if (host.price !== 0) {
-    host.price = host.price * ((1 - user.user_group.discount) / 100)
+    host.price = host.price * ((1 - user.value.user_group.discount) / 100)
     // 转正数
     host.price = Math.abs(host.price)
     // 保留两位小数
@@ -152,8 +152,7 @@ function processHost(host) {
 function refresh_host() {
   http.get("/hosts").then(res => {
     let temp_hosts = []
-    const user = userStore.state.user
-    if (user.user_group_id !== null) {
+    if (user.value.user_group_id !== null) {
       res.data.forEach(host => {
         temp_hosts.push(processHost(host))
       })
@@ -168,8 +167,11 @@ function refresh_host() {
 // listen hosts.created
 listen('hosts.created', (e) => {
   const host = e.data
-  console.log(host)
-  hosts.value.push(processHost(host))
+
+  if (user.value.user_group_id !== null) {
+    hosts.value.push(processHost(host))
+
+  }
 })
 
 // listen hosts.updated
