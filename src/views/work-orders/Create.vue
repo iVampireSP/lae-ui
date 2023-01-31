@@ -256,6 +256,8 @@ function submitWorkOrder() {
         id: res.data.uuid,
       },
     }), 1000)
+  }).catch(() => {
+    sending.value = false
   })
 }
 
