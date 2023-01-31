@@ -1,115 +1,117 @@
 <template>
-  <div v-if="!token" style="height: 64px" class="fixed top-0 left-0 right-0 flex justify-center">
-    <div class="flex items-center">
-      <div style="font-size: 18px">正在 <a class="underline" href="/">莱云</a> 上参与工单</div>
+  <div>
+    <div v-if="!token" style="height: 64px" class="fixed top-0 left-0 right-0 flex justify-center">
+      <div class="flex items-center">
+        <div style="font-size: 18px">正在 <a class="underline" href="/">莱云</a> 上参与工单</div>
+      </div>
     </div>
-  </div>
 
 
-  <IndexLayout>
-    <div class="flex justify-center">
-      <div class="work-order-layout">
-        <div v-if="!loaded">
-          <!-- 加载中 -->
-          <div class="flex justify-center h-screen text-center">
-            <div class="flex items-center">
-              <span class="loader"></span>
+    <IndexLayout>
+      <div class="flex justify-center">
+        <div class="work-order-layout">
+          <div v-if="!loaded">
+            <!-- 加载中 -->
+            <div class="flex justify-center h-screen text-center">
+              <div class="flex items-center">
+                <span class="loader"></span>
+              </div>
             </div>
           </div>
-        </div>
-        <div v-if="loaded">
-          <div>
-            <n-h1 prefix="bar">
-              <n-text type="success">
-                {{ workOrder.title }}
-              </n-text>
-            </n-h1>
+          <div v-if="loaded">
+            <div>
+              <n-h1 prefix="bar">
+                <n-text type="success">
+                  {{ workOrder.title }}
+                </n-text>
+              </n-h1>
 
-            <div class="markdown-preview">
-              <Preview :text="workOrder.content"/>
-            </div>
-          </div>
-
-          <WorkOrderStatus v-if="workOrder.status" :status="workOrder.status"/>
-
-          <div class="mt-3" v-if="replies.length">
-            <!-- replies -->
-            <n-h3 prefix="bar">
-              <n-text type="success">
-                对话记录
-              </n-text>
-            </n-h3>
-
-            <template v-for="(item, index) in replies">
-              <n-h4 :id="'page-' + index" v-if="index">第 {{ index }} 页</n-h4>
-
-              <n-list hoverable clickable bordered v-if="index !== 0">
-                <n-list-item v-for="reply in item">
-                  <n-thing
-                      :title="(reply.role === 'module' ? reply.module.name + (reply.name ? ' 的 ' + reply.name : '') : (reply.role === 'admin' ? '莱云 的' + reply.name : reply.name ?? '无')) "
-                      content-style="margin-top: 10px;">
-                  </n-thing>
-
-                  <Preview :text="reply.content"/>
-
-                  <n-text depth="3">
-                    {{ new Date(reply.created_at).toLocaleString() }}
-                  </n-text>
-
-                </n-list-item>
-              </n-list>
-
-            </template>
-          </div>
-
-          <div class="flex justify-center mt-5" v-if="can_next">
-            <n-spin v-if="loading"/>
-
-            <n-button v-if="!loading && !can_next" type="primary" @click="load(true)">
-              已经到底了
-            </n-button>
-          </div>
-
-          <div v-if="!token" class="mt-5">
-            <n-h3 prefix="bar">
-              <n-text type="success">
-                您的称呼
-              </n-text>
-            </n-h3>
-
-            <n-input v-model:value="reply.name" placeholder="在提交回复后可见。"></n-input>
-          </div>
-
-          <div class="mt-3">
-            <n-h3 prefix="bar">
-              <n-text type="success">
-                回复
-              </n-text>
-            </n-h3>
-
-            <v-md-editor
-                v-model="reply.content"
-                height="500px"
-                placeholder="继续跟进问题。如果问题已解决，请关闭工单。"
-            ></v-md-editor>
-          </div>
-
-          <div class="mt-3">
-            <div class="mb-2">
-              <WorkOrderStatus v-if="workOrder.status" :status="workOrder.status"/>
+              <div class="markdown-preview">
+                <Preview :text="workOrder.content"/>
+              </div>
             </div>
 
-            <n-button-group>
-              <n-button type="primary" @click="replyWorkOrder">回复</n-button>
-              <n-button type="default" @click="closeWorkOrder">关闭</n-button>
-            </n-button-group>
+            <WorkOrderStatus v-if="workOrder.status" :status="workOrder.status"/>
+
+            <div class="mt-3" v-if="replies.length">
+              <!-- replies -->
+              <n-h3 prefix="bar">
+                <n-text type="success">
+                  对话记录
+                </n-text>
+              </n-h3>
+
+              <template v-for="(item, index) in replies">
+                <n-h4 :id="'page-' + index" v-if="index">第 {{ index }} 页</n-h4>
+
+                <n-list hoverable clickable bordered v-if="index !== 0">
+                  <n-list-item v-for="reply in item">
+                    <n-thing
+                        :title="(reply.role === 'module' ? reply.module.name + (reply.name ? ' 的 ' + reply.name : '') : (reply.role === 'admin' ? '莱云 的' + reply.name : reply.name ?? '无')) "
+                        content-style="margin-top: 10px;">
+                    </n-thing>
+
+                    <Preview :text="reply.content"/>
+
+                    <n-text depth="3">
+                      {{ new Date(reply.created_at).toLocaleString() }}
+                    </n-text>
+
+                  </n-list-item>
+                </n-list>
+
+              </template>
+            </div>
+
+            <div class="flex justify-center mt-5" v-if="can_next">
+              <n-spin v-if="loading"/>
+
+              <n-button v-if="!loading && !can_next" type="primary" @click="load(true)">
+                已经到底了
+              </n-button>
+            </div>
+
+            <div v-if="!token" class="mt-5">
+              <n-h3 prefix="bar">
+                <n-text type="success">
+                  您的称呼
+                </n-text>
+              </n-h3>
+
+              <n-input v-model:value="reply.name" placeholder="在提交回复后可见。"></n-input>
+            </div>
+
+            <div class="mt-3">
+              <n-h3 prefix="bar">
+                <n-text type="success">
+                  回复
+                </n-text>
+              </n-h3>
+
+              <v-md-editor
+                  v-model="reply.content"
+                  height="500px"
+                  placeholder="继续跟进问题。如果问题已解决，请关闭工单。"
+              ></v-md-editor>
+            </div>
+
+            <div class="mt-3">
+              <div class="mb-2">
+                <WorkOrderStatus v-if="workOrder.status" :status="workOrder.status"/>
+              </div>
+
+              <n-button-group>
+                <n-button type="primary" @click="replyWorkOrder">回复</n-button>
+                <n-button type="default" @click="closeWorkOrder">关闭</n-button>
+              </n-button-group>
 
 
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </IndexLayout>
+    </IndexLayout>
+  </div>
 </template>
 
 <script setup>
