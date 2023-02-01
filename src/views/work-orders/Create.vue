@@ -281,9 +281,9 @@ function submitWorkOrder() {
   top: -40px;
   height: 70px;
   width: 50px;
-  background-image: linear-gradient(#fff 45px, transparent 0),
-  linear-gradient(#fff 45px, transparent 0),
-  linear-gradient(#fff 45px, transparent 0);
+  background-image: linear-gradient(#dcdcdc 45px, transparent 0),
+  linear-gradient(#dcdcdc 45px, transparent 0),
+  linear-gradient(#dcdcdc 45px, transparent 0);
   background-repeat: no-repeat;
   background-size: 30px 4px;
   background-position: 0 11px, 8px 35px, 0 60px;
