@@ -248,7 +248,7 @@ function closeWorkOrder() {
   position: relative;
   width: 100px;
   height: 130px;
-  background: #fff;
+  background: #f0f0f0;
   border-radius: 4px;
 }
 
