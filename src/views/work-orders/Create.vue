@@ -223,7 +223,7 @@ VMdEditor.use(githubTheme, {
 const hosts = ref([])
 const modules = ref([])
 
-const sending = ref(true)
+const sending = ref(false)
 
 const workOrder = ref({
   title: null,
