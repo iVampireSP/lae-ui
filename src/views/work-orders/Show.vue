@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div v-if="!token" style="height: 64px" class="fixed top-0 left-0 right-0 flex justify-center">
-      <div class="flex items-center">
-        <div style="font-size: 18px">正在 <a class="underline" href="/">莱云</a> 上参与工单</div>
-      </div>
-    </div>
+<!--    <div v-if="!token" style="height: 64px" class="fixed top-0 left-0 right-0 flex justify-center">-->
+<!--      <div class="flex items-center">-->
+<!--        <div style="font-size: 18px">正在 <a class="underline" href="/">莱云</a> 上参与工单</div>-->
+<!--      </div>-->
+<!--    </div>-->
 
 
     <IndexLayout>
@@ -20,11 +20,11 @@
           </div>
           <div v-if="loaded">
             <div>
-              <n-h1 prefix="bar">
+              <n-h2 prefix="bar">
                 <n-text type="success">
                   {{ workOrder.title }}
                 </n-text>
-              </n-h1>
+              </n-h2>
 
               <div class="markdown-preview">
                 <Preview :text="workOrder.content"/>
@@ -66,8 +66,8 @@
             <div class="flex justify-center mt-5" v-if="can_next">
               <n-spin v-if="loading"/>
 
-              <n-button v-if="!loading && !can_next" type="primary" @click="load(true)">
-                已经到底了
+              <n-button v-if="!loading && can_next" type="primary" @click="load(true)">
+                下一页
               </n-button>
             </div>
 
@@ -117,7 +117,7 @@
 <script setup>
 import {useRoute} from 'vue-router'
 import {computed, onUnmounted, ref} from 'vue'
-import {NButton, NButtonGroup, NH1, NH3, NH4, NInput, NList, NListItem, NSpin, NText, NThing} from 'naive-ui'
+import {NButton, NButtonGroup, NH2, NH3, NH4, NInput, NList, NListItem, NText, NThing, NSpin} from 'naive-ui'
 import userStore from '../../plugins/stores/user'
 import IndexLayout from "../../components/menus/IndexLayout.vue";
 import Preview from '../../components/Markdown/Preview.vue'
