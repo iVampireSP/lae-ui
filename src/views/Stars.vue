@@ -5,46 +5,31 @@
         正是你<span v-show="stars.data.length > 1">们</span>，点亮了星空。
       </n-text>
     </n-h1>
-
-<!--    <div>-->
-<!--      <div v-for="user in stars.data" :key="user.id">-->
-<!--        <div-->
-<!--            class="d-flex align-items-center mt-3"-->
-<!--        >-->
-<!--          <img-->
-<!--              :src="api.avatar + user.email_md5 + '?s=90&d=retro'"-->
-<!--              class="rounded-circle"-->
-<!--              width="48"-->
-<!--              style="object-fit: cover; width: 48px; height: 48px"-->
-<!--          />-->
-<!--          <div class="ms-3">-->
-<!--            <h5 class="mb-0">{{ user.name }}</h5>-->
-<!--            <div class="text-muted animate__animated animate__bounceInRight" v-if="user.id === current_user.id">-->
-<!--              这是你-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-
-<!--        <hr/>-->
-<!--      </div>-->
-
-<!--      &lt;!&ndash; 中央按钮 &ndash;&gt;-->
-<!--      <div class="d-flex justify-content-center mt-5" v-if="can_next">-->
-<!--        <div class="spinner-border text-primary" role="status" v-if="loading">-->
-<!--          <span class="visually-hidden">Loading...</span>-->
-<!--        </div>-->
-
-<!--        <button type="button" class="btn btn-primary" @click="load(true)" v-else>-->
-<!--          加载更多-->
-<!--        </button>-->
-<!--      </div>-->
-<!--    </div>-->
-
+    <n-list hoverable>
+      <n-list-item v-for="star in stars.data">
+        <template #prefix>
+          <n-avatar :src="api.avatar + star.email_md5 + '?s=256?cache=0'" round size="large"/>
+        </template>
+        <n-thing :title="star.name">
+          <template v-if="star.id === current_user.id" #description>
+            <n-text depth="3">
+              这是你
+            </n-text>
+          </template>
+        </n-thing>
+      </n-list-item>
+    </n-list>
+    <div v-if="can_next === true" class="text-center mt-5">
+      <n-spin v-if="loading === true" size="medium"/>
+      <n-button v-else secondary strong type="info" @click="load(true)">
+        加载更多
+      </n-button>
+    </div>
   </IndexLayout>
 </template>
 
 <script setup>
-import {NH1, NText} from 'naive-ui'
+import {NAvatar, NButton, NH1, NList, NListItem, NSpin, NText, NThing} from 'naive-ui'
 import {computed, ref} from "vue"
 import userStore from '../plugins/stores/user'
 import IndexLayout from "../components/menus/IndexLayout.vue"
@@ -53,10 +38,6 @@ import api from "../config/api.js";
 
 const stars = ref({
   data: []
-})
-
-http.get('birthdays').then(res => {
-  stars.value = res.data
 })
 
 const page = ref(0)
