@@ -49,6 +49,13 @@
                       </n-button>
                     </n-input-group>
                   </n-form-item>
+
+                  <n-form-item v-if="create_tunnel.protocol === 'xtcp' || create_tunnel.protocol === 'stcp'"
+                               label="密钥"
+                               path="sk">
+                    <n-input v-model:value="create_tunnel.sk" placeholder="输入一个自定义的密钥"/>
+                  </n-form-item>
+
                 </n-gi>
 
 
@@ -71,6 +78,14 @@
                       <n-radio-button
                           label="HTTPS"
                           value="https"
+                      />
+                      <n-radio-button
+                          label="XTCP"
+                          value="xtcp"
+                      />
+                      <n-radio-button
+                          label="STCP"
+                          value="stcp"
                       />
                     </n-radio-group>
                   </n-form-item>
@@ -171,6 +186,7 @@ const create_tunnel = ref({
   server_id: '',
   status: '',
   custom_domain: '',
+  sk: '',
 })
 
 const form = ref(null)
@@ -292,6 +308,10 @@ const rules = {
   server_id: {
     required: true,
     message: '请选择服务器',
+  },
+  sk: {
+    required: true,
+    message: '需要输入密钥',
   },
   remote_port: {
     validator(rule, value) {
