@@ -69,7 +69,7 @@ const user = computed(() => {
 
 const avatar = conf.avatar + user.value.email_md5 + '?s=64'
 
-http.get('/users').then((res) => {
+http.get('/user').then((res) => {
   userStore.commit('updateUser', res.data)
 })
 
