@@ -57,21 +57,34 @@
           </div>
         </div>
 
-<!--          <div v-if="ct && ct.stats">-->
-<!--            <n-h3 class="!mb-2 !mt-0">使用率</n-h3>-->
-<!--&lt;!&ndash;            {{ ct }}&ndash;&gt;-->
-<!--            <div class="text-center">-->
-<!--              <n-card title="CPU 使用率" style="max-width: 10rem" class="text-left">-->
-<!--                {{ ct.stats['cpu_absolute'].toString() }}% / {{ gct.cpu_limit }}%-->
-<!--              </n-card>-->
-<!--              <n-card title="内存使用率" style="max-width: 10rem" class="text-left mt-2">-->
-<!--                &lt;!&ndash;            MEMORY_USAGE&ndash;&gt;-->
-<!--              </n-card>-->
-<!--              <n-card title="存储空间" style="max-width: 10rem" class="text-left mt-2">-->
-<!--                {{ Humanize.fileSize(ct.stats.disk_bytes) }} / {{ gct.disk / 1024 }} GB-->
-<!--              </n-card>-->
-<!--            </div>-->
-<!--          </div>-->
+        <div v-if="ct && ct.stats">
+
+          <div>
+            <n-h3 class="!mb-0 !mt-2">CPU 使用率</n-h3>
+            <span>
+              {{ ct.stats.cpu_absolute }}% / {{ gct.cpu_limit }}%
+            </span>
+          </div>
+
+          <div>
+            <n-h3 class="!mb-0 !mt-2">内存 使用率</n-h3>
+            <span>
+              {{ Humanize.fileSize(ct.stats.memory_bytes) }} / {{ Humanize.fileSize(ct.stats.memory_limit_bytes) }}
+
+            </span>
+          </div>
+
+          <div>
+            <n-h3 class="!mb-0 !mt-2">存储 使用率</n-h3>
+            <span>
+                           {{ Humanize.fileSize(ct.stats.disk_bytes) }} / {{ gct.disk / 1024 }} GB
+
+            </span>
+          </div>
+
+          <!--          <span v-text="ct.stats"></span>-->
+
+        </div>
 
       </n-gi>
       <n-gi span="6">
@@ -160,7 +173,6 @@ import {
   NA,
   NButton,
   NButtonGroup,
-  NCard,
   NFormItem,
   NGi,
   NGradientText,

@@ -188,7 +188,8 @@ const init = (socket) => {
         })
         break
       case 'stats':
-        stats.value = msg.args[0] ?? {}
+        stats.value = JSON.parse(msg.args[0] || '{}')
+        break
     }
 
   }
