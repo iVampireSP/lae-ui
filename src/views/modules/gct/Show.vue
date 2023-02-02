@@ -241,7 +241,7 @@ gateway.get('gct/nests').then(res => {
     }
   }
 
-  gct.value.egg_id = eggs.value[1].value
+  //gct.value.egg_id = eggs.value[1].value
 
 })
 
