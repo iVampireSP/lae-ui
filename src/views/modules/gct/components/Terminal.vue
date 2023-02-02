@@ -113,6 +113,7 @@ const handlePowerChangeEvent = ($state) => {
 //
 //     })
 
+
 gateway.get('gct/hosts/' + props.gct_id + '/server/websocket').then(res => {
   gct_ws.value = res.data
 
@@ -124,6 +125,18 @@ gateway.get('gct/hosts/' + props.gct_id + '/server/websocket').then(res => {
   }
 })
 
+const stats = ref({
+  cpu_absolute: 0,
+  disk_bytes: 0,
+  memory_bytes: 0,
+  memory_limit_bytes: 0,
+  network: {
+    rx_bytes: 0,
+    tx_bytes: 0
+  },
+  state: 'running',
+  uptime: 2957575458
+})
 
 const init = (socket) => {
 
@@ -174,6 +187,8 @@ const init = (socket) => {
           handleDaemonErrorOutput(line)
         })
         break
+      case 'stats':
+        stats.value = msg.args[0] ?? {}
     }
 
   }
@@ -203,7 +218,8 @@ onBeforeUnmount(() => {
 defineExpose({
   setState,
   sendCommand,
-  state
+  state,
+  stats
 })
 
 </script>
