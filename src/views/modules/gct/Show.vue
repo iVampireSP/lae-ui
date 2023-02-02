@@ -57,7 +57,22 @@
           </div>
         </div>
 
-        <n-h3 class="!mb-0 !mt-0">使用率</n-h3>
+<!--          <div v-if="ct && ct.stats">-->
+<!--            <n-h3 class="!mb-2 !mt-0">使用率</n-h3>-->
+<!--&lt;!&ndash;            {{ ct }}&ndash;&gt;-->
+<!--            <div class="text-center">-->
+<!--              <n-card title="CPU 使用率" style="max-width: 10rem" class="text-left">-->
+<!--                {{ ct.stats['cpu_absolute'].toString() }}% / {{ gct.cpu_limit }}%-->
+<!--              </n-card>-->
+<!--              <n-card title="内存使用率" style="max-width: 10rem" class="text-left mt-2">-->
+<!--                &lt;!&ndash;            MEMORY_USAGE&ndash;&gt;-->
+<!--              </n-card>-->
+<!--              <n-card title="存储空间" style="max-width: 10rem" class="text-left mt-2">-->
+<!--                {{ Humanize.fileSize(ct.stats.disk_bytes) }} / {{ gct.disk / 1024 }} GB-->
+<!--              </n-card>-->
+<!--            </div>-->
+<!--          </div>-->
+
       </n-gi>
       <n-gi span="6">
         <n-tabs animated type="line">
@@ -145,6 +160,7 @@ import {
   NA,
   NButton,
   NButtonGroup,
+  NCard,
   NFormItem,
   NGi,
   NGradientText,
@@ -169,6 +185,7 @@ import Terminal from './components/Terminal.vue'
 import gateway from '../../../plugins/gateway'
 import {useRoute} from "vue-router";
 import api from '../../../config/api'
+import Humanize from "humanize-plus";
 
 const router = useRoute()
 
