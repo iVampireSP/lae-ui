@@ -70,15 +70,13 @@
             <n-h3 class="!mb-0 !mt-2">内存 使用率</n-h3>
             <span>
               {{ Humanize.fileSize(ct.stats.memory_bytes) }} / {{ Humanize.fileSize(ct.stats.memory_limit_bytes) }}
-
             </span>
           </div>
 
           <div>
             <n-h3 class="!mb-0 !mt-2">存储 使用率</n-h3>
             <span>
-                           {{ Humanize.fileSize(ct.stats.disk_bytes) }} / {{ gct.disk / 1024 }} GB
-
+              {{ Humanize.fileSize(ct.stats.disk_bytes) }} / {{ gct.disk / 1024 }} GB
             </span>
           </div>
 
