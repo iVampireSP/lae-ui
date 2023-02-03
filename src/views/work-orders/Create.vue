@@ -241,7 +241,7 @@ http.get("/modules").then(res => {
   modules.value = res.data
 
   modules.value.unshift({
-    id: '',
+    id: 'lae',
     name: "莱云",
     status: "up"
   })
