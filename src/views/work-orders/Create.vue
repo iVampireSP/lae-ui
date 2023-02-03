@@ -249,6 +249,11 @@ http.get("/modules").then(res => {
 
 function submitWorkOrder() {
   sending.value = true
+
+  if (workOrder.value.module_id === 'lae') {
+    workOrder.value.module_id = null
+  }
+
   http.post('/work-orders', workOrder.value).then((res) => {
     setTimeout(() => router.push({
       name: 'work-orders.show',
