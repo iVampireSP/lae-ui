@@ -121,8 +121,8 @@
                 <n-gi>
                   <n-form-item label="内存">
                     <n-slider v-model:value="gct.memory" :default-value="1024" :format-tooltip="formatTooltip"
-                              :max="10240" :min="512"
-                              :show-tooltip="gct.memory > 2048" :step="512"/>
+                              :max="32768" :min="512"
+                              :show-tooltip="gct.memory > 8192" :step="512"/>
                   </n-form-item>
                   <n-form-item label="CPU 限制">
                     <n-slider v-model:value="gct.cpu_limit" :default-value="100" :format-tooltip="formatCpuLimitTooltip"
@@ -131,7 +131,7 @@
                   </n-form-item>
                   <n-form-item label="存储大小">
                     <n-slider v-model:value="gct.disk" :default-value="512" :format-tooltip="formatDiskTooltip"
-                              :max="10240" :min="512"
+                              :max="65536" :min="512"
                               :show-tooltip="gct.disk > 4096" :step="512"/>
                   </n-form-item>
                   <n-form-item label="备份数量">
@@ -227,7 +227,9 @@ const ct = ref(null)
 
 const formatTooltip = (value) => `${value / 1024} GB`
 const formatCpuLimitTooltip = (value) => `相当于 ${value / 100} 核`
-const formatDiskTooltip = (value) => `${value} MB`
+const formatDiskTooltip = (value) => {
+  return Humanize.fileSize(value * 1024 * 1024)
+}
 const formatCommonTooltip = (value) => `${value} 个`
 
 
