@@ -46,8 +46,8 @@
               <n-form-item label="内存">
                 <!--                <n-input v-model:value="create_gct.name" @keydown.enter.prevent/>-->
                 <n-slider v-model:value="create_gct.memory" :default-value="1024" :format-tooltip="formatTooltip"
-                          :max="10240" :min="1024"
-                          :show-tooltip="create_gct.memory > 2048" :step="512"/>
+                          :max="32768" :min="1024"
+                          :show-tooltip="create_gct.memory > 8192" :step="512"/>
               </n-form-item>
               <n-form-item label="CPU 限制">
                 <n-slider v-model:value="create_gct.cpu_limit" :default-value="100"
@@ -56,7 +56,7 @@
               </n-form-item>
               <n-form-item label="存储大小">
                 <n-slider v-model:value="create_gct.disk" :default-value="1024" :format-tooltip="formatDiskTooltip"
-                          :max="10240" :min="1024"
+                          :max="65536" :min="1024"
                           :show-tooltip="create_gct.disk > 4096" :step="512"/>
               </n-form-item>
               <n-form-item label="备份数量">
@@ -142,6 +142,7 @@ import {
   NTooltip,
   useDialog
 } from 'naive-ui'
+import Humanize from "humanize-plus";
 import gateway from '../../../plugins/gateway'
 import lyric from "../../../plugins/lyric.js";
 
@@ -319,7 +320,9 @@ const deploy = () => {
 
 const formatTooltip = (value) => `${value / 1024} GB`
 const formatCpuLimitTooltip = (value) => `相当于 ${value / 100} 核`
-const formatDiskTooltip = (value) => `${value} MB`
+const formatDiskTooltip = (value) => {
+  return Humanize.fileSize(value * 1024 * 1024)
+}
 const formatCommonTooltip = (value) => `${value} 个`
 
 const rules = {
