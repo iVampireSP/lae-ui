@@ -13,7 +13,7 @@
           <tr class="text-center">
             <th>类型</th>
             <th>标识</th>
-            <th>心跳</th>
+            <th>上次心跳</th>
           </tr>
           </thead>
           <tbody>
