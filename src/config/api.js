@@ -4,7 +4,8 @@ const config = {
         auth: 'http://www.lae.test',
 
         ws_gateway: 'ws://www.lae.test:8282',
-        gateway: 'http://www.lae.test:3000/',
+        // gateway: 'http://www.lae.test:3000/',
+        gateway: 'http://www.lae.test/api/modules',
 
         ws_host: 'www.lae.test',
         ws_port: 6001,
@@ -31,7 +32,7 @@ const config = {
 
         ws_host: 'socket.lae.yistars.net',
         ws_port: 443,
-        ws_auth_endpoint: 'https://api.lae.yistars.net/broadcasting/auth',
+        ws_auth_endpoint: 'https://api.laecloud.com/broadcasting/auth',
 
         avatar: 'https://cravatar.cn/avatar/',
 
@@ -45,7 +46,7 @@ const config = {
     },
 }
 
-let current = config.prod;
+let current = config.dev;
 
 if (process.env.NODE_ENV === 'production') {
     current = config.prod;
