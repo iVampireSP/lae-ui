@@ -69,6 +69,14 @@ const routes = [
         },
         component: () => import('../views/forum/Pinned.vue'),
     },
+    {
+        path: '/status',
+        name: 'status',
+        meta: {
+            title: '状态',
+        },
+        component: () => import('../views/Status.vue'),
+    },
     // {
     //   path: '/servers',
     //   name: 'servers',

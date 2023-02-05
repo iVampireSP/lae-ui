@@ -1,0 +1,139 @@
+<template>
+  <IndexLayout>
+    <n-h1 type="success" align-text prefix="bar">
+      <n-gradient-text type="success">
+        监控
+      </n-gradient-text>
+    </n-h1>
+
+    <n-tabs animated type="line" v-model:value="currentModule" @update:value="handleUpdateValue">
+      <n-tab-pane name="lae" key="lae" tab="莱云">
+        <n-table>
+          <thead>
+          <tr class="text-center">
+            <th>类型</th>
+            <th>标识</th>
+            <th>心跳</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="node in nodes" class="text-center">
+            <td>
+              <n-text type="success" v-if="node.type === 'master'">
+                主
+              </n-text>
+              <n-text depth="3" v-if="node.type === 'slave'">
+                从
+              </n-text>
+              <span v-else-if="node.type === 'edge'">
+                <span style="color: #ff7e15">
+                  边缘
+                </span>
+              </span>
+            </td>
+            <td>{{ node.id }}</td>
+            <td>
+              {{ new Date(node.last_heartbeat * 1000).toLocaleTimeString() }}
+            </td>
+          </tr>
+          </tbody>
+        </n-table>
+      </n-tab-pane>
+      <n-tab-pane v-for="module in modules" :name="module.id" :key="module.id" :tab="module.name">
+        <n-table v-if="servers[module.id].length">
+          <thead>
+          <tr>
+            <th>名称</th>
+            <th>状态</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              {{ module.name }}
+            </td>
+            <td>
+              <n-text type="success" v-if="module.status === 'up'">
+                正常
+              </n-text>
+              <n-text type="error" v-else-if="module.status === 'down'">
+                离线
+              </n-text>
+              <n-text depth="3" v-else>
+                维护
+              </n-text>
+            </td>
+
+          </tr>
+          <tr v-for="server in servers[module.id]">
+            <td>
+              {{ server.name }}
+            </td>
+            <td>
+              <n-text type="success" v-if="server.status === 'up'">
+                正常
+              </n-text>
+              <n-text type="warning" v-else-if="server.status === 'maintenance'">
+                维护中
+              </n-text>
+              <n-text type="error" v-else>
+                无信号
+              </n-text>
+            </td>
+          </tr>
+          </tbody>
+        </n-table>
+        <n-empty v-else description="没有检索到服务器。"/>
+
+      </n-tab-pane>
+    </n-tabs>
+  </IndexLayout>
+</template>
+
+<script setup>
+import {ref} from "vue"
+import {NEmpty, NGradientText, NH1, NTable, NTabPane, NTabs, NText} from "naive-ui"
+import http from '../plugins/http'
+import IndexLayout from "../components/menus/IndexLayout.vue";
+
+const modules = ref([])
+const nodes = ref([
+  {
+    id: 1,
+    name: 'test',
+    last_heartbeat: '1675610325'
+  }
+])
+const currentModule = ref('lae')
+const servers = ref({
+  example: {}
+})
+
+function refreshModules() {
+  http.get('modules').then(res => {
+    modules.value = res.data
+    servers.value[res.data[0].id] = {}
+  })
+}
+
+function refreshNodes() {
+  http.get('nodes').then(res => {
+    nodes.value = res.data
+  })
+}
+
+refreshModules()
+refreshNodes()
+
+function handleUpdateValue(value) {
+  if (value === 'lae') {
+    refreshNodes()
+    return
+  }
+
+  http.get(`servers/${value}`).then(res => {
+    servers.value[value] = res.data
+  })
+}
+
+</script>
