@@ -91,7 +91,7 @@
 </template>
 
 <script setup>
-import {ref} from "vue"
+import {onUnmounted, ref} from "vue"
 import {NEmpty, NGradientText, NH1, NTable, NTabPane, NTabs, NText} from "naive-ui"
 import http from '../plugins/http'
 import IndexLayout from "../components/menus/IndexLayout.vue";
@@ -135,5 +135,20 @@ function handleUpdateValue(value) {
     servers.value[value] = res.data
   })
 }
+
+const interval = setInterval(() => {
+  if (currentModule.value === 'lae') {
+    refreshNodes()
+  } else {
+    http.get(`servers/${currentModule.value}`).then(res => {
+      servers.value[currentModule.value] = res.data
+    })
+  }
+}, 5000)
+
+
+onUnmounted(() => {
+  clearInterval(interval)
+})
 
 </script>
