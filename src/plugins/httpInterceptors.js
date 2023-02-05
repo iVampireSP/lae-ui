@@ -1,8 +1,10 @@
-import user from "./stores/user.js";
-import {dialog, loadingBar} from "../utils/layout.js";
-import http from "./stores/http.js";
-import router from "./router.js";
+import user from "./stores/user";
+// import {dialog, loadingBar} from "../utils/layout";
+import {dialog} from "../utils/layout";
+import http from "./stores/http";
+import router from "./router";
 import {h} from "vue";
+import loadingBar from './spinner'
 import error401 from "../views/errors/401.vue";
 import error404 from "../views/errors/404.vue";
 import error500 from "../views/errors/500.vue";
@@ -17,6 +19,7 @@ const request = {
         config.headers['Authorization'] = 'Bearer ' + user.state.token
 
         loadingBar.start()
+
 
         return Promise.resolve(config)
     },
