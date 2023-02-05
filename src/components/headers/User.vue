@@ -96,7 +96,7 @@ const avatar = computed(() => {
 
 const show = ref(false)
 
-const showPopover = ref(false)
+let showPopover = ref(false)
 
 
 const tasks = computed(() => taskStore.state.tasks)
