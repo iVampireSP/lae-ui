@@ -26,7 +26,8 @@ const config = {
         auth: 'https://api.laecloud.com',
 
         ws_gateway: 'wss://ws.gateway.laecloud.com',
-        gateway: 'https://gateway.laecloud.com/',
+        // gateway: 'https://gateway.laecloud.com/',
+        gateway: 'https://api.laecloud.com/api/modules',
 
         ws_host: 'socket.lae.yistars.net',
         ws_port: 443,
