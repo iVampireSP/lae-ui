@@ -52,9 +52,9 @@
             </n-button>
           </n-button-group>
 
-          <div v-else>
+          <p v-else class="mr-2">
             切换到“控制台”选项卡以查看电源控制。
-          </div>
+          </p>
         </div>
 
         <div v-if="ct && ct.stats">
