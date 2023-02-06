@@ -1,10 +1,10 @@
 <template>
   <IndexLayout>
     <n-h1 prefix="bar">
-      <n-text type="primary">固钉</n-text>
+      <n-text type="primary">合作需求</n-text>
     </n-h1>
 
-    <Topic :base_url="base_url" :items="pinned"></Topic>
+    <Topic :base_url="base_url" :items="data"></Topic>
   </IndexLayout>
 </template>
 
@@ -16,22 +16,20 @@ import IndexLayout from '../../components/menus/IndexLayout.vue'
 
 import Topic from './components/Topic.vue'
 
-import {NH1, NText,} from 'naive-ui'
+import {NH1, NText} from 'naive-ui'
 
-const pinned = ref({
+const data = ref({
   base_url: '',
 })
 const base_url = ref('')
 
 const show = ref(false)
 
-http.get('forum/pinned').then((res) => {
-  pinned.value = res.data
-  base_url.value = pinned.value.base_url
+http.get('forum/partner').then((res) => {
+  data.value = res.data
+  base_url.value = data.value.base_url
   setTimeout(() => {
     show.value = true
   }, 500)
 })
 </script>
-
-<style scoped></style>

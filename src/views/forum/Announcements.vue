@@ -1,7 +1,7 @@
 <template>
   <IndexLayout>
     <n-h1 prefix="bar">
-      <n-text type="primary"> 公告</n-text>
+      <n-text type="primary">公告</n-text>
     </n-h1>
 
     <Topic :base_url="base_url" :items="announcements"></Topic>
