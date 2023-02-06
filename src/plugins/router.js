@@ -55,7 +55,7 @@ const routes = [
     },
     {
         path: '/announcements',
-        name: 'announcements',
+        name: 'forum.announcements',
         meta: {
             title: '公告',
         },
@@ -63,11 +63,19 @@ const routes = [
     },
     {
         path: '/pinned',
-        name: 'pinned',
+        name: 'forum.pinned',
         meta: {
             title: '固钉',
         },
         component: () => import('../views/forum/Pinned.vue'),
+    },
+    {
+        path: '/partner',
+        name: 'forum.partner',
+        meta: {
+            title: '合作',
+        },
+        component: () => import('../views/forum/Partner.vue'),
     },
     {
         path: '/status',
