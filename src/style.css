@@ -28,6 +28,10 @@ body {
     background-color: unset !important;
 }
 
+.h-full {
+    height: 84vh;
+}
+
 @media only screen and (max-width: 639px) {
     body {
         overflow: visible;

@@ -9,7 +9,7 @@ const routes = [
         name: 'index',
         component: () => import('../views/Index.vue'),
         meta: {
-            auth: true,
+            auth: false,
             keepalive: true,
             title: '欢迎',
         },
