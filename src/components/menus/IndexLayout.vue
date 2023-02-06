@@ -25,7 +25,3 @@ removeAllMenuOptionsThen('left', () => {
 
 
 </script>
-
-<style scoped>
-
-</style>
