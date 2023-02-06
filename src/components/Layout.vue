@@ -3,7 +3,7 @@
 
   <n-layout
       :position="isMobile ? 'static' : 'absolute'"
-      :style="{ top: isMobile ? '' : 'var(--header-height)' }"
+      :style="{ top: user.state.token ? isMobile ? '' : 'var(--header-height)' : '' }"
       has-sider
   >
     <n-layout-sider
