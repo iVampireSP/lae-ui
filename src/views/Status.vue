@@ -83,7 +83,9 @@
           </tr>
           </tbody>
         </n-table>
-        <n-empty v-else description="没有检索到服务器。"/>
+        <div v-else>
+          <n-empty :description="'没有检索到服务器，' + '模块状态' + getTextStatus(module.status) + '。'"/>
+        </div>
 
       </n-tab-pane>
     </n-tabs>
@@ -120,6 +122,19 @@ function refreshNodes() {
   http.get('nodes').then(res => {
     nodes.value = res.data
   })
+}
+
+function getTextStatus(status) {
+  switch (status) {
+    case 'up':
+      return '正常'
+    case 'down':
+      return '离线'
+    case 'maintenance':
+      return '维护中'
+    default:
+      return '未知'
+  }
 }
 
 refreshModules()
