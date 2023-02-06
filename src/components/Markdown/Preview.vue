@@ -1,5 +1,5 @@
 <template>
-  <VMdPreview :text="text" :mode="mode"/>
+  <VMdPreview :mode="mode" :text="text"/>
 </template>
 
 <script setup>

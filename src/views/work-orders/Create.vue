@@ -71,7 +71,7 @@
                   </n-icon>
                   错误
                 </n-text>
-                <n-popover trigger="hover" v-else-if="host.status === 'unavailable'">
+                <n-popover v-else-if="host.status === 'unavailable'" trigger="hover">
                   <template #trigger>
                     <div>
                       <n-icon size="20">
@@ -180,7 +180,7 @@
           </n-text>
         </n-h2>
 
-        <n-input v-model:value="workOrder.title" type="text" size="large" placeholder="一句话概括一下" maxlength="30"/>
+        <n-input v-model:value="workOrder.title" maxlength="30" placeholder="一句话概括一下" size="large" type="text"/>
 
         <div class="mt-5">
           <v-md-editor
@@ -191,7 +191,7 @@
         </div>
 
         <div class="mt-3 text-right">
-          <n-button size="large" type="primary" secondary strong @click="submitWorkOrder">
+          <n-button secondary size="large" strong type="primary" @click="submitWorkOrder">
             投递工单
           </n-button>
         </div>

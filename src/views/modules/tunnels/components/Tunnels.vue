@@ -53,10 +53,10 @@
               >
                 {{ $tunnel.custom_domain }}
               </n-tag>
-              <n-tag v-else :bordered="false" size="small" type="info" v-if="$tunnel.remote_port">
+              <n-tag v-else v-if="$tunnel.remote_port" :bordered="false" size="small" type="info">
                 {{ $tunnel.remote_port }}
               </n-tag>
-              <n-tag :bordered="false" size="small" type="info" v-if="$tunnel.local_address">
+              <n-tag v-if="$tunnel.local_address" :bordered="false" size="small" type="info">
                 {{ $tunnel.local_address }}
               </n-tag>
             </n-space>

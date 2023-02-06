@@ -1,10 +1,10 @@
 <template>
   <div>
-<!--    <div v-if="!token" style="height: 64px" class="fixed top-0 left-0 right-0 flex justify-center">-->
-<!--      <div class="flex items-center">-->
-<!--        <div style="font-size: 18px">正在 <a class="underline" href="/">莱云</a> 上参与工单</div>-->
-<!--      </div>-->
-<!--    </div>-->
+    <!--    <div v-if="!token" style="height: 64px" class="fixed top-0 left-0 right-0 flex justify-center">-->
+    <!--      <div class="flex items-center">-->
+    <!--        <div style="font-size: 18px">正在 <a class="underline" href="/">莱云</a> 上参与工单</div>-->
+    <!--      </div>-->
+    <!--    </div>-->
 
 
     <IndexLayout>
@@ -33,7 +33,7 @@
 
             <WorkOrderStatus v-if="workOrder.status" :status="workOrder.status"/>
 
-            <div class="mt-3" v-if="replies.length">
+            <div v-if="replies.length" class="mt-3">
               <!-- replies -->
               <n-h3 prefix="bar">
                 <n-text type="success">
@@ -42,9 +42,9 @@
               </n-h3>
 
               <template v-for="(item, index) in replies">
-                <n-h4 :id="'page-' + index" v-if="index">第 {{ index }} 页</n-h4>
+                <n-h4 v-if="index" :id="'page-' + index">第 {{ index }} 页</n-h4>
 
-                <n-list hoverable clickable bordered v-if="index !== 0">
+                <n-list v-if="index !== 0" bordered clickable hoverable>
                   <n-list-item v-for="reply in item">
                     <n-thing
                         :title="(reply.role === 'module' ? reply.module.name + (reply.name ? ' 的 ' + reply.name : '') : (reply.role === 'admin' ? '莱云 的 ' + reply.name : reply.name ?? '无')) "
@@ -63,7 +63,7 @@
               </template>
             </div>
 
-            <div class="flex justify-center mt-5" v-if="can_next">
+            <div v-if="can_next" class="flex justify-center mt-5">
               <n-spin v-if="loading"/>
 
               <n-button v-if="!loading && can_next" type="primary" @click="load(true)">
@@ -117,7 +117,7 @@
 <script setup>
 import {useRoute} from 'vue-router'
 import {computed, onUnmounted, ref} from 'vue'
-import {NButton, NButtonGroup, NH2, NH3, NH4, NInput, NList, NListItem, NText, NThing, NSpin} from 'naive-ui'
+import {NButton, NButtonGroup, NH2, NH3, NH4, NInput, NList, NListItem, NSpin, NText, NThing} from 'naive-ui'
 import userStore from '../../plugins/stores/user'
 import IndexLayout from "../../components/menus/IndexLayout.vue";
 import Preview from '../../components/Markdown/Preview.vue'

@@ -1,5 +1,5 @@
 <template>
-  <n-spin size="small" :show="spinner.loading">
+  <n-spin :show="spinner.loading" size="small">
     <span :class="props.class"></span>
   </n-spin>
   <!--  <img src="/assets/images/logo-lae-2023.png" width="40" height="25" alt="莱云 兔年 Logo">-->

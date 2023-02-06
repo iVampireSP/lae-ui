@@ -19,7 +19,7 @@
     </router-link>
 
     <div class="mt-3"></div>
-    <n-list clickable hoverable v-if="work_orders.length">
+    <n-list v-if="work_orders.length" clickable hoverable>
       <n-list-item v-for="work_order in work_orders"
                    @click="router.push({name: 'work-orders.show', params: {id: work_order.uuid}})">
         <n-thing :title="work_order.title ?? ''"
@@ -27,7 +27,7 @@
                  description="description">
           <template #description>
             <n-space size="small" style="margin-top: 4px">
-              <n-tag :bordered="false" type="info" size="small">
+              <n-tag :bordered="false" size="small" type="info">
                <span v-if="work_order.module">
                   {{ work_order.module.name }}
                </span>
@@ -35,10 +35,10 @@
                   莱云
                 </span>
               </n-tag>
-              <n-tag :bordered="false" type="info" size="small">
+              <n-tag :bordered="false" size="small" type="info">
                 <WorkOrderStatus :status="work_order.status"/>
               </n-tag>
-              <n-tag :bordered="false" type="info" size="small" v-if="work_order.host">
+              <n-tag v-if="work_order.host" :bordered="false" size="small" type="info">
                 <span>
                   {{ work_order.host.name }}
                 </span>

@@ -60,7 +60,7 @@
               </n-icon>
               错误
             </n-text>
-            <n-popover trigger="hover" v-else-if="host.status === 'unavailable'">
+            <n-popover v-else-if="host.status === 'unavailable'" trigger="hover">
               <template #trigger>
                 <div>
                   <n-icon size="20">

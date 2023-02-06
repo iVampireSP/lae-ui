@@ -1,13 +1,13 @@
 <template>
   <IndexLayout>
-    <n-h1 type="success" align-text prefix="bar">
+    <n-h1 align-text prefix="bar" type="success">
       <n-gradient-text type="success">
         监控
       </n-gradient-text>
     </n-h1>
 
-    <n-tabs animated type="line" v-model:value="currentModule" @update:value="handleUpdateValue">
-      <n-tab-pane name="lae" key="lae" tab="莱云">
+    <n-tabs v-model:value="currentModule" animated type="line" @update:value="handleUpdateValue">
+      <n-tab-pane key="lae" name="lae" tab="莱云">
         <n-table>
           <thead>
           <tr class="text-center">
@@ -19,10 +19,10 @@
           <tbody>
           <tr v-for="node in nodes" class="text-center">
             <td>
-              <n-text type="success" v-if="node.type === 'master'">
+              <n-text v-if="node.type === 'master'" type="success">
                 主
               </n-text>
-              <n-text depth="3" v-if="node.type === 'slave'">
+              <n-text v-if="node.type === 'slave'" depth="3">
                 从
               </n-text>
               <span v-else-if="node.type === 'edge'">
@@ -39,7 +39,7 @@
           </tbody>
         </n-table>
       </n-tab-pane>
-      <n-tab-pane v-for="module in modules" :name="module.id" :key="module.id" :tab="module.name">
+      <n-tab-pane v-for="module in modules" :key="module.id" :name="module.id" :tab="module.name">
         <n-table v-if="servers[module.id].length">
           <thead>
           <tr>
@@ -53,13 +53,13 @@
               {{ module.name }}
             </td>
             <td>
-              <n-text type="success" v-if="module.status === 'up'">
+              <n-text v-if="module.status === 'up'" type="success">
                 正常
               </n-text>
-              <n-text type="error" v-else-if="module.status === 'down'">
+              <n-text v-else-if="module.status === 'down'" type="error">
                 离线
               </n-text>
-              <n-text depth="3" v-else>
+              <n-text v-else depth="3">
                 维护
               </n-text>
             </td>
@@ -70,13 +70,13 @@
               {{ server.name }}
             </td>
             <td>
-              <n-text type="success" v-if="server.status === 'up'">
+              <n-text v-if="server.status === 'up'" type="success">
                 正常
               </n-text>
-              <n-text type="warning" v-else-if="server.status === 'maintenance'">
+              <n-text v-else-if="server.status === 'maintenance'" type="warning">
                 维护中
               </n-text>
-              <n-text type="error" v-else>
+              <n-text v-else type="error">
                 无信号
               </n-text>
             </td>
