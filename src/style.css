@@ -29,7 +29,7 @@ body {
 }
 
 .h-full {
-    height: 84vh;
+    height: 80vh;
 }
 
 @media only screen and (max-width: 639px) {
