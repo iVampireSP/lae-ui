@@ -1,6 +1,6 @@
 <template>
   <div v-if="is_ready">
-    <TerminalComponent ref="terminal" :socket="socket" height="90px"/>
+    <TerminalComponent ref="terminal" :socket="socket" height="90px" cursor-style="underline" />
 
     <div>
       <input
@@ -231,5 +231,7 @@ defineExpose({
   color: #ffffff;
   border-style: none;
   outline: none;
+  position: relative;
+  top: -2px
 }
 </style>
