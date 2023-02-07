@@ -1,13 +1,19 @@
 <template>
   <div>
-    <n-button type="primary" @click="login" v-if="!user.state.token">
-      {{ text }}
-    </n-button>
+    <n-button-group>
+      <n-button type="primary" @click="login" v-if="!user.state.token">
+        {{ text }}
+      </n-button>
+
+      <n-button type="primary" tag="a" target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=4vzG2Jk0aOEOswOkboJrYrqZUwWcTaKL&jump_from=webapi&authKey=MN5mxefqchK55kph7YJBnKZrNggZyJnKT2HRgAFt/8iR+MEtWQGE6hXqG8F/ky7F" v-if="join">
+        加入 QQ 群
+      </n-button>
+    </n-button-group>
   </div>
 </template>
 
 <script setup>
-import {NButton} from 'naive-ui'
+import {NButton, NButtonGroup} from 'naive-ui'
 import user from '../plugins/stores/user'
 import router from '../plugins/router'
 
@@ -21,6 +27,10 @@ defineProps({
   text: {
     type: String,
     default: '登录'
+  },
+  join: {
+    type: Boolean,
+    default: false
   }
 })
 
