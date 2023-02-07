@@ -30,7 +30,7 @@ const config = {
         // gateway: 'https://gateway.laecloud.com/',
         gateway: 'https://api.laecloud.com/api/modules',
 
-        ws_host: 'socket.lae.yistars.net',
+        ws_host: 'socket.laecloud.com',
         ws_port: 443,
         ws_auth_endpoint: 'https://api.laecloud.com/broadcasting/auth',
 
@@ -46,7 +46,7 @@ const config = {
     },
 }
 
-let current = config.dev;
+let current = config.prod;
 
 if (process.env.NODE_ENV === 'production') {
     current = config.prod;

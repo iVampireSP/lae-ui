@@ -9,7 +9,7 @@ PusherJS.logToConsole = false
 
 let echo = new LaravelEcho({
     broadcaster: 'pusher',
-    key: 'app-key',
+    key: 'Q6SEgerhsgMVz',
     wsHost: api.ws_host,
     wsPort: api.ws_port,
     wssPort: api.ws_port,
