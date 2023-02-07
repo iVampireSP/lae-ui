@@ -46,7 +46,7 @@ const config = {
     },
 }
 
-let current = config.dec;
+let current = config.dev;
 
 if (process.env.NODE_ENV === 'production') {
     current = config.prod;
