@@ -33,7 +33,12 @@
             </td>
             <td>{{ node.id }}</td>
             <td>
-              {{ new Date(node.last_heartbeat * 1000).toLocaleTimeString() }}
+              <n-text v-if="Math.abs(Date.now() / 1000 - node.last_heartbeat) > 10" type="error">
+                无心跳
+              </n-text>
+              <n-text v-else type="success">
+                {{ new Date(node.last_heartbeat * 1000).toLocaleTimeString() }}
+              </n-text>
             </td>
           </tr>
           </tbody>
@@ -103,6 +108,7 @@ const nodes = ref([
   {
     id: 1,
     name: 'test',
+    type: 'master',
     last_heartbeat: '1675610325'
   }
 ])
@@ -120,7 +126,21 @@ function refreshModules() {
 
 function refreshNodes() {
   http.get('nodes').then(res => {
-    nodes.value = res.data
+
+    // 根据 node.type 排序
+    nodes.value = res.data.sort((a, b) => {
+      if (a.type === 'master') {
+        return -1
+      } else if (b.type === 'master') {
+        return 1
+      } else if (a.type === 'slave') {
+        return -1
+      } else if (b.type === 'slave') {
+        return 1
+      } else {
+        return 0
+      }
+    })
   })
 }
 
