@@ -82,7 +82,7 @@
                 维护中
               </n-text>
               <n-text v-else type="error">
-                无信号
+                失败
               </n-text>
             </td>
           </tr>
