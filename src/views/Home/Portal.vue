@@ -7,8 +7,14 @@
 
   <div class="flex items-center align-center justify-center h-full">
     <div class="text-center">
-      <img src="/assets/images/i9.jpeg" alt="i9" width="200" class="rounded inline"
-           style="box-shadow: rgb(22 57 141) 0 0 20px 6px">
+      <div style="left: -22.5px" class="relative">
+        <img src="/assets/images/i7.jpeg" alt="i7" width="200" class="rounded-1 relative inline z-10"
+        >
+        <img src="/assets/images/i9.jpeg" alt="i9" width="200" class="rounded-1 inline absolute"
+             style="left: 45px"
+        >
+      </div>
+
       <br/>
       <n-h1>
         游戏容器
@@ -16,7 +22,7 @@
         即将推出
       </n-h1>
       <br/>
-      <LoginButton text="现在登录" :join="true" />
+      <LoginButton text="现在登录" :join="true"/>
     </div>
   </div>
 
