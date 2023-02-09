@@ -13,6 +13,7 @@
           <tr class="text-center">
             <th>类型</th>
             <th>标识</th>
+            <th>权重</th>
             <th>上次心跳</th>
           </tr>
           </thead>
@@ -32,6 +33,14 @@
               </span>
             </td>
             <td>{{ node.id }}</td>
+            <td>
+              <n-text v-if="parseInt(node.weight) === 0" type="error">
+                不调度
+              </n-text>
+              <n-text v-else>
+                {{ node.weight }}
+              </n-text>
+            </td>
             <td>
               <n-text v-if="Math.abs(Date.now() / 1000 - node.last_heartbeat) > 10" type="error">
                 无心跳
