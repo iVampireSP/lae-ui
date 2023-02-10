@@ -104,6 +104,8 @@
                 (create_gct.disk / 1024) * selectedLocation.disk_price +
                 (create_gct.memory / 1024) * selectedLocation.memory_price +
                 (create_gct.cpu_limit / 100) * selectedLocation.cpu_price +
+                (create_gct.backups) * selectedLocation.backup_price +
+                (create_gct.allocations) * selectedLocation.allocation_price +
                 selectedLocation.price
               ).toFixed(2)"></span> 元 / 月
               </n-p>
