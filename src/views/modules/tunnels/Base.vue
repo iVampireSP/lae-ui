@@ -2,9 +2,7 @@
   <router-view/>
 
   <n-text class="text-center mt-5" depth="3" tag="div">
-    <span>Aehxy 创建 / 策划 / 运营</span>
-    <br/>
-    <span>莱云 所有</span>
+    <span>联合映射 由 LoCyan Team & MirrorEdge Network 运营</span>
     <br/>
     <n-icon class="relative top-px">
       <LogoGithub/>
@@ -26,7 +24,7 @@ import {
   addMenuOptions,
   removeAllMenuOptions,
   removeAllMenuOptionsThen
-} from "../../../config/menuOptions.js";
+} from "../../../plugins/menuOptions.js";
 
 import {NA, NIcon, NText} from "naive-ui";
 

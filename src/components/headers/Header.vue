@@ -79,7 +79,7 @@
 import {NGrid, NGridItem, NIcon, NLayout, NLayoutHeader, NMenu, NPopover} from 'naive-ui'
 
 import {useIsMobile, useIsTablet} from "../../utils/composables.js";
-import {menuOptions, selectedKey} from "../../config/menuOptions.js"
+import {menuOptions, selectedKey} from "../../plugins/menuOptions.js"
 
 import {MenuOutline} from "@vicons/ionicons5"
 

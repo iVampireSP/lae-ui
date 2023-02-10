@@ -8,7 +8,7 @@ import {
   addMenuOptions,
   removeAllMenuOptions,
   removeAllMenuOptionsThen
-} from '../../../config/menuOptions.js'
+} from '../../../plugins/menuOptions.js'
 
 import {AddOutline, ListOutline} from "@vicons/ionicons5";
 import {ref} from 'vue'

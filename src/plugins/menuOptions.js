@@ -1,7 +1,7 @@
 import {h, ref} from "vue";
 import {RouterLink} from "vue-router";
 import {NIcon} from 'naive-ui'
-import router from "../plugins/router.js";
+import router from "./router.js";
 import LaeLogo from "../components/LaeLogo.vue";
 import SimpleMenuIcon from "../components/SimpleMenuIcon.vue";
 

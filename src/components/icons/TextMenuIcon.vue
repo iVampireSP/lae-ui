@@ -7,7 +7,7 @@
 <script setup>
 import {ref, watchEffect} from 'vue'
 
-import {menuCollapsed} from '../../config/menuOptions.js'
+import {menuCollapsed} from '../../plugins/menuOptions.js'
 
 import {useIsMobile, useIsTablet} from "../../utils/composables.js";
 

@@ -14,7 +14,7 @@ import {
   addMenuOptions,
   removeAllMenuOptions,
   removeAllMenuOptionsThen
-} from "../../../config/menuOptions.js";
+} from "../../../plugins/menuOptions.js";
 import {AddOutline} from "@vicons/ionicons5";
 import redPacketsStore from "../../../plugins/stores/red-packets.js";
 import {ref} from "vue";

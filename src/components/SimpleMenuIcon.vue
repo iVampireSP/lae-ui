@@ -9,7 +9,7 @@
 <script setup>
 // import { defineProps } from 'vue'
 
-import {menuCollapsed} from '../config/menuOptions.js'
+import {menuCollapsed} from '../plugins/menuOptions.js'
 
 defineProps({
   title: {

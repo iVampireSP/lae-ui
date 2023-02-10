@@ -7,7 +7,7 @@
 <script setup>
 import {useRoute, useRouter} from "vue-router";
 
-import {removeAllMenuOptions} from "../../config/menuOptions.js";
+import {removeAllMenuOptions} from "../../plugins/menuOptions.js";
 
 const router = useRouter()
 const route = useRoute()

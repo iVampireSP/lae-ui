@@ -2,7 +2,7 @@
   <div>
     <n-h1 prefix="bar">
       <n-text type="primary">
-        镜缘映射
+        联合映射
       </n-text>
     </n-h1>
 

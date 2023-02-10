@@ -50,7 +50,7 @@ import user from '../plugins/stores/user.js'
 import HeaderVue from './headers/Header.vue'
 import Menu from './Menu.vue'
 
-import {menuCollapsed} from '../config/menuOptions.js'
+import {menuCollapsed} from '../plugins/menuOptions.js'
 import Notifications from './Notifications.vue'
 
 const isMobile = useIsMobile()

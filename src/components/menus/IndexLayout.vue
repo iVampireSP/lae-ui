@@ -6,7 +6,7 @@
 
 <script setup>
 
-import {addMenuOptions, removeAllMenuOptionsThen} from "../../config/menuOptions.js";
+import {addMenuOptions, removeAllMenuOptionsThen} from "../../plugins/menuOptions.js";
 
 import {HomeOutline, PinOutline, PricetagsSharp, Server} from "@vicons/ionicons5";
 import {CakeRound, MessageOutlined, MonitorHeartFilled, SupportAgentRound} from "@vicons/material"

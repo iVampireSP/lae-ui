@@ -12,7 +12,7 @@
 
 import {NMenu} from 'naive-ui'
 
-import {menuInst, menuOptions, selectedKey} from "../config/menuOptions.js"
+import {menuInst, menuOptions, selectedKey} from "../plugins/menuOptions.js"
 
 //
 </script>
