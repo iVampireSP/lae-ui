@@ -18,6 +18,9 @@ import router from '../../../plugins/router'
 
 import tunnelsStore from "../../../plugins/stores/tunnels";
 import Tunnels from "./components/Tunnels.vue";
+import {title} from '../../../plugins/site'
+
+title('PortIO 联合映射')
 
 const tunnels = computed(() => {
   return tunnelsStore.state.tunnels

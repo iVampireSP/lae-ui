@@ -43,8 +43,8 @@ import {ref} from 'vue'
 import tunnelsStore from "../../../plugins/stores/tunnels";
 import MenuIcon from "../../../components/icons/HostMenuIcon.vue";
 
-const tunnels = ref([])
 
+const tunnels = ref([])
 
 removeAllMenuOptions()
 
