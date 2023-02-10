@@ -301,7 +301,6 @@ function closeWorkOrder() {
 }
 
 .github-markdown-body {
-  padding: 0 !important;
   background-color: unset !important;
 }
 

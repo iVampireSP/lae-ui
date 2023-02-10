@@ -1,5 +1,5 @@
 <template>
-  <div class="preview">
+  <div class="vmd">
     <VMdPreview :mode="mode" :text="text"/>
   </div>
 </template>
@@ -29,14 +29,3 @@ defineProps({
 
 </script>
 
-<style scoped>
-
-.preview .v-md-editor-preview .github-markdown-body {
-  padding: 0 !important;
-}
-
-.preview .github-markdown-body p {
-  padding: 0 !important;
-  margin-bottom: 0 !important;
-}
-</style>

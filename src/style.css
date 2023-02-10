@@ -24,8 +24,17 @@ body {
 }
 
 .markdown-preview .github-markdown-body {
-    padding: 0;
+    /*padding: 0;*/
     background-color: unset !important;
+}
+
+.vmd .v-md-editor-preview .github-markdown-body {
+    padding: 0 !important;
+}
+
+.vmd .github-markdown-body p {
+    padding: 0 !important;
+    margin-bottom: 0 !important;
 }
 
 .h-full {
