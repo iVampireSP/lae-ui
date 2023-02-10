@@ -136,7 +136,7 @@
                   </n-form-item>
                   <n-form-item label="备份数量">
                     <n-slider v-model:value="gct.backups" :default-value="1" :format-tooltip="formatCommonTooltip"
-                              :max="8" :min="1"
+                              :max="20" :min="1"
                               :show-tooltip="gct.backups > 3" :step="1"/>
                   </n-form-item>
                 </n-gi>
