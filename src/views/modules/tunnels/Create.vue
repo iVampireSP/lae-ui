@@ -100,6 +100,11 @@
                     <n-text v-else>没有可用的服务器</n-text>
                   </n-form-item>
 
+                  <n-form-item label="流量计费" v-if="selectedServer">
+                    <n-text type="secondary" v-if="selectedServer.price_per_gb">
+                      价格: {{ selectedServer.price_per_gb }} / GB
+                    </n-text>
+                  </n-form-item>
 
                 </n-gi>
 
@@ -191,6 +196,10 @@ const create_tunnel = ref({
 
 const form = ref(null)
 
+const selectedServer = ref({
+  price_per_gb: 0
+})
+
 const servers = ref([
   {
     id: 1,
@@ -214,6 +223,9 @@ watch(create_tunnel.value, () => {
     const server = servers.value.find(server => server.id === create_tunnel.value.server_id)
     port_range.value.min_port = server.min_port
     port_range.value.max_port = server.max_port
+    selectedServer.value = servers.value.filter(server => server.id === create_tunnel.value.server_id)[0]
+
+    console.log(selectedServer.value)
   }
 })
 
@@ -273,7 +285,7 @@ const rules = {
           return new Error('需要定义本地地址')
         }
 
-        const reg = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\:([0-9]|[1-9]\d{1,3}|[1-5]\d{4}|6[0-5]{2}[0-3][0-5])$/
+        const reg = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5]):([0-9]|[1-9]\d{1,3}|[1-5]\d{4}|6[0-5]{2}[0-3][0-5])$/
         if (!reg.test(value)) {
           return new Error('本地地址只能是 IPv4:Port 格式')
         }
