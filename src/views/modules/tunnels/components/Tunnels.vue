@@ -181,6 +181,7 @@ function copy(content) {
 function updateStatus($tunnel) {
   selectedTunnel.value = $tunnel
   const copyCommand = "frpc " + "-t " + "\"" + user.state.token + "\" " + "-i " + $tunnel.host_id
+  const linuxSystemdCommand = "curl -s https://dash.laecloud.com/scripts/mefrp.sh | bash -s " + "\"" + user.state.token + "\" " + $tunnel.host_id
 
   if ($tunnel.status === 'delete') {
     dialog.warning({
@@ -221,6 +222,8 @@ function updateStatus($tunnel) {
     $tunnel.status = 'running'
   } else if ($tunnel.status === 'copy') {
     copy(copyCommand)
+  } else if ($tunnel.status === 'copy_startup') {
+    copy(linuxSystemdCommand)
   } else {
     patch({
       status: $tunnel.status,
@@ -266,7 +269,11 @@ const options = ref([
     value: 'rename',
   },
   {
-    label: '复制启动命令',
+    label: '复制一件配置命令(推荐)',
+    value: 'copy_startup',
+  },
+  {
+    label: '复制简单启动命令',
     value: 'copy',
   },
 ])

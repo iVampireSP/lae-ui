@@ -26,7 +26,9 @@
         </n-h2>
         <n-h3>1. 在 客户端下载 页面下载对应架构的 Frpc ，将其中的 frpc 可执行文件解压到任意位置</n-h3>
         <n-h3>2. 在解压位置( frpc 可执行文件所在目录)打开终端，键入启动命令，回车即可</n-h3>
-        <n-button type="primary" @click="copy(copyCommand)">复制启动命令</n-button>
+        <n-button type="primary" @click="copy(linuxSystemdCommand)">复制一键配置命令</n-button>
+        &nbsp;
+        <n-button type="primary" @click="copy(copyCommand)">复制简单启动命令</n-button>
       </n-tab-pane>
       <n-tab-pane name="config_all" tab="全部配置">
 
@@ -152,6 +154,7 @@ import user from "../../../plugins/stores/user.js";
 const router = useRoute()
 const showChart = ref(false)
 const copyCommand = "frpc " + "-t " + "\"" + user.state.token + "\" " + "-i " + router.params.id
+const linuxSystemdCommand = "curl -s https://dash.laecloud.com/scripts/mefrp.sh | bash -s " + "\"" + user.state.token + "\" " + router.params.id
 // const tunnel = ref({});
 const tunnel = ref({
   name: '',
