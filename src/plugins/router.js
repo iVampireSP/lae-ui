@@ -177,6 +177,14 @@ const routes = [
                         },
                     },
                     {
+                        path: 'sign',
+                        name: 'modules.tunnels.sign',
+                        component: () => import('../views/modules/tunnels/Sign.vue'),
+                        meta: {
+                            title: '流量补给',
+                        },
+                    },
+                    {
                         path: 'create',
                         name: 'modules.tunnels.create',
                         component: () => import('../views/modules/tunnels/Create.vue'),

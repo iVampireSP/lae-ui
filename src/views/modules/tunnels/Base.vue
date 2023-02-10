@@ -36,6 +36,7 @@ import {
   ListOutline,
   LogoGithub,
   ServerOutline,
+  CheckmarkSharp
 } from "@vicons/ionicons5";
 
 import {ref} from 'vue'
@@ -55,6 +56,7 @@ function reRegisterMenu() {
     addMenuOptions('left', 'modules.tunnels.index', '所有隧道', ListOutline)
     addMenuOptions('left', 'modules.tunnels.create', '新建隧道', AddOutline)
     addMenuOptions('left', 'modules.tunnels.concat', '配置文件', ClipboardOutline)
+    addMenuOptions('left', 'modules.tunnels.sign', '流量补给', CheckmarkSharp)
     addMenuOptions('left', 'modules.tunnels.status', '服务状态', ServerOutline)
     addMenuOptions('left', 'modules.tunnels.sponsor', '赞助我们', CashOutline)
     addMenuOptions('left', 'modules.tunnels.downloads', '客户端下载', CloudDownloadOutline)
