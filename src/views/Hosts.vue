@@ -166,12 +166,7 @@ function refresh_host() {
 
 // listen hosts.created
 listen('hosts.created', (e) => {
-  const host = e.data
-
-  if (user.value.user_group_id !== null) {
-    hosts.value.push(processHost(host))
-
-  }
+  refresh_host()
 })
 
 // listen hosts.updated
