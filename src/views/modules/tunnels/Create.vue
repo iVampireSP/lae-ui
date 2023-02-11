@@ -382,7 +382,7 @@ function handleCreate() {
       gateway.post('frp/hosts', create_tunnel.value).then(res => {
 
         tunnelsStore.commit('addTunnel', res.data)
-        message.success('隧道已创建，欢迎使用 ME Frp。')
+        message.success('隧道成功创建。')
       }).finally(() => {
         creating.value = false
       })
