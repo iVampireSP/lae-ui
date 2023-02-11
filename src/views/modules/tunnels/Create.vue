@@ -104,6 +104,9 @@
                     <n-text type="secondary" v-if="selectedServer.price_per_gb">
                       价格: {{ selectedServer.price_per_gb }} / GB
                     </n-text>
+                    <n-text v-else>
+                      此节点免费。
+                    </n-text>
                   </n-form-item>
 
                 </n-gi>
