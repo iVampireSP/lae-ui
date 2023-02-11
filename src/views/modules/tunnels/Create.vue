@@ -2,10 +2,9 @@
   <div>
     <n-h1 prefix="bar">
       <n-text type="primary">
-        欢迎使用 ME Frp
+        创建隧道
       </n-text>
     </n-h1>
-    <n-p>我们将引导您创建隧道。</n-p>
 
     <n-card>
       <n-tabs
