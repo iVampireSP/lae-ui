@@ -140,6 +140,69 @@
       </n-tabs>
     </n-card>
 
+
+    <div class="mt-5">
+      <n-h1 prefix="bar">
+        <n-text type="primary">
+          常见问题
+        </n-text>
+      </n-h1>
+
+      <n-collapse>
+        <n-collapse-item title="计费方式是什么？">
+          <div>
+            流量计费。每隔一段时间会统计一次流量，然后根据流量计算价格。
+          </div>
+        </n-collapse-item>
+        <n-collapse-item title="是否拥有免费流量？" >
+          <div>
+            是，并且签到获取。
+            <br />
+            并且可能还会进行一些活动，获取更多的免费流量。
+            <br />
+            公益项目也可以申请免费流量 <a href="https://forum.laecloud.com/d/15-gong-yi-ge-ren-xiang-mu-mian-fei-liu-liang-shen-qing" target="_blank">点击申请</a>。
+          </div>
+        </n-collapse-item>
+        <n-collapse-item title="免费流量用完后会停止隧道吗？">
+          <div>
+            不会，超出的流量将会从余额中扣除，可能会造成欠费情况。
+          </div>
+        </n-collapse-item>
+        <n-collapse-item title="限速吗？">
+          <div>
+            不限速。
+          </div>
+        </n-collapse-item>
+        <n-collapse-item title="限制隧道数量吗？">
+          <div>
+            不限制。
+          </div>
+        </n-collapse-item>
+        <n-collapse-item title="有 VIP 吗？">
+          <div>
+            没有。
+          </div>
+        </n-collapse-item>
+        <n-collapse-item title="打算推出流量包吗？">
+          <div>
+            不打算，因为我们目前的方式不会造成流量浪费的情况。
+          </div>
+        </n-collapse-item>
+        <n-collapse-item title="节点会稳定吗？">
+          <div>
+            收费后我们会有资金来维护节点。
+          </div>
+        </n-collapse-item>
+        <n-collapse-item title="价格如何？">
+          <div>
+            每个节点都会说明流量费用。
+            <br />
+            后期可能会调整价格。
+          </div>
+        </n-collapse-item>
+      </n-collapse>
+    </div>
+
   </div>
 
 </template>
@@ -149,6 +212,8 @@ import {computed, ref, watch} from 'vue'
 import {
   NButton,
   NCard,
+  NCollapse,
+  NCollapseItem,
   NForm,
   NFormItem,
   NGi,
