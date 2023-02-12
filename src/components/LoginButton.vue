@@ -6,7 +6,7 @@
       </n-button>
 
       <n-button type="primary" tag="a" target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=4vzG2Jk0aOEOswOkboJrYrqZUwWcTaKL&jump_from=webapi&authKey=MN5mxefqchK55kph7YJBnKZrNggZyJnKT2HRgAFt/8iR+MEtWQGE6hXqG8F/ky7F" v-if="join">
-        加入 QQ 群
+        加入咖啡厅
       </n-button>
     </n-button-group>
   </div>
