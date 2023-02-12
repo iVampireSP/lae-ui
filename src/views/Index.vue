@@ -7,7 +7,7 @@
 <script setup>
 import router from '../plugins/router.js'
 import IndexLayout from '../components/menus/IndexLayout.vue'
-import Portal from "./Home/Portal.vue";
+import Portal from "./home/Portal.vue";
 
 // import direct from "../plugins/direct.js";
 
