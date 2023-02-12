@@ -61,16 +61,16 @@ function sign() {
   gateway.post('frp/traffic').then(res => {
     traffic.value = res.data
 
-    let content = `获得了 ${res.data.free_traffic} GB 流量！`
+    let content = `获得了 ${res.data.traffic} GB 流量！`
 
-    if (res.data.free_traffic === 0) {
+    if (res.data.traffic === 0) {
       content = '没有获得流量～'
     }
 
     dialog.success({
       title: '签到成功',
       content: content,
-      positiveText: res.data.free_traffic === 0 ? '呜' : '哇',
+      positiveText: res.data.traffic === 0 ? '呜' : '哇',
     })
 
   }).finally(() => {
