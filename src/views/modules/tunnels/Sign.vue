@@ -16,9 +16,9 @@
           </n-statistic>
         </n-col>
         <n-col :span="12">
-          <n-statistic label="下次签到">
-            <div v-if="traffic.last_sign_at">
-              {{ nextSignAt }}
+          <n-statistic label="签到状态">
+            <div v-if="traffic.is_signed">
+              今日已签到
             </div>
             <div v-else>
               <n-button :loading="loading" @click="sign">
@@ -46,14 +46,14 @@ const traffic = ref({
   free_traffic: 0
 })
 
-const nextSignAt = ref('')
+// const nextSignAt = ref('')
 
 const loading = ref(false)
 
 gateway.get('frp/traffic').then(res => {
   traffic.value = res.data
 }).finally(() => {
-  refreshSign()
+  // refreshSign()
 })
 
 function sign() {
@@ -75,26 +75,26 @@ function sign() {
 
   }).finally(() => {
     loading.value = false
-    refreshSign()
+    // refreshSign()
   })
 }
 
-function refreshSign() {
-  const date = new Date(traffic.value.last_sign_at)
-
-
-  if (traffic.value.last_sign_at) {
-    date.setDate(date.getDate() + 1)
-    // nextSignAt.value = date.toLocaleString()
-    // 算出差多少小时
-    const diff = date.getTime() - new Date().getTime()
-    const hours = Math.floor(diff / 1000 / 60 / 60)
-    const minutes = Math.floor(diff / 1000 / 60 % 60)
-    nextSignAt.value = `${hours} 小时 ${minutes} 分钟`
-
-  } else {
-    nextSignAt.value = null
-  }
-}
+// function refreshSign() {
+//   const date = new Date(traffic.value.last_sign_at)
+//
+//
+//   if (traffic.value.last_sign_at) {
+//     date.setDate(date.getDate() + 1)
+//     // nextSignAt.value = date.toLocaleString()
+//     // 算出差多少小时
+//     const diff = date.getTime() - new Date().getTime()
+//     const hours = Math.floor(diff / 1000 / 60 / 60)
+//     const minutes = Math.floor(diff / 1000 / 60 % 60)
+//     nextSignAt.value = `${hours} 小时 ${minutes} 分钟`
+//
+//   } else {
+//     nextSignAt.value = null
+//   }
+// }
 
 </script>
