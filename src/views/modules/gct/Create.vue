@@ -105,7 +105,7 @@
 
             <n-gi class="text-right">
               <n-p>
-                <span v-text="price"></span> 元 / 月
+                <span v-text="price"></span> 元
               </n-p>
               <n-button type="primary" @click="deploy">部署我的服务器</n-button>
             </n-gi>
@@ -286,7 +286,6 @@ function getPrice() {
   gateway.post('gct/calculate', create_gct.value).then((res) => {
     price.value = res.data.price
 
-    console.log(res.data)
   })
 }
 
