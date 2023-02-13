@@ -69,45 +69,43 @@
 
           <n-grid cols="1 s:2" responsive="screen" x-gap="12">
             <n-gi class="text-left">
-              <n-grid cols="1 s:2" responsive="screen" x-gap="12">
-                <n-gi>
-                  节点: <span v-text="selectedLocation.price.toFixed(2)"></span> 元
-                </n-gi>
-                <n-gi>
-                  核心: <span v-text="((create_gct.cpu_limit / 100) * selectedLocation.cpu_price).toFixed(2)"></span> 元
-                </n-gi>
-                <n-gi>
-                  内存: <span v-text="((create_gct.memory / 1024) * selectedLocation.memory_price).toFixed(2)"></span> 元
-
-                </n-gi>
-                <n-gi>
-                  存储: <span v-text="((create_gct.disk / 1024) * selectedLocation.disk_price).toFixed(2)"></span> 元
-
-                </n-gi>
-
-                <n-gi>
-                  端口: <span v-text="(create_gct.allocations * selectedLocation.allocation_price).toFixed(2)"></span> 元
-
-                </n-gi>
-
-                <n-gi>
-                  备份: <span v-text="(create_gct.backups * selectedLocation.backup_price).toFixed(2)"></span> 元
-
-                </n-gi>
-              </n-grid>
-
+                <n-form-item label="支付方式" class="overflow-x-auto">
+                  <n-radio-group v-model:value="create_gct.billing_cycle" name="protocol">
+                    <n-radio-button
+                        label="动态"
+                        value=""
+                    />
+                    <n-radio-button
+                        label="月付"
+                        value="monthly"
+                    />
+                    <n-radio-button
+                        label="季付"
+                        value="quarterly"
+                    />
+                    <n-radio-button
+                        label="半年付"
+                        value="semi-annually"
+                    />
+                    <n-radio-button
+                        label="年付"
+                        value="annually"
+                    />
+                    <n-radio-button
+                        label="两年付"
+                        value="biennially"
+                    />
+                    <n-radio-button
+                        label="三年付"
+                        value="triennially"
+                    />
+                  </n-radio-group>
+                </n-form-item>
             </n-gi>
 
             <n-gi class="text-right">
               <n-p>
-                大约: <span v-text="(
-                (create_gct.disk / 1024) * selectedLocation.disk_price +
-                (create_gct.memory / 1024) * selectedLocation.memory_price +
-                (create_gct.cpu_limit / 100) * selectedLocation.cpu_price +
-                (create_gct.backups) * selectedLocation.backup_price +
-                (create_gct.allocations) * selectedLocation.allocation_price +
-                selectedLocation.price
-              ).toFixed(2)"></span> 元 / 月
+                <span v-text="price"></span> 元 / 月
               </n-p>
               <n-button type="primary" @click="deploy">部署我的服务器</n-button>
             </n-gi>
@@ -125,7 +123,7 @@
 </template>
 
 <script setup>
-import {h, ref} from 'vue'
+import {h, onUnmounted, ref, watch} from 'vue'
 import {
   NButton,
   NCard,
@@ -142,6 +140,8 @@ import {
   NSpin,
   NText,
   NTooltip,
+  NRadioButton,
+  NRadioGroup,
   useDialog
 } from 'naive-ui'
 import Humanize from "humanize-plus";
@@ -161,6 +161,7 @@ const create_gct = ref({
   allocations: 1,
   backups: 1,
   databases: 1,
+  billing_cycle: null
 })
 
 const locations = ref([])
@@ -277,9 +278,54 @@ gateway.get('gct/nests').then(res => {
   }
 
   create_gct.value.egg_id = options.value[1].value
-
 })
 
+const price = ref(0)
+
+function getPrice() {
+  gateway.post('gct/calculate', create_gct.value).then((res) => {
+    price.value = res.data.price
+
+    console.log(res.data)
+  })
+}
+
+let last_calculate_at = new Date().getTime()
+let last_gct = create_gct.value
+
+// 当 create_gct.value 发生变化时，重新计算价格
+watch(create_gct.value, () => {
+  // 防止重复计算
+  if (new Date().getTime() - last_calculate_at < 1000) {
+    return
+  }
+
+  if (!create_gct.value.egg_id) {
+    return
+  }
+
+  last_calculate_at = new Date().getTime()
+  last_gct = create_gct.value
+  getPrice()
+})
+
+let calcPriceInter = setInterval(() => {
+  // if (last_gct === create_gct.value) {
+  //   // return
+  // }
+
+  if (new Date().getTime() - last_calculate_at < 1000) {
+    return
+  }
+
+  if (!create_gct.value.egg_id) {
+    return
+  }
+
+
+  getPrice()
+
+}, 3000)
 
 const dialog = useDialog()
 
@@ -303,14 +349,14 @@ const deploy = () => {
       // })
 
 
-      dialog.success({
-        title: '好~',
-        content: '已经开始排队部署容器了，稍等一下就好了。',
-        positiveText: '哇',
-      })
-
       gateway.post('gct/hosts', create_gct.value).finally(() => {
         creating.value = false
+
+        dialog.success({
+          title: '好~',
+          content: '已经开始排队部署容器了，稍等一下就好了。',
+          positiveText: '哇',
+        })
       })
 
 
@@ -370,6 +416,10 @@ const rules = {
     }
   ],
 };
+
+onUnmounted(() => {
+  clearInterval(calcPriceInter)
+})
 
 
 </script>
