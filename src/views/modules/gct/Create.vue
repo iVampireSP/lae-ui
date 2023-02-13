@@ -161,7 +161,7 @@ const create_gct = ref({
   allocations: 1,
   backups: 1,
   databases: 1,
-  billing_cycle: null
+  billing_cycle: ''
 })
 
 const locations = ref([])
