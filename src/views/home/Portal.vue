@@ -20,14 +20,14 @@
     </div>
   </div>
 
-  <div class="absolute bottom-3 left-0 right-0">
-    <n-p class="text-center">
-      <n-text depth="3">
-        <n-a target="_blank" href="https://muhan.ltd">木韩网络</n-a>
-        提供服务
-      </n-text>
-    </n-p>
-  </div>
+<!--  <div class="absolute bottom-3 left-0 right-0">-->
+<!--    <n-p class="text-center">-->
+<!--      <n-text depth="3">-->
+<!--        <n-a target="_blank" href="https://muhan.ltd">木韩网络</n-a>-->
+<!--        提供服务-->
+<!--      </n-text>-->
+<!--    </n-p>-->
+<!--  </div>-->
 
 </template>
 
