@@ -308,6 +308,25 @@ const routes = [
                     }
                 ],
             },
+            {
+                path: 'ip-manager',
+                component: () => import('../views/modules/ip-manager/Base.vue'),
+                meta: {
+                    title: 'IP 管理',
+                },
+                children: [
+                    {
+                        path: '',
+                        name: 'modules.ip-manager.index',
+                        component: () => import('../views/modules/ip-manager/Index.vue'),
+                    },
+                    {
+                        path: 'get',
+                        name: 'modules.ip-manager.create',
+                        component: () => import('../views/modules/ip-manager/Create.vue'),
+                    }
+                ],
+            }
             // {
             //   path: 'cdn',
             //   name: 'modules.cdn',

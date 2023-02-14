@@ -1,13 +1,16 @@
 const config = {
   dev: {
-    api: 'http://www.lae.test/api/',
-    auth: 'http://www.lae.test',
+    // api: 'http://www.lae.test/api/',
+    // auth: 'http://www.lae.test',
 
-    ws_gateway: 'ws://www.lae.test:8282',
+    api: 'http://latte.lae.test/api/',
+    auth: 'http://latte.lae.test',
+
+    ws_gateway: 'ws://latte.lae.test:8282',
     // gateway: 'http://www.lae.test:3000/',
-    gateway: 'http://www.lae.test/api/modules',
+    gateway: 'http://latte.lae.test/api/modules',
 
-    ws_host: 'www.lae.test',
+    ws_host: 'latte.lae.test',
     ws_port: 6001,
     ws_auth_endpoint: 'http://www.lae.test/broadcasting/auth',
     pusher_key: 'app-key',
