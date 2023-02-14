@@ -324,6 +324,11 @@ const routes = [
                         path: 'get',
                         name: 'modules.ip-manager.create',
                         component: () => import('../views/modules/ip-manager/Create.vue'),
+                    },
+                    {
+                        path: 'forward',
+                        name: 'modules.ip-manager.forward',
+                        component: () => import('../views/modules/ip-manager/Forward.vue'),
                     }
                 ],
             }
