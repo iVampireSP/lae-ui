@@ -213,7 +213,7 @@ const routes = [
                         name: 'modules.tunnels.show',
                         component: () => import('../views/modules/tunnels/Show.vue'),
                         meta: {
-                            collapses: ['left'],
+                            // collapses: ['left'],
                             title: '隧道详情',
                         },
                     },
