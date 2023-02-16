@@ -3,6 +3,12 @@
     <n-h1 prefix="bar">
       <n-text type="primary"> 客户端下载</n-text>
     </n-h1>
+
+    <n-alert type="warning">
+      下载维护，请加 QQ 群 769779712。
+    </n-alert>
+
+    <br />
     <n-data-table
         :columns="headers"
         :data="items"
@@ -33,7 +39,7 @@
 </template>
 
 <script setup>
-import {NA, NDataTable, NH1, NText} from 'naive-ui'
+import {NA, NDataTable, NH1, NText, NAlert} from 'naive-ui'
 import {h, ref} from 'vue'
 
 const headers = [
