@@ -7,7 +7,7 @@
     <!--      <template #trigger>-->
     <n-badge :processing="taskProcessing" :type="taskStatus" :value="tasks.length"
              @click="showPopover = !showPopover">
-      <n-avatar :src="avatar" class="cursor-pointer" round size="large" @click.stop="show = true"/>
+      <n-avatar :src="avatar" class="cursor-pointer" round size="large" @click.stop="showDrawer"/>
     </n-badge>
     <!--      </template>-->
     <!--      <div>-->
@@ -105,6 +105,12 @@ const taskProcessing = computed(() => taskStore.state.processing)
 
 taskStore.dispatch('fetch')
 
+function showDrawer() {
+  show.value = true
+
+  userStore.dispatch('fetch')
+
+}
 
 </script>
 

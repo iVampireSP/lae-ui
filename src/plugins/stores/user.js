@@ -1,5 +1,6 @@
 import {createStore} from 'vuex'
 import createPersistedState from '../persistedstate'
+import http from "../http.js";
 
 export default createStore({
     plugins: [
@@ -35,6 +36,11 @@ export default createStore({
         },
         updateUser({commit}, user) {
             commit('updateUser', user)
+        },
+        fetch({commit}) {
+            http.get('/user').then(response => {
+                commit('updateUser', response.data);
+            });
         },
     },
     mutations: {
