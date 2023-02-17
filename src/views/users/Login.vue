@@ -184,6 +184,8 @@ function toLogin() {
           token.value = res.data.token
           state.value = 'confirm'
 
+          loginInter && clearInterval(loginInter)
+
           setTimeout(() => {
             connect()
           }, 500)
@@ -196,7 +198,7 @@ function toLogin() {
       }
 
       times.value++
-    }, 1000)
+    }, 3000)
   }).catch(() => {
     state.value = 'error'
     loading.value = false
