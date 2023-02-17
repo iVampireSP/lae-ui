@@ -1,29 +1,6 @@
 <template>
   <div>
-    <div v-if="maintenances.length">
-      <n-alert
-        :title="
-          (maintenances[0].module ? maintenances[0].module.name + ': ': '维护通知: ') +
-          maintenances[0].name
-        "
-        type="warning"
-        :bordered="bordered"
-      >
-        {{ maintenances[0].content }}
-
-        <br />
-        <span v-if="maintenances[0].start_at">
-          <span>开始时间: </span>
-          <span>{{ new Date(maintenances[0].start_at).toLocaleString() }}</span>
-        </span>
-        <span v-if="maintenances[0].end_at">
-          <span v-show="maintenances[0].start_at">, </span>
-
-          <span>结束时间: </span>
-          <span>{{ new Date(maintenances[0].end_at).toLocaleString() }}</span>
-        </span>
-      </n-alert>
-    </div>
+    <Maintenance v-if="user.state.token" />
     <div>
       <slot />
     </div>
@@ -31,14 +8,12 @@
 </template>
 
 <script setup>
-  import { ref, onUnmounted } from 'vue'
-
   import {
     addMenuOptions,
     removeAllMenuOptionsThen,
   } from '../../plugins/menuOptions.js'
 
-  import http from '../../plugins/http.js'
+  import user from '../../plugins/stores/user'
 
   import {
     HomeOutline,
@@ -53,7 +28,7 @@
     SupportAgentRound,
   } from '@vicons/material'
 
-  import { NAlert } from 'naive-ui'
+  import Maintenance from '../Maintenance.vue'
 
   removeAllMenuOptionsThen('left', () => {
     // 注册菜单
@@ -65,22 +40,5 @@
     addMenuOptions('left', 'status', '监控', MonitorHeartFilled)
     addMenuOptions('left', 'work-orders', '工单', SupportAgentRound)
     addMenuOptions('left', 'stars', '繁星', CakeRound)
-  })
-
-  const maintenances = ref([])
-  const bordered = ref(false)
-
-  let interval = null
-
-  http.get('maintenances').then((res) => {
-    maintenances.value = res.data
-
-    interval = setInterval(() => {
-      bordered.value = !bordered.value
-    }, 1000)
-  })
-
-  onUnmounted(() => {
-    interval && clearInterval(interval)
   })
 </script>
