@@ -68,6 +68,15 @@
         </n-a>
       </div>
 
+      <div class="mt-5">
+        <n-h2 class="all-zero">退出登录</n-h2>
+        <n-a>
+          <router-link :to="{ name: 'auth.login' }" class="link">
+            退出登录
+          </router-link>
+        </n-a>
+      </div>
+
     </n-drawer-content>
   </n-drawer>
 
