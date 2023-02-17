@@ -24,7 +24,10 @@
       <Menu />
     </n-layout-sider>
 
-    <n-layout :native-scrollbar="false" content-style="padding: 24px;padding-top: 10px">
+    <n-layout
+      :native-scrollbar="false"
+      content-style="padding: 24px;padding-top: 10px"
+    >
       <Maintenance v-if="user.state.token" class="mb-5 mt-1" />
 
       <router-view v-slot="{ Component }">
@@ -53,7 +56,6 @@
   import HeaderVue from './headers/Header.vue'
   import Menu from './Menu.vue'
   import Maintenance from './Maintenance.vue'
-
 
   import { menuCollapsed } from '../plugins/menuOptions.js'
   import Notifications from './Notifications.vue'
