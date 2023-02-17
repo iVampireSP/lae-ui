@@ -8,6 +8,7 @@
       "
       type="warning"
       :bordered="bordered"
+      :closable="true"
     >
       {{ maintenances[0].content }}
 

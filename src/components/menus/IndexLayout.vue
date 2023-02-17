@@ -1,9 +1,6 @@
 <template>
   <div>
-    <Maintenance v-if="user.state.token" />
-    <div>
-      <slot />
-    </div>
+    <slot />
   </div>
 </template>
 
@@ -12,8 +9,6 @@
     addMenuOptions,
     removeAllMenuOptionsThen,
   } from '../../plugins/menuOptions.js'
-
-  import user from '../../plugins/stores/user'
 
   import {
     HomeOutline,
@@ -27,8 +22,6 @@
     MonitorHeartFilled,
     SupportAgentRound,
   } from '@vicons/material'
-
-  import Maintenance from '../Maintenance.vue'
 
   removeAllMenuOptionsThen('left', () => {
     // 注册菜单
