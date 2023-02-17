@@ -24,8 +24,8 @@
       <Menu />
     </n-layout-sider>
 
-    <n-layout :native-scrollbar="false" content-style="padding: 24px">
-      <Maintenance v-if="user.state.token" class="mb-5" />
+    <n-layout :native-scrollbar="false" content-style="padding: 24px;padding-top: 10px">
+      <Maintenance v-if="user.state.token" class="mb-5 mt-1" />
 
       <router-view v-slot="{ Component }">
         <transition mode="out-in" name="fade">
