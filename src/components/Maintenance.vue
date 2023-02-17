@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-  import { ref, onUnmounted } from 'vue'
+  import { ref, onMounted, onUnmounted } from 'vue'
   import { NAlert } from 'naive-ui'
   import http from '../plugins/http.js'
 
@@ -36,9 +36,20 @@
   const bordered = ref(false)
 
   let interval = null
+  let refresh_interval = null
 
-  http.get('maintenances').then((res) => {
-    maintenances.value = res.data
+  function refresh() {
+    http.get('maintenances').then((res) => {
+      maintenances.value = res.data
+    })
+  }
+
+  onMounted(() => {
+    refresh()
+
+    refresh_interval = setInterval(() => {
+      refresh()
+    }, 10000)
 
     interval = setInterval(() => {
       bordered.value = !bordered.value
@@ -47,5 +58,6 @@
 
   onUnmounted(() => {
     interval && clearInterval(interval)
+    refresh_interval && clearInterval(refresh_interval)
   })
 </script>
