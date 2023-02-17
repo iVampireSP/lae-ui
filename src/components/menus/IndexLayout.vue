@@ -3,8 +3,7 @@
     <div v-if="maintenances.length">
       <n-alert
         :title="
-          (maintenances[0].module ? maintenances[0].module.name : '') +
-          ': ' +
+          (maintenances[0].module ? maintenances[0].module.name + ': ': '维护通知: ') +
           maintenances[0].name
         "
         type="warning"
