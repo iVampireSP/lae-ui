@@ -269,7 +269,7 @@ const options = ref([
     value: 'rename',
   },
   {
-    label: '复制一件配置命令(推荐)',
+    label: '复制一键配置命令(推荐)',
     value: 'copy_startup',
   },
   {
