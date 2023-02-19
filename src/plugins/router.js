@@ -24,16 +24,16 @@ const routes = [
             title: '繁星',
         },
     },
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   component: () => import('../../../../Downloads/lae-ui-main/src/views/About.vue'),
-    //   meta: {
-    //     auth: true,
-    //     keepalive: true,
-    //     title: '关于',
-    //   },
-    // },
+    {
+      path: '/about',
+      name: 'about',
+      component: () => import('../views/About.vue'),
+      meta: {
+        auth: true,
+        keepalive: true,
+        title: '关于',
+      },
+    },
     {
         path: '/auth/login',
         name: 'auth.login',
