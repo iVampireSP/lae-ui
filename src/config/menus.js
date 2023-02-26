@@ -16,12 +16,12 @@ const modules = [
         route: "modules.gct.index",
         icon: GameControllerOutline
     },
-    {
-        id: "ip-manager",
-        name: "IP 管理",
-        route: "modules.ip-manager.index",
-        icon: GameControllerOutline
-    },
+    // {
+    //     id: "ip-manager",
+    //     name: "IP 管理",
+    //     route: "modules.ip-manager.index",
+    //     icon: GameControllerOutline
+    // },
     // {
     //     id: "user-mqtt",
     //     name: "消息队列",
