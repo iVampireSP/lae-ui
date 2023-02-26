@@ -69,38 +69,38 @@
 
           <n-grid cols="1 s:2" responsive="screen" x-gap="12">
             <n-gi class="text-left">
-<!--                <n-form-item label="计费周期" class="overflow-x-auto">-->
-<!--                  <n-radio-group v-model:value="create_gct.billing_cycle" name="protocol">-->
-<!--                    <n-radio-button-->
-<!--                        label="动态"-->
-<!--                        value=""-->
-<!--                    />-->
-<!--                    <n-radio-button-->
-<!--                        label="月付"-->
-<!--                        value="monthly"-->
-<!--                    />-->
-<!--                    <n-radio-button-->
-<!--                        label="季付"-->
-<!--                        value="quarterly"-->
-<!--                    />-->
-<!--                    <n-radio-button-->
-<!--                        label="半年付"-->
-<!--                        value="semi-annually"-->
-<!--                    />-->
-<!--                    <n-radio-button-->
-<!--                        label="年付"-->
-<!--                        value="annually"-->
-<!--                    />-->
-<!--                    <n-radio-button-->
-<!--                        label="两年付"-->
-<!--                        value="biennially"-->
-<!--                    />-->
-<!--                    <n-radio-button-->
-<!--                        label="三年付"-->
-<!--                        value="triennially"-->
-<!--                    />-->
-<!--                  </n-radio-group>-->
-<!--                </n-form-item>-->
+              <!--                <n-form-item label="计费周期" class="overflow-x-auto">-->
+              <!--                  <n-radio-group v-model:value="create_gct.billing_cycle" name="protocol">-->
+              <!--                    <n-radio-button-->
+              <!--                        label="动态"-->
+              <!--                        value=""-->
+              <!--                    />-->
+              <!--                    <n-radio-button-->
+              <!--                        label="月付"-->
+              <!--                        value="monthly"-->
+              <!--                    />-->
+              <!--                    <n-radio-button-->
+              <!--                        label="季付"-->
+              <!--                        value="quarterly"-->
+              <!--                    />-->
+              <!--                    <n-radio-button-->
+              <!--                        label="半年付"-->
+              <!--                        value="semi-annually"-->
+              <!--                    />-->
+              <!--                    <n-radio-button-->
+              <!--                        label="年付"-->
+              <!--                        value="annually"-->
+              <!--                    />-->
+              <!--                    <n-radio-button-->
+              <!--                        label="两年付"-->
+              <!--                        value="biennially"-->
+              <!--                    />-->
+              <!--                    <n-radio-button-->
+              <!--                        label="三年付"-->
+              <!--                        value="triennially"-->
+              <!--                    />-->
+              <!--                  </n-radio-group>-->
+              <!--                </n-form-item>-->
             </n-gi>
 
             <n-gi class="text-right">
@@ -140,8 +140,6 @@ import {
   NSpin,
   NText,
   NTooltip,
-  NRadioButton,
-  NRadioGroup,
   useDialog
 } from 'naive-ui'
 import Humanize from "humanize-plus";

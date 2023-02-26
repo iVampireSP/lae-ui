@@ -9,7 +9,7 @@
     <n-card>
       <n-row>
         <n-col :span="12">
-          <n-statistic label="当前流量" :value="traffic.free_traffic">
+          <n-statistic :value="traffic.free_traffic" label="当前流量">
             <template #suffix>
               GB
             </template>

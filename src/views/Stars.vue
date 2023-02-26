@@ -49,8 +49,7 @@ const current_user = computed(() => userStore.state.user)
 function load(scroll = false) {
   page.value++
   loading.value = true
-  http
-      .get('birthdays', {
+  http.get('birthdays', {
         params: {
           page: page.value,
         },

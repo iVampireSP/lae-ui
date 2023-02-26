@@ -21,13 +21,9 @@
 
 
   <n-drawer v-model:show="show" :width="width" placement="right">
-    <n-drawer-content :native-scrollbar="false" :title="user.name + ' # ' + user.id" closable @click="show = false">
+    <n-drawer-content :native-scrollbar="false" :title="user.name + ' # ' + user.id" closable>
 
-      <div class="text-center">
-        <n-avatar :size="256" :src="avatar" round/>
-        <br/>
-        <n-h1 class="all-zero">{{ user.name }} # {{ user.id }}</n-h1>
-      </div>
+      <Username/>
 
       <div>
         <n-h2 class="all-zero">财务</n-h2>
@@ -85,6 +81,7 @@
 <script setup>
 import {NA, NAvatar, NBadge, NDrawer, NDrawerContent, NH1, NH2, NH4} from "naive-ui";
 import {computed, ref} from "vue";
+import Username from "./Username.vue";
 
 import api from "../../config/api.js";
 import userStore from "../../plugins/stores/user.js";

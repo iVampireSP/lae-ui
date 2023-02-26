@@ -99,8 +99,8 @@
                     <n-text v-else>没有可用的服务器</n-text>
                   </n-form-item>
 
-                  <n-form-item label="流量计费" v-if="selectedServer">
-                    <n-text type="secondary" v-if="selectedServer.price_per_gb">
+                  <n-form-item v-if="selectedServer" label="流量计费">
+                    <n-text v-if="selectedServer.price_per_gb" type="secondary">
                       价格: {{ selectedServer.price_per_gb }} / GB
                     </n-text>
                     <n-text v-else>
@@ -154,13 +154,15 @@
             流量计费。每隔一段时间会统计一次流量，然后根据流量计算价格。
           </div>
         </n-collapse-item>
-        <n-collapse-item title="是否拥有免费流量？" >
+        <n-collapse-item title="是否拥有免费流量？">
           <div>
             是，并且签到获取。
-            <br />
+            <br/>
             并且可能还会进行一些活动，获取更多的免费流量。
-            <br />
-            公益项目也可以申请免费流量 <a href="https://forum.laecloud.com/d/15-gong-yi-ge-ren-xiang-mu-mian-fei-liu-liang-shen-qing" target="_blank">点击申请</a>。
+            <br/>
+            公益项目也可以申请免费流量 <a
+              href="https://forum.laecloud.com/d/15-gong-yi-ge-ren-xiang-mu-mian-fei-liu-liang-shen-qing"
+              target="_blank">点击申请</a>。
           </div>
         </n-collapse-item>
         <n-collapse-item title="免费流量用完后会停止隧道吗？">
@@ -196,7 +198,7 @@
         <n-collapse-item title="价格如何？">
           <div>
             每个节点都会说明流量费用。
-            <br />
+            <br/>
             后期可能会调整价格。
           </div>
         </n-collapse-item>

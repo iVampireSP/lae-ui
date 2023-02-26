@@ -8,7 +8,7 @@
       下载维护，请加 QQ 群 769779712。
     </n-alert>
 
-    <br />
+    <br/>
     <n-data-table
         :columns="headers"
         :data="items"
@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import {NA, NDataTable, NH1, NText, NAlert} from 'naive-ui'
+import {NA, NAlert, NDataTable, NH1, NText} from 'naive-ui'
 import {h, ref} from 'vue'
 
 const headers = [
