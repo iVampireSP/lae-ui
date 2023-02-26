@@ -31,12 +31,12 @@ import {NA, NIcon, NText} from "naive-ui";
 import {
   AddOutline,
   CashOutline,
+  CheckmarkSharp,
   ClipboardOutline,
   CloudDownloadOutline,
   ListOutline,
   LogoGithub,
-  ServerOutline,
-  CheckmarkSharp
+  ServerOutline
 } from "@vicons/ionicons5";
 
 import {ref} from 'vue'

@@ -1,6 +1,6 @@
 <template>
   <div v-if="is_ready">
-    <TerminalComponent ref="terminal" :socket="socket" height="90px" cursor-style="underline" />
+    <TerminalComponent ref="terminal" :socket="socket" cursor-style="underline" height="90px"/>
 
     <div>
       <input

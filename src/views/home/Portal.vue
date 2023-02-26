@@ -7,8 +7,8 @@
 
   <div class="flex items-center align-center justify-center h-full">
     <div class="text-center">
-      <img src="/assets/images/i7.jpeg" alt="i7-12700k" width="200" class="rounded inline"
-           style="box-shadow: rgb(22 57 141) 0 0 20px 6px">
+      <img alt="i7-12700k" class="rounded inline" src="/assets/images/i7.jpeg" style="box-shadow: rgb(22 57 141) 0 0 20px 6px"
+           width="200">
       <br/>
       <n-h1>
         游戏容器
@@ -16,23 +16,23 @@
         限量供应
       </n-h1>
       <br/>
-      <LoginButton text="现在登录" :join="true" />
+      <LoginButton :join="true" text="现在登录"/>
     </div>
   </div>
 
-<!--  <div class="absolute bottom-3 left-0 right-0">-->
-<!--    <n-p class="text-center">-->
-<!--      <n-text depth="3">-->
-<!--        <n-a target="_blank" href="https://muhan.ltd">木韩网络</n-a>-->
-<!--        提供服务-->
-<!--      </n-text>-->
-<!--    </n-p>-->
-<!--  </div>-->
+  <!--  <div class="absolute bottom-3 left-0 right-0">-->
+  <!--    <n-p class="text-center">-->
+  <!--      <n-text depth="3">-->
+  <!--        <n-a target="_blank" href="https://muhan.ltd">木韩网络</n-a>-->
+  <!--        提供服务-->
+  <!--      </n-text>-->
+  <!--    </n-p>-->
+  <!--  </div>-->
 
 </template>
 
 <script setup>
-import {NA, NH1, NP, NText} from 'naive-ui'
+import {NH1} from 'naive-ui'
 import LoginButton from "../../components/LoginButton.vue";
 //
 </script>

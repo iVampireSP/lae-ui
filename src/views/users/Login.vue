@@ -24,7 +24,7 @@
 
           <br/>
           <span>请
-            <n-a :href="url" target="_blank" class="underline underline-offset-4">点击打开 URL 并授权</n-a>
+            <n-a :href="url" class="underline underline-offset-4" target="_blank">点击打开 URL 并授权</n-a>
             。
           </span>
         </div>
@@ -74,7 +74,7 @@
           </n-text>
         </n-h3>
 
-        <n-button type="success" @click="connect" :loading="loading">
+        <n-button :loading="loading" type="success" @click="connect">
           确认登录
         </n-button>
       </p>

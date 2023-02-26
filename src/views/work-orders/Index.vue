@@ -12,9 +12,7 @@
             <PlusOutlined/>
           </n-icon>
         </template>
-        <n-text>
-          新建工单
-        </n-text>
+        新建工单
       </n-button>
     </router-link>
 
