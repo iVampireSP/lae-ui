@@ -25,9 +25,13 @@
             <span>次数: {{ times }} / 10</span>
             <br />
 
-          <br/>
-          <span>请
-            <n-a :href="url" target="_blank" class="underline underline-offset-4">点击打开 URL 并授权</n-a>
+            请
+            <n-a
+              :href="url"
+              target="_blank"
+              class="underline underline-offset-4"
+              >点击打开 URL 并授权</n-a
+            >
             。
           </span>
           <span v-else>
