@@ -5,7 +5,7 @@
         关于
       </n-text>
     </n-h1>
-    <n-card title="开发人员">
+    <n-card class="mb-3" title="开发人员">
       <n-list hoverable>
         <n-list-item v-for="developer in developers">
           <template #prefix>
@@ -15,7 +15,7 @@
         </n-list-item>
       </n-list>
     </n-card>
-    <n-card title="特别感谢">
+    <n-card class="mb-3" title="特别感谢">
       <n-list hoverable>
         <n-list-item v-for="people in special_thanks">
           <template #prefix>
@@ -40,7 +40,8 @@
 <script setup>
 import IndexLayout from '../components/menus/IndexLayout.vue'
 import api from '../config/api.js'
-import { NText, NH1, NCard, NThing, NList, NListItem, NAvatar, NA, NH4 } from 'naive-ui'
+import {NA, NAvatar, NCard, NH1, NH4, NList, NListItem, NText, NThing} from 'naive-ui'
+
 const developers = [
   {
     name: 'kingc',
@@ -150,10 +151,12 @@ const techs = [
   }
 ]
 
-developers.sort(() => Math.random() - 0.5);
-special_thanks.sort(() => Math.random() - 0.5);
-techs.sort(() => Math.random() - 0.5);
-
+// developers.sort(() => Math.random() - 0.5);
+// special_thanks.sort(() => Math.random() - 0.5);
+// techs.sort(() => Math.random() - 0.5);
+developers.sort((a, b) => a.name.localeCompare(b.name));
+special_thanks.sort((a, b) => a.name.localeCompare(b.name));
+techs.sort((a, b) => a.name.localeCompare(b.name));
 </script>
 
 <style scoped>

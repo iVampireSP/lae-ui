@@ -1,9 +1,9 @@
 <template>
   <IndexLayout>
-    <n-h1 align-text prefix="bar" type="success">
-      <n-gradient-text type="success">
+    <n-h1 prefix="bar">
+      <n-text type="primary">
         监控
-      </n-gradient-text>
+      </n-text>
     </n-h1>
 
     <n-tabs v-model:value="currentModule" animated type="line" @update:value="handleUpdateValue">
@@ -98,7 +98,7 @@
           </tbody>
         </n-table>
         <div v-else>
-          <n-empty :description="'没有检索到服务器，' + '模块状态' + getTextStatus(module.status) + '。'"/>
+          <n-empty :description="'没有检索到服务器，' + '模块状态' + getTextStatus(module.status) + '。'" class="mt-3"/>
         </div>
 
       </n-tab-pane>
@@ -108,7 +108,7 @@
 
 <script setup>
 import {onUnmounted, ref} from "vue"
-import {NEmpty, NGradientText, NH1, NTable, NTabPane, NTabs, NText} from "naive-ui"
+import {NEmpty, NH1, NTable, NTabPane, NTabs, NText} from "naive-ui"
 import http from '../plugins/http'
 import IndexLayout from "../components/menus/IndexLayout.vue";
 
