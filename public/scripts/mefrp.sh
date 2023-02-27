@@ -3,7 +3,7 @@
 check_root() {
     if [ $EUID -ne 0 ]; then
         echo "请使用 root 权限运行"
-        exit 1
+        # exit 1
     fi
     
 }
@@ -26,7 +26,10 @@ install_frpc() {
     
     file_name="frp_MirrorEdgeFrp_0.46.1_beta_${kernel}_$arch"
     
-    link="https://www.laecloud.com/wp-content/downloads/$file_name.tar.gz"
+    link="https://r2.laecloud.com/MEFrpRelease/$file_name.tar.gz"
+
+    echo $link
+    exit 1
     
     # 下载 frp
     wget -O /tmp/frp.tar.gz "$link"
@@ -70,7 +73,7 @@ echo "$token" > /etc/laecloud/token
 # systemd
 cat > /etc/systemd/system/frpc@.service << EOF
 [Unit]
-Description=Frp Client Service of %i
+Description=LAE Frp Client Service of %i
 After=network.target
 
 
