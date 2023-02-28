@@ -27,9 +27,6 @@ install_frpc() {
     file_name="frp_MirrorEdgeFrp_0.46.1_beta_${kernel}_$arch"
     
     link="https://r2.laecloud.com/MEFrpRelease/$file_name.tar.gz"
-
-    echo $link
-    exit 1
     
     # 下载 frp
     wget -O /tmp/frp.tar.gz "$link"
