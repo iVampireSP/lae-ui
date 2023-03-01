@@ -119,10 +119,10 @@ function sendWorkOrderNotification(e) {
     'read': '已读',
     'open': '已开启',
   }
-
-  let title = e.data.title
-  let content = e.data.content
-  let meta = status[e.data.status] + ' - ' + new Date(e['sent_at']).toLocaleString()
+  
+  let title = status[e.data.status]
+  let content = e.data.latest_reply['content'] ?? e.data.title
+  let meta = new Date(e['sent_at']).toLocaleString()
   notification.info({
     title: title,
     content: () => {
