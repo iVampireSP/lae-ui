@@ -36,14 +36,6 @@ const sponsors = {
       "items": "广东联通/辽宁电信节点"
     },
     {
-      "name": "PH",
-      "items": "哥斯达黎加节点"
-    },
-    {
-      "name": "夏小叶",
-      "items": "新加坡节点"
-    },
-    {
       "name": "akchiji888",
       "comment": "祝 ME Frp 越来越好，越来越长久地运营下去",
       "items": "10 RMB"
