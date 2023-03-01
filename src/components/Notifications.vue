@@ -64,7 +64,15 @@ listen('tasks.updated', (e) => {
 
 /* Begin Notification */
 listen('notifications', (e) => {
-  let title = ''
+  handleNotification(e)
+})
+
+listen('notification', (e) => {
+  handleNotification(e)
+})
+
+function handleNotification(e) {
+    let title = ''
 
   if (e.data.name) {
     title = e.data.name
@@ -102,7 +110,7 @@ listen('notifications', (e) => {
   }
 
   play('Popcorn.ogg')
-})
+}
 
 /* End Notification */
 
