@@ -1,5 +1,5 @@
 <template>
-  <div class="justify-center items-center flex" style="height: 60vh">
+  <div class="justify-center items-center flex" style="height: 92vh">
     <div v-if="!route.query.auth_request">
       <div v-if="state === 'redirect'">
         <div class="text-center">
@@ -19,19 +19,19 @@
             <div v-if="loginUrl">
               <p>使用移动设备扫码登录</p>
               <QRCodeVue3
-                  :dotsOptions="qrOptions.dotsOptions"
-                  :imageOptions="qrOptions.imageOptions"
-                  :qrOptions="qrOptions.qrOptions"
                   :backgroundOptions="qrOptions.backgroundOptions"
                   :backgroundOptionsHelper="qrOptions.backgroundOptionsHelper"
-                  :dotsOptionsHelper="qrOptions.dotsOptionsHelper"
-                  :cornersSquareOptions="qrOptions.cornersSquareOptions"
-                  :cornersSquareOptionsHelper="qrOptions.cornersSquareOptionsHelper"
                   :cornersDotOptions="qrOptions.cornersDotOptions"
                   :cornersDotOptionsHelper="qrOptions.cornersDotOptionsHelper"
+                  :cornersSquareOptions="qrOptions.cornersSquareOptions"
+                  :cornersSquareOptionsHelper="qrOptions.cornersSquareOptionsHelper"
+                  :dotsOptions="qrOptions.dotsOptions"
+                  :dotsOptionsHelper="qrOptions.dotsOptionsHelper"
+                  :height="qrOptions.height"
+                  :imageOptions="qrOptions.imageOptions"
+                  :qrOptions="qrOptions.qrOptions"
                   :value="loginUrl"
                   :width="qrOptions.width"
-                  :height="qrOptions.height"
               />
               <br/>
 
@@ -40,14 +40,18 @@
                 <n-a
                     :href="url"
                     class="underline underline-offset-4"
-                >不使用二维码登录</n-a>。
+                >不使用二维码登录
+                </n-a>
+                。
               </n-p>
             </div>
             <div v-else>
               <n-a
                   :href="url"
                   class="underline underline-offset-4"
-              >点击打开 URL 并授权</n-a>。
+              >点击打开 URL 并授权
+              </n-a>
+              。
             </div>
 
             <!--            <span>次数: {{ times }} / 10</span>-->
@@ -75,7 +79,12 @@
     </div>
     <div v-else>
       <n-h1 class="mt-5">
-        <n-text class="text-center" type="info"> 请稍后...</n-text>
+        <n-spin>
+          <template #description>
+            <n-p v-text="lyric()">
+            </n-p>
+          </template>
+        </n-spin>
       </n-h1>
     </div>
   </div>
@@ -83,7 +92,7 @@
 
 <script setup>
 import {onMounted, ref} from 'vue'
-import {NA, NH1, NH2, NP, NSpin, NText} from 'naive-ui'
+import {NA, NH1, NH2, NP, NSpin} from 'naive-ui'
 import http from '../../plugins/http'
 import api from '../../config/api'
 import user from '../../plugins/stores/user.js'
