@@ -3,8 +3,12 @@
     <div v-if="!route.query.auth_request">
       <div v-if="state === 'redirect'">
         <div class="text-center">
-          <n-h1>请稍后</n-h1>
-
+          <n-spin>
+            <template #description>
+              <n-p v-text="lyric()">
+              </n-p>
+            </template>
+          </n-spin>
         </div>
       </div>
       <div v-else-if="state === 'logging'">
@@ -31,11 +35,13 @@
               />
               <br/>
 
-              或者
-              <n-a
-                  :href="url"
-                  class="underline underline-offset-4"
-              >点击打开 URL 并授权</n-a>。
+              <n-p>
+                或者
+                <n-a
+                    :href="url"
+                    class="underline underline-offset-4"
+                >不使用二维码登录</n-a>。
+              </n-p>
             </div>
             <div v-else>
               <n-a
@@ -113,7 +119,6 @@ const qrOptions = ref({
   "width": 200,
   "height": 200,
   "padding": 0,
-  "margin": 0,
   "qrOptions": {
     "typeNumber": "0",
     "mode": "Byte",
