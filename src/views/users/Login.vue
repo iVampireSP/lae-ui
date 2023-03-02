@@ -104,12 +104,6 @@
 
   const route = useRoute()
 
-  const style = {
-    textAlign: 'center',
-    marginTop: '20px',
-    marginBottom: '20px',
-  }
-
   const origin = api.auth
 
   console.log('auth server: ' + origin)
