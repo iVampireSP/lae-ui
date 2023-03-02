@@ -1,124 +1,229 @@
 <template>
   <div class="justify-center items-center flex" style="height: 60vh">
-    <div>
+    <div v-if="!route.query.auth_request">
       <div v-if="state === 'redirect'">
-        <Lottie :height="256" :style="style" name="Wave" />
-
         <div class="text-center">
-          <n-h1>欢迎！要一起加入莱云吗？</n-h1>
+          <n-h1>请稍后</n-h1>
 
-          <n-button
-            :loading="loading"
-            class="text-center"
-            type="info"
-            @click="toLogin"
-          >
-            现在登录！
-          </n-button>
         </div>
       </div>
       <div v-else-if="state === 'logging'">
         <div class="text-center">
-          <span v-if="url">
-            <n-h2>正在等待验证</n-h2>
+          <div v-if="url">
+            <n-h2>登录 莱云</n-h2>
 
-            <span>次数: {{ times }} / 10</span>
-            <br />
+            <div v-if="loginUrl">
+              <p>使用移动设备扫码登录</p>
+              <QRCodeVue3
+                  :dotsOptions="qrOptions.dotsOptions"
+                  :imageOptions="qrOptions.imageOptions"
+                  :qrOptions="qrOptions.qrOptions"
+                  :backgroundOptions="qrOptions.backgroundOptions"
+                  :backgroundOptionsHelper="qrOptions.backgroundOptionsHelper"
+                  :dotsOptionsHelper="qrOptions.dotsOptionsHelper"
+                  :cornersSquareOptions="qrOptions.cornersSquareOptions"
+                  :cornersSquareOptionsHelper="qrOptions.cornersSquareOptionsHelper"
+                  :cornersDotOptions="qrOptions.cornersDotOptions"
+                  :cornersDotOptionsHelper="qrOptions.cornersDotOptionsHelper"
+                  :value="loginUrl"
+                  :width="qrOptions.width"
+                  :height="qrOptions.height"
+              />
+              <br/>
 
-            请
-            <n-a
-              :href="url"
-              target="_blank"
-              class="underline underline-offset-4"
-              >点击打开 URL 并授权</n-a
-            >
-            。
-          </span>
+              或者
+              <n-a
+                  :href="url"
+                  class="underline underline-offset-4"
+              >点击打开 URL 并授权</n-a>。
+            </div>
+            <div v-else>
+              <n-a
+                  :href="url"
+                  class="underline underline-offset-4"
+              >点击打开 URL 并授权</n-a>。
+            </div>
+
+            <!--            <span>次数: {{ times }} / 10</span>-->
+
+
+          </div>
           <span v-else>
-            <n-h2>正在加载...</n-h2>
+            <n-spin>
+              <template #description>
+                <n-p v-text="lyric()">
+                </n-p>
+              </template>
+            </n-spin>
           </span>
         </div>
       </div>
-      <div v-else-if="state === 'error'">
-        <Lottie :height="256" :style="style" name="Ghost" />
-
-        <div class="text-center">
-          <n-h1 class="mt-5">
-            <n-text class="text-center" type="error"> 无法完成登录。 </n-text>
-          </n-h1>
-
-          <n-button type="error" @click="toLogin"> 重新登录 </n-button>
-        </div>
-      </div>
-      <div v-else-if="state === 'error'">
-        <Lottie :height="256" :style="style" name="Ghost" />
-
-        <div class="text-center">
-          <n-h1 class="mt-5">
-            <n-text class="text-center" type="error"> 无法完成登录。 </n-text>
-          </n-h1>
-
-          <n-button type="error" @click="toLogin"> 重新登录 </n-button>
-        </div>
-      </div>
-
-      <p v-if="state === 'confirm'" class="text-center mt-5">
-        <n-h3 class="mt-5">
-          <n-text class="text-center" type="success">
-            您好, {{ auth_request.user.name }}。
-          </n-text>
-        </n-h3>
-
-        <n-button :loading="loading" type="success" @click="connect">
-          确认登录
-        </n-button>
-      </p>
 
       <p v-if="state === 'redirect'" class="text-center mt-5">
         莱云 iVampireSP.com 作品
-        <br />
+        <br/>
         <span>莱云的 Logo 动画由 Fofray 制作。</span>
-        <br />
+        <br/>
         <a href="https://beian.miit.gov.cn/">苏ICP备2022042268号-1</a>
       </p>
+    </div>
+    <div v-else>
+      <n-h1 class="mt-5">
+        <n-text class="text-center" type="info"> 请稍后...</n-text>
+      </n-h1>
     </div>
   </div>
 </template>
 
 <script setup>
-  import { onMounted, ref } from 'vue'
-  import { NA, NButton, NH1, NH2, NH3, NText } from 'naive-ui'
-  import http from '../../plugins/http'
-  import api from '../../config/api'
-  import user from '../../plugins/stores/user.js'
-  import Lottie from '../../components/Lottie.vue'
-  import axios from 'axios'
+import {onMounted, ref} from 'vue'
+import {NA, NH1, NH2, NP, NSpin, NText} from 'naive-ui'
+import http from '../../plugins/http'
+import api from '../../config/api'
+import user from '../../plugins/stores/user.js'
+import axios from 'axios'
+import {useRoute} from 'vue-router'
+import lyric from "../../plugins/lyric.js";
+import QRCodeVue3 from "qrcode-vue3";
 
-  const style = {
-    textAlign: 'center',
-    marginTop: '20px',
-    marginBottom: '20px',
+const route = useRoute()
+
+const style = {
+  textAlign: 'center',
+  marginTop: '20px',
+  marginBottom: '20px',
+}
+
+const origin = api.auth
+
+console.log('auth server: ' + origin)
+
+const token = ref('')
+const state = ref('redirect')
+
+const auth_request = ref({})
+
+const loading = ref(false)
+
+const url = ref('')
+
+const loginUrl = ref('')
+
+const qrOptions = ref({
+  "width": 200,
+  "height": 200,
+  "padding": 0,
+  "margin": 0,
+  "qrOptions": {
+    "typeNumber": "0",
+    "mode": "Byte",
+    "errorCorrectionLevel": "Q"
+  },
+  "dotsOptions": {
+    "type": "rounded",
+    "color": "#065de0",
+    "gradient": {
+      "type": "radial",
+      "rotation": 0,
+      "colorStops": [
+        {
+          "offset": 0,
+          "color": "#005ec2"
+        },
+        {
+          "offset": 1,
+          "color": "#388eff"
+        }
+      ]
+    }
+  },
+  "backgroundOptions": {
+    "color": "#ffffff",
+    "gradient": null
+  },
+  "dotsOptionsHelper": {
+    "colorType": {
+      "single": true,
+      "gradient": false
+    },
+    "gradient": {
+      "linear": true,
+      "radial": false,
+      "color1": "#6a1a4c",
+      "color2": "#6a1a4c",
+      "rotation": "0"
+    }
+  },
+  "cornersSquareOptions": {
+    "type": "extra-rounded",
+    "color": "#00e6d6",
+    "gradient": {
+      "type": "radial",
+      "rotation": 0,
+      "colorStops": [
+        {
+          "offset": 0,
+          "color": "#0072d6"
+        },
+        {
+          "offset": 1,
+          "color": "#68bcfd"
+        }
+      ]
+    }
+  },
+  "cornersSquareOptionsHelper": {
+    "colorType": {
+      "single": true,
+      "gradient": false
+    },
+    "gradient": {
+      "linear": true,
+      "radial": false,
+      "color1": "#000000",
+      "color2": "#000000",
+      "rotation": "0"
+    }
+  },
+  "cornersDotOptions": {
+    "type": "",
+    "color": "#3385ff",
+    "gradient": null
+  },
+  "cornersDotOptionsHelper": {
+    "colorType": {
+      "single": true,
+      "gradient": false
+    },
+    "gradient": {
+      "linear": true,
+      "radial": false,
+      "color1": "#000000",
+      "color2": "#000000",
+      "rotation": "0"
+    }
+  },
+  "backgroundOptionsHelper": {
+    "colorType": {
+      "single": true,
+      "gradient": false
+    },
+    "gradient": {
+      "linear": true,
+      "radial": false,
+      "color1": "#ffffff",
+      "color2": "#ffffff",
+      "rotation": "0"
+    }
   }
+})
 
-  const origin = api.auth
+const connect = () => {
+  loading.value = true
 
-  console.log('auth server: ' + origin)
+  user.commit('updateToken', token.value)
 
-  const token = ref('')
-  const state = ref('redirect')
-
-  const auth_request = ref({})
-
-  const loading = ref(false)
-
-  const url = ref('')
-
-  const connect = () => {
-    loading.value = true
-
-    user.commit('updateToken', token.value)
-
-    http
+  http
       .get('/user')
       .then((res) => {
         setTimeout(() => {
@@ -136,30 +241,29 @@
 
         loading.value = true
       })
-  }
+}
 
-  let loginInter = null
+let loginInter = null
 
-  const times = ref(0)
+const times = ref(0)
 
-  function toLogin() {
-    if (state.value === 'logging') {
-      return
-    }
+function toLogin() {
+  state.value = 'logging'
+  times.value = 0
 
-    state.value = 'logging'
-    times.value = 0
+  loading.value = true
 
-    loading.value = true
-
-    axios
+  axios
       .post(api.auth + '/public/auth_request', {
         description: '莱云仪表盘',
         require_token: true,
         abilities: ['*'],
+        return_url: window.location.href
       })
       .then((res) => {
         loading.value = true
+
+        loginUrl.value = api.auth + '/auth_request/' + res.data.meta.token
 
         auth_request.value = res.data
 
@@ -167,28 +271,29 @@
 
         loginInter = setInterval(() => {
           axios
-            .get(api.auth + '/public/auth_request/' + res.data.meta.token)
-            .then((res) => {
-              auth_request.value = res.data
+              .get(api.auth + '/public/auth_request/' + res.data.meta.token)
+              .then((res) => {
+                auth_request.value = res.data
 
-              if (res.data.user) {
-                token.value = res.data.token
-                state.value = 'confirm'
+                if (res.data.user) {
+                  token.value = res.data.token
+                  state.value = 'confirm'
 
-                loginInter && clearInterval(loginInter)
+                  loginInter && clearInterval(loginInter)
 
-                setTimeout(() => {
                   connect()
-                }, 500)
-              }
-            })
+                }
+              })
 
-          if (times.value === 10) {
+          if (times.value >= 10) {
             clearInterval(loginInter)
-            state.value = 'error'
+            times.value = 0
+            state.value = 'redirect'
+            toLogin()
+          } else {
+            times.value++
           }
 
-          times.value++
         }, 3000)
       })
       .catch(() => {
@@ -198,15 +303,34 @@
       .finally(() => {
         loading.value = false
       })
-  }
+}
 
-  onMounted(() => {
-    user.commit('updateToken', '')
-    user.commit('updateUser', {})
-  })
+// if get has auth request
+if (route.query.auth_request) {
+  axios
+      .get(api.auth + '/public/auth_request/' + route.query.auth_request)
+      .then((res) => {
+        auth_request.value = res.data
 
-  const logo = ref('Logo-dark')
-  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    logo.value = 'Logo-white'
-  }
+        if (res.data.user) {
+          token.value = res.data.token
+          state.value = 'confirm'
+
+          connect()
+        }
+      })
+} else {
+  toLogin()
+}
+
+
+onMounted(() => {
+  user.commit('updateToken', '')
+  user.commit('updateUser', {})
+})
+
+const logo = ref('Logo-dark')
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  logo.value = 'Logo-white'
+}
 </script>
