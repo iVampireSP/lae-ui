@@ -74,7 +74,9 @@
           <div class="flex justify-center">
             <CloudOfflineOutline style="width: 100px" />
           </div>
-          <n-h3 class="text-center">我们的服务器可能出现了点问题，请稍后再试。</n-h3>
+          <n-h3 class="text-center"
+            >我们的服务器可能出现了点问题，请稍后再试。</n-h3
+          >
         </div>
       </div>
     </div>
@@ -101,6 +103,7 @@
   import api from '../../config/api'
   import user from '../../plugins/stores/user.js'
   import lyric from '../../plugins/lyric.js'
+  import router from '../../plugins/router'
 
   const route = useRoute()
 
@@ -235,11 +238,15 @@
     http
       .get('/user')
       .then((res) => {
+        state.value = 'redirect'
+
         setTimeout(() => {
           user.commit('updateToken', token.value)
           user.commit('updateUser', res.data)
 
-          location.href = '/'
+          router.push('/')
+
+          //   location.href = '/'
         }, 1000)
       })
       .catch(() => {
