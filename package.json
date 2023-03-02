@@ -24,6 +24,7 @@
     "postcss": "^8.4.20",
     "prismjs": "^1.29.0",
     "pusher-js": "^7.4.0",
+    "qrcode-vue3": "^1.4.17",
     "tailwindcss": "^3.2.4",
     "three": "^0.149.0",
     "ts-node": "^10.9.1",
