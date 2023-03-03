@@ -1,7 +1,7 @@
 import axios from 'axios'
+import {request, response} from "./httpInterceptors";
+import api from '../config/api'
 
-import api from '../config/api.js'
-import {request, response} from "./httpInterceptors.js";
 
 const baseURL = api.api
 // axios.defaults.withCredentials = true;
