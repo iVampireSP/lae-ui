@@ -5,5 +5,5 @@ export default {
 
     // isLogin: false,
 
-    loading: ref(true),
+    loading: ref(false),
 }
