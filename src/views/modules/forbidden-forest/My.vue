@@ -25,6 +25,9 @@
     <n-form-item label="应用程序密码">
       <n-input v-model:value="blog.password" placeholder="应用程序密码。"/>
     </n-form-item>
+    <n-form-item label="标签别名">
+      <n-input v-model:value="blog.tag" placeholder="如果不填，则索引全部文章。"/>
+    </n-form-item>
     <n-form-item label="确认一下">
 
       <div>
@@ -62,6 +65,7 @@ const user = ref({
 const blog = ref({
   id: '',
   url: '',
+  tag: '',
 })
 
 gateway.get('/forbidden-forest/user').then(res => {
