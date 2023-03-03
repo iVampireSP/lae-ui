@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="showRef ? 'mt-10' : ''">
     <n-spin :show="showRef">
       <slot/>
       <template #description>
