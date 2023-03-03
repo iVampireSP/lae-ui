@@ -1,6 +1,6 @@
 import {CloudOutline, GameControllerOutline} from "@vicons/ionicons5";
-
-import {addMenuOptions} from "../plugins/menuOptions.js";
+import {ArticleOutlined} from "@vicons/material"
+import {addMenuOptions} from "../plugins/menuOptions";
 
 
 const modules = [
@@ -27,6 +27,12 @@ const modules = [
     //     name: "消息队列",
     //     route: "modules.user-mqtt"
     // }
+    {
+        id: "forbidden-forest",
+        name: "禁林",
+        route: "modules.forbidden-forest.index",
+        icon: ArticleOutlined
+    },
 ]
 
 for (let i = 0; i < modules.length; i++) {

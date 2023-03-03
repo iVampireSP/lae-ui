@@ -309,6 +309,30 @@ const routes = [
                 ],
             },
             {
+                path: 'forbidden-forest',
+                component: () => import('../views/modules/forbidden-forest/Base.vue'),
+                meta: {
+                    title: '禁林',
+                },
+                children: [
+                    {
+                        path: '',
+                        name: 'modules.forbidden-forest.index',
+                        component: () => import('../views/modules/forbidden-forest/Index.vue'),
+                    },
+                    {
+                        path: 'my',
+                        name: 'modules.forbidden-forest.my',
+                        component: () => import('../views/modules/forbidden-forest/My.vue'),
+                    },
+                    {
+                        path: 'blogs/:blog_id/posts/:post_id',
+                        name: 'modules.forbidden-forest.show',
+                        component: () => import('../views/modules/forbidden-forest/Show.vue'),
+                    }
+                ],
+            },
+            {
                 path: 'ip-manager',
                 component: () => import('../views/modules/ip-manager/Base.vue'),
                 meta: {
