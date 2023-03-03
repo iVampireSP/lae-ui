@@ -11,6 +11,7 @@
 
             <!--  加载动画  -->
             <transition name="fade">
+
               <div v-show="load_step === 1">
                 <div class="flex h-screen">
                   <div class="m-auto text-center">
