@@ -14,22 +14,22 @@ let instance = axios.create({
 })
 
 const requestOnFulfilled = (config) => {
-    app.loading.value = true
+    // app.loading.value = true
     return request.onFulfilled(config)
 }
 
 const requestOnRejected = (config) => {
-    app.loading.value = true
+    // app.loading.value = true
     return request.onRejected(config)
 }
 
 const responseOnFulfilled = (res) => {
-    app.loading.value = false
+    // app.loading.value = false
     return response.onFulfilled(res)
 }
 
 const responseOnRejected = (error) => {
-    app.loading.value = false
+    // app.loading.value = false
     return response.onRejected(error)
 }
 
