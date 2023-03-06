@@ -1,9 +1,6 @@
 <template>
   <div>
-    <n-grid :cols="2">
-      <n-gi>
-        <QrCode/>
-      </n-gi>
+    <n-grid cols="1 xl:2"  responsive="screen">
       <n-gi>
         <div class="justify-center items-center flex" style="height: 92vh">
           <div>
@@ -29,6 +26,9 @@
             </n-form>
           </div>
         </div>
+      </n-gi>
+      <n-gi>
+        <QrCode/>
       </n-gi>
     </n-grid>
   </div>
