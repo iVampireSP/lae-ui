@@ -1,84 +1,83 @@
 <template>
-  <!--  <n-h1 prefix="bar" align-text type="success">-->
-  <!--    <n-text type="success">-->
-  <!--      游戏容器 i9 限量出售-->
-  <!--    </n-text>-->
-  <!--  </n-h1>-->
-
   <div class="flex items-center align-center justify-center h-full">
     <div class="text-center">
-      <img alt="i7-12700k" class="rounded inline" src="/assets/images/i7.jpeg" style="box-shadow: rgb(22 57 141) 0 0 20px 6px"
-           width="200">
+      <img class="m-auto" src="https://stack.laecloud.com/templates/lagom2/assets/img/logo/logo_big.287493382.png"
+           width="128"/>
+      <div class="mt-5">
+        <n-h1>
+          莱栈, 现已可用。
+        </n-h1>
+      </div>
       <br/>
-      <n-h1>
-        游戏容器
-        <br/>
-        限量供应
-      </n-h1>
-      <br/>
-      <LoginButton :join="true" text="现在登录"/>
+      <n-button type="primary" target="_blank" tag="a" href="https://stack.laecloud.com/store/gct">
+        前往莱栈
+      </n-button>
+
+      <n-button class="!ml-2 block" type="primary" @click="open" v-if="!feedback">
+        打开反馈
+      </n-button>
+
     </div>
   </div>
 
-  <!--  <div class="absolute bottom-3 left-0 right-0">-->
-  <!--    <n-p class="text-center">-->
-  <!--      <n-text depth="3">-->
-  <!--        <n-a target="_blank" href="https://muhan.ltd">木韩网络</n-a>-->
-  <!--        提供服务-->
-  <!--      </n-text>-->
-  <!--    </n-p>-->
-  <!--  </div>-->
+
+  <n-modal v-model:show="feedback"
+           :mask-closable="true"
+           preset="dialog"
+           title="对我们说的话"
+           positive-text="提交"
+           negative-text="关闭"
+           @positive-click="submit"
+           @negative-click="close"
+  >
+
+    <div>
+      <n-input
+          v-model:value="form.content"
+          placeholder="比如...您想要什么功能，或者您遇到了什么问题，或者您有什么建议。我们会通过工单与您取得联系。"
+          type="textarea"
+          :autosize="{
+            minRows: 6,
+            maxRows: 9
+          }"
+      />
+    </div>
+  </n-modal>
 
 </template>
 
 <script setup>
-import {NH1} from 'naive-ui'
-import LoginButton from "../../components/LoginButton.vue";
-//
+import {NButton, NH1, NInput, NModal} from 'naive-ui'
+import {computed, ref} from "vue";
+import http from '../../plugins/http'
+import appStore from '../../plugins/stores/app'
+
+const show = ref(false)
+
+const feedback = computed(() => {
+  return appStore.state.display_feedback
+})
+
+const form = ref({
+  title: '对你们说的话',
+  content: ''
+})
+
+function submit() {
+  return http.post('work-orders', form.value).then(res => {
+    console.log(res)
+  }).finally(() => {
+    close()
+  })
+
+}
+
+function close() {
+  appStore.commit('set_display_feedback', false)
+}
+
+function open() {
+  appStore.commit('set_display_feedback', true)
+}
+
 </script>
-
-
-<!--<template>-->
-<!--  &lt;!&ndash;  <n-h1 prefix="bar" align-text type="success">&ndash;&gt;-->
-<!--  &lt;!&ndash;    <n-text type="success">&ndash;&gt;-->
-<!--  &lt;!&ndash;      游戏容器 i9 限量出售&ndash;&gt;-->
-<!--  &lt;!&ndash;    </n-text>&ndash;&gt;-->
-<!--  &lt;!&ndash;  </n-h1>&ndash;&gt;-->
-
-<!--  <div class="flex items-center align-center justify-center h-full">-->
-<!--    <div class="text-center">-->
-<!--      <div style="left: -22.5px" class="relative">-->
-<!--        <img src="/assets/images/i7.jpeg" alt="i7" width="200" class="rounded-1 relative inline z-10"-->
-<!--        >-->
-<!--        <img src="/assets/images/i9.jpeg" alt="i9" width="200" class="rounded-1 inline absolute"-->
-<!--             style="left: 45px"-->
-<!--        >-->
-<!--      </div>-->
-
-<!--      <br/>-->
-<!--      <n-h1>-->
-<!--        游戏容器-->
-<!--        <br/>-->
-<!--        即将推出-->
-<!--      </n-h1>-->
-<!--      <br/>-->
-<!--      <LoginButton text="现在登录" :join="true"/>-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--  <div class="absolute bottom-3 left-0 right-0">-->
-<!--    <n-p class="text-center">-->
-<!--      <n-text depth="3">-->
-<!--        部分赞助商 <n-a target="_blank" href="https://muhan.ltd">木韩网络</n-a> i9-->
-<!--      </n-text>-->
-<!--    </n-p>-->
-<!--  </div>-->
-
-<!--</template>-->
-
-<!--<script setup>-->
-<!--import {NA, NH1, NP, NText} from 'naive-ui'-->
-<!--import LoginButton from "../../components/LoginButton.vue";-->
-
-<!--//-->
-<!--</script>-->
