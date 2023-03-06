@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center align-center justify-center h-full">
     <div class="text-center">
-      <img class="m-auto" src="https://stack.laecloud.com/templates/lagom2/assets/img/logo/logo_big.287493382.png"
+      <img class="m-auto" src="https://stack.laecloud.com/templates/lagom2/assets/img/logo/logo_big.287493382.png" alt="laestack"
            width="128"/>
       <div class="mt-5">
         <n-h1>
@@ -9,11 +9,16 @@
         </n-h1>
       </div>
       <br/>
-      <n-button type="primary" target="_blank" tag="a" href="https://stack.laecloud.com/store/gct">
+      <n-button type="primary" @click="login" v-if="!isLogin">
+        登录
+      </n-button>
+
+
+      <n-button class="!ml-2" type="primary" target="_blank" tag="a" href="https://stack.laecloud.com/store/gct">
         前往莱栈
       </n-button>
 
-      <n-button class="!ml-2 block" type="primary" @click="open" v-if="!feedback && isLogin">
+      <n-button class="!ml-2" type="primary" @click="open" v-if="!feedback && isLogin">
         打开反馈
       </n-button>
 
@@ -52,6 +57,7 @@ import {computed, ref} from "vue";
 import http from '../../plugins/http'
 import appStore from '../../plugins/stores/app'
 import userStore from '../../plugins/stores/user'
+import router from "../../plugins/router.js";
 
 const show = ref(false)
 
@@ -86,5 +92,12 @@ function close() {
 function open() {
   appStore.commit('set_display_feedback', true)
 }
+
+function login() {
+  router.push({
+    name: 'auth.login'
+  })
+}
+
 
 </script>
