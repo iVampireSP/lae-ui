@@ -80,7 +80,7 @@ function login() {
     } else {
       dialog.error({
         title: '登录失败',
-        content: '我们的服务器可能出现了点问题，请稍后再试。'
+        content: err.response.data.message
       })
     }
   })
