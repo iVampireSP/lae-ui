@@ -13,7 +13,7 @@
         前往莱栈
       </n-button>
 
-      <n-button class="!ml-2 block" type="primary" @click="open" v-if="!feedback">
+      <n-button class="!ml-2 block" type="primary" @click="open" v-if="!feedback && isLogin">
         打开反馈
       </n-button>
 
@@ -51,12 +51,19 @@ import {NButton, NH1, NInput, NModal} from 'naive-ui'
 import {computed, ref} from "vue";
 import http from '../../plugins/http'
 import appStore from '../../plugins/stores/app'
+import userStore from '../../plugins/stores/user'
 
 const show = ref(false)
 
-const feedback = computed(() => {
-  return appStore.state.display_feedback
+const isLogin = computed(() => {
+  return userStore.state.token
 })
+
+
+const feedback = computed(() => {
+  return appStore.state.display_feedback && userStore.state.token
+})
+
 
 const form = ref({
   title: '对你们说的话',
