@@ -65,6 +65,16 @@
       </div>
 
       <div class="mt-5">
+        <n-h2 class="all-zero">用户中心</n-h2>
+        <n-a v-show="!loading" @click="goToUserCenter">
+          用户中心
+        </n-a>
+        <span v-show="loading">
+          正在载入...
+        </span>
+      </div>
+
+      <div class="mt-5">
         <n-h2 class="all-zero">退出登录</n-h2>
         <n-a>
           <router-link :to="{ name: 'auth.login' }" class="link">
@@ -79,13 +89,16 @@
 </template>
 
 <script setup>
-import {NA, NAvatar, NBadge, NDrawer, NDrawerContent, NH1, NH2, NH4} from "naive-ui";
+import {NA, NAvatar, NBadge, NDrawer, NDrawerContent, NH2, NH4} from "naive-ui";
 import {computed, ref} from "vue";
 import Username from "./Username.vue";
+import http from '../../plugins/http'
 
 import api from "../../config/api.js";
 import userStore from "../../plugins/stores/user.js";
 import taskStore from '../../plugins/stores/tasks'
+
+const loading = ref(false)
 
 const user = computed(() => {
   return userStore.state.user
@@ -116,6 +129,17 @@ function showDrawer() {
 
   userStore.dispatch('fetch')
 
+}
+
+function goToUserCenter() {
+  loading.value = true
+  http.post('sessions').then(res => {
+    setTimeout(() => {
+      window.open(res.data.url, '_blank')
+    })
+  }).finally(() => {
+    loading.value = false
+  })
 }
 
 </script>
