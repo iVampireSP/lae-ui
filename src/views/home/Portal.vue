@@ -1,7 +1,10 @@
 <template>
   <div class="flex items-center align-center justify-center h-full">
     <div class="text-center">
-      <img class="m-auto" src="https://stack.laecloud.com/templates/lagom2/assets/img/logo/logo_big.287493382.png" alt="laestack"
+      <img class="m-auto" v-if="osThemeRef === 'dark'"
+           src="https://stack.laecloud.com/templates/lagom2/assets/img/logo/logo_big.287493382.png" alt="laestack"
+           width="128"/>
+      <img class="m-auto" v-else src="/assets/lae-dark.png" alt="laestack"
            width="128"/>
       <div class="mt-5">
         <n-h1>
@@ -52,7 +55,7 @@
 </template>
 
 <script setup>
-import {NButton, NH1, NInput, NModal} from 'naive-ui'
+import {NButton, NH1, NInput, NModal, useOsTheme} from 'naive-ui'
 import {computed, ref} from "vue";
 import http from '../../plugins/http'
 import appStore from '../../plugins/stores/app'
@@ -69,6 +72,8 @@ const isLogin = computed(() => {
 const feedback = computed(() => {
   return appStore.state.display_feedback && userStore.state.token
 })
+
+const osThemeRef = useOsTheme();
 
 
 const form = ref({
