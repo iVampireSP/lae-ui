@@ -84,6 +84,24 @@
 
         </div>
 
+        <div class="mt-5">
+          <n-h3 class="!mb-0">
+            销毁
+          </n-h3>
+
+          <n-popconfirm
+              @positive-click="destroy"
+          >
+            <template #trigger>
+              <n-button type="error" size="small">
+                销毁
+              </n-button>
+            </template>
+            此服务器将会永久删除，你确定要这么做吗？
+          </n-popconfirm>
+
+        </div>
+
       </n-gi>
       <n-gi span="6">
         <n-tabs animated type="line">
@@ -179,6 +197,7 @@ import {
   NH3,
   NIcon,
   NInput,
+  NPopconfirm,
   NSelect,
   NSlider,
   NSpin,
@@ -196,6 +215,7 @@ import gateway from '../../../plugins/gateway'
 import {useRoute} from "vue-router";
 import api from '../../../config/api'
 import Humanize from "humanize-plus";
+import route from "../../../plugins/router";
 
 const router = useRoute()
 
@@ -283,6 +303,17 @@ function update() {
 
   gateway.patch('gct/hosts/' + router.params.id, gct.value).then(() => {
     modifying.value = false
+  })
+}
+
+function destroy() {
+  modifying.value = true
+  gateway.delete('gct/hosts/' + router.params.id).then(() => {
+    modifying.value = false
+
+    route.push({
+      name: 'modules.gct.index'
+    })
   })
 }
 
