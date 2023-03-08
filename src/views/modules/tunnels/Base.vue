@@ -2,7 +2,7 @@
   <router-view/>
 
   <n-text class="text-center mt-5" depth="3" tag="div">
-    <span>联合映射 由 LoCyan Team & MirrorEdge Network 运营</span>
+    <span>MirrorEdge Network 运营</span>
     <br/>
     <n-icon class="relative top-px">
       <LogoGithub/>
