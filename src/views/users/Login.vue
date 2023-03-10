@@ -18,7 +18,7 @@
 
                   <n-button type="primary" @click="login">登录</n-button>
                   <br/>
-                  <span>
+                  <span class="mt-3">
                     如果您没有账号，我们将会帮您创建一个。
                   </span>
                 </div>
