@@ -37,7 +37,7 @@
 </template>
 
 <script setup>
-import {defineProps, toRefs} from 'vue'
+import {toRefs} from 'vue'
 
 import {NText} from "naive-ui"
 

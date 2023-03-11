@@ -45,6 +45,16 @@ const routes = [
         },
     },
     {
+        path: '/nav',
+        name: 'nav',
+        component: () => import('../views/Nav.vue'),
+        meta: {
+            auth: true,
+            keepalive: true,
+            title: '导航',
+        },
+    },
+    {
         path: '/auth/login',
         name: 'auth.login',
         meta: {
