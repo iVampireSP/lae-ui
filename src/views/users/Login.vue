@@ -1,6 +1,6 @@
 <template>
   <div>
-    <n-grid cols="1 xl:2"  responsive="screen">
+    <n-grid cols="1 xl:2" responsive="screen">
       <n-gi>
         <div class="justify-center items-center flex" style="height: 92vh">
           <div>
@@ -20,6 +20,10 @@
                   <br/>
                   <span>
                     如果您没有账号，我们将会帮您创建一个。
+                    <span v-show="isMobile">
+                      <br/>
+                      向下滑动以使用扫码/跳转登录。
+                    </span>
                   </span>
                 </div>
               </n-form-item>
@@ -43,6 +47,7 @@ import userStore from '../../plugins/stores/user.js'
 import router from '../../plugins/router'
 import QrCode from './QrCode.vue'
 import axios from "axios";
+import {useIsMobile} from "../../utils/composables.js";
 
 const dialog = useDialog()
 
@@ -52,6 +57,8 @@ const form = ref({
   email: '',
   password: ''
 })
+
+const isMobile = useIsMobile()
 
 function login() {
 
