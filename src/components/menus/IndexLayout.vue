@@ -15,7 +15,8 @@
     PinOutline,
     PricetagsSharp,
     Server,
-    Information
+    Information,
+    DocumentTextOutline
   } from '@vicons/ionicons5'
   import {
     CakeRound,
@@ -34,6 +35,7 @@
     addMenuOptions('left', 'status', '监控', MonitorHeartFilled)
     addMenuOptions('left', 'work-orders', '工单', SupportAgentRound)
     addMenuOptions('left', 'stars', '繁星', CakeRound)
+    addMenuOptions('left', 'api-docs', 'API 文档', DocumentTextOutline)
     addMenuOptions('left', 'about', '关于', Information)
   })
 </script>

@@ -35,6 +35,26 @@ const routes = [
       },
     },
     {
+        path: '/api-docs',
+        name: 'api-docs',
+        component: () => import('../views/Api.vue'),
+        meta: {
+            auth: true,
+            keepalive: true,
+            title: 'API 文档',
+        },
+    },
+    {
+        path: '/nav',
+        name: 'nav',
+        component: () => import('../views/Nav.vue'),
+        meta: {
+            auth: true,
+            keepalive: true,
+            title: '导航',
+        },
+    },
+    {
         path: '/auth/login',
         name: 'auth.login',
         meta: {
