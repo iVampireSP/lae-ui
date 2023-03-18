@@ -93,7 +93,7 @@
               @positive-click="destroy"
           >
             <template #trigger>
-              <n-button type="error" size="small">
+              <n-button size="small" type="error">
                 销毁
               </n-button>
             </template>

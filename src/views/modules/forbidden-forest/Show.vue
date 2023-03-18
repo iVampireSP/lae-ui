@@ -24,13 +24,13 @@
 
     <n-input
         v-model:value="comment"
-        type="textarea"
         placeholder="给原文快速留言..."
+        type="textarea"
     />
     <div class="mt-1">
       <n-button type="primary" @click="sendComment">留言</n-button>
       &nbsp;
-      <n-button tag="a" :href="post.link" target="_blank" type="primary">查看原文章</n-button>
+      <n-button :href="post.link" tag="a" target="_blank" type="primary">查看原文章</n-button>
     </div>
   </div>
 
