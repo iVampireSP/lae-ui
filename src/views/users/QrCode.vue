@@ -35,7 +35,7 @@
               <n-p>
                 或者
                 <n-a :href="url" class="underline underline-offset-4"
-                >不使用二维码登录
+                >不使用二维码登录(直接登录)
                 </n-a>
                 。
               </n-p>
