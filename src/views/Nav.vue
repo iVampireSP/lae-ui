@@ -27,7 +27,7 @@
           &nbsp;换一换
         </n-button>
       </n-spin>
-      <n-grid x-gap="12" :cols="6" class="mt-5">
+      <n-grid x-gap="12" y-gap="6" :cols="6" class="mt-5">
         <n-gi>
           <a href="https://chat.openai.com" referrerpolicy="no-referrer" target="_blank">
             <n-card>
@@ -86,31 +86,72 @@
             </n-card>
           </a>
         </n-gi>
-        <n-gi>
-          <a href="https://pan.baidu.com" referrerpolicy="no-referrer" target="_blank">
+        <n-gi v-if="navs.state.navs !== []" v-for="nav in navs.state.navs">
+          <a :href="nav.web_url" referrerpolicy="no-referrer" target="_blank">
             <n-card>
               <div class="mb-1"></div>
-              <n-icon size="36">
-                <CloudUploadOutline/>
-              </n-icon>
-              <n-h2>百度网盘</n-h2>
+              <n-avatar size="large">
+                {{ nav.web_name.substring(0, 1) }}
+              </n-avatar>
+              <n-h2>
+                {{ nav.web_name }}
+                <a href="#">
+                  <n-icon class="hover:text-red-600" size="16" @click="remove_nav(nav.web_name)">
+                    <TrashOutline/>
+                  </n-icon>
+                </a>
+              </n-h2>
               <div class="mb-2"></div>
             </n-card>
           </a>
         </n-gi>
+        <n-gi>
+          <n-card class="cursor-pointer" @click="create_new = true">
+            <div class="mb-1"></div>
+            <n-icon size="36">
+              <Add/>
+            </n-icon>
+            <n-h2>新建</n-h2>
+            <div class="mb-2"></div>
+          </n-card>
+        </n-gi>
       </n-grid>
+      <n-modal v-model:show="create_new" preset="dialog" title="新建导航" transform-origin="center">
+        <template #header>
+          <div>新建导航</div>
+        </template>
+        <n-input-group class="mb-3 mt-2">
+          <n-input-group-label>网站标题</n-input-group-label>
+          <n-input type="text" v-model:value="web_name"/>
+        </n-input-group>
+        <n-input-group class="mb-3">
+          <n-input-group-label>网站链接</n-input-group-label>
+          <n-input type="text" v-model:value="web_url" @keyup.enter="add_nav()"/>
+        </n-input-group>
+        <template #action>
+          <n-button strong secondary type="tertiary" @click="create_new = false">取消</n-button>
+          <n-button strong secondary type="success" @click="add_nav()">保存</n-button>
+        </template>
+      </n-modal>
     </div>
   </IndexLayout>
 </template>
 
 <script setup>
 import IndexLayout from "../components/menus/IndexLayout.vue";
-import {NButton, NDivider, NH1, NH4, NH5, NIcon, NInput, NInputGroup, NSelect, NSpin, NGrid, NGi, NCard, NH2} from "naive-ui";
-import {Refresh, Search, LanguageOutline, ChatboxEllipsesOutline, CloudUploadOutline} from "@vicons/ionicons5";
+import {NButton, NDivider, NH1, NH4, NH5, NIcon, NInput, NInputGroup, NSelect, NSpin, NGrid, NGi, NCard, NH2, NModal, NInputGroupLabel, useMessage, NAvatar, useDialog} from "naive-ui";
+import {Refresh, Search, LanguageOutline, ChatboxEllipsesOutline, CloudUploadOutline, Add, TrashOutline} from "@vicons/ionicons5";
 import {ref} from "vue";
 import axios from "axios";
+import navs from "../plugins/stores/navs";
 
+const web_name = ref("")
+const web_url = ref("")
+
+const message = useMessage()
+const dialog = useDialog()
 const hitokoto = ref({})
+const create_new = ref(false)
 const search_engine = ref("baidu")
 const search_content = ref("")
 let date = new Date()
@@ -141,22 +182,6 @@ const options = [
     value: 'duckduckgo'
   }
 ]
-
-// const time = computed(() => {
-//   let returnValue = ""
-//   if (date.getHours() < 10) {
-//     returnValue += "0" + date.getHours()
-//   } else {
-//     returnValue += date.getHours()
-//   }
-//   returnValue += ":"
-//   if (date.getMinutes() < 10) {
-//     returnValue += "0" + date.getMinutes()
-//   } else {
-//     returnValue += date.getMinutes()
-//   }
-//   return returnValue
-// })
 
 let time = ref("")
 
@@ -212,16 +237,42 @@ function get_hitokoto() {
   }, 500)
 }
 
+function add_nav() {
+  if (!web_name.value) {
+    message.error("网站标题不能为空")
+    return
+  }
+  if (!web_url.value) {
+    message.error("网站链接不能为空")
+    return
+  }
+  const p = {
+    "web_name": web_name.value,
+    "web_url": web_url.value
+  }
+  navs.commit("addNav", p)
+  message.success("保存成功")
+  web_name.value = ""
+  web_url.value = ""
+  create_new.value = false
+}
+
+function remove_nav(web_name) {
+  dialog.warning({
+    title: "警告",
+    content: "你确定要删除吗",
+    transformOrigin: "center",
+    positiveText: "确定",
+    negativeText: "取消",
+    onPositiveClick: () => {
+      const p = {
+        "web_name": web_name
+      }
+      navs.commit("removeNav", p)
+      message.success("删除成功")
+    }
+  });
+}
+
 get_hitokoto()
 </script>
-
-<style scoped>
-.light-green {
-  height: 108px;
-  background-color: rgba(0, 128, 0, 0.12);
-}
-.green {
-  height: 108px;
-  background-color: rgba(0, 128, 0, 0.24);
-}
-</style>

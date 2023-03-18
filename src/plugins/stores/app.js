@@ -1,6 +1,5 @@
 import {createStore} from 'vuex'
 import createPersistedState from '../persistedstate'
-import http from "../http.js";
 
 export default createStore({
     plugins: [
@@ -19,7 +18,5 @@ export default createStore({
             state.display_feedback = value
         }
     },
-    actions: {
-
-    }
+    actions: {}
 })
