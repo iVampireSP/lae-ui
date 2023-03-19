@@ -69,7 +69,7 @@
 
           <n-grid cols="1 s:2" responsive="screen" x-gap="12">
             <n-gi class="text-left">
-              <n-form-item label="计费周期" class="overflow-x-auto">
+              <n-form-item class="overflow-x-auto" label="计费周期">
                 <n-radio-group v-model:value="create_gct.billing_cycle" name="protocol">
                   <n-radio-button
                       label="小时"

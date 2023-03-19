@@ -11,20 +11,18 @@
                 <n-input v-model:value="form.email" placeholder="您的邮箱"/>
               </n-form-item>
               <n-form-item label="密码" prop="password">
-                <n-input type="password" v-model:value="form.password" placeholder="您的密码"/>
+                <n-input v-model:value="form.password" placeholder="您的密码" type="password"/>
               </n-form-item>
               <n-form-item>
                 <div>
-
                   <n-button type="primary" @click="login">登录</n-button>
-                  <br/>
-                  <span class="mt-3">
+                  <div class="mt-3">
                     如果您没有账号，我们将会帮您创建一个。
                     <span v-show="isMobile">
                       <br/>
                       向下滑动以使用扫码/一键登录(推荐)。
                     </span>
-                  </span>
+                  </div>
                 </div>
               </n-form-item>
             </n-form>

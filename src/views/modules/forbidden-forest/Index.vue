@@ -5,12 +5,12 @@
     </n-text>
   </n-h1>
 
-  <n-input v-model:value="params.search" @change="params.page=1;doSearch()" type="text" placeholder="搜索内容..."/>
+  <n-input v-model:value="params.search" placeholder="搜索内容..." type="text" @change="params.page=1;doSearch()"/>
 
   <div class="mt-3"></div>
 
   <n-list bordered clickable hoverable>
-<!--    @click="viewPost(post.url)"-->
+    <!--    @click="viewPost(post.url)"-->
     <n-list-item v-for="post in posts" @click="goToPost(post.blog_id, post.blog_post_id)">
 
 
@@ -20,9 +20,9 @@
 
         <template #avatar>
           <n-avatar
-              round
-              size="medium"
-              :src="api.avatar + '/' +md5(post.blog.user.email)" alt="avatar" />
+              :src="api.avatar + '/' +md5(post.blog.user.email)"
+              alt="avatar"
+              round size="medium"/>
         </template>
 
         <template #description>
@@ -36,7 +36,7 @@
             </n-tag>
           </n-space>
 
-          <n-text >
+          <n-text>
             <div class="mt-2">
               {{ post.excerpt }}
             </div>
@@ -56,7 +56,7 @@
   </n-list>
 
 
-  <div class="text-center mt-3" v-show="posts_raw.current_page !== posts_raw.last_page">
+  <div v-show="posts_raw.current_page !== posts_raw.last_page" class="text-center mt-3">
     <n-button @click="params.page++;doSearch()">下一页</n-button>
   </div>
 
@@ -69,7 +69,7 @@
 
 <script setup>
 import {ref} from "vue";
-import {NAvatar, NButton, NH1, NInput, NList, NListItem, NText, NThing, NSpace, NTag} from 'naive-ui'
+import {NAvatar, NButton, NH1, NInput, NList, NListItem, NSpace, NTag, NText, NThing} from 'naive-ui'
 import md5 from 'js-md5'
 import api from "../../../config/api";
 
