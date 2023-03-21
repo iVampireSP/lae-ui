@@ -50,10 +50,10 @@ function load(scroll = false) {
   page.value++
   loading.value = true
   http.get('birthdays', {
-        params: {
-          page: page.value,
-        },
-      })
+    params: {
+      page: page.value,
+    },
+  })
       .then((res) => {
         // append
         stars.value.data = stars.value.data.concat(res.data.data)

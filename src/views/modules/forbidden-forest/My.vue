@@ -31,11 +31,11 @@
     <n-form-item label="确认一下">
 
       <div>
-        <n-button @click="save()" type="primary">
+        <n-button type="primary" @click="save()">
           保存
         </n-button>
         &nbsp;
-        <n-button @click="remove()" class="ml-1" type="error" v-if="blog.id">
+        <n-button v-if="blog.id" class="ml-1" type="error" @click="remove()">
           删除
         </n-button>
 

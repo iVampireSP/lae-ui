@@ -12,7 +12,7 @@
             <n-h2>登录 莱云</n-h2>
 
             <div v-if="loginUrl">
-              <p>使用移动设备扫码登录</p>
+              <n-p>使用移动设备扫码登录</n-p>
               <QRCodeVue3
                   :backgroundOptions="qrOptions.backgroundOptions"
                   :backgroundOptionsHelper="qrOptions.backgroundOptionsHelper"
