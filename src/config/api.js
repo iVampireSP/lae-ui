@@ -33,7 +33,7 @@ const config = {
     // gateway: 'https://gateway.laecloud.com/',
     gateway: 'https://api.laecloud.com/api/modules',
 
-    ws_host: 'socket.laecloud.com',
+    ws_host: 'socket.lae.yistars.net',
     ws_port: 443,
     ws_auth_endpoint: 'https://api.laecloud.com/broadcasting/auth',
     pusher_key: 'Q6SEgerhsgMVz',
