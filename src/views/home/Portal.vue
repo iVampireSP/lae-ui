@@ -2,7 +2,7 @@
   <div class="flex items-center align-center justify-center h-full">
     <div class="text-center">
       <img v-if="osThemeRef === 'dark'" alt="laestack"
-           class="m-auto" src="https://stack.laecloud.com/templates/lagom2/assets/img/logo/logo_big.287493382.png"
+           class="m-auto" src="https://stack.laecloud.com/templates/lagom2/assets/img/logo/logo_big_inverse.1354344624.png"
            width="128"/>
       <img v-else alt="laestack" class="m-auto" src="/assets/lae-dark.png"
            width="128"/>
