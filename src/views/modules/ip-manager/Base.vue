@@ -1,5 +1,5 @@
 <template>
-  <router-view></router-view>
+    <router-view></router-view>
 
 
 </template>
@@ -16,9 +16,9 @@ removeAllMenuOptions()
 IpStore.dispatch('fetch')
 
 removeAllMenuOptionsThen('left', () => {
-  addMenuOptions('left', 'modules.ip-manager.index', '列表', ListOutline)
-  addMenuOptions('left', 'modules.ip-manager.create', '申请', AddOutline)
-  addMenuOptions('left', 'modules.ip-manager.forward', '转发', AddOutline)
+    addMenuOptions('left', 'modules.ip-manager.index', '列表', ListOutline)
+    addMenuOptions('left', 'modules.ip-manager.create', '申请', AddOutline)
+    addMenuOptions('left', 'modules.ip-manager.forward', '转发', AddOutline)
 })
 
 </script>

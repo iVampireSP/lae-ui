@@ -1,13 +1,13 @@
 <template>
-  <router-view></router-view>
+    <router-view></router-view>
 </template>
 
 <script setup>
 import {
-  addMenuDivider,
-  addMenuOptions,
-  removeAllMenuOptions,
-  removeAllMenuOptionsThen
+    addMenuDivider,
+    addMenuOptions,
+    removeAllMenuOptions,
+    removeAllMenuOptionsThen
 } from '../../../plugins/menuOptions.js'
 
 import {AddOutline, ListOutline} from "@vicons/ionicons5";
@@ -23,32 +23,32 @@ removeAllMenuOptions()
 gctStore.dispatch('fetchGct')
 
 function reRegisterMenu() {
-  removeAllMenuOptionsThen('left', () => {
-    addMenuOptions('left', 'modules.gct.index', '所有容器', ListOutline)
-    addMenuOptions('left', 'modules.gct.create', '新建容器', AddOutline)
+    removeAllMenuOptionsThen('left', () => {
+        addMenuOptions('left', 'modules.gct.index', '所有容器', ListOutline)
+        addMenuOptions('left', 'modules.gct.create', '新建容器', AddOutline)
 
-    if (containers.value.length > 0) {
-      addMenuDivider('left')
+        if (containers.value.length > 0) {
+            addMenuDivider('left')
 
-      for (let i = 0; i < containers.value.length; i++) {
-        const container = containers.value[i]
+            for (let i = 0; i < containers.value.length; i++) {
+                const container = containers.value[i]
 
-        addMenuOptions('left', {
-          name: 'modules.gct.show', params: {id: container.host_id}
-        }, container.name, MenuIcon, {
-          host: container
-        })
-      }
-    }
-  })
+                addMenuOptions('left', {
+                    name: 'modules.gct.show', params: {id: container.host_id}
+                }, container.name, MenuIcon, {
+                    host: container
+                })
+            }
+        }
+    })
 }
 
 // subscribe
 gctStore.subscribe((mutation, state) => {
-  if (mutation.type === 'setGct') {
-    containers.value = state.containers
-  }
+    if (mutation.type === 'setGct') {
+        containers.value = state.containers
+    }
 
-  reRegisterMenu()
+    reRegisterMenu()
 })
 </script>
