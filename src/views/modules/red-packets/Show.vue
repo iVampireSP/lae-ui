@@ -1,53 +1,53 @@
 <template>
-  <n-spin :show="loading">
-    <div class="text-center">
-      <div v-if="packet['remain'] ?? 0 > 0">
-        <div v-if="packet.user_id === user.state.user.id">
-          <Lottie :loop="false" name="Party-popper"/>
-          <n-h2>你的红包已准备好～</n-h2>
-          <n-p>将此页面的 URL 告诉他们，让他们输入 {{ packet['password'] }} 来领取。</n-p>
+    <n-spin :show="loading">
+        <div class="text-center">
+            <div v-if="packet['remain'] ?? 0 > 0">
+                <div v-if="packet.user_id === user.state.user.id">
+                    <Lottie :loop="false" name="Party-popper"/>
+                    <n-h2>你的红包已准备好～</n-h2>
+                    <n-p>将此页面的 URL 告诉他们，让他们输入 {{ packet['password'] }} 来领取。</n-p>
 
-          <n-button @click="refund">
-            退还 {{ packet['remaining_amount'] ?? 0 }} 元
-          </n-button>
-        </div>
+                    <n-button @click="refund">
+                        退还 {{ packet['remaining_amount'] ?? 0 }} 元
+                    </n-button>
+                </div>
 
-        <div v-if="packet.user_id && packet.user_id !== user.state.user.id">
+                <div v-if="packet.user_id && packet.user_id !== user.state.user.id">
 
-          <div v-if="step === 0">
-            <Lottie :loop="false" name="Partying-face"/>
-            <n-h2>{{ packet.greeting ?? '你发现了一个红包！' }}</n-h2>
+                    <div v-if="step === 0">
+                        <Lottie :loop="false" name="Partying-face"/>
+                        <n-h2>{{ packet.greeting ?? '你发现了一个红包！' }}</n-h2>
 
-            <div class="mt-3 text-center">
-              <n-input v-model:value="password" class="w-fit" placeholder="输入红包密码。"/>
+                        <div class="mt-3 text-center">
+                            <n-input v-model:value="password" class="w-fit" placeholder="输入红包密码。"/>
+                        </div>
+
+                        <div class="mt-2">
+                            <n-button @click="open">
+                                打开红包
+                            </n-button>
+                        </div>
+                    </div>
+                    <div v-else-if="step === 1">
+                        <Lottie name="Glowing-star"/>
+
+                        <n-h1>恭喜你获得了 {{ amount }} 元！</n-h1>
+
+                    </div>
+
+                </div>
             </div>
 
-            <div class="mt-2">
-              <n-button @click="open">
-                打开红包
-              </n-button>
+            <div v-else-if="packet['remain'] === 0">
+                <Lottie name="Balloon"/>
+                <n-h2>红包已经被领完了。</n-h2>
+
+                <n-button v-if="packet.user_id === user.state.user.id" @click="refund">
+                    删除记录
+                </n-button>
             </div>
-          </div>
-          <div v-else-if="step === 1">
-            <Lottie name="Glowing-star"/>
-
-            <n-h1>恭喜你获得了 {{ amount }} 元！</n-h1>
-
-          </div>
-
         </div>
-      </div>
-
-      <div v-else-if="packet['remain'] === 0">
-        <Lottie name="Balloon"/>
-        <n-h2>红包已经被领完了。</n-h2>
-
-        <n-button v-if="packet.user_id === user.state.user.id" @click="refund">
-          删除记录
-        </n-button>
-      </div>
-    </div>
-  </n-spin>
+    </n-spin>
 
 
 </template>
@@ -75,35 +75,35 @@ const amount = ref('')
 const step = ref(0)
 
 gateway.get('red-packets/' + route.params.id).then((response) => {
-  packet.value = response.data
+    packet.value = response.data
 })
 
 
 function refund() {
-  loading.value = true
-  gateway.delete('red-packets/' + route.params.id).then((response) => {
-    packet.value = response.data
-  }).finally(() => {
-    loading.value = false
-    router.push({name: 'modules.red-packets.index'})
-  })
+    loading.value = true
+    gateway.delete('red-packets/' + route.params.id).then((response) => {
+        packet.value = response.data
+    }).finally(() => {
+        loading.value = false
+        router.push({name: 'modules.red-packets.index'})
+    })
 }
 
 function open() {
-  loading.value = true
-  gateway.post('red-packets/' + route.params.id + '/grab', {
-    password: password.value
-  }).then((response) => {
-    amount.value = response.data.amount
-    step.value = 1
-    //
-    // setTimeout(() => {
-    //   step.value = 2
-    // }, 1800)
+    loading.value = true
+    gateway.post('red-packets/' + route.params.id + '/grab', {
+        password: password.value
+    }).then((response) => {
+        amount.value = response.data.amount
+        step.value = 1
+        //
+        // setTimeout(() => {
+        //   step.value = 2
+        // }, 1800)
 
-  }).finally(() => {
-    loading.value = false
-  })
+    }).finally(() => {
+        loading.value = false
+    })
 }
 
 

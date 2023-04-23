@@ -1,7 +1,7 @@
 <template>
-  <IndexLayout>
-    <Portal/>
-  </IndexLayout>
+    <IndexLayout>
+        <Portal/>
+    </IndexLayout>
 </template>
 
 <script setup>
@@ -30,8 +30,8 @@ import Portal from "./home/Portal.vue";
 // })
 
 const go = (route_name) => {
-  router.push({
-    name: route_name,
-  })
+    router.push({
+        name: route_name,
+    })
 }
 </script>

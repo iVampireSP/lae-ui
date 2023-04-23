@@ -1,16 +1,16 @@
 <template>
-  <n-result
-      description="我们的锅。"
-      status="500"
-      title="服务器错误"
-  >
-    <template #icon>
-      <Lottie :height="250" name="Scrunched-mouth"/>
-    </template>
-    <template #footer>
-      <!--      <n-button>散财消灾</n-button>-->
-    </template>
-  </n-result>
+    <n-result
+            description="我们的锅。"
+            status="500"
+            title="服务器错误"
+    >
+        <template #icon>
+            <Lottie :height="250" name="Scrunched-mouth"/>
+        </template>
+        <template #footer>
+            <!--      <n-button>散财消灾</n-button>-->
+        </template>
+    </n-result>
 </template>
 
 <script setup>

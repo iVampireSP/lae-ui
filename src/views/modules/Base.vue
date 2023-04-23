@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <router-view :key="route.fullPath"></router-view>
-  </div>
+    <div>
+        <router-view :key="route.fullPath"></router-view>
+    </div>
 </template>
 
 <script setup>

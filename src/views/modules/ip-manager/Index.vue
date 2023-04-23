@@ -1,11 +1,11 @@
 <template>
-  <n-h1 prefix="bar">
-    <n-text type="primary">
-      IP 管理器
-    </n-text>
-  </n-h1>
+    <n-h1 prefix="bar">
+        <n-text type="primary">
+            IP 管理器
+        </n-text>
+    </n-h1>
 
-  <p>在做了</p>
+    <p>在做了</p>
 
 
 </template>
