@@ -13,26 +13,6 @@
                 :filterOptions="filter_options"
                 :render-cell="render"
         />
-        <!-- TODO: 完成表格筛选 -->
-        <!-- @update:filters="archFilter" -->
-        <!-- <n-table :single-line="false" >
-          <thead>
-            <tr class="text-center">
-              <th>名称</th>
-              <th>架构</th>
-              <th>下载</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in items" class="text-center">
-              <td> {{ item.name }}</td>
-              <td> {{ item.arch }}</td>
-              <td>
-                <n-a :href="item.url" :title="item.name + ' 下载'" target="_blank">下载</n-a>
-              </td>
-            </tr>
-          </tbody>
-        </n-table> -->
     </div>
 </template>
 
