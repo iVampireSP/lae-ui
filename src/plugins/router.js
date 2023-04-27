@@ -177,7 +177,7 @@ const routes = [
                 // name: 'modules.tunnels',
                 component: () => import('../views/modules/tunnels/Base.vue'),
                 meta: {
-                    title: 'ME Frp',
+                    title: 'PortIO',
                 },
                 children: [
                     {
@@ -272,15 +272,6 @@ const routes = [
                             title: '创建容器',
                         },
                     },
-                    // {
-                    //     path: 'intro',
-                    //     name: 'modules.gct.intro',
-                    //     props: true,
-                    //     component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/gct/Intro.vue'),
-                    //     meta: {
-                    //         title: '引导创建',
-                    //     },
-                    // },
                     {
                         path: ':id',
                         name: 'modules.gct.show',
@@ -385,7 +376,7 @@ const routes = [
             //   path: 'cdn/create',
             //   name: 'modules.cdn.create',
             //   props: true,
-            //   component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/cdn/Create.vue'),
+            //   component: () => import('../../../../Downloads/lae-ui-main/src/views/modules/cdn/Create.vue.bak'),
             // },
             // {
             //   path: 'cdn/:id',
