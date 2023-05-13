@@ -9,11 +9,8 @@
                  width="128"/>
             <div class="mt-5 !ml-2">
                 <n-h1>
-                    PortIO / 镜缘映射，马上回来。
+                    莱栈, 现已可用
                 </n-h1>
-                <n-p>
-                    将在莱栈继续为您提供服务。
-                </n-p>
             </div>
             <br/>
             <n-button v-if="!isLogin" type="primary" @click="login">
@@ -25,9 +22,36 @@
                 前往莱栈
             </n-button>
 
+            <n-button v-if="!feedback && isLogin" class="!ml-2" type="primary" @click="open">
+                打开反馈
+            </n-button>
+
         </div>
     </div>
 
+
+    <n-modal v-model:show="feedback"
+             :mask-closable="true"
+             negative-text="关闭"
+             positive-text="提交"
+             preset="dialog"
+             title="对我们说的话"
+             @positive-click="submit"
+             @negative-click="close"
+    >
+
+        <div>
+            <n-input
+                    v-model:value="form.content"
+                    :autosize="{
+            minRows: 6,
+            maxRows: 9
+          }"
+                    placeholder="比如...您想要什么功能，或者您遇到了什么问题，或者您有什么建议。我们会通过工单与您取得联系。"
+                    type="textarea"
+            />
+        </div>
+    </n-modal>
 
 </template>
 
@@ -58,6 +82,22 @@ const form = ref({
     content: ''
 })
 
+function submit() {
+    return http.post('work-orders', form.value).then(res => {
+        console.log(res)
+    }).finally(() => {
+        close()
+    })
+
+}
+
+function close() {
+    appStore.commit('set_display_feedback', false)
+}
+
+function open() {
+    appStore.commit('set_display_feedback', true)
+}
 
 function login() {
     router.push({
