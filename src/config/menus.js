@@ -1,14 +1,8 @@
-import {CloudOutline, GameControllerOutline} from "@vicons/ionicons5";
+import {GameControllerOutline} from "@vicons/ionicons5";
 import {addMenuOptions} from "../plugins/menuOptions";
 
 
 const modules = [
-    {
-        id: "tunnels",
-        name: "PortIO",
-        route: "modules.tunnels.index",
-        icon: CloudOutline
-    },
     {
         id: "gct",
         name: "游戏容器",
